@@ -1155,3 +1155,102 @@ footer {
   }
 }
 
+/* ==========================================================================
+   👤 Creator Profile Panel
+   ========================================================================== */
+
+/* Profile nav button — same look as nav-link but styled as a button */
+.profile-nav-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.profile-nav-btn:hover {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px var(--accent-cyan-glow);
+  background: hsla(189, 94%, 43%, 0.06);
+}
+
+/* Profile panel overlay — reuses modal-overlay structure */
+.profile-panel-overlay {
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-panel-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.profile-panel-card {
+  max-width: 520px;
+  width: 100%;
+  padding: 2.2rem 2rem 2rem;
+  text-align: left;
+  border: 1px solid hsla(189, 94%, 43%, 0.2);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.profile-panel-card h3 {
+  font-family: var(--font-headers);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: var(--text-primary);
+}
+
+/* Profile form fields */
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.profile-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.profile-hint {
+  font-size: 0.77rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 0.2rem;
+}
+
+.profile-hint code {
+  background: hsla(217, 20%, 30%, 0.4);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+}
+
+/* Responsive */
+@media (max-width: 580px) {
+  .profile-panel-card {
+    padding: 1.8rem 1.4rem 1.6rem;
+  }
+}
+
