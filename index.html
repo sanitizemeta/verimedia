@@ -195,6 +195,16 @@
         <div class="faq-item">
           <h3 style="display: flex; align-items: flex-start; gap: 8px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>Where do I find my Creator Pro license key?</span>
+          </h3>
+          <p>
+            After purchasing, check your email for the Paddle receipt. Your license key is the <strong>Transaction ID</strong> found in the receipt (it usually starts with <code>txn_</code>). Just copy and paste that into the Activation menu if it didn't activate automatically!
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 style="display: flex; align-items: flex-start; gap: 8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             <span>How do I block AI web crawlers from using my images?</span>
           </h3>
           <p>
@@ -317,37 +327,54 @@
       <p class="modal-subtitle">Your identity is embedded into every processed file's metadata. Set it once, use it forever.</p>
 
       <form id="profileForm" autocomplete="off">
+        <div id="profileInputsWrap" style="position: relative;">
+          <!-- Pro Lock Overlay -->
+          <div id="proProfileOverlay" class="pro-overlay" style="display:none;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 0.5rem;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <h4 style="color: white; margin-bottom: 0.5rem; font-family: var(--font-headers);">Creator Pro Feature</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Upgrade to embed your identity and enable Google Licensable Badges.</p>
+            <button class="pricing-btn primary-btn" id="profileUpgradeBtn" type="button">Upgrade to Pro</button>
+          </div>
 
-        <div class="profile-field">
-          <label for="profileName" class="profile-label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-            Creator Name <span style="color:var(--text-secondary);font-weight:400;">(Artist EXIF tag)</span>
-          </label>
-          <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" maxlength="120" spellcheck="false" />
-          <p class="profile-hint">This becomes the <code>Artist</code> field embedded in your images. Pro users get a "VeriMedia Verified Creator" prefix.</p>
+          <div class="profile-field">
+            <label for="profileName" class="profile-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Creator Name <span style="color:var(--text-secondary);font-weight:400;">(Artist EXIF tag)</span>
+            </label>
+            <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" maxlength="120" spellcheck="false" />
+            <p class="profile-hint">This becomes the <code>Artist</code> field embedded in your images. Pro users get a "VeriMedia Verified Creator" prefix.</p>
+          </div>
+
+          <div class="profile-field">
+            <label for="profileCopyright" class="profile-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83a4 4 0 1 1 0-5.66"/></svg>
+              Copyright String <span style="color:var(--text-secondary);font-weight:400;">(Copyright EXIF tag)</span>
+            </label>
+            <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith. All rights reserved." maxlength="200" spellcheck="false" />
+            <p class="profile-hint">Injected as the <code>Copyright</code> EXIF/XMP field. Used by Getty, Shutterstock, and news publishers to trace image ownership.</p>
+          </div>
+
+          <div class="profile-field">
+            <label for="profileUrl" class="profile-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              License / Portfolio URL <span style="color:var(--text-secondary);font-weight:400;">(Google Licensable Badge)</span>
+            </label>
+            <input type="url" id="profileUrl" class="license-input" placeholder="e.g. https://janesmith.com/license" maxlength="300" spellcheck="false" />
+            <p class="profile-hint">Your website or licensing page. Embedded as the <code>WebStatement</code> XMP tag — this triggers Google Images' <strong>"Licensable" badge</strong> on your photos.</p>
+          </div>
         </div>
 
-        <div class="profile-field">
-          <label for="profileCopyright" class="profile-label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83a4 4 0 1 1 0-5.66"/></svg>
-            Copyright String <span style="color:var(--text-secondary);font-weight:400;">(Copyright EXIF tag)</span>
-          </label>
-          <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith. All rights reserved." maxlength="200" spellcheck="false" />
-          <p class="profile-hint">Injected as the <code>Copyright</code> EXIF/XMP field. Used by Getty, Shutterstock, and news publishers to trace image ownership.</p>
-        </div>
-
-        <div class="profile-field">
-          <label for="profileUrl" class="profile-label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            License / Portfolio URL <span style="color:var(--text-secondary);font-weight:400;">(Google Licensable Badge)</span>
-          </label>
-          <input type="url" id="profileUrl" class="license-input" placeholder="e.g. https://janesmith.com/license" maxlength="300" spellcheck="false" />
-          <p class="profile-hint">Your website or licensing page. Embedded as the <code>WebStatement</code> XMP tag — this triggers Google Images' <strong>"Licensable" badge</strong> on your photos.</p>
-        </div>
-
+        <button class="pricing-btn primary-btn" id="profileSaveBtn" style="width:100%;margin-top:1.2rem;">Save Profile</button>
       </form>
 
-      <button class="pricing-btn primary-btn" id="profileSaveBtn" style="width:100%;margin-top:1.2rem;">Save Profile</button>
+      <!-- Active Key Display (Pro Only) -->
+      <div id="activeKeyDisplay" style="display:none; margin-top: 1.5rem; padding: 1rem; background: rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: 8px;">
+        <p style="font-size: 0.75rem; color: var(--accent-cyan); margin-bottom: 0.4rem; font-weight: 600; text-transform: uppercase;">Creator Pro Active Key</p>
+        <div style="display: flex; gap: 0.5rem;">
+          <input type="text" id="profileKeyInput" readonly class="license-input" style="padding: 0.5rem; color: var(--text-secondary); cursor: text;" />
+          <button type="button" id="copyKeyBtn" class="pricing-btn secondary-btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem;">Copy</button>
+        </div>
+      </div>
       <p class="modal-footnote" style="margin-top:0.75rem;">Profile is stored in your browser's local storage. Never uploaded.</p>
     </div>
   </div>

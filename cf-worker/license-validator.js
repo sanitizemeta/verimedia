@@ -213,19 +213,35 @@ async function handleWebhook(request, env) {
 
   if (webhookSecret) {
     const isValid = await verifyPaddleSignature(rawBody, signatureHeader, webhookSecret);
-    if (!isValid) return new Response('Unauthorized', { status: 401 });
+    if (!isValid) {
+      console.warn('Signature validation failed. Secret may be incorrect or event is replayed.');
+      return new Response('Unauthorized', { status: 401 });
+    }
+  } else {
+    console.warn('WARNING: No webhook secret set. Skipping signature validation.');
   }
 
   let event;
-  try { event = JSON.parse(rawBody); } catch { return new Response('Invalid JSON', { status: 400 }); }
+  try { 
+    event = JSON.parse(rawBody); 
+  } catch (err) { 
+    console.error('Failed to parse webhook JSON:', err);
+    return new Response('Invalid JSON', { status: 400 }); 
+  }
 
   const eventType = event.event_type || event.eventType;
+  console.log(`Received Webhook Event: ${eventType}`);
 
-  if (eventType === 'transaction.completed') {
+  // Paddle Billing uses 'transaction.completed' or 'transaction.paid'
+  if (eventType === 'transaction.completed' || eventType === 'transaction.paid') {
     const transactionId = event.data?.id;
-    if (!transactionId) return new Response('OK', { status: 200 });
+    if (!transactionId) {
+      console.error('Webhook missing transaction ID in data.id:', JSON.stringify(event.data));
+      return new Response('OK', { status: 200 });
+    }
 
     const licenseKey = transactionId.toUpperCase();
+    console.log(`Processing activation for key: ${licenseKey}`);
 
     try {
       const existing = await env.LICENSE_KEYS.get(licenseKey);
@@ -236,10 +252,16 @@ async function handleWebhook(request, env) {
           device_ids: [],
           purchase_date: new Date().toISOString()
         }));
+        console.log(`✅ Success: Activated new license key: ${licenseKey}`);
+      } else {
+        console.log(`ℹ️ Info: License key already active: ${licenseKey}`);
       }
     } catch (err) {
+      console.error('❌ Error: Failed to write to KV:', err.message);
       return new Response('Internal error', { status: 500 });
     }
+  } else {
+    console.log(`Ignoring unhandled event type: ${eventType}`);
   }
 
   return new Response('OK', { status: 200 });

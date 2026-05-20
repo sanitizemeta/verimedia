@@ -105,7 +105,47 @@ function openProfilePanel() {
   profileName.value = creatorProfile.name    || '';
   profileCopy.value = creatorProfile.copyright || '';
   profileUrl.value  = creatorProfile.url      || '';
+  
+  const proOverlay = document.getElementById('proProfileOverlay');
+  const activeKeyDisplay = document.getElementById('activeKeyDisplay');
+  const profileKeyInput = document.getElementById('profileKeyInput');
+  const inputsWrap = document.getElementById('profileInputsWrap');
+
+  if (isPro) {
+    if (proOverlay) proOverlay.style.display = 'none';
+    if (activeKeyDisplay) activeKeyDisplay.style.display = 'block';
+    if (profileKeyInput) {
+      profileKeyInput.value = localStorage.getItem(STORAGE_KEY_LICENSE) || 'Active';
+    }
+    profileSave.style.display = 'block';
+  } else {
+    if (proOverlay) proOverlay.style.display = 'flex';
+    if (activeKeyDisplay) activeKeyDisplay.style.display = 'none';
+    profileSave.style.display = 'none';
+  }
+
   profilePanel.classList.add('active');
+}
+
+// Additional event listeners for the profile modal
+const profileUpgradeBtn = document.getElementById('profileUpgradeBtn');
+if (profileUpgradeBtn) {
+  profileUpgradeBtn.addEventListener('click', () => {
+    closeProfilePanel();
+    openModal(viewBuy);
+  });
+}
+
+const copyKeyBtn = document.getElementById('copyKeyBtn');
+const profileKeyInput = document.getElementById('profileKeyInput');
+if (copyKeyBtn && profileKeyInput) {
+  copyKeyBtn.addEventListener('click', () => {
+    profileKeyInput.select();
+    document.execCommand('copy');
+    const originalText = copyKeyBtn.textContent;
+    copyKeyBtn.textContent = 'Copied!';
+    setTimeout(() => { copyKeyBtn.textContent = originalText; }, 2000);
+  });
 }
 
 function closeProfilePanel() {
@@ -166,11 +206,11 @@ dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover
 dropzone.addEventListener('drop', (e) => {
   e.preventDefault();
   dropzone.classList.remove('dragover');
-  if (e.dataTransfer.files.length) handleFileUpload(e.dataTransfer.files[0]);
+  if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
 });
 
 fileInput.addEventListener('change', (e) => {
-  if (e.target.files.length) handleFileUpload(e.target.files[0]);
+  if (e.target.files.length) handleFiles(e.target.files);
 });
 
 // ── Supported types ───────────────────────────────────────────────────────────
@@ -189,8 +229,29 @@ function getFileCategory(file) {
   return null;
 }
 
-// ── Main entry: handle uploaded file ─────────────────────────────────────────
-async function handleFileUpload(file) {
+// ── Main entry: handle uploaded files ─────────────────────────────────────────
+async function handleFiles(fileList) {
+  const files = Array.from(fileList);
+  if (files.length === 0) return;
+
+  if (files.length > 1 && !isPro) {
+    reportContent.innerHTML = buildErrorItem('Bulk processing is a Creator Pro feature. Please process 1 file at a time or upgrade.');
+    return;
+  }
+  
+  if (files.length > 100) {
+    reportContent.innerHTML = buildErrorItem('Maximum 100 files allowed per batch.');
+    return;
+  }
+
+  if (files.length === 1) {
+    await handleSingleFileUpload(files[0]);
+  } else {
+    await processBulkFiles(files);
+  }
+}
+
+async function handleSingleFileUpload(file) {
   const category = getFileCategory(file);
 
   if (!category) {
@@ -314,6 +375,103 @@ async function handleFileUpload(file) {
     statusBadge.className = 'status-indicator idle';
     reportContent.innerHTML = buildErrorItem(`Processing failed: ${error.message}. Ensure the file is a valid image or PDF.`);
     console.error('Engine error:', error);
+  }
+}
+
+async function processBulkFiles(files) {
+  statusBadge.innerText = `Processing Batch...`;
+  statusBadge.className = 'status-indicator scanning';
+  
+  reportContent.innerHTML = `
+    <div class="empty-state" style="margin:auto;width:100%;">
+      <p id="progressLabel" style="font-family:var(--font-headers);font-weight:600;color:var(--accent-cyan);font-size:1.1rem;margin-bottom:0.5rem;letter-spacing:0.5px;">Initializing Batch Engine...</p>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressBarFill" style="width:0%;"></div>
+      </div>
+      <p style="font-size:0.85rem;color:var(--text-secondary);opacity:0.75;" id="progressCount">0 / ${files.length} files</p>
+    </div>
+  `;
+  const progressBarFill = document.getElementById('progressBarFill');
+  const progressLabel   = document.getElementById('progressLabel');
+  const progressCount   = document.getElementById('progressCount');
+
+  try {
+    progressLabel.innerText = 'Loading ZIP Engine...';
+    const { default: JSZip } = await import('https://esm.sh/jszip@3.10.1');
+    const zip = new JSZip();
+    
+    let successCount = 0;
+    
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const category = getFileCategory(file);
+      if (!category) continue;
+      
+      progressLabel.innerText = `Sanitizing: ${file.name}`;
+      progressCount.innerText = `${i + 1} / ${files.length} files`;
+      progressBarFill.style.width = `${(i / files.length) * 100}%`;
+      
+      let outputBlob;
+      if (category === 'pdf') {
+        const pdfBytes = await sanitizePDF(file);
+        outputBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+      } else {
+        const options = { keepIcc: false, keepAnnots: false, keepCameraSpecs: isPro };
+        outputBlob = await sanitizeImage(file, options);
+        
+        if (outputBlob.type === 'image/jpeg' || outputBlob.type === '') {
+          try {
+            const { default: piexif } = await import('piexifjs');
+            const dataUrl = await blobToDataUrl(outputBlob);
+            const name      = creatorProfile.name      || 'Human Creator';
+            const copyright = creatorProfile.copyright || `© ${new Date().getFullYear()} Human Creator`;
+            const url       = creatorProfile.url       || '';
+
+            const newExif = { '0th': {}, Exif: {}, GPS: {}, '1st': {} };
+            newExif['0th'][piexif.ImageIFD.Artist]           = isPro ? `VeriMedia Verified Creator — ${name}` : name;
+            newExif['0th'][piexif.ImageIFD.Copyright]        = copyright;
+            newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz AI-Shield v2.0';
+            newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+
+            const exifBytes = piexif.dump(newExif);
+            const finalUrl  = piexif.insert(exifBytes, dataUrl);
+            outputBlob = dataUrlToBlob(finalUrl);
+          } catch (e) {}
+        }
+      }
+      
+      const outName = file.name.replace(/\.[^/.]+$/, '') + '_safe' + getOutputExt(file);
+      zip.file(outName, outputBlob);
+      successCount++;
+    }
+    
+    progressLabel.innerText = 'Compressing Batch Archive...';
+    progressBarFill.style.width = '95%';
+    
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+    
+    if (processedBlob) URL.revokeObjectURL(processedBlob._url);
+    processedBlob = zipBlob;
+    processedBlob._url = URL.createObjectURL(zipBlob);
+    processedFileName = `VeriMedia_Batch_${successCount}_Files.zip`;
+    
+    statusBadge.innerText = 'Complete';
+    statusBadge.className = 'status-indicator complete';
+    
+    reportContent.innerHTML = `
+      <div style="text-align:center; padding: 2rem 0;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3 style="font-family:var(--font-headers); color:var(--text-primary); margin-bottom:0.5rem;">Batch Processing Complete</h3>
+        <p style="color:var(--text-secondary); margin-bottom: 1.5rem;">Successfully sanitized ${successCount} files.</p>
+        <button class="download-sec-btn" id="downloadBtn">Download Secure ZIP Archive</button>
+      </div>
+    `;
+    document.getElementById('downloadBtn').addEventListener('click', triggerDownload);
+    
+  } catch (err) {
+    statusBadge.innerText = 'Error';
+    statusBadge.className = 'status-indicator idle';
+    reportContent.innerHTML = buildErrorItem(`Batch processing failed: ${err.message}`);
   }
 }
 
