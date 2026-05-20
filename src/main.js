@@ -523,6 +523,17 @@ function triggerDownload() {
 const LICENSE_VALIDATE_URL = 'https://license.verimedia.xyz/validate';
 
 const STORAGE_KEY_LICENSE = 'vm_license_key';
+const STORAGE_KEY_DEVICE  = 'vm_device_id';
+
+// ── Device Identity (for 3-device limit) ──────────────────────────────────────
+function getDeviceId() {
+  let id = localStorage.getItem(STORAGE_KEY_DEVICE);
+  if (!id) {
+    id = crypto.randomUUID?.() || Math.random().toString(36).slice(2) + Date.now().toString(36);
+    localStorage.setItem(STORAGE_KEY_DEVICE, id);
+  }
+  return id;
+}
 
 // ── Modal element refs ────────────────────────────────────────────────────────
 const paymentModal      = document.getElementById('paymentModal');
@@ -547,10 +558,8 @@ let modalTriggerElement = null; // For a11y: store element that opened the modal
 // ── Paddle.js Initialization ──────────────────────────────────────────────────
 // Initialize Paddle for Billing v2
 if (window.Paddle) {
-  // IMPORTANT: You need to set your CLIENT SIDE TOKEN from Paddle Dashboard 
-  // → Developer Tools → Authentication → Client-side tokens
   window.Paddle.Initialize({ 
-    token: 'live_2f19b88294a235307e74e44f820', 
+    token: 'live_2f19b88294a235307e74e44f820'
   });
 }
 
@@ -582,11 +591,21 @@ function openCheckout() {
     },
     eventCallback: (event) => {
       if (event.name === 'checkout.completed') {
-        // Automation: The user just paid! 
-        // 1. Close the Paddle overlay
-        // 2. Open our "Success" screen
-        console.log('Payment successful:', event.data);
-        openModal(viewSuccess);
+        // AUTOMATION: Grab the Transaction ID and activate it instantly!
+        const txnId = event.data?.transaction_id || event.data?.id;
+        if (txnId) {
+          console.log('Automated Activation for:', txnId);
+          activateLicenseBtn.disabled = true;
+          verifyLicense(txnId).then(data => {
+            if (data.valid === true) {
+              localStorage.setItem(STORAGE_KEY_LICENSE, txnId);
+              setProActiveUI();
+              showModalView(viewSuccess);
+            }
+          }).catch(console.error);
+        } else {
+          openModal(viewSuccess);
+        }
       }
     }
   });
@@ -663,7 +682,10 @@ async function verifyLicense(licenseKey) {
   const res = await fetch(LICENSE_VALIDATE_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ license_key: licenseKey.trim() }),
+    body: JSON.stringify({ 
+      license_key: licenseKey.trim(),
+      device_id:   getDeviceId()
+    }),
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json(); // expects { valid: boolean, error?: string }

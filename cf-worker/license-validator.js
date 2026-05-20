@@ -142,10 +142,11 @@ async function handleValidate(request, env, corsHeaders) {
     return json({ valid: false, error: 'Method not allowed' }, 405, corsHeaders);
   }
 
-  let licenseKey;
+  let licenseKey, deviceId;
   try {
     const body = await request.json();
     licenseKey = (body.license_key || '').trim().toUpperCase();
+    deviceId   = (body.device_id || '').trim();
   } catch {
     return json({ valid: false, error: 'Invalid request body' }, 400, corsHeaders);
   }
@@ -155,18 +156,46 @@ async function handleValidate(request, env, corsHeaders) {
   }
 
   try {
-    const status = await env.LICENSE_KEYS.get(licenseKey);
+    const kvData = await env.LICENSE_KEYS.get(licenseKey);
 
-    if (status === 'active') {
-      return json({ valid: true }, 200, corsHeaders);
-    } else if (status === 'revoked') {
-      return json({ valid: false, error: 'This license has been revoked. Contact support@verimedia.xyz.' }, 200, corsHeaders);
-    } else {
+    if (!kvData) {
       return json({ valid: false, error: 'License key not found. Double-check your purchase email from Paddle.' }, 200, corsHeaders);
     }
+
+    // Parse the license data (support both old 'active' string and new JSON format)
+    let license = { status: 'active', device_ids: [] };
+    try {
+      if (kvData !== 'active' && kvData !== 'revoked') {
+        license = JSON.parse(kvData);
+      } else {
+        license.status = kvData;
+      }
+    } catch { /* fallback to default */ }
+
+    if (license.status === 'revoked') {
+      return json({ valid: false, error: 'This license has been revoked. Contact support@verimedia.xyz.' }, 200, corsHeaders);
+    }
+
+    // ── Device Limit Logic (3 Devices Max) ──────────────────────────────────
+    if (deviceId) {
+      if (!license.device_ids.includes(deviceId)) {
+        if (license.device_ids.length >= 3) {
+          return json({ 
+            valid: false, 
+            error: 'Device limit reached. This license is already active on 3 other devices. Contact support to reset.' 
+          }, 200, corsHeaders);
+        }
+        // Register new device
+        license.device_ids.push(deviceId);
+        await env.LICENSE_KEYS.put(licenseKey, JSON.stringify(license));
+      }
+    }
+
+    return json({ valid: true }, 200, corsHeaders);
+
   } catch (err) {
     console.error('KV lookup error:', err.message);
-    return json({ valid: false, error: 'Validation service temporarily unavailable. Try again in a moment.' }, 502, corsHeaders);
+    return json({ valid: false, error: 'Validation service temporarily unavailable.' }, 502, corsHeaders);
   }
 }
 
@@ -178,65 +207,41 @@ async function handleWebhook(request, env) {
     return new Response('Method not allowed', { status: 405 });
   }
 
-  // Read raw body BEFORE parsing (signature verification needs the raw string)
   const rawBody = await request.text();
   const signatureHeader = request.headers.get('Paddle-Signature') || '';
-
-  // ── Verify the webhook is genuinely from Paddle ───────────────────────────
   const webhookSecret = env.PADDLE_WEBHOOK_SECRET;
 
-  if (!webhookSecret) {
-    // Secret not configured yet — log warning but don't crash
-    console.warn('PADDLE_WEBHOOK_SECRET not set. Skipping signature verification (unsafe!).');
-  } else {
+  if (webhookSecret) {
     const isValid = await verifyPaddleSignature(rawBody, signatureHeader, webhookSecret);
-    if (!isValid) {
-      console.warn('Invalid Paddle webhook signature. Rejecting.');
-      return new Response('Unauthorized', { status: 401 });
-    }
+    if (!isValid) return new Response('Unauthorized', { status: 401 });
   }
 
-  // ── Parse the verified webhook payload ────────────────────────────────────
   let event;
-  try {
-    event = JSON.parse(rawBody);
-  } catch {
-    return new Response('Invalid JSON', { status: 400 });
-  }
+  try { event = JSON.parse(rawBody); } catch { return new Response('Invalid JSON', { status: 400 }); }
 
   const eventType = event.event_type || event.eventType;
-  console.log(`Paddle webhook received: ${eventType}`);
 
-  // ── Handle transaction.completed → activate license key ──────────────────
   if (eventType === 'transaction.completed') {
     const transactionId = event.data?.id;
+    if (!transactionId) return new Response('OK', { status: 200 });
 
-    if (!transactionId) {
-      console.error('transaction.completed webhook missing data.id');
-      return new Response('OK', { status: 200 }); // Always 200 to Paddle or they retry
-    }
-
-    // Use the Transaction ID as the license key (Paddle includes it in receipt emails)
-    // Convert to uppercase so activation is case-insensitive
     const licenseKey = transactionId.toUpperCase();
 
     try {
-      // Check idempotency: don't overwrite if already active
       const existing = await env.LICENSE_KEYS.get(licenseKey);
       if (!existing) {
-        await env.LICENSE_KEYS.put(licenseKey, 'active');
-        console.log(`License activated: ${licenseKey}`);
-      } else {
-        console.log(`License already exists (idempotent): ${licenseKey}`);
+        // Initializing with JSON format
+        await env.LICENSE_KEYS.put(licenseKey, JSON.stringify({
+          status: 'active',
+          device_ids: [],
+          purchase_date: new Date().toISOString()
+        }));
       }
     } catch (err) {
-      console.error('KV write error:', err.message);
-      // Return 500 so Paddle retries the webhook
       return new Response('Internal error', { status: 500 });
     }
   }
 
-  // Always return 200 to Paddle (otherwise they retry indefinitely)
   return new Response('OK', { status: 200 });
 }
 
