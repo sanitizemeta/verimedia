@@ -569,4 +569,27 @@ licenseKeyInput.addEventListener('keydown', e => {
     localStorage.removeItem(STORAGE_KEY_LICENSE);
     localStorage.removeItem(STORAGE_KEY_INSTANCE);
   }
+
+  // Initialize Lemon Squeezy Overlay event tracking
+  const initLemonSqueezyEventTracking = () => {
+    if (window.LemonSqueezy) {
+      window.LemonSqueezy.Setup({
+        eventHandler: (eventData) => {
+          if (eventData.event === 'Checkout.Success') {
+            // Auto transition modal to the activate view so they can input the key!
+            showModalView(viewActivate);
+            clearLicenseError();
+            if (licenseKeyInput) licenseKeyInput.focus();
+          }
+        }
+      });
+    }
+  };
+
+  // Try immediately or on script load
+  if (window.LemonSqueezy) {
+    initLemonSqueezyEventTracking();
+  } else {
+    window.addEventListener('LemonSqueezy.Setup', initLemonSqueezyEventTracking);
+  }
 })();
