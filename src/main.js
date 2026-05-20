@@ -559,40 +559,12 @@ let modalTriggerElement = null; // For a11y: store element that opened the modal
 // Initialize Paddle for Billing v2
 if (window.Paddle) {
   window.Paddle.Initialize({ 
-    token: 'live_2f19b88294a235307e74e44f820'
-  });
-}
-
-function openCheckout() {
-  if (!window.Paddle) {
-    alert('Payment system is loading, please try again in a moment.');
-    return;
-  }
-  
-  window.Paddle.Checkout.open({
-    items: [{
-      priceId: 'pri_01ks3bgn6zyh2bsvqk438c3dcv', 
-      quantity: 1
-    }],
-    settings: {
-      displayMode: 'overlay',
-      theme: 'dark',
-      locale: 'en'
-    },
-    // Theme customization to match VeriMedia's cosmic cyberpunk look
-    theme: {
-      primaryColor: '#06b6d4', // Your Cyan accent
-      fontFamily: 'Outfit',
-      buttonRadius: 10,
-      inputRadius: 8,
-      headerColor: '#ffffff',
-      textColor: '#94a3b8' // --text-secondary
-    },
-    eventCallback: (event) => {
+    token: 'live_2f19b88294a235307e74e44f820',
+    eventCallback: function(event) {
       console.log('Paddle Event:', event.name, event.data);
       if (event.name === 'checkout.completed') {
         // STRICTLY grab the transaction ID (txn_...).
-        const txnId = event.data?.transaction_id || event.data?.id; // Fallback just in case Paddle changes payload structure
+        const txnId = event.data?.transaction_id || event.data?.id; 
         
         if (txnId) {
           console.log('Automated Activation starting for:', txnId);
@@ -637,6 +609,34 @@ function openCheckout() {
           openModal(viewSuccess); // Fallback
         }
       }
+    }
+  });
+}
+
+function openCheckout() {
+  if (!window.Paddle) {
+    alert('Payment system is loading, please try again in a moment.');
+    return;
+  }
+  
+  window.Paddle.Checkout.open({
+    items: [{
+      priceId: 'pri_01ks3bgn6zyh2bsvqk438c3dcv', 
+      quantity: 1
+    }],
+    settings: {
+      displayMode: 'overlay',
+      theme: 'dark',
+      locale: 'en'
+    },
+    // Theme customization to match VeriMedia's cosmic cyberpunk look
+    theme: {
+      primaryColor: '#06b6d4', // Your Cyan accent
+      fontFamily: 'Outfit',
+      buttonRadius: 10,
+      inputRadius: 8,
+      headerColor: '#ffffff',
+      textColor: '#94a3b8' // --text-secondary
     }
   });
 }
