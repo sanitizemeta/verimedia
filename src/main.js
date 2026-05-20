@@ -252,7 +252,7 @@ async function handleFiles(fileList) {
   if (isFirstRun) {
     statusBadge.innerText = 'Warming Up...';
     statusBadge.className = 'status-indicator scanning';
-    reportContent.innerHTML = \`<div class="empty-state"><p>Loading secure environment for the first time...</p></div>\`;
+    reportContent.innerHTML = `<div class="empty-state"><p>Loading secure environment for the first time...</p></div>`;
     await new Promise(r => setTimeout(r, 600)); // Brief visual pause
     isFirstRun = false;
   }
