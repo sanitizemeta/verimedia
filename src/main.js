@@ -568,7 +568,8 @@ function openCheckout() {
     settings: {
       displayMode: 'overlay',
       theme: 'dark',
-      locale: 'en'
+      locale: 'en',
+      successUrl: window.location.href // Fallback redirect
     },
     // Theme customization to match VeriMedia's cosmic cyberpunk look
     theme: {
@@ -578,6 +579,15 @@ function openCheckout() {
       inputRadius: 8,
       headerColor: '#ffffff',
       textColor: '#94a3b8' // --text-secondary
+    },
+    eventCallback: (event) => {
+      if (event.name === 'checkout.completed') {
+        // Automation: The user just paid! 
+        // 1. Close the Paddle overlay
+        // 2. Open our "Success" screen
+        console.log('Payment successful:', event.data);
+        openModal(viewSuccess);
+      }
     }
   });
 }
