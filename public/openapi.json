@@ -1,0 +1,76 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "VeriMedia Agent Tool API",
+    "version": "1.0.0",
+    "description": "API contract for autonomous agents to inspect image metadata health, check for E-E-A-T credentials, and verify AI training opt-out states."
+  },
+  "servers": [
+    {
+      "url": "https://verimedia.xyz/api"
+    }
+  ],
+  "paths": {
+    "/validate": {
+      "post": {
+        "summary": "Validate Image Metadata Health",
+        "description": "Inspects a public image URL to check if sensitive GPS/camera EXIF details exist, and verify if E-E-A-T tags or AI opt-out indicators are present.",
+        "operationId": "validateImageMetadata",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imageUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The public HTTP URL of the image to be analyzed."
+                  }
+                },
+                "required": ["imageUrl"]
+              }
+                }
+              }
+            },
+        "responses": {
+          "200": {
+            "description": "Successful analysis report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gpsCoordinatesFound": {
+                      "type": "boolean",
+                      "description": "True if private GPS coordinate tags are present."
+                    },
+                    "cameraHardwareExposed": {
+                      "type": "boolean",
+                      "description": "True if hardware serials or model strings are visible."
+                    },
+                    "hasEeatCredentials": {
+                      "type": "boolean",
+                      "description": "True if Google-compatible IPTC/XMP licensing fields are present."
+                    },
+                    "hasAiOptOutInjected": {
+                      "type": "boolean",
+                      "description": "True if an explicit opt-out indicator is written in the metadata."
+                    },
+                    "metadataHealthScore": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Rating out of 100 on metadata security and SEO compliance."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

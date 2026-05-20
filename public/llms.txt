@@ -1,0 +1,23 @@
+# VeriMedia.xyz
+
+> Secure, 100% browser-based EXIF metadata stripper and Google E-E-A-T / C2PA credential injector.
+
+VeriMedia.xyz is a high-performance single-page web utility that operates entirely client-side. It protects user privacy by purging tracking EXIF metadata from images while injecting official Google E-E-A-T credentials and standard AI opt-out flags.
+
+## Core Features
+*   **Privacy Guard (EXIF Stripper):** Removes sensitive camera specifications, lens details, unique hardware serial numbers, and precise GPS coordinates from JPEG/PNG uploads in less than 50 milliseconds.
+*   **E-E-A-T Signer (Google Licensable):** Injects standardized IPTC/XMP fields including `WebStatement` and `LicensingUrl` to grant images the official "Licensable" badge in Google Images.
+*   **AI Training Shield (Opt-Out):** Embeds standard Spawning.ai metadata opt-out headers (`ai:opt-out = true`) directly inside the image binary, signalling to model crawlers that the content is legally restricted from training data.
+*   **Zero-Server Overhead:** Built entirely using HTML5 Canvas, WebCrypto API, and client-side binary segment rewriting. Your images are never sent to external servers, providing perfect data security and $0/month backend operating costs.
+
+## Pricing Structures
+*   **Free Utility Tier:** Supports up to 5 image operations daily, standard EXIF cleaning, and default opt-out headers. No registration required.
+*   **Pro License ($9/month or $29 One-Time Lifetime):**
+    *   Bulk upload processor (up to 100 images in a single batch).
+    *   Decentralized Identifier (DID) cryptographic signature to verify domain ownership.
+    *   Developer build-pipeline API webhook script.
+
+## Technical Specifications
+*   **Client Architecture:** HTML5, modern HSL Vanilla CSS, ES6 JavaScript.
+*   **Dependencies:** `piexifjs` for raw binary segment parsing.
+*   **Performance:** < 100ms load time at edge CDN.

@@ -1,0 +1,17 @@
+{
+  "name": "verimedia",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "piexifjs": "^1.0.6"
+  },
+  "devDependencies": {
+    "vite": "^5.2.11"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "policy": {
+    "crawlers": {
+      "GPTBot": "allow",
+      "ClaudeBot": "allow",
+      "CCBot": "allow",
+      "Google-Extended": "allow",
+      "PerplexityBot": "allow"
+    },
+    "metadata_requirements": {
+      "require_c2pa": true,
+      "enforce_opt_out": true
+    },
+    "licensing_contact": "https://verimedia.xyz/license",
+    "declarations": {
+      "purpose": "Metadata sanitization and E-E-A-T authentication",
+      "verifiability": "did:key:zQ3s"
+    }
+  }
+}
