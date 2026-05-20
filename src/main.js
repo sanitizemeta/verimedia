@@ -570,6 +570,25 @@ licenseKeyInput.addEventListener('keydown', e => {
     localStorage.removeItem(STORAGE_KEY_INSTANCE);
   }
 
+  // Check if we were redirected back with a license key parameter from Lemon Squeezy
+  const urlParams = new URLSearchParams(window.location.search);
+  const licenseFromUrl = urlParams.get('license');
+  if (licenseFromUrl && !isValid) {
+    // Open payment modal directly on activation screen
+    openModal(viewActivate);
+    if (licenseKeyInput) {
+      licenseKeyInput.value = licenseFromUrl;
+      // Auto-trigger activation call after a brief transition delay
+      setTimeout(() => {
+        activateLicenseBtn.click();
+      }, 450);
+    }
+    
+    // Clean query parameters from URL for a sleek experience
+    const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+  }
+
   // Initialize Lemon Squeezy Overlay event tracking
   const initLemonSqueezyEventTracking = () => {
     if (window.LemonSqueezy) {
