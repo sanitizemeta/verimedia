@@ -871,6 +871,11 @@ function setProActiveUI() {
   upgradeBtn.style.cursor = 'default';
   upgradeBtn.disabled = true;
   if (activateKeyBtn) activateKeyBtn.style.display = 'none';
+  
+  // Unlock bulk selection for Pro users
+  if (fileInput) {
+    fileInput.setAttribute('multiple', 'true');
+  }
 }
 
 function showLicenseError(msg) {
