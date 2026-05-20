@@ -577,8 +577,7 @@ function openCheckout() {
     settings: {
       displayMode: 'overlay',
       theme: 'dark',
-      locale: 'en',
-      successUrl: window.location.href // Fallback redirect
+      locale: 'en'
     },
     // Theme customization to match VeriMedia's cosmic cyberpunk look
     theme: {
@@ -592,12 +591,18 @@ function openCheckout() {
     eventCallback: (event) => {
       console.log('Paddle Event:', event.name, event.data);
       if (event.name === 'checkout.completed') {
-        // STRICTLY grab the transaction ID (txn_...). Do NOT use the checkout ID (che_...).
-        const txnId = event.data?.transaction_id;
+        // STRICTLY grab the transaction ID (txn_...).
+        const txnId = event.data?.transaction_id || event.data?.id; // Fallback just in case Paddle changes payload structure
         
         if (txnId) {
           console.log('Automated Activation starting for:', txnId);
-          activateLicenseBtn.disabled = true;
+          
+          // Switch to activate view and show a loading state
+          openModal(viewActivate);
+          if (licenseKeyInput) licenseKeyInput.value = txnId.toUpperCase();
+          showLicenseError('Securely activating your Creator Pro license. Please wait...');
+          licenseError.style.color = 'var(--accent-cyan)'; // Make it look like a status message, not an error
+          setActivateBtnLoading(true);
           
           // Polling to fix race condition (Webhook takes a few seconds to reach CF)
           let attempts = 0;
@@ -609,24 +614,27 @@ function openCheckout() {
                 clearInterval(poll);
                 localStorage.setItem(STORAGE_KEY_LICENSE, txnId.toUpperCase());
                 setProActiveUI();
+                licenseError.style.color = ''; // reset color
+                clearLicenseError();
                 openModal(viewSuccess);
               } else if (attempts >= 10) {
                 clearInterval(poll);
-                // Fallback if webhook is super slow
-                openModal(viewActivate);
-                if (licenseKeyInput) {
-                  licenseKeyInput.value = txnId.toUpperCase();
-                  showLicenseError('Payment received, but activation is delayed. Click Activate in a few seconds.');
-                }
+                setActivateBtnLoading(false);
+                licenseError.style.color = ''; // reset color
+                showLicenseError('Activation is taking longer than usual. Please click Activate manually.');
               }
             } catch (e) {
-              if (attempts >= 10) clearInterval(poll);
+              if (attempts >= 10) {
+                clearInterval(poll);
+                setActivateBtnLoading(false);
+                licenseError.style.color = '';
+              }
             }
-          }, 1500); // Check every 1.5 seconds, up to 10 times (15 seconds)
+          }, 2000); // Check every 2 seconds, up to 10 times (20 seconds)
           
         } else {
           console.warn('Checkout completed, but no transaction_id found in payload.', event.data);
-          openModal(viewSuccess); // Fallback to success view, user might need to manually enter key later if it fails here
+          openModal(viewSuccess); // Fallback
         }
       }
     }
