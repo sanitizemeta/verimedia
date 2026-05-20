@@ -505,21 +505,24 @@ function triggerDownload() {
 
 
 /* ==========================================================================
-   4. Paddle License Validation Engine
-   (Replace PADDLE_VENDOR_ID and PADDLE_AUTH_CODE with values from
-    Paddle Dashboard → Developer Tools → Auth Code)
+   4. License Validation Engine (via Cloudflare Worker proxy)
+   
+   ARCHITECTURE:
+   Browser → POST https://verimedia-license.YOUR_SUBDOMAIN.workers.dev/validate
+           → CF Worker (holds Paddle API key as secret env var)
+           → Paddle API
+           ← { valid: true/false }
+   
+   The browser NEVER touches Paddle credentials directly.
+   Deploy the worker from /cf-worker/license-validator.js
    ========================================================================== */
 
-// ── Paddle configuration ──────────────────────────────────────────────────────
-// TODO: Set your Vendor ID from Paddle Dashboard → Developer Tools
-const PADDLE_VENDOR_ID  = 'YOUR_PADDLE_VENDOR_ID';
-// TODO: Set your Auth Code from Paddle Dashboard → Developer Tools → Auth Code
-const PADDLE_AUTH_CODE  = 'YOUR_PADDLE_AUTH_CODE';
-// Paddle Billing classic license verify endpoint
-const PADDLE_VERIFY_URL = 'https://vendors.paddle.com/api/2.0/product/licenses/verify';
+// ── License configuration ─────────────────────────────────────────────────────
+// Point this at your deployed Cloudflare Worker URL.
+// See cf-worker/license-validator.js for the worker source.
+const LICENSE_VALIDATE_URL = 'https://verimedia-license.YOUR_SUBDOMAIN.workers.dev/validate';
 
-const STORAGE_KEY_LICENSE  = 'vm_license_key';
-const STORAGE_KEY_INSTANCE = 'vm_instance_id';
+const STORAGE_KEY_LICENSE = 'vm_license_key';
 
 // ── Modal element refs ────────────────────────────────────────────────────────
 const paymentModal      = document.getElementById('paymentModal');
@@ -591,22 +594,15 @@ function setActivateBtnLoading(loading) {
   }
 }
 
-// ── Core: Verify a Paddle license key ────────────────────────────────────────
-async function verifyPaddleLicense(licenseKey) {
-  const body = new URLSearchParams({
-    vendor_id:    PADDLE_VENDOR_ID,
-    auth_code:    PADDLE_AUTH_CODE,
-    license_code: licenseKey.trim(),
-  });
-
-  const res = await fetch(PADDLE_VERIFY_URL, {
+// ── Core: Verify a license key via CF Worker proxy ───────────────────────────
+async function verifyLicense(licenseKey) {
+  const res = await fetch(LICENSE_VALIDATE_URL, {
     method: 'POST',
-    headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: body.toString(),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ license_key: licenseKey.trim() }),
   });
-
-  const data = await res.json();
-  return data;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json(); // expects { valid: boolean, error?: string }
 }
 
 // ── Core: Silent re-validation on page load ───────────────────────────────────
@@ -615,9 +611,8 @@ async function validateStoredLicense() {
   if (!key) return false;
 
   try {
-    const data = await verifyPaddleLicense(key);
-    // Paddle returns { success: true, response: { is_valid: true } }
-    return data.success === true && data.response?.is_valid === true;
+    const data = await verifyLicense(key);
+    return data.valid === true;
   } catch {
     // Network failure — trust cached state to avoid locking out offline users
     return true;
@@ -647,15 +642,14 @@ activateLicenseBtn.addEventListener('click', async () => {
   setActivateBtnLoading(true);
 
   try {
-    const data = await verifyPaddleLicense(key);
+    const data = await verifyLicense(key);
 
-    if (data.success === true && data.response?.is_valid === true) {
+    if (data.valid === true) {
       localStorage.setItem(STORAGE_KEY_LICENSE, key);
       setProActiveUI();
       showModalView(viewSuccess);
     } else {
-      const errMsg = data.error || (data.response?.is_valid === false ? 'This license key is invalid or has expired.' : '');
-      showLicenseError(errMsg || 'Activation failed. Double-check your purchase email or contact support.');
+      showLicenseError(data.error || 'Invalid or expired license key. Double-check your purchase email or contact support.');
     }
   } catch {
     showLicenseError('Network error. Check your connection and try again.');
@@ -675,7 +669,6 @@ licenseKeyInput.addEventListener('keydown', e => {
     setProActiveUI();
   } else if (localStorage.getItem(STORAGE_KEY_LICENSE)) {
     localStorage.removeItem(STORAGE_KEY_LICENSE);
-    localStorage.removeItem(STORAGE_KEY_INSTANCE);
   }
 
   // Handle license key passed via URL param (e.g., Paddle redirect)
