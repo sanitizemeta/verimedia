@@ -97,6 +97,7 @@ const profileForm    = document.getElementById('profileForm');
 const profileName    = document.getElementById('profileName');
 const profileCopy    = document.getElementById('profileCopyright');
 const profileUrl     = document.getElementById('profileUrl');
+const profileAiOnly  = document.getElementById('profileAiOnly');
 const profileSave    = document.getElementById('profileSaveBtn');
 const profileClose   = document.getElementById('profileCloseBtn');
 
@@ -105,6 +106,7 @@ function openProfilePanel() {
   profileName.value = creatorProfile.name    || '';
   profileCopy.value = creatorProfile.copyright || '';
   profileUrl.value  = creatorProfile.url      || '';
+  if (profileAiOnly) profileAiOnly.checked = creatorProfile.aiOnly === true;
   
   const proOverlay = document.getElementById('proProfileOverlay');
   const activeKeyDisplay = document.getElementById('activeKeyDisplay');
@@ -137,9 +139,9 @@ if (profileUpgradeBtn) {
 }
 
 const copyKeyBtn = document.getElementById('copyKeyBtn');
-const profileKeyInput = document.getElementById('profileKeyInput');
-if (copyKeyBtn && profileKeyInput) {
+if (copyKeyBtn && document.getElementById('profileKeyInput')) {
   copyKeyBtn.addEventListener('click', () => {
+    const profileKeyInput = document.getElementById('profileKeyInput');
     profileKeyInput.select();
     document.execCommand('copy');
     const originalText = copyKeyBtn.textContent;
@@ -159,9 +161,10 @@ if (profilePanel) profilePanel.addEventListener('click', e => { if (e.target ===
 if (profileSave) {
   profileSave.addEventListener('click', () => {
     creatorProfile = {
-      name:      profileName.value.trim()  || 'Human Creator',
-      copyright: profileCopy.value.trim()  || `© ${new Date().getFullYear()} Human Creator`,
+      name:      profileName.value.trim()  || '',
+      copyright: profileCopy.value.trim()  || '',
       url:       profileUrl.value.trim()   || '',
+      aiOnly:    profileAiOnly ? profileAiOnly.checked : false
     };
     saveProfile(creatorProfile);
 
@@ -192,6 +195,7 @@ const reportContent = document.getElementById('reportContent');
 let isPro = false;
 let processedBlob = null;
 let processedFileName = '';
+let isFirstRun = true;
 
 // ── Drag & drop / file-input events ──────────────────────────────────────────
 dropzone.addEventListener('click', () => fileInput.click());
@@ -242,6 +246,15 @@ async function handleFiles(fileList) {
   if (files.length > 100) {
     reportContent.innerHTML = buildErrorItem('Maximum 100 files allowed per batch.');
     return;
+  }
+
+  // Handle first run loading state
+  if (isFirstRun) {
+    statusBadge.innerText = 'Warming Up...';
+    statusBadge.className = 'status-indicator scanning';
+    reportContent.innerHTML = \`<div class="empty-state"><p>Loading secure environment for the first time...</p></div>\`;
+    await new Promise(r => setTimeout(r, 600)); // Brief visual pause
+    isFirstRun = false;
   }
 
   if (files.length === 1) {
@@ -333,15 +346,21 @@ async function handleSingleFileUpload(file) {
         try {
           const { default: piexif } = await import('piexifjs');
           const dataUrl = await blobToDataUrl(outputBlob);
-          const name      = creatorProfile.name      || 'Human Creator';
-          const copyright = creatorProfile.copyright || `© ${new Date().getFullYear()} Human Creator`;
-          const url       = creatorProfile.url       || '';
-
           const newExif = { '0th': {}, Exif: {}, GPS: {}, '1st': {} };
-          newExif['0th'][piexif.ImageIFD.Artist]           = isPro ? `VeriMedia Verified Creator — ${name}` : name;
-          newExif['0th'][piexif.ImageIFD.Copyright]        = copyright;
-          newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz AI-Shield v2.0';
-          newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+
+          if (creatorProfile.aiOnly) {
+            newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.`;
+            newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
+          } else {
+            const name      = creatorProfile.name      || 'Human Creator';
+            const copyright = creatorProfile.copyright || `© ${new Date().getFullYear()} Human Creator`;
+            const url       = creatorProfile.url       || '';
+
+            newExif['0th'][piexif.ImageIFD.Artist]           = isPro ? `VeriMedia Verified Creator - ${name}` : name;
+            newExif['0th'][piexif.ImageIFD.Copyright]        = copyright;
+            newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
+            newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+          }
 
           const exifBytes = piexif.dump(newExif);
           const finalUrl  = piexif.insert(exifBytes, dataUrl);
@@ -423,15 +442,21 @@ async function processBulkFiles(files) {
           try {
             const { default: piexif } = await import('piexifjs');
             const dataUrl = await blobToDataUrl(outputBlob);
-            const name      = creatorProfile.name      || 'Human Creator';
-            const copyright = creatorProfile.copyright || `© ${new Date().getFullYear()} Human Creator`;
-            const url       = creatorProfile.url       || '';
-
             const newExif = { '0th': {}, Exif: {}, GPS: {}, '1st': {} };
-            newExif['0th'][piexif.ImageIFD.Artist]           = isPro ? `VeriMedia Verified Creator — ${name}` : name;
-            newExif['0th'][piexif.ImageIFD.Copyright]        = copyright;
-            newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz AI-Shield v2.0';
-            newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+
+            if (creatorProfile.aiOnly) {
+              newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.`;
+              newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
+            } else {
+              const name      = creatorProfile.name      || 'Human Creator';
+              const copyright = creatorProfile.copyright || `© ${new Date().getFullYear()} Human Creator`;
+              const url       = creatorProfile.url       || '';
+
+              newExif['0th'][piexif.ImageIFD.Artist]           = isPro ? `VeriMedia Verified Creator - ${name}` : name;
+              newExif['0th'][piexif.ImageIFD.Copyright]        = copyright;
+              newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
+              newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+            }
 
             const exifBytes = piexif.dump(newExif);
             const finalUrl  = piexif.insert(exifBytes, dataUrl);
