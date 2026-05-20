@@ -1254,3 +1254,32 @@ footer {
   }
 }
 
+/* ==========================================================================
+   ✨ Polished Modal UI (Design Refresh from User Feedback)
+   ========================================================================== */
+.modal-card {
+  text-align: center; /* Center all modal content */
+}
+
+.modal-card h3 {
+  font-size: 1.65rem;    /* Larger title */
+  margin-top: 0.5rem;   /* More space above title */
+  margin-bottom: 0.5rem;
+}
+
+.modal-subtitle {
+  max-width: 320px;     /* Constrain line length for readability */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem; /* More space below subtitle */
+}
+
+.payment-summary {
+  padding: 1.25rem 1.5rem; /* More internal padding */
+  margin-bottom: 2rem;  /* More space below summary */
+}
+
+.modal-switch-link {
+  margin-top: 1rem; /* More space above "Already have a key?" */
+}
+
