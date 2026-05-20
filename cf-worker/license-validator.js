@@ -1,120 +1,249 @@
 /**
  * VeriMedia License Validator — Cloudflare Worker
  *
- * ARCHITECTURE:
- *   Browser → POST /validate { license_key }
- *   Worker  → checks Workers KV store → { valid: true/false }
- *   KV is populated by your Paddle webhook endpoint (see webhook notes below)
+ * TWO endpoints on this single worker:
+ *
+ *   POST /validate  — called by the browser to check a license key
+ *   POST /webhook   — called by Paddle when a purchase completes (auto-adds key to KV)
  *
  * ════════════════════════════════════════════════════════════════
- * ONE-TIME SETUP (do this once, takes ~10 minutes)
+ * HOW IT WORKS END-TO-END (fully automated):
  * ════════════════════════════════════════════════════════════════
  *
- * STEP 1 — Install Wrangler (Cloudflare's CLI, free)
- *   npm install -g wrangler
- *   wrangler login
+ *  1. Customer pays on Paddle checkout
+ *  2. Paddle fires a webhook → https://verimedia-license.sanitizemeta.workers.dev/webhook
+ *  3. Worker verifies the webhook signature (using your PADDLE_WEBHOOK_SECRET)
+ *  4. Worker writes  transaction_id → "active"  into Workers KV
+ *  5. Paddle automatically emails the customer their receipt
+ *     (the receipt contains the Transaction ID — this becomes their license key)
+ *  6. Customer opens verimedia.xyz, clicks "Activate License"
+ *  7. Browser POSTs the transaction ID to /validate
+ *  8. Worker does a KV lookup → returns { valid: true }
+ *  9. App unlocks Creator Pro — done!
  *
- * STEP 2 — Create a KV namespace to store license keys
- *   cd cf-worker
- *   wrangler kv:namespace create "LICENSE_KEYS"
- *   → Copy the returned `id` and paste it in wrangler.toml
+ * ════════════════════════════════════════════════════════════════
+ * ONE-TIME SETUP (you only do this once)
+ * ════════════════════════════════════════════════════════════════
  *
- * STEP 3 — Deploy the worker
+ * STEP 1 — Set your Paddle Webhook Secret as a Worker secret:
+ *   In Paddle Dashboard → Notifications → click your notification destination
+ *   → copy the "Secret key" shown there
+ *   Then run: wrangler secret put PADDLE_WEBHOOK_SECRET
+ *   Paste the secret when prompted.
+ *
+ * STEP 2 — Set up the Paddle Webhook in Paddle Dashboard:
+ *   Paddle Dashboard → Notifications → New Destination
+ *   URL: https://verimedia-license.sanitizemeta.workers.dev/webhook
+ *   Events: check "transaction.completed"
+ *   Save → copy the "Secret key" → use it in STEP 1
+ *
+ * STEP 3 — (Optional) Add custom domain so users never see workers.dev:
+ *   Cloudflare Dashboard → Workers & Pages → verimedia-license
+ *   → Settings → Domains & Routes → Add Custom Domain
+ *   Type: license.verimedia.xyz
+ *   Then update src/main.js → LICENSE_VALIDATE_URL to https://license.verimedia.xyz/validate
+ *
+ * STEP 4 — Re-deploy after setting secrets:
  *   wrangler deploy
- *   → Note your worker URL: https://verimedia-license.YOUR.workers.dev
- *   → Paste it into src/main.js → LICENSE_VALIDATE_URL
- *
- * STEP 4 — Set CORS_ORIGIN secret (your live domain)
- *   wrangler secret put CORS_ORIGIN
- *   → Type: https://verimedia.xyz  (and press Enter)
- *
- * ════════════════════════════════════════════════════════════════
- * ADDING LICENSE KEYS (when a customer buys)
- * ════════════════════════════════════════════════════════════════
- *
- * Since you're on Paddle Billing (no built-in license keys), here's the flow:
- *
- * OPTION A — Manual (easiest for < 100 customers):
- *   After each purchase, go to your Paddle Dashboard → Transactions
- *   Copy the transaction ID (e.g. txn_01abc123)
- *   Use that as the license key you email the customer, then add it to KV:
- *     wrangler kv:key put --namespace-id=YOUR_KV_ID "txn_01abc123" "active"
- *
- * OPTION B — Automated via Paddle Webhook (recommended):
- *   1. In Paddle Dashboard → Notifications → New Notification
- *   2. Point it at a webhook URL (a second small worker or serverless function)
- *   3. On `transaction.completed` event, write the key to KV:
- *      await env.LICENSE_KEYS.put(transaction.id, 'active');
- *   4. Email the customer their transaction ID as their license key
- *      (Paddle does this automatically via their email templates)
- *
- * OPTION C — Use a third-party license manager like Keygen.sh or Cryptlex
- *   These integrate with Paddle Billing webhooks and handle license
- *   generation, seat management, and activation automatically.
- *   Keygen has a generous free tier for indie developers.
  */
 
+// ── HMAC-SHA256 verification using Web Crypto (native in CF Workers) ──────────
+async function verifyPaddleSignature(rawBody, signatureHeader, secret) {
+  if (!signatureHeader || !secret) return false;
+
+  try {
+    // Paddle signature header format: "ts=1234567890;h1=abc123..."
+    const parts = Object.fromEntries(
+      signatureHeader.split(';').map(p => p.split('=').map((v, i) => i > 0 ? p.slice(p.indexOf('=') + 1) : v)).map(([k, v]) => [k, v])
+    );
+
+    const ts = signatureHeader.match(/ts=(\d+)/)?.[1];
+    const h1 = signatureHeader.match(/h1=([a-f0-9]+)/)?.[1];
+    if (!ts || !h1) return false;
+
+    // Replay attack protection: reject webhooks older than 5 minutes
+    const webhookAge = Date.now() / 1000 - parseInt(ts, 10);
+    if (webhookAge > 300) return false;
+
+    // Signed payload = "timestamp:rawBody"
+    const signedPayload = `${ts}:${rawBody}`;
+
+    // Import the secret as a HMAC-SHA256 key
+    const encoder = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      'raw',
+      encoder.encode(secret),
+      { name: 'HMAC', hash: 'SHA-256' },
+      false,
+      ['sign']
+    );
+
+    // Compute expected signature
+    const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(signedPayload));
+    const expectedHex = Array.from(new Uint8Array(signature))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+
+    // Timing-safe comparison
+    if (expectedHex.length !== h1.length) return false;
+    let diff = 0;
+    for (let i = 0; i < expectedHex.length; i++) {
+      diff |= expectedHex.charCodeAt(i) ^ h1.charCodeAt(i);
+    }
+    return diff === 0;
+
+  } catch (err) {
+    console.error('Signature verification error:', err);
+    return false;
+  }
+}
+
+// ── Main fetch handler ────────────────────────────────────────────────────────
 export default {
   async fetch(request, env) {
 
-    // ── CORS headers ──────────────────────────────────────────────────────────
+    const url = new URL(request.url);
+
+    // ── CORS: restrict to verimedia.xyz (+ localhost for dev) ──────────────
     const allowedOrigin = env.CORS_ORIGIN || 'https://verimedia.xyz';
     const origin = request.headers.get('Origin') || '';
+    const isAllowedOrigin = origin === allowedOrigin || origin.startsWith('http://localhost');
 
     const corsHeaders = {
-      'Access-Control-Allow-Origin': (origin === allowedOrigin || origin.includes('localhost'))
-        ? origin
-        : allowedOrigin,
+      'Access-Control-Allow-Origin':  isAllowedOrigin ? origin : allowedOrigin,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Max-Age': '86400',
+      'Access-Control-Max-Age':       '86400',
     };
 
-    // CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: corsHeaders });
     }
 
-    if (request.method !== 'POST') {
-      return json({ valid: false, error: 'Method not allowed' }, 405, corsHeaders);
+    // ── Route: POST /validate ─────────────────────────────────────────────
+    if (url.pathname === '/validate') {
+      return handleValidate(request, env, corsHeaders);
     }
 
-    // ── Parse body ────────────────────────────────────────────────────────────
-    let licenseKey;
-    try {
-      const body = await request.json();
-      licenseKey = (body.license_key || '').trim().toUpperCase();
-    } catch {
-      return json({ valid: false, error: 'Invalid request body' }, 400, corsHeaders);
+    // ── Route: POST /webhook (no CORS needed — Paddle calls this directly) ─
+    if (url.pathname === '/webhook') {
+      return handleWebhook(request, env);
     }
 
-    if (!licenseKey || licenseKey.length < 8) {
-      return json({ valid: false, error: 'No valid license key provided' }, 400, corsHeaders);
-    }
-
-    // ── KV lookup: is this key active? ───────────────────────────────────────
-    try {
-      const status = await env.LICENSE_KEYS.get(licenseKey);
-
-      if (status === 'active') {
-        return json({ valid: true }, 200, corsHeaders);
-      } else if (status === 'revoked') {
-        return json({ valid: false, error: 'This license has been revoked. Contact support@verimedia.xyz.' }, 200, corsHeaders);
-      } else {
-        // Not found in KV — key doesn't exist or was never activated
-        return json({ valid: false, error: 'License key not found. Double-check your purchase email.' }, 200, corsHeaders);
-      }
-    } catch (err) {
-      console.error('KV lookup error:', err.message);
-      return json({ valid: false, error: 'Validation service temporarily unavailable. Try again.' }, 502, corsHeaders);
-    }
+    return new Response('Not found', { status: 404 });
   }
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// /validate — browser calls this to check a license key
+// ─────────────────────────────────────────────────────────────────────────────
+async function handleValidate(request, env, corsHeaders) {
+  if (request.method !== 'POST') {
+    return json({ valid: false, error: 'Method not allowed' }, 405, corsHeaders);
+  }
+
+  let licenseKey;
+  try {
+    const body = await request.json();
+    licenseKey = (body.license_key || '').trim().toUpperCase();
+  } catch {
+    return json({ valid: false, error: 'Invalid request body' }, 400, corsHeaders);
+  }
+
+  if (!licenseKey || licenseKey.length < 6) {
+    return json({ valid: false, error: 'No valid license key provided' }, 400, corsHeaders);
+  }
+
+  try {
+    const status = await env.LICENSE_KEYS.get(licenseKey);
+
+    if (status === 'active') {
+      return json({ valid: true }, 200, corsHeaders);
+    } else if (status === 'revoked') {
+      return json({ valid: false, error: 'This license has been revoked. Contact support@verimedia.xyz.' }, 200, corsHeaders);
+    } else {
+      return json({ valid: false, error: 'License key not found. Double-check your purchase email from Paddle.' }, 200, corsHeaders);
+    }
+  } catch (err) {
+    console.error('KV lookup error:', err.message);
+    return json({ valid: false, error: 'Validation service temporarily unavailable. Try again in a moment.' }, 502, corsHeaders);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// /webhook — Paddle calls this automatically when a purchase completes
+// ─────────────────────────────────────────────────────────────────────────────
+async function handleWebhook(request, env) {
+  if (request.method !== 'POST') {
+    return new Response('Method not allowed', { status: 405 });
+  }
+
+  // Read raw body BEFORE parsing (signature verification needs the raw string)
+  const rawBody = await request.text();
+  const signatureHeader = request.headers.get('Paddle-Signature') || '';
+
+  // ── Verify the webhook is genuinely from Paddle ───────────────────────────
+  const webhookSecret = env.PADDLE_WEBHOOK_SECRET;
+
+  if (!webhookSecret) {
+    // Secret not configured yet — log warning but don't crash
+    console.warn('PADDLE_WEBHOOK_SECRET not set. Skipping signature verification (unsafe!).');
+  } else {
+    const isValid = await verifyPaddleSignature(rawBody, signatureHeader, webhookSecret);
+    if (!isValid) {
+      console.warn('Invalid Paddle webhook signature. Rejecting.');
+      return new Response('Unauthorized', { status: 401 });
+    }
+  }
+
+  // ── Parse the verified webhook payload ────────────────────────────────────
+  let event;
+  try {
+    event = JSON.parse(rawBody);
+  } catch {
+    return new Response('Invalid JSON', { status: 400 });
+  }
+
+  const eventType = event.event_type || event.eventType;
+  console.log(`Paddle webhook received: ${eventType}`);
+
+  // ── Handle transaction.completed → activate license key ──────────────────
+  if (eventType === 'transaction.completed') {
+    const transactionId = event.data?.id;
+
+    if (!transactionId) {
+      console.error('transaction.completed webhook missing data.id');
+      return new Response('OK', { status: 200 }); // Always 200 to Paddle or they retry
+    }
+
+    // Use the Transaction ID as the license key (Paddle includes it in receipt emails)
+    // Convert to uppercase so activation is case-insensitive
+    const licenseKey = transactionId.toUpperCase();
+
+    try {
+      // Check idempotency: don't overwrite if already active
+      const existing = await env.LICENSE_KEYS.get(licenseKey);
+      if (!existing) {
+        await env.LICENSE_KEYS.put(licenseKey, 'active');
+        console.log(`License activated: ${licenseKey}`);
+      } else {
+        console.log(`License already exists (idempotent): ${licenseKey}`);
+      }
+    } catch (err) {
+      console.error('KV write error:', err.message);
+      // Return 500 so Paddle retries the webhook
+      return new Response('Internal error', { status: 500 });
+    }
+  }
+
+  // Always return 200 to Paddle (otherwise they retry indefinitely)
+  return new Response('OK', { status: 200 });
+}
+
 // ── Helper ────────────────────────────────────────────────────────────────────
-function json(data, status, corsHeaders) {
+function json(data, status, headers = {}) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    headers: { ...headers, 'Content-Type': 'application/json' },
   });
 }
