@@ -540,6 +540,8 @@ const viewBuy      = document.getElementById('modalViewBuy');
 const viewActivate = document.getElementById('modalViewActivate');
 const viewSuccess  = document.getElementById('modalViewSuccess');
 
+let modalTriggerElement = null; // For a11y: store element that opened the modal
+
 // ── Modal view switcher ───────────────────────────────────────────────────────
 function showModalView(view) {
   [viewBuy, viewActivate, viewSuccess].forEach(v => v.style.display = 'none');
@@ -547,14 +549,19 @@ function showModalView(view) {
 }
 
 function openModal(startView = viewBuy) {
+  modalTriggerElement = document.activeElement; // Store focus for later
   showModalView(startView);
   paymentModal.classList.add('active');
   paymentModal.setAttribute('aria-hidden', 'false');
+  closeModal.focus(); // Move focus inside the modal to the close button
 }
 
 function closePaymentModal() {
   paymentModal.classList.remove('active');
   paymentModal.setAttribute('aria-hidden', 'true');
+  if (modalTriggerElement) {
+    modalTriggerElement.focus(); // Return focus to the element that opened the modal
+  }
 }
 
 // ── UI state helpers ──────────────────────────────────────────────────────────
