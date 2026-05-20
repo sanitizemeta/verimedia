@@ -590,11 +590,13 @@ function openCheckout() {
       textColor: '#94a3b8' // --text-secondary
     },
     eventCallback: (event) => {
+      console.log('Paddle Event:', event.name, event.data);
       if (event.name === 'checkout.completed') {
-        // AUTOMATION: Grab the Transaction ID and activate it instantly!
-        const txnId = event.data?.transaction_id || event.data?.id;
+        // STRICTLY grab the transaction ID (txn_...). Do NOT use the checkout ID (che_...).
+        const txnId = event.data?.transaction_id;
+        
         if (txnId) {
-          console.log('Automated Activation for:', txnId);
+          console.log('Automated Activation starting for:', txnId);
           activateLicenseBtn.disabled = true;
           
           // Polling to fix race condition (Webhook takes a few seconds to reach CF)
@@ -605,7 +607,7 @@ function openCheckout() {
               const data = await verifyLicense(txnId);
               if (data.valid === true) {
                 clearInterval(poll);
-                localStorage.setItem(STORAGE_KEY_LICENSE, txnId);
+                localStorage.setItem(STORAGE_KEY_LICENSE, txnId.toUpperCase());
                 setProActiveUI();
                 openModal(viewSuccess);
               } else if (attempts >= 10) {
@@ -613,7 +615,7 @@ function openCheckout() {
                 // Fallback if webhook is super slow
                 openModal(viewActivate);
                 if (licenseKeyInput) {
-                  licenseKeyInput.value = txnId;
+                  licenseKeyInput.value = txnId.toUpperCase();
                   showLicenseError('Payment received, but activation is delayed. Click Activate in a few seconds.');
                 }
               }
@@ -623,7 +625,8 @@ function openCheckout() {
           }, 1500); // Check every 1.5 seconds, up to 10 times (15 seconds)
           
         } else {
-          openModal(viewSuccess);
+          console.warn('Checkout completed, but no transaction_id found in payload.', event.data);
+          openModal(viewSuccess); // Fallback to success view, user might need to manually enter key later if it fails here
         }
       }
     }
