@@ -720,7 +720,6 @@ function getDeviceId() {
 
 // ── Modal element refs ────────────────────────────────────────────────────────
 const paymentModal      = document.getElementById('paymentModal');
-const upgradeBtn        = document.getElementById('upgradeBtn');
 const activateKeyBtn    = document.getElementById('activateKeyBtn');
 const closeModal        = document.getElementById('closeModal');
 const switchToActivate  = document.getElementById('switchToActivate');
@@ -730,7 +729,7 @@ const licenseKeyInput   = document.getElementById('licenseKeyInput');
 const licenseError      = document.getElementById('licenseError');
 const closeSuccessBtn   = document.getElementById('closeSuccessBtn');
 
-const paddleCheckoutBtn = document.getElementById('paddleCheckoutBtn');
+const paddleCheckoutBtns = document.querySelectorAll('#paddleCheckoutBtn, .paddle-checkout-btn');
 
 const viewBuy      = document.getElementById('modalViewBuy');
 const viewActivate = document.getElementById('modalViewActivate');
@@ -832,44 +831,46 @@ function openCheckout() {
       textColor: '#94a3b8' // --text-secondary
     }
   });
-}
+  }
 
-if (paddleCheckoutBtn) {
-  paddleCheckoutBtn.addEventListener('click', () => {
+  paddleCheckoutBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
     closePaymentModal(); // Close our local modal first
     openCheckout();      // Open Paddle overlay
   });
-}
+  });
 
-// ── Modal view switcher ───────────────────────────────────────────────────────
-function showModalView(view) {
+  // ── Modal view switcher ───────────────────────────────────────────────────────
+  function showModalView(view) {
   [viewBuy, viewActivate, viewSuccess].forEach(v => v.style.display = 'none');
   view.style.display = 'block';
-}
+  }
 
-function openModal(startView = viewBuy) {
+  function openModal(startView = viewBuy) {
   modalTriggerElement = document.activeElement; // Store focus for later
   showModalView(startView);
   paymentModal.classList.add('active');
   paymentModal.setAttribute('aria-hidden', 'false');
   closeModal.focus(); // Move focus inside the modal to the close button
-}
+  }
 
-function closePaymentModal() {
+  function closePaymentModal() {
   paymentModal.classList.remove('active');
   paymentModal.setAttribute('aria-hidden', 'true');
   if (modalTriggerElement) {
     modalTriggerElement.focus(); // Return focus to the element that opened the modal
   }
-}
+  }
 
-// ── UI state helpers ──────────────────────────────────────────────────────────
-function setProActiveUI() {
+  // ── UI state helpers ──────────────────────────────────────────────────────────
+  function setProActiveUI() {
   isPro = true;
-  upgradeBtn.textContent = 'Creator Pro Active';
-  upgradeBtn.style.background = 'var(--accent-emerald)';
-  upgradeBtn.style.cursor = 'default';
-  upgradeBtn.disabled = true;
+  paddleCheckoutBtns.forEach(btn => {
+    btn.textContent = 'Creator Pro Active';
+    btn.style.background = 'var(--accent-emerald)';
+    btn.style.cursor = 'default';
+    btn.disabled = true;
+  });
   if (activateKeyBtn) activateKeyBtn.style.display = 'none';
 
   // Unlock bulk selection for Pro users
@@ -877,19 +878,20 @@ function setProActiveUI() {
     fileInput.multiple = true;
     fileInput.setAttribute('multiple', 'multiple');
   }
-}
-function showLicenseError(msg) {
+  }
+
+  function showLicenseError(msg) {
   licenseError.textContent = msg;
   licenseError.style.display = 'block';
   licenseKeyInput.classList.add('input-error');
-}
+  }
 
-function clearLicenseError() {
+  function clearLicenseError() {
   licenseError.style.display = 'none';
   licenseKeyInput.classList.remove('input-error');
-}
+  }
 
-function setActivateBtnLoading(loading) {
+  function setActivateBtnLoading(loading) {
   if (!document.getElementById('spinner-kf')) {
     const s = document.createElement('style');
     s.id = 'spinner-kf';
@@ -903,24 +905,24 @@ function setActivateBtnLoading(loading) {
     activateLicenseBtn.textContent = 'Activate License';
     activateLicenseBtn.disabled = false;
   }
-}
+  }
 
-// ── Core: Verify a license key via CF Worker proxy ───────────────────────────
-async function verifyLicense(licenseKey) {
+  // ── Core: Verify a license key via CF Worker proxy ───────────────────────────
+  async function verifyLicense(licenseKey) {
   const res = await fetch(LICENSE_VALIDATE_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ 
+    body: JSON.stringify({
       license_key: licenseKey.trim(),
       device_id:   getDeviceId()
     }),
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json(); // expects { valid: boolean, error?: string }
-}
+  }
 
-// ── Core: Silent re-validation on page load ───────────────────────────────────
-async function validateStoredLicense() {
+  // ── Core: Silent re-validation on page load ───────────────────────────────────
+  async function validateStoredLicense() {
   const key = localStorage.getItem(STORAGE_KEY_LICENSE);
   if (!key) return false;
 
@@ -931,14 +933,12 @@ async function validateStoredLicense() {
     // Network failure — trust cached state to avoid locking out offline users
     return true;
   }
-}
+  }
 
-// ── Events: Upgrade / Activate buttons ───────────────────────────────────────
-upgradeBtn.addEventListener('click', () => openModal(viewBuy));
-
-if (activateKeyBtn) {
+  // ── Events: Upgrade / Activate buttons ───────────────────────────────────────
+  if (activateKeyBtn) {
   activateKeyBtn.addEventListener('click', () => openModal(viewActivate));
-}
+  }
 
 closeModal.addEventListener('click', closePaymentModal);
 paymentModal.addEventListener('click', e => { if (e.target === paymentModal) closePaymentModal(); });
