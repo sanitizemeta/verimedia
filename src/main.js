@@ -520,7 +520,7 @@ function triggerDownload() {
 // ── License configuration ─────────────────────────────────────────────────────
 // Point this at your deployed Cloudflare Worker URL.
 // See cf-worker/license-validator.js for the worker source.
-const LICENSE_VALIDATE_URL = 'https://verimedia-license.YOUR_SUBDOMAIN.workers.dev/validate';
+const LICENSE_VALIDATE_URL = 'https://verimedia-license.sanitizemeta.workers.dev/validate';
 
 const STORAGE_KEY_LICENSE = 'vm_license_key';
 
