@@ -596,13 +596,32 @@ function openCheckout() {
         if (txnId) {
           console.log('Automated Activation for:', txnId);
           activateLicenseBtn.disabled = true;
-          verifyLicense(txnId).then(data => {
-            if (data.valid === true) {
-              localStorage.setItem(STORAGE_KEY_LICENSE, txnId);
-              setProActiveUI();
-              showModalView(viewSuccess);
+          
+          // Polling to fix race condition (Webhook takes a few seconds to reach CF)
+          let attempts = 0;
+          const poll = setInterval(async () => {
+            attempts++;
+            try {
+              const data = await verifyLicense(txnId);
+              if (data.valid === true) {
+                clearInterval(poll);
+                localStorage.setItem(STORAGE_KEY_LICENSE, txnId);
+                setProActiveUI();
+                openModal(viewSuccess);
+              } else if (attempts >= 10) {
+                clearInterval(poll);
+                // Fallback if webhook is super slow
+                openModal(viewActivate);
+                if (licenseKeyInput) {
+                  licenseKeyInput.value = txnId;
+                  showLicenseError('Payment received, but activation is delayed. Click Activate in a few seconds.');
+                }
+              }
+            } catch (e) {
+              if (attempts >= 10) clearInterval(poll);
             }
-          }).catch(console.error);
+          }, 1500); // Check every 1.5 seconds, up to 10 times (15 seconds)
+          
         } else {
           openModal(viewSuccess);
         }
