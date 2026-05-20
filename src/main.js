@@ -563,6 +563,11 @@ if (window.Paddle) {
     eventCallback: function(event) {
       console.log('Paddle Event:', event.name, event.data);
       if (event.name === 'checkout.completed') {
+        // Instantly close Paddle's default success overlay
+        if (window.Paddle && window.Paddle.Checkout) {
+          window.Paddle.Checkout.close();
+        }
+
         // STRICTLY grab the transaction ID (txn_...).
         const txnId = event.data?.transaction_id || event.data?.id; 
         
