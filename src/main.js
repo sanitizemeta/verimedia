@@ -536,11 +536,49 @@ const licenseKeyInput   = document.getElementById('licenseKeyInput');
 const licenseError      = document.getElementById('licenseError');
 const closeSuccessBtn   = document.getElementById('closeSuccessBtn');
 
+const paddleCheckoutBtn = document.getElementById('paddleCheckoutBtn');
+
 const viewBuy      = document.getElementById('modalViewBuy');
 const viewActivate = document.getElementById('modalViewActivate');
 const viewSuccess  = document.getElementById('modalViewSuccess');
 
 let modalTriggerElement = null; // For a11y: store element that opened the modal
+
+// ── Paddle.js Initialization ──────────────────────────────────────────────────
+// Initialize Paddle for Billing v2
+if (window.Paddle) {
+  // IMPORTANT: You need to set your CLIENT SIDE TOKEN from Paddle Dashboard 
+  // → Developer Tools → Authentication → Client-side tokens
+  window.Paddle.Initialize({ 
+    token: 'live_2f19b88294a235307e74e44f820', 
+  });
+}
+
+function openCheckout() {
+  if (!window.Paddle) {
+    alert('Payment system is loading, please try again in a moment.');
+    return;
+  }
+  
+  window.Paddle.Checkout.open({
+    items: [{
+      priceId: 'pro_01ks3bafeed6zdbxg93ebw7xew', // Using your Product ID as the Price ID
+      quantity: 1
+    }],
+    settings: {
+      displayMode: 'overlay',
+      theme: 'dark',
+      locale: 'en'
+    }
+  });
+}
+
+if (paddleCheckoutBtn) {
+  paddleCheckoutBtn.addEventListener('click', () => {
+    closePaymentModal(); // Close our local modal first
+    openCheckout();      // Open Paddle overlay
+  });
+}
 
 // ── Modal view switcher ───────────────────────────────────────────────────────
 function showModalView(view) {
