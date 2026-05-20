@@ -91,16 +91,11 @@ const fileInput = document.getElementById('fileInput');
 const statusBadge = document.getElementById('statusBadge');
 const reportContent = document.getElementById('reportContent');
 
-// Modal Elements
-const paymentModal = document.getElementById('paymentModal');
-const upgradeBtn = document.getElementById('upgradeBtn');
-const closeModal = document.getElementById('closeModal');
-const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
-
 // State Variables
 let isPro = false;
 let processedImageBlobUrl = null;
 let processedFileName = "";
+
 
 // Drag and drop events
 dropzone.addEventListener('click', () => fileInput.click());
@@ -382,66 +377,196 @@ function triggerDownload() {
 }
 
 /* ==========================================================================
-   💳 3. LemonSqueezy-style Pricing Modal & Sandbox Billing Triggers
+   3. Lemon Squeezy License Validation Engine (Serverless, Real)
    ========================================================================== */
 
-upgradeBtn.addEventListener('click', () => {
+const LS_STORE_ID = 381579;
+const LS_ACTIVATE_URL = 'https://api.lemonsqueezy.com/v1/licenses/activate';
+const LS_VALIDATE_URL = 'https://api.lemonsqueezy.com/v1/licenses/validate';
+const LS_INSTANCE_NAME = 'verimedia-browser-' + (navigator.userAgent.slice(0, 20).replace(/\s/g, '-'));
+const STORAGE_KEY_LICENSE = 'vm_license_key';
+const STORAGE_KEY_INSTANCE = 'vm_instance_id';
+
+// Modal element refs
+const paymentModal = document.getElementById('paymentModal');
+const upgradeBtn = document.getElementById('upgradeBtn');
+const activateKeyBtn = document.getElementById('activateKeyBtn');
+const closeModal = document.getElementById('closeModal');
+const switchToActivate = document.getElementById('switchToActivate');
+const switchToBuy = document.getElementById('switchToBuy');
+const activateLicenseBtn = document.getElementById('activateLicenseBtn');
+const licenseKeyInput = document.getElementById('licenseKeyInput');
+const licenseError = document.getElementById('licenseError');
+const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+
+const viewBuy = document.getElementById('modalViewBuy');
+const viewActivate = document.getElementById('modalViewActivate');
+const viewSuccess = document.getElementById('modalViewSuccess');
+
+// ── Modal view switcher ──────────────────────────────────────────────────────
+function showModalView(view) {
+  [viewBuy, viewActivate, viewSuccess].forEach(v => v.style.display = 'none');
+  view.style.display = 'block';
+}
+
+function openModal(startView = viewBuy) {
+  showModalView(startView);
   paymentModal.classList.add('active');
   paymentModal.setAttribute('aria-hidden', 'false');
-});
+}
 
-closeModal.addEventListener('click', () => {
+function closePaymentModal() {
   paymentModal.classList.remove('active');
   paymentModal.setAttribute('aria-hidden', 'true');
-});
-
-paymentModal.addEventListener('click', (e) => {
-  if (e.target === paymentModal) {
-    paymentModal.classList.remove('active');
-    paymentModal.setAttribute('aria-hidden', 'true');
-  }
-});
-
-confirmPaymentBtn.addEventListener('click', () => {
-  confirmPaymentBtn.innerHTML = `<span style="display:inline-block; width:14px; height:14px; border:2px solid black; border-top-color:transparent; border-radius:50%; animation: spin 0.8s linear infinite; margin-right:8px; vertical-align:middle;"></span>Verifying Transaction...`;
-  confirmPaymentBtn.disabled = true;
-
-  // Add keyframe for spinner in JS to avoid CSS leaks
-  if (!document.getElementById('spinner-keyframe')) {
-    const style = document.createElement('style');
-    style.id = "spinner-keyframe";
-    style.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
-    document.head.appendChild(style);
-  }
-
-  // Simulate payment processing sandbox (1.5 seconds)
-  setTimeout(() => {
-    isPro = true;
-    confirmPaymentBtn.innerText = "Payment Successful! Pro Unlocked";
-    confirmPaymentBtn.style.background = "var(--accent-emerald)";
-    
-    localStorage.setItem('verimedia_pro', 'true');
-
-    // Trigger visual confetti effect (Simulated via simple alert and glowing outline triggers)
-    setTimeout(() => {
-      paymentModal.classList.remove('active');
-      paymentModal.setAttribute('aria-hidden', 'true');
-      
-      // Update primary pricing UI states
-      upgradeBtn.innerText = "Creator Pro Active";
-      upgradeBtn.style.background = "var(--accent-emerald)";
-      upgradeBtn.disabled = true;
-      
-      alert("Creator Pro successfully activated! You can now sign images with custom copyright credentials.");
-    }, 1000);
-
-  }, 1600);
-});
-
-// Auto-activate Pro if already purchased in storage
-if (localStorage.getItem('verimedia_pro') === 'true') {
-  isPro = true;
-  upgradeBtn.innerText = "Creator Pro Active";
-  upgradeBtn.style.background = "var(--accent-emerald)";
-  upgradeBtn.disabled = true;
 }
+
+// ── UI state helpers ─────────────────────────────────────────────────────────
+function setProActiveUI() {
+  isPro = true;
+  upgradeBtn.textContent = 'Creator Pro Active';
+  upgradeBtn.style.background = 'var(--accent-emerald)';
+  upgradeBtn.style.cursor = 'default';
+  upgradeBtn.disabled = true;
+  if (activateKeyBtn) activateKeyBtn.style.display = 'none';
+}
+
+function showLicenseError(msg) {
+  licenseError.textContent = msg;
+  licenseError.style.display = 'block';
+  licenseKeyInput.classList.add('input-error');
+}
+
+function clearLicenseError() {
+  licenseError.style.display = 'none';
+  licenseKeyInput.classList.remove('input-error');
+}
+
+// ── Spinner helper ───────────────────────────────────────────────────────────
+function setActivateBtnLoading(loading) {
+  if (!document.getElementById('spinner-kf')) {
+    const s = document.createElement('style');
+    s.id = 'spinner-kf';
+    s.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+    document.head.appendChild(s);
+  }
+  if (loading) {
+    activateLicenseBtn.innerHTML = '<span style="display:inline-block;width:13px;height:13px;border:2px solid rgba(0,0,0,0.4);border-top-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px;"></span>Validating...';
+    activateLicenseBtn.disabled = true;
+  } else {
+    activateLicenseBtn.textContent = 'Activate License';
+    activateLicenseBtn.disabled = false;
+  }
+}
+
+// ── Core: Activate a new license key with Lemon Squeezy ─────────────────────
+async function activateLicenseKey(key) {
+  const body = new URLSearchParams({
+    license_key: key.trim(),
+    instance_name: LS_INSTANCE_NAME,
+  });
+
+  const res = await fetch(LS_ACTIVATE_URL, {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString(),
+  });
+
+  const data = await res.json();
+  return data;
+}
+
+// ── Core: Silently validate a stored key + instance on page load ─────────────
+async function validateStoredLicense() {
+  const key = localStorage.getItem(STORAGE_KEY_LICENSE);
+  const instanceId = localStorage.getItem(STORAGE_KEY_INSTANCE);
+  if (!key || !instanceId) return false;
+
+  try {
+    const body = new URLSearchParams({
+      license_key: key,
+      instance_id: instanceId,
+    });
+    const res = await fetch(LS_VALIDATE_URL, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
+    });
+    const data = await res.json();
+    return data.valid === true;
+  } catch {
+    // Network failure — trust cached state to avoid locking out offline users
+    return true;
+  }
+}
+
+// ── Event: Open modal via Upgrade button ─────────────────────────────────────
+upgradeBtn.addEventListener('click', () => openModal(viewBuy));
+
+// ── Event: "Enter your license key" shortcut from pricing card ───────────────
+if (activateKeyBtn) {
+  activateKeyBtn.addEventListener('click', () => openModal(viewActivate));
+}
+
+// ── Event: Modal close ───────────────────────────────────────────────────────
+closeModal.addEventListener('click', closePaymentModal);
+paymentModal.addEventListener('click', e => { if (e.target === paymentModal) closePaymentModal(); });
+if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', closePaymentModal);
+
+// ── Event: Switch between modal views ────────────────────────────────────────
+switchToActivate.addEventListener('click', () => { clearLicenseError(); showModalView(viewActivate); });
+switchToBuy.addEventListener('click', () => showModalView(viewBuy));
+
+// ── Event: Activate License button ──────────────────────────────────────────
+activateLicenseBtn.addEventListener('click', async () => {
+  const key = licenseKeyInput.value.trim();
+  if (!key) { showLicenseError('Please enter your license key.'); return; }
+
+  clearLicenseError();
+  setActivateBtnLoading(true);
+
+  try {
+    const data = await activateLicenseKey(key);
+
+    if (data.activated === true || data.license_key?.status === 'active') {
+      // Store key + instance ID for future silent validation
+      localStorage.setItem(STORAGE_KEY_LICENSE, key);
+      localStorage.setItem(STORAGE_KEY_INSTANCE, data.instance?.id || '');
+
+      setProActiveUI();
+      showModalView(viewSuccess);
+    } else {
+      // Decode common LS error responses into human-readable messages
+      const errMsg = data.error || '';
+      if (errMsg.toLowerCase().includes('expired')) {
+        showLicenseError('This license key has expired. Please contact support.');
+      } else if (errMsg.toLowerCase().includes('limit')) {
+        showLicenseError('This key has reached its device limit (3). Deactivate another device first.');
+      } else if (errMsg.toLowerCase().includes('invalid')) {
+        showLicenseError('Invalid license key. Double-check your purchase email.');
+      } else {
+        showLicenseError(errMsg || 'Activation failed. Please try again or contact support.');
+      }
+    }
+  } catch {
+    showLicenseError('Network error. Check your connection and try again.');
+  } finally {
+    setActivateBtnLoading(false);
+  }
+});
+
+// ── Allow Enter key to trigger activation ────────────────────────────────────
+licenseKeyInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') activateLicenseBtn.click();
+});
+
+// ── Boot: Silent re-validation on every page load ───────────────────────────
+(async () => {
+  const isValid = await validateStoredLicense();
+  if (isValid) {
+    setProActiveUI();
+  } else if (localStorage.getItem(STORAGE_KEY_LICENSE)) {
+    // Had a stored key but it's now invalid — clear and reset
+    localStorage.removeItem(STORAGE_KEY_LICENSE);
+    localStorage.removeItem(STORAGE_KEY_INSTANCE);
+  }
+})();
