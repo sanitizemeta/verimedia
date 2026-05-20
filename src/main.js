@@ -787,10 +787,15 @@ function openCheckout() {
       priceId: 'pri_01ks3bgn6zyh2bsvqk438c3dcv', 
       quantity: 1
     }],
+    customData: {
+      // Pass the device ID to the checkout so we can trace it later if needed
+      device_id: getDeviceId()
+    },
     settings: {
       displayMode: 'overlay',
       theme: 'dark',
-      locale: 'en'
+      locale: 'en',
+      allowLogout: false
     },
     // Theme customization to match VeriMedia's cosmic cyberpunk look
     theme: {
