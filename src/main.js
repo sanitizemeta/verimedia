@@ -420,6 +420,7 @@ async function processBulkFiles(files) {
     const zip = new JSZip();
     
     let successCount = 0;
+    let batchStatsHtml = '';
     
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -431,10 +432,24 @@ async function processBulkFiles(files) {
       progressBarFill.style.width = `${(i / files.length) * 100}%`;
       
       let outputBlob;
+      let tagsRemoved = 0;
+      let tagsAdded = 0;
+      let startScore = 90;
+      
       if (category === 'pdf') {
         const pdfBytes = await sanitizePDF(file);
         outputBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+        tagsRemoved = 'All'; // PDF wipes entire dicts
       } else {
+        // Run extraction to get real privacy score and tag counts before wiping
+        try {
+          const report = await extractMetadata(file);
+          if (report) {
+            tagsRemoved = report.tags.filter(t => ['GPS Location', 'Device', 'Device ID', 'Timestamp', 'Identity', 'Provenance'].includes(t.category)).length;
+            startScore = Math.min(90, report.privacyScore);
+          }
+        } catch(e) {}
+        
         const options = { keepIcc: false, keepAnnots: false, keepCameraSpecs: isPro };
         outputBlob = await sanitizeImage(file, options);
         
@@ -447,6 +462,7 @@ async function processBulkFiles(files) {
             if (creatorProfile.aiOnly) {
               newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.`;
               newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
+              tagsAdded = 1;
             } else {
               const name      = creatorProfile.name      || 'Human Creator';
               const copyright = creatorProfile.copyright || `© ${new Date().getFullYear()} Human Creator`;
@@ -456,6 +472,7 @@ async function processBulkFiles(files) {
               newExif['0th'][piexif.ImageIFD.Copyright]        = copyright;
               newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
               newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+              tagsAdded = url ? 4 : 3;
             }
 
             const exifBytes = piexif.dump(newExif);
@@ -465,6 +482,17 @@ async function processBulkFiles(files) {
         }
       }
       
+      const truncName = truncate(file.name, 22);
+      batchStatsHtml += `
+        <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size:0.75rem;">
+          <span style="color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:40%;" title="${file.name}">${truncName}</span>
+          <span style="text-align:right;">
+            <span style="color:var(--accent-rose);">- ${tagsRemoved} tags</span> <span style="color:var(--text-secondary); opacity:0.5; margin:0 4px;">|</span> 
+            <span style="color:var(--accent-emerald);">+ ${tagsAdded} embedded</span> <span style="color:var(--text-secondary); opacity:0.5; margin:0 4px;">|</span> 
+            <span style="color:var(--text-secondary);">Score: <span style="color:${startScore >= 90 ? 'var(--accent-emerald)' : 'var(--accent-cyan)'}">${startScore}</span> ➔ <span style="color:var(--accent-emerald)">100</span></span>
+          </span>
+        </div>`;
+        
       const outName = file.name.replace(/\.[^/.]+$/, '') + '_safe' + getOutputExt(file);
       zip.file(outName, outputBlob);
       successCount++;
@@ -484,10 +512,18 @@ async function processBulkFiles(files) {
     statusBadge.className = 'status-indicator complete';
     
     reportContent.innerHTML = `
-      <div style="text-align:center; padding: 2rem 0;">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <h3 style="font-family:var(--font-headers); color:var(--text-primary); margin-bottom:0.5rem;">Batch Processing Complete</h3>
-        <p style="color:var(--text-secondary); margin-bottom: 1.5rem;">Successfully sanitized ${successCount} files.</p>
+      <div style="text-align:center; padding: 1rem 0;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3 style="font-family:var(--font-headers); color:var(--text-primary); margin-bottom:0.25rem;">Batch Processing Complete</h3>
+        <p style="color:var(--text-secondary); margin-bottom: 1.2rem;">Successfully sanitized ${successCount} files.</p>
+        
+        <details style="margin-bottom: 1.5rem; text-align: left; background: rgba(255,255,255,0.02); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+          <summary style="cursor: pointer; color: var(--accent-cyan); font-weight: 500; font-size: 0.85rem; outline: none; user-select:none;">View Detailed File Report</summary>
+          <div style="margin-top: 0.75rem; max-height: 180px; overflow-y: auto; padding-right: 5px;" class="custom-scrollbar">
+            ${batchStatsHtml}
+          </div>
+        </details>
+
         <button class="download-sec-btn" id="downloadBtn">Download Secure ZIP Archive</button>
       </div>
     `;
