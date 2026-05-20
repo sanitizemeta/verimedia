@@ -562,7 +562,7 @@ function openCheckout() {
   
   window.Paddle.Checkout.open({
     items: [{
-      priceId: 'pro_01ks3bafeed6zdbxg93ebw7xew', // Using your Product ID as the Price ID
+      priceId: 'pri_01ks3bgn6zyh2bsvqk438c3dcv', 
       quantity: 1
     }],
     settings: {
