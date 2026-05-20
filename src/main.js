@@ -568,7 +568,18 @@ function openCheckout() {
     settings: {
       displayMode: 'overlay',
       theme: 'dark',
-      locale: 'en'
+      locale: 'en',
+      variant: 'one-page',
+      allowLogout: false
+    },
+    customer: {
+      email: '' 
+    },
+    // Theme customization to match VeriMedia's cosmic cyberpunk look
+    theme: {
+      primaryColor: '#06b6d4', // Matches your --accent-cyan
+      fontFamily: "'Outfit', sans-serif",
+      buttonRadius: 4
     }
   });
 }
