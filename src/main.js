@@ -473,6 +473,12 @@ async function processBulkFiles(files) {
         
         outputBlob = await sanitizeImage(file, options);
         
+        // Report tags added for PNG/WebP (handled inside engine.ts)
+        if (outputBlob.type === 'image/png' || outputBlob.type === 'image/webp') {
+          if (options.injectIdentity) tagsAdded = 4;
+          else if (options.aiOptOut) tagsAdded = 1;
+        }
+        
         if (outputBlob.type === 'image/jpeg' || outputBlob.type === '') {
           try {
             const { default: piexif } = await import('piexifjs');
