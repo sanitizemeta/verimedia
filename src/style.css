@@ -1207,11 +1207,14 @@ footer {
 .profile-panel-overlay {
   align-items: center;
   justify-content: center;
+  overflow-y: auto; /* Allow the entire page to scroll if modal is tall */
+  padding: 3rem 1.5rem;
 }
 
 .profile-panel-overlay.active {
   opacity: 1;
   pointer-events: all;
+  display: flex; /* Ensure it stays visible */
 }
 
 .nav-link.profile-nav-btn::after {
@@ -1221,12 +1224,17 @@ footer {
 .profile-panel-card {
   max-width: 620px;
   width: 100%;
-  padding: 2.2rem 2.5rem 2.2rem;
+  padding: 2.8rem 3.5rem;
   text-align: left;
   border: 1px solid hsla(189, 94%, 43%, 0.2);
   position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
+  /* Natural height based on content - no internal scroller */
+  overflow: visible; 
+  max-height: none;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
 .profile-panel-card input:disabled, 
