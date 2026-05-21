@@ -285,6 +285,75 @@ nav {
   font-weight: 600;
 }
 
+/* 5.5 Features Grid (Simpllo-inspired) */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  padding: 2.5rem 2rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card h3 {
+  font-family: var(--font-headers);
+  font-size: 1.25rem;
+  color: white;
+  letter-spacing: -0.2px;
+}
+
+.feature-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.feature-icon-wrap {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  transition: var(--transition-spring);
+}
+
+.feature-card:hover .feature-icon-wrap {
+  transform: scale(1.1) rotate(-5deg);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: currentColor;
+  box-shadow: 0 0 15px currentColor;
+}
+
+/* Pro Highlighting */
+.pro-feature-highlight {
+  border-color: hsla(189, 94%, 43%, 0.25);
+}
+
+.pro-tag {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  background: hsla(189, 94%, 43%, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--accent-cyan);
+  letter-spacing: 1px;
+}
+
 /* 6. Main Cards & Translucent Grid Layout */
 .glass-card {
   background: var(--card-bg);

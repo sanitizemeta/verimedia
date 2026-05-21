@@ -12,15 +12,20 @@
     "summary": "VeriMedia is a secure tool that works entirely in your browser. It removes hidden location data and private tracking info from your photos and PDFs, while adding your personal copyright and AI opt-out tags in seconds."
   },
   "kb": {
-    "title": "How VeriMedia Protects Your Work",
-    "ai_title": "AI Training Protection",
-    "ai_desc": "VeriMedia adds a standard \"AI Opt-Out\" tag to your files. This sends a clear signal to AI scrapers that your work is off-limits for model training datasets.",
-    "privacy_title": "Privacy & Ownership",
-    "privacy_desc": "We remove hidden tracking data like GPS locations and camera serial numbers while permanently embedding your personal copyright and ownership info.",
-    "google_title": "Google Images Support",
-    "google_desc": "By adding your portfolio link to your photos, you can trigger the \"Licensable\" badge in Google Images, making it easier for people to find and credit your original work.",
-    "pdf_title": "Clean & Safe PDFs",
-    "pdf_desc": "VeriMedia goes beyond basic cleaning for PDFs. We physically overwrite hidden data streams to ensure that your private info is completely erased and cannot be recovered."
+    "title": "Uncompromising Privacy & Creator Protection",
+    "subtitle": "Professional-grade tools for photographers, journalists, and digital artists.",
+    "ai_title": "AI Training Opt-Out",
+    "ai_desc": "Embeds 'ai:opt-out=true' tags recognized by major crawlers to protect your work from being used in AI training datasets.",
+    "privacy_title": "Neural Privacy Shield",
+    "privacy_desc": "Instantly strips invasive GPS coordinates, camera serial numbers, and device fingerprints from every image you share.",
+    "google_title": "Google Licensable Badge",
+    "google_desc": "Triggers the 'Licensable' badge in Google Images by embedding your portfolio link directly into your photo metadata.",
+    "pdf_title": "Forensic PDF Scrubbing",
+    "pdf_desc": "Physically overwrites hidden data streams in PDFs to ensure sensitive author info is permanently erased and unrecoverable.",
+    "identity_title": "Creator Identity (Pro)",
+    "identity_desc": "Embed your official Artist name and Copyright URL into every file to ensure you are always credited for your original work.",
+    "whitelabel_title": "Whitelabel Engine (Pro)",
+    "whitelabel_desc": "Remove all VeriMedia references from your file metadata, replacing 'Software' tags with 'Original Content Engine'."
   },
   "sandbox": {
     "drop_title": "Drag & Drop your media file",

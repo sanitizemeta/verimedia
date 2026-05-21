@@ -12,15 +12,20 @@
     "summary": "VeriMedia es una herramienta segura que funciona íntegramente en su navegador. Elimina los datos de ubicación ocultos y la información de seguimiento privada de sus fotos y archivos PDF, al mismo tiempo que agrega sus etiquetas personales de derechos de autor y exclusión voluntaria de IA en segundos."
   },
   "kb": {
-    "title": "Cómo VeriMedia protege su trabajo",
-    "ai_title": "Protección de entrenamiento de IA",
-    "ai_desc": "VeriMedia agrega una etiqueta estándar de \"Exclusión voluntaria de IA\" a sus archivos. Esto envía una señal clara a los rastreadores de IA de que su trabajo está fuera de los límites de los conjuntos de datos de entrenamiento de modelos.",
-    "privacy_title": "Privacidad y propiedad",
-    "privacy_desc": "Eliminamos datos de seguimiento ocultos, como ubicaciones GPS y números de serie de cámaras, al tiempo que incorporamos permanentemente sus derechos de autor personales y su información de propiedad.",
-    "google_title": "Soporte de Google Imágenes",
-    "google_desc": "Al agregar el enlace de su portafolio a sus fotos, puede activar la insignia \"Licenciable\" en Google Imágenes, lo que facilita que las personas encuentren y acrediten su trabajo original.",
-    "pdf_title": "Archivos PDF limpios y seguros",
-    "pdf_desc": "VeriMedia va más allá de la limpieza básica de archivos PDF. Sobrescribimos físicamente los flujos de datos ocultos para garantizar que su información privada se borre por completo y no se pueda recuperar."
+    "title": "Privacidad sin concesiones y protección del creador",
+    "subtitle": "Herramientas de nivel profesional para fotógrafos, periodistas y artistas digitales.",
+    "ai_title": "Exclusión de entrenamiento de IA",
+    "ai_desc": "Inserta etiquetas 'ai:opt-out=true' reconocidas por los principales rastreadores para proteger su trabajo de ser utilizado en conjuntos de datos de entrenamiento de IA.",
+    "privacy_title": "Escudo de privacidad neural",
+    "privacy_desc": "Elimina instantáneamente coordenadas GPS invasivas, números de serie de cámaras y huellas digitales del dispositivo de cada imagen que comparte.",
+    "google_title": "Insignia licenciable de Google",
+    "google_desc": "Activa la insignia 'Licenciable' en Google Imágenes insertando el enlace de su portafolio directamente en los metadatos de su foto.",
+    "pdf_title": "Limpieza forense de PDF",
+    "pdf_desc": "Sobrescribe físicamente flujos de datos ocultos en archivos PDF para garantizar que la información sensible del autor se borre permanentemente y sea irrecuperable.",
+    "identity_title": "Identidad del creador (Pro)",
+    "identity_desc": "Incruste su nombre de artista oficial y URL de derechos de autor en cada archivo para asegurarse de recibir siempre el crédito por su trabajo original.",
+    "whitelabel_title": "Motor de marca blanca (Pro)",
+    "whitelabel_desc": "Elimine todas las referencias a VeriMedia de los metadatos de sus archivos, reemplazando las etiquetas de 'Software' con 'Original Content Engine'."
   },
   "sandbox": {
     "drop_title": "Arrastra y suelta tu archivo multimedia",

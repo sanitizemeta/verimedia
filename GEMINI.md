@@ -4,11 +4,12 @@
 VeriMedia is a 100% client-side privacy tool that removes sensitive metadata (GPS, EXIF, etc.) from images and PDFs, while injecting creator identity, copyright, and AI opt-out indicators.
 
 ## Tech Stack
-- **Frontend:** Vanilla HTML/CSS/JS (Vite build system)
+- **Frontend:** Vanilla HTML/CSS/JS (Vite 5 build system)
 - **UI Theme:** "Cosmic Cyberpunk" (Dark navy `#090D19`, Cyan `#06B6D4`, Emerald `#10B981`)
-- **Metadata Engine:** `piexifjs` (for JPEG EXIF injection), `exifreader` (for analysis), `pdf-lib` (for PDF sanitization).
+- **Metadata Engine:** `piexifjs` (JPEG), `exifr` (analysis), `pdf-lib` (PDF), `heic2any` (HEIC support), `cbor-x` (CBOR/C2PA).
 - **Batch Processing:** `jszip` (dynamically imported for Pro users)
 - **Deployment:** Cloudflare Pages (Frontend) & Cloudflare Workers (Backend validation)
+- **Localization:** Custom zero-dependency i18n engine using local JSON bundles (EN, ES, FR).
 
 ## Licensing & Payment Architecture (Paddle Billing v2)
 The application uses a hybrid client/edge architecture for secure, automated licensing.

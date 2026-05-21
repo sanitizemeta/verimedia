@@ -12,15 +12,20 @@
     "summary": "VeriMedia est un outil sécurisé qui fonctionne entièrement dans votre navigateur. Il supprime les données de localisation cachées et les informations de suivi privées de vos photos et PDF, tout en ajoutant vos tags personnels de copyright et d'opt-out IA en quelques secondes."
   },
   "kb": {
-    "title": "Comment VeriMedia protège votre travail",
-    "ai_title": "Protection contre l'entraînement de l'IA",
-    "ai_desc": "VeriMedia ajoute un tag standard \"AI Opt-Out\" à vos fichiers. Cela envoie un signal clair aux extracteurs d'IA que votre travail est hors limites pour les ensembles de données d'entraînement de modèles.",
-    "privacy_title": "Confidentialité et Propriété",
-    "privacy_desc": "Nous supprimons les données de suivi cachées comme les positions GPS et les numéros de série des caméras tout en intégrant de façon permanente vos informations personnelles de copyright et de propriété.",
-    "google_title": "Support de Google Images",
-    "google_desc": "En ajoutant le lien de votre portfolio à vos photos, vous pouvez déclencher le badge \"Licenciable\" dans Google Images, ce qui facilite la recherche et le crédit de votre travail original.",
-    "pdf_title": "PDF propres et sûrs",
-    "pdf_desc": "VeriMedia va au-delà du nettoyage de base pour les PDF. Nous écrasons physiquement les flux de données cachés pour garantir que vos informations privées sont complètement effacées et ne peuvent pas être récupérées."
+    "title": "Confidentialité sans compromis et protection des créateurs",
+    "subtitle": "Outils de niveau professionnel pour les photographes, les journalistes et les artistes numériques.",
+    "ai_title": "Désactivation de l'entraînement de l'IA",
+    "ai_desc": "Intègre les balises 'ai:opt-out=true' reconnues par les principaux robots d'indexation pour protéger votre travail contre l'utilisation dans les ensembles de données d'entraînement de l'IA.",
+    "privacy_title": "Bouclier de confidentialité neural",
+    "privacy_desc": "Supprime instantanément les coordonnées GPS invasives, les numéros de série des caméras et les empreintes numériques des appareils de chaque image que vous partagez.",
+    "google_title": "Badge licenciable Google",
+    "google_desc": "Déclenche le badge 'Licenciable' dans Google Images en intégrant le lien de votre portfolio directement dans les métadonnées de votre photo.",
+    "pdf_title": "Nettoyage médico-légal des PDF",
+    "pdf_desc": "Écrase physiquement les flux de données cachés dans les PDF pour garantir que les informations sensibles de l'auteur sont définitivement effacées et irrécupérables.",
+    "identity_title": "Identité du créateur (Pro)",
+    "identity_desc": "Intégrez votre nom d'artiste officiel et l'URL de votre copyright dans chaque fichier pour vous assurer d'être toujours crédité pour votre travail original.",
+    "whitelabel_title": "Moteur en marque blanche (Pro)",
+    "whitelabel_desc": "Supprimez toutes les références à VeriMedia des métadonnées de vos fichiers, en remplaçant les balises 'Logiciel' par 'Original Content Engine'."
   },
   "sandbox": {
     "drop_title": "Glissez-déposez votre fichier média",
