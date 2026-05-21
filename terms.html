@@ -44,14 +44,12 @@
       <a href="/#calculator-section" class="nav-link" data-i18n="header.utility">Utility</a>
       <a href="/#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
 
-      <!-- Custom Language Switcher -->
+      <!-- Standardized Language Switcher -->
       <div class="lang-switcher-wrap" style="position: relative;">
-        <button id="langToggle" class="nav-link lang-btn" aria-label="Switch Language" style="display: flex; align-items: center; gap: 4px; padding: 4px 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <button id="langToggle" class="nav-link" aria-label="Switch Language" style="background: none; border: none; padding: 0.35rem 0; cursor: pointer; text-transform: uppercase;">
           <span id="currentLang">EN</span>
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5;"><path d="m6 9 6 6 6-9"/></svg>
         </button>
-        <div id="langDropdown" class="glass-card lang-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 120px; z-index: 1000; padding: 0.5rem; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+        <div id="langDropdown" class="glass-card lang-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 130px; z-index: 1000; padding: 0.5rem; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
           <button class="lang-opt" data-lang="en">English (EN)</button>
           <button class="lang-opt" data-lang="es">Español (ES)</button>
           <button class="lang-opt" data-lang="fr">Français (FR)</button>

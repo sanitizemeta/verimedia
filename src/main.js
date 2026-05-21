@@ -186,10 +186,12 @@ const profileSave    = document.getElementById('profileSaveBtn');
 const profileClose   = document.getElementById('profileCloseBtn');
 
 function openProfilePanel() {
+  if (!profilePanel || !profileName) return; // Guard for non-index pages
+
   // Populate fields with saved values
   profileName.value = creatorProfile.name    || '';
-  profileCopy.value = creatorProfile.copyright || '';
-  profileUrl.value  = creatorProfile.url      || '';
+  if (profileCopy) profileCopy.value = creatorProfile.copyright || '';
+  if (profileUrl)  profileUrl.value  = creatorProfile.url      || '';
   if (profileAiOnly) profileAiOnly.checked = creatorProfile.aiOnly === true;
   if (profileWhitelabel) profileWhitelabel.checked = creatorProfile.whitelabel === true;
   
@@ -204,23 +206,23 @@ function openProfilePanel() {
     if (profileKeyInput) {
       profileKeyInput.value = localStorage.getItem(STORAGE_KEY_LICENSE) || 'Active';
     }
-    profileSave.style.display = 'block';
+    if (profileSave) profileSave.style.display = 'block';
     
     // Enable fields for Pro users
     profileName.disabled = false;
-    profileCopy.disabled = false;
-    profileUrl.disabled = false;
+    if (profileCopy) profileCopy.disabled = false;
+    if (profileUrl)  profileUrl.disabled = false;
     if (profileWhitelabel) profileWhitelabel.disabled = false;
   } else {
     if (proOverlay) proOverlay.style.display = 'flex';
     if (activeKeyDisplay) activeKeyDisplay.style.display = 'none';
     if (profileWhitelabelWrap) profileWhitelabelWrap.style.display = 'none';
-    profileSave.style.display = 'none';
+    if (profileSave) profileSave.style.display = 'none';
 
     // Lockdown fields for non-Pro users
     profileName.disabled = true;
-    profileCopy.disabled = true;
-    profileUrl.disabled = true;
+    if (profileCopy) profileCopy.disabled = true;
+    if (profileUrl)  profileUrl.disabled = true;
     if (profileWhitelabel) profileWhitelabel.disabled = true;
   }
 
