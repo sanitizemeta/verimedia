@@ -1,0 +1,41 @@
+{
+  "header": {
+    "utility": "Utility",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "profile": "Profile"
+  },
+  "hero": {
+    "title": "Protect Your Photos & PDFs from AI Scrapers",
+    "summary": "VeriMedia is a secure tool that works entirely in your browser. It removes hidden location data and private tracking info from your photos and PDFs, while adding your personal copyright and AI opt-out tags in seconds."
+  },
+  "kb": {
+    "title": "How VeriMedia Protects Your Work",
+    "ai_title": "AI Training Protection",
+    "ai_desc": "VeriMedia adds a standard \"AI Opt-Out\" tag to your files. This sends a clear signal to AI scrapers that your work is off-limits for model training datasets.",
+    "privacy_title": "Privacy & Ownership",
+    "privacy_desc": "We remove hidden tracking data like GPS locations and camera serial numbers while permanently embedding your personal copyright and ownership info.",
+    "google_title": "Google Images Support",
+    "google_desc": "By adding your portfolio link to your photos, you can trigger the \"Licensable\" badge in Google Images, making it easier for people to find and credit your original work.",
+    "pdf_title": "Clean & Safe PDFs",
+    "pdf_desc": "VeriMedia goes beyond basic cleaning for PDFs. We physically overwrite hidden data streams to ensure that your private info is completely erased and cannot be recovered."
+  },
+  "sandbox": {
+    "drop_title": "Drag & Drop your media file",
+    "drop_subtitle": "or click to browse local files (max 25MB)",
+    "audit_title": "Privacy & Copyright Audit",
+    "audit_empty": "Upload a photo to strip tracking details and embed copyright and AI opt-out tags."
+  },
+  "pricing": {
+    "title": "Simple Pricing",
+    "subtitle": "Choose the tier that best fits your workflow.",
+    "free_title": "Standard Tier",
+    "free_price": "Free",
+    "free_period": "/ forever",
+    "pro_title": "Creator Pro",
+    "pro_price": "$19",
+    "pro_period": "one-time",
+    "buy_now": "Buy Now - $19",
+    "activate": "Enter your license key"
+  }
+}

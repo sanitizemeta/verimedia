@@ -29,8 +29,22 @@ The application uses a hybrid client/edge architecture for secure, automated lic
   - `POST /validate`: Called by the browser. Verifies the key and enforces a **3-device limit** by tracking unique browser-generated `device_id`s.
   - `POST /webhook`: Called by Paddle. Listens for `transaction.completed` or `transaction.paid`, validates the HMAC-SHA256 signature using `PADDLE_WEBHOOK_SECRET`, and idempotently registers the key in KV.
 
-## Key Features & Constraints
-- **File Processing Limit:** 25MB per file (client-side memory constraint).
-- **Free Tier:** Single file processing only. No creator identity injection.
-- **Pro Tier:** Unlocked via valid license key. Enables batch processing (up to 100 files via ZIP), identity injection, Google Licensable Badge schema, and multi-device support (up to 3).
-- **AI Opt-Out:** Supports injecting `ai:opt-out=true` into image descriptions.
+## Core Capabilities
+- **Neural Privacy Shield:** Intelligent metadata stripping for Images (JPEG, PNG, WebP, HEIC) and PDFs.
+- **Forensic PDF Scrubbing:** 'Nuke and Pave' strategy that physically overwrites metadata streams to prevent recovery.
+- **AI Opt-Out Injection:** Standardized `ai:opt-out=true` embedding recognized by major model crawlers.
+- **Creator Identity (Pro):** Custom Author, Copyright, and License URL (Google Licensable Badge) injection.
+- **Whitelabel (Pro):** Option to remove all VeriMedia branding from file metadata.
+- **Profile Portability:** Export/Import creator settings via secure JSON (license keys excluded).
+- **SEO/AIO Optimized:** High-density semantic data and Schema.org integration for Google AI Mode (Gemini/SGE).
+
+## Tech Stack
+- **Frontend:** Vanilla HTML/CSS/JS (Vite 5 build system)
+- **UI Theme:** "Cosmic Cyberpunk" (Glassmorphism, Neon Cyan/Emerald, Dark Space background)
+- **Metadata Engine:** `piexifjs` (JPEG), `pdf-lib` (PDF), Custom surgical byte injection (PNG/WebP).
+- **Security:** 100% Client-side. Local processing via WebWorkers and ArrayBuffers.
+- **Licensing:** Paddle.js v2 + Cloudflare Workers/KV (3-device hardware locking).
+
+## Constraints
+- **File Limit:** 25MB (Local browser memory constraint).
+- **Privacy First:** No serverside file storage; zero-latency edge validation.

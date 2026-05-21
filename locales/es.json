@@ -1,0 +1,41 @@
+{
+  "header": {
+    "utility": "Utilidad",
+    "pricing": "Precios",
+    "faq": "Preguntas frecuentes",
+    "profile": "Perfil"
+  },
+  "hero": {
+    "title": "Proteja sus fotos y archivos PDF de los raspadores de IA",
+    "summary": "VeriMedia es una herramienta segura que funciona íntegramente en su navegador. Elimina los datos de ubicación ocultos y la información de seguimiento privada de sus fotos y archivos PDF, al mismo tiempo que agrega sus etiquetas personales de derechos de autor y exclusión voluntaria de IA en segundos."
+  },
+  "kb": {
+    "title": "Cómo VeriMedia protege su trabajo",
+    "ai_title": "Protección de entrenamiento de IA",
+    "ai_desc": "VeriMedia agrega una etiqueta estándar de \"Exclusión voluntaria de IA\" a sus archivos. Esto envía una señal clara a los rastreadores de IA de que su trabajo está fuera de los límites de los conjuntos de datos de entrenamiento de modelos.",
+    "privacy_title": "Privacidad y propiedad",
+    "privacy_desc": "Eliminamos datos de seguimiento ocultos, como ubicaciones GPS y números de serie de cámaras, al tiempo que incorporamos permanentemente sus derechos de autor personales y su información de propiedad.",
+    "google_title": "Soporte de Google Imágenes",
+    "google_desc": "Al agregar el enlace de su portafolio a sus fotos, puede activar la insignia \"Licenciable\" en Google Imágenes, lo que facilita que las personas encuentren y acrediten su trabajo original.",
+    "pdf_title": "Archivos PDF limpios y seguros",
+    "pdf_desc": "VeriMedia va más allá de la limpieza básica de archivos PDF. Sobrescribimos físicamente los flujos de datos ocultos para garantizar que su información privada se borre por completo y no se pueda recuperar."
+  },
+  "sandbox": {
+    "drop_title": "Arrastra y suelta tu archivo multimedia",
+    "drop_subtitle": "o haga clic para buscar archivos locales (máx. 25 MB)",
+    "audit_title": "Auditoría de privacidad y derechos de autor",
+    "audit_empty": "Sube una foto para eliminar los detalles de seguimiento e insertar etiquetas de derechos de autor y exclusión voluntaria de IA."
+  },
+  "pricing": {
+    "title": "Precios simples",
+    "subtitle": "Elija el nivel que mejor se adapte a su flujo de trabajo.",
+    "free_title": "Nivel estándar",
+    "free_price": "Gratis",
+    "free_period": "/ para siempre",
+    "pro_title": "Creador Pro",
+    "pro_price": "$19",
+    "pro_period": "pago único",
+    "buy_now": "Comprar ahora - $19",
+    "activate": "Ingrese su clave de licencia"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "header": {
+    "utility": "Utilitaire",
+    "pricing": "Tarification",
+    "faq": "FAQ",
+    "profile": "Profil"
+  },
+  "hero": {
+    "title": "Protégez vos photos et PDF des extracteurs d'IA",
+    "summary": "VeriMedia est un outil sécurisé qui fonctionne entièrement dans votre navigateur. Il supprime les données de localisation cachées et les informations de suivi privées de vos photos et PDF, tout en ajoutant vos tags personnels de copyright et d'opt-out IA en quelques secondes."
+  },
+  "kb": {
+    "title": "Comment VeriMedia protège votre travail",
+    "ai_title": "Protection contre l'entraînement de l'IA",
+    "ai_desc": "VeriMedia ajoute un tag standard \"AI Opt-Out\" à vos fichiers. Cela envoie un signal clair aux extracteurs d'IA que votre travail est hors limites pour les ensembles de données d'entraînement de modèles.",
+    "privacy_title": "Confidentialité et Propriété",
+    "privacy_desc": "Nous supprimons les données de suivi cachées comme les positions GPS et les numéros de série des caméras tout en intégrant de façon permanente vos informations personnelles de copyright et de propriété.",
+    "google_title": "Support de Google Images",
+    "google_desc": "En ajoutant le lien de votre portfolio à vos photos, vous pouvez déclencher le badge \"Licenciable\" dans Google Images, ce qui facilite la recherche et le crédit de votre travail original.",
+    "pdf_title": "PDF propres et sûrs",
+    "pdf_desc": "VeriMedia va au-delà du nettoyage de base pour les PDF. Nous écrasons physiquement les flux de données cachés pour garantir que vos informations privées sont complètement effacées et ne peuvent pas être récupérées."
+  },
+  "sandbox": {
+    "drop_title": "Glissez-déposez votre fichier média",
+    "drop_subtitle": "ou cliquez pour parcourir les fichiers locaux (max 25 Mo)",
+    "audit_title": "Audit de Confidentialité et Copyright",
+    "audit_empty": "Téléchargez une photo pour supprimer les détails de suivi et insérer des tags de copyright et d'opt-out IA."
+  },
+  "pricing": {
+    "title": "Tarification Simple",
+    "subtitle": "Choisissez l'offre qui convient le mieux à votre flux de travail.",
+    "free_title": "Niveau Standard",
+    "free_price": "Gratuit",
+    "free_period": "/ toujours",
+    "pro_title": "Créateur Pro",
+    "pro_price": "$19",
+    "pro_period": "paiement unique",
+    "buy_now": "Acheter Maintenant - $19",
+    "activate": "Entrez votre clé de licence"
+  }
+}
