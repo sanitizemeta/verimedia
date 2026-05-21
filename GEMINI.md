@@ -31,20 +31,27 @@ The application uses a hybrid client/edge architecture for secure, automated lic
 
 ## Core Capabilities
 - **Neural Privacy Shield:** Intelligent metadata stripping for Images (JPEG, PNG, WebP, HEIC) and PDFs.
-- **Forensic PDF Scrubbing:** 'Nuke and Pave' strategy that physically overwrites metadata streams to prevent recovery.
-- **AI Opt-Out Injection:** Standardized `ai:opt-out=true` embedding recognized by major model crawlers.
-- **Creator Identity (Pro):** Custom Author, Copyright, and License URL (Google Licensable Badge) injection.
-- **Whitelabel (Pro):** Option to remove all VeriMedia branding from file metadata.
-- **Profile Portability:** Export/Import creator settings via secure JSON (license keys excluded).
-- **SEO/AIO Optimized:** High-density semantic data and Schema.org integration for Google AI Mode (Gemini/SGE).
+- **Forensic PDF Scrubbing:** 'Nuke and Pave' strategy that physically overwrites metadata streams with empty data to prevent forensic recovery/carving.
+- **AI Opt-Out Injection:** Standardized `ai:opt-out=true` embedding recognized by major model crawlers (GPTBot, ClaudeBot).
+- **Creator Identity (Pro):** Custom Author, Copyright, and License URL (Google Licensable Badge) injection across all supported formats.
+- **Whitelabel (Pro):** Pro-exclusive toggle to remove all VeriMedia branding from file metadata, replacing 'Software' tags with 'Original Content Engine'.
+- **Multi-Lingual (i18n):** 100% localized interface for English (EN), Spanish (ES), and French (FR) with persistent real-time language switching.
+- **Profile Portability:** Export/Import creator settings via secure JSON (license keys excluded for security).
+- **SEO/AIO Optimized:** High-density semantic data and Schema.org integration (HowTo, SoftwareApplication, Organization) for Google AI Mode (Gemini/SGE).
+
+## Specialized Agent Skills
+- **skill-fetcher:** A custom, project-agnostic "Smart CTO" skill that autonomously researches and evaluating top-tier FREE and OPEN-SOURCE tools based on adoption metrics (Stars, Downloads).
 
 ## Tech Stack
-- **Frontend:** Vanilla HTML/CSS/JS (Vite 5 build system)
-- **UI Theme:** "Cosmic Cyberpunk" (Glassmorphism, Neon Cyan/Emerald, Dark Space background)
+- **Frontend:** Vanilla HTML/CSS/JS (Vite 5 build system).
+- **Localization:** Custom zero-dependency i18n engine using local JSON bundles.
+- **UI Theme:** "Cosmic Cyberpunk" (Glassmorphism, Neon Cyan/Emerald, Dark Space background).
 - **Metadata Engine:** `piexifjs` (JPEG), `pdf-lib` (PDF), Custom surgical byte injection (PNG/WebP).
-- **Security:** 100% Client-side. Local processing via WebWorkers and ArrayBuffers.
+- **Security:** 100% Client-side. Local processing via WebWorkers and ArrayBuffers. No serverside storage.
 - **Licensing:** Paddle.js v2 + Cloudflare Workers/KV (3-device hardware locking).
 
-## Constraints
-- **File Limit:** 25MB (Local browser memory constraint).
-- **Privacy First:** No serverside file storage; zero-latency edge validation.
+## Critical Implementation Details
+- **Branding Logic:** Free users get "VeriMedia Verified Creator" branding. Pro users can toggle "Whitelabel" to remove it.
+- **Global Modals:** Profile and Payment modals must be present on every page (`index`, `privacy`, `terms`, `refund`) to ensure consistent functional access.
+- **Form Safety:** All profile/license buttons must use `e.preventDefault()` to prevent accidental form-triggered page refreshes.
+- **C2PA Awareness:** The engine detects and handles C2PA manifests for content provenance verification.
