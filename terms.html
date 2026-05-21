@@ -40,94 +40,105 @@
       </a>
     </div>
     <nav>
-      <a href="/" class="nav-link">Home</a>
-      <a href="/#calculator-section" class="nav-link">Utility</a>
-      <a href="/#pricing-section" class="nav-link">Pricing</a>
+      <a href="/" class="nav-link" data-i18n="header.home">Home</a>
+      <a href="/#calculator-section" class="nav-link" data-i18n="header.utility">Utility</a>
+      <a href="/#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
+
+      <!-- Custom Language Switcher -->
+      <div class="lang-switcher-wrap" style="position: relative;">
+        <button id="langToggle" class="nav-link lang-btn" aria-label="Switch Language" style="display: flex; align-items: center; gap: 4px; padding: 4px 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="currentLang">EN</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5;"><path d="m6 9 6 6 6-9"/></svg>
+        </button>
+        <div id="langDropdown" class="glass-card lang-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 120px; z-index: 1000; padding: 0.5rem; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+          <button class="lang-opt" data-lang="en">English (EN)</button>
+          <button class="lang-opt" data-lang="es">Español (ES)</button>
+          <button class="lang-opt" data-lang="fr">Français (FR)</button>
+        </div>
+      </div>
     </nav>
   </header>
 
   <main>
     <section class="policy-section">
       <div class="card glass-card policy-card">
-        <h1>Terms of Service</h1>
-        <span class="last-updated">Last Updated: May 20, 2026</span>
+        <h1 data-i18n="terms_page.h1">Terms of Service</h1>
+        <span class="last-updated" data-i18n="terms_page.last_updated">Last Updated: May 20, 2026</span>
 
-        <p>
+        <p data-i18n="terms_page.intro">
           Welcome to <strong>VeriMedia.xyz</strong> (the "Service"). By accessing or using our browser-based metadata purging and copyright shield utility, you agree to comply with and be bound by the following Terms of Service.
         </p>
 
-        <h2>1. Agreement to Terms</h2>
-        <p>
+        <h2 data-i18n="terms_page.h2_1">1. Agreement to Terms</h2>
+        <p data-i18n="terms_page.p1">
           By using our website, utilities, or purchasing a Creator Pro license, you acknowledge that you have read, understood, and agreed to these terms. If you do not agree, you must immediately cease using the Service.
         </p>
 
-        <h2>2. Description of Service</h2>
-        <p>
+        <h2 data-i18n="terms_page.h2_2">2. Description of Service</h2>
+        <p data-i18n="terms_page.p2">
           VeriMedia.xyz provides edge-computed browser tools designed to:
         </p>
         <ul>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Strip EXIF/GPS coordinate metadata segments from JPEGs.</span>
+            <span data-i18n="terms_page.li2_1">Strip EXIF/GPS coordinate metadata segments from JPEGs.</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Inject custom IPTC copyright credits, author licensing anchors, and E-E-A-T badges.</span>
+            <span data-i18n="terms_page.li2_2">Inject custom IPTC copyright credits, author licensing anchors, and E-E-A-T badges.</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Embed global AI training opt-out markers (<code>ai:opt-out=true</code>).</span>
+            <span data-i18n="terms_page.li2_3">Embed global AI training opt-out markers (<code>ai:opt-out=true</code>).</span>
           </li>
         </ul>
-        <p>
+        <p data-i18n="terms_page.p2_footer">
           The Standard Tier is free for casual creators. The Creator Pro Tier is a lifetime-payout upgrade that unlocks batch uploads and custom creator branding.
         </p>
 
-        <h2>3. Creator Pro License & Seat Limits</h2>
-        <p>
+        <h2 data-i18n="terms_page.h2_3">3. Creator Pro License & Seat Limits</h2>
+        <p data-i18n="terms_page.p3">
           When you purchase a **Creator Pro** license key:
         </p>
         <ul>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>Personal & Commercial Use:</strong> You are granted a non-exclusive, non-transferable, perpetual license to use the Pro features for personal and commercial content production.</span>
+            <span data-i18n="terms_page.li3_1"><strong>Personal & Commercial Use:</strong> You are granted a non-exclusive, non-transferable, perpetual license to use the Pro features for personal and commercial content production.</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>Seat Limitation:</strong> A single license key is valid for activation on a maximum of **3 active browser instances or devices** simultaneously.</span>
+            <span data-i18n="terms_page.li3_2"><strong>Seat Limitation:</strong> A single license key is valid for activation on a maximum of **3 active browser instances or devices** simultaneously.</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>Abuse:</strong> Reselling, distributing, decompiling, or attempting to crack license key validation processes will result in the immediate and permanent revocation of your active seats without refund.</span>
+            <span data-i18n="terms_page.li3_3"><strong>Abuse:</strong> Reselling, distributing, decompiling, or attempting to crack license key validation processes will result in the immediate and permanent revocation of your active seats without refund.</span>
           </li>
         </ul>
 
-        <h2>4. Acceptable Use</h2>
-        <p>
+        <h2 data-i18n="terms_page.h2_4">4. Acceptable Use</h2>
+        <p data-i18n="terms_page.p4">
           You agree not to use VeriMedia to process images for fraudulent purposes (e.g., stripping copyright labels belonging to other artists to claim fraudulent authorship). You are entirely liable for the images you upload, download, and publish.
         </p>
 
-        <h2>5. Intellectual Property</h2>
-        <p>
+        <h2 data-i18n="terms_page.h2_5">5. Intellectual Property</h2>
+        <p data-i18n="terms_page.p5">
           All codebase structures, graphic interfaces, styles, trademark logo names, and living particle systems are the exclusive property of VeriMedia.xyz. You are granted permission to download the locally modified media output, but you do not acquire any ownership over the core binary compiler or UI systems.
         </p>
 
-        <h2>6. Disclaimer of Warranties</h2>
-        <p>
+        <h2 data-i18n="terms_page.h2_6">6. Disclaimer of Warranties</h2>
+        <p data-i18n="terms_page.p6">
           The Service is provided "AS-IS" and "AS-AVAILABLE" without warranties of any kind, either express or implied. 
         </p>
-        <p>
-          While we utilize standard EXIF parser specifications (`piexifjs`), we do not guarantee that third-party social media sites (like Instagram, X/Twitter, or Facebook) will not discard metadata upon re-compression on their platforms. Similarly, while standard `ai:opt-out=true` tags signal opt-outs legally under contemporary compliance laws, we are not liable for malicious crawlers that deliberately violate standard robots/XMP metadata opt-out requests.
-        </p>
 
-        <h2>7. Limitation of Liability</h2>
-        <p>
+        <h2 data-i18n="terms_page.h2_7">7. Limitation of Liability</h2>
+        <p data-i18n="terms_page.p7">
           Under no circumstances shall VeriMedia.xyz, its developers, or payment partners be liable for any direct, indirect, incidental, or consequential damages resulting from the use of or inability to use this Service, including but not limited to location disclosure from un-stripped photos or loss of traffic on external sites.
         </p>
 
-        <h2>8. Contact & Governing Law</h2>
+        <h2 data-i18n="terms_page.h2_8">8. Contact & Governing Law</h2>
         <p>
-          These Terms of Service are governed by local statutes. For licensing inquires or copyright disputes, contact us at <a href="mailto:support@verimedia.xyz">support@verimedia.xyz</a>.
+          <span data-i18n="terms_page.p8">These Terms of Service are governed by local statutes. For licensing inquires or copyright disputes, contact us at</span> <a href="mailto:support@verimedia.xyz">support@verimedia.xyz</a>.
         </p>
       </div>
     </section>
@@ -136,16 +147,18 @@
   <!-- Footer Section -->
   <footer>
     <div class="footer-content">
-      <p>&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
+      <p data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
       <div class="footer-links">
-        <a href="/" class="footer-link">Home</a>
-        <a href="/privacy.html" class="footer-link">Privacy</a>
-        <a href="/refund.html" class="footer-link">Refunds</a>
+        <a href="/" class="footer-link" data-i18n="header.home">Home</a>
+        <a href="/privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy</a>
+        <a href="/refund.html" class="footer-link" data-i18n="footer.refunds">Refunds</a>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script type="module" src="/src/particles.js"></script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
 </body>
 </html>

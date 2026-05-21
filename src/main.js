@@ -12,7 +12,10 @@ async function loadTranslations(lang) {
     const response = await fetch(`/locales/${lang}.json`);
     translations = await response.json();
     applyTranslations();
-    document.getElementById('currentLang').textContent = lang.toUpperCase();
+    
+    const langDisplay = document.getElementById('currentLang');
+    if (langDisplay) langDisplay.textContent = lang.toUpperCase();
+    
     localStorage.setItem(LANG_KEY, lang);
   } catch (err) {
     console.error('Failed to load translations:', err);
@@ -35,6 +38,16 @@ function applyTranslations() {
       }
     }
   });
+
+  // Also translate document title if key exists
+  const pagePath = window.location.pathname.replace('.html', '').split('/').pop() || 'index';
+  let titleVal = '';
+  if (pagePath === 'index') {
+    titleVal = translations.hero?.title || 'VeriMedia';
+  } else if (translations[`${pagePath}_page`]?.h1) {
+    titleVal = `${translations[`${pagePath}_page`].h1} | VeriMedia.xyz`;
+  }
+  if (titleVal) document.title = titleVal;
 }
 
 // Initialize Language Switcher
@@ -239,33 +252,34 @@ function closeProfilePanel() {
   profilePanel.classList.remove('active');
 }
 
-if (profileBtn)   profileBtn.addEventListener('click', openProfilePanel);
-if (profileClose) profileClose.addEventListener('click', closeProfilePanel);
-if (profilePanel) profilePanel.addEventListener('click', e => { if (e.target === profilePanel) closeProfilePanel(); });
+if (profileBtn) {
+  profileBtn.addEventListener('click', openProfilePanel);
+  if (profileClose) profileClose.addEventListener('click', closeProfilePanel);
+  if (profilePanel) profilePanel.addEventListener('click', e => { if (e.target === profilePanel) closeProfilePanel(); });
 
-if (profileSave) {
-  profileSave.addEventListener('click', () => {
-    creatorProfile = {
-      name:      profileName.value.trim()  || '',
-      copyright: profileCopy.value.trim()  || '',
-      url:       profileUrl.value.trim()   || '',
-      aiOnly:    profileAiOnly ? profileAiOnly.checked : false,
-      whitelabel: profileWhitelabel ? profileWhitelabel.checked : false
-    };
-    saveProfile(creatorProfile);
+  if (profileSave) {
+    profileSave.addEventListener('click', () => {
+      creatorProfile = {
+        name:      profileName.value.trim()  || '',
+        copyright: profileCopy.value.trim()  || '',
+        url:       profileUrl.value.trim()   || '',
+        aiOnly:    profileAiOnly ? profileAiOnly.checked : false,
+        whitelabel: profileWhitelabel ? profileWhitelabel.checked : false
+      };
+      saveProfile(creatorProfile);
 
-    // Visual feedback: pulse button green
-    profileSave.textContent = '✓ Saved!';
-    profileSave.style.background = 'var(--accent-emerald)';
-    setTimeout(() => {
-      profileSave.textContent = 'Save Profile';
-      profileSave.style.background = '';
-    }, 1800);
+      // Visual feedback: pulse button green
+      profileSave.textContent = translations.profile?.save || '✓ Saved!';
+      profileSave.style.background = 'var(--accent-emerald)';
+      setTimeout(() => {
+        profileSave.textContent = translations.profile?.save || 'Save Profile';
+        profileSave.style.background = '';
+      }, 1800);
 
-    closeProfilePanel();
-  });
+      closeProfilePanel();
+    });
+  }
 }
-
 
 /* ==========================================================================
    🛡️ 3. Core VeriMedia Client-Side UI & Process Engine (engine.ts)
@@ -277,31 +291,27 @@ const fileInput   = document.getElementById('fileInput');
 const statusBadge = document.getElementById('statusBadge');
 const reportContent = document.getElementById('reportContent');
 
-// State Variables
-let isPro = false;
-let processedBlob = null;
-let processedFileName = '';
-let isFirstRun = true;
+if (dropzone && fileInput) {
+  // ── Drag & drop / file-input events ──────────────────────────────────────────
+  dropzone.addEventListener('click', () => fileInput.click());
 
-// ── Drag & drop / file-input events ──────────────────────────────────────────
-dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzone.classList.add('dragover');
+  });
 
-dropzone.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  dropzone.classList.add('dragover');
-});
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
 
-dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+    if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+  });
 
-dropzone.addEventListener('drop', (e) => {
-  e.preventDefault();
-  dropzone.classList.remove('dragover');
-  if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
-});
-
-fileInput.addEventListener('change', (e) => {
-  if (e.target.files.length) handleFiles(e.target.files);
-});
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files.length) handleFiles(e.target.files);
+  });
+}
 
 // ── Supported types ───────────────────────────────────────────────────────────
 const SUPPORTED_IMAGE_TYPES = new Set([

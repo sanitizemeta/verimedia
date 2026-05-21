@@ -40,60 +40,68 @@
       </a>
     </div>
     <nav>
-      <a href="/" class="nav-link">Home</a>
-      <a href="/#calculator-section" class="nav-link">Utility</a>
-      <a href="/#pricing-section" class="nav-link">Pricing</a>
+      <a href="/" class="nav-link" data-i18n="header.home">Home</a>
+      <a href="/#calculator-section" class="nav-link" data-i18n="header.utility">Utility</a>
+      <a href="/#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
+
+      <!-- Custom Language Switcher -->
+      <div class="lang-switcher-wrap" style="position: relative;">
+        <button id="langToggle" class="nav-link lang-btn" aria-label="Switch Language" style="display: flex; align-items: center; gap: 4px; padding: 4px 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="currentLang">EN</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5;"><path d="m6 9 6 6 6-9"/></svg>
+        </button>
+        <div id="langDropdown" class="glass-card lang-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 120px; z-index: 1000; padding: 0.5rem; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+          <button class="lang-opt" data-lang="en">English (EN)</button>
+          <button class="lang-opt" data-lang="es">Español (ES)</button>
+          <button class="lang-opt" data-lang="fr">Français (FR)</button>
+        </div>
+      </div>
     </nav>
   </header>
 
   <main>
     <section class="policy-section">
       <div class="card glass-card policy-card">
-        <h1>Refund Policy</h1>
-        <span class="last-updated">Last Updated: May 20, 2026</span>
+        <h1 data-i18n="refund_page.h1">Refund Policy</h1>
+        <span class="last-updated" data-i18n="refund_page.last_updated">Last Updated: May 20, 2026</span>
 
-        <p>
+        <p data-i18n="refund_page.intro">
           We stand by the quality of our edge-compiled tools. Because we provide a fully functional, zero-click Standard Tier completely free of charge, all upgrades to <strong>Creator Pro</strong> are final.
         </p>
 
-        <h2>1. Transparent Testing (Try Before You Buy)</h2>
-        <p>
+        <h2 data-i18n="refund_page.h2_1">1. Transparent Testing (Try Before You Buy)</h2>
+        <p data-i18n="refund_page.p1">
           To ensure VeriMedia meets your metadata stripping and copyright licensing needs, we offer the **Standard Tier 100% free of charge, forever**. 
         </p>
-        <p>
-          This free version uses the exact same local binary manipulation algorithms as the **Creator Pro** upgrade. We strongly encourage you to drag-and-drop your original JPEGs to verify local device rendering and EXIF purging speeds on your hardware before purchasing a Pro license key.
-        </p>
 
-        <h2>2. Strictly No Refunds (All Sales Are Final)</h2>
-        <p>
+        <h2 data-i18n="refund_page.h2_2">2. Strictly No Refunds (All Sales Are Final)</h2>
+        <p data-i18n="refund_page.p2">
           Since you have the ability to thoroughly test all EXIF stripping, metadata purges, and licensing tags on your own hardware before upgrading, we do not offer refunds, exchanges, or cancellations for <strong>Creator Pro</strong> purchases.
         </p>
-        <p>
-          Once a license key is issued and activated, the sale is final, and no refunds will be granted.
-        </p>
 
-        <h2>3. Special Exceptions</h2>
-        <p>
+        <h2 data-i18n="refund_page.h2_3">3. Special Exceptions</h2>
+        <p data-i18n="refund_page.p3">
           We only consider refund exceptions under the following extreme circumstances:
         </p>
         <ul>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>Technical System Malfunction:</strong> In the rare event that a purchased license key fails to activate due to database/server-side validation errors, and our technical support desk is unable to resolve the issue or issue a working replacement key within 5 business days of contact.</span>
+            <span data-i18n="refund_page.li3_1"><strong>Technical System Malfunction:</strong> In the rare event that a purchased license key fails to activate due to database/server-side validation errors, and our technical support desk is unable to resolve the issue or issue a working replacement key within 5 business days of contact.</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>Accidental Duplicate Purchases:</strong> If you accidentally purchase the Creator Pro tier multiple times in immediate succession, we will gladly refund the duplicate transactions upon verification of the duplicate license keys (which will then be deactivated).</span>
+            <span data-i18n="refund_page.li3_2"><strong>Accidental Duplicate Purchases:</strong> If you accidentally purchase the Creator Pro tier multiple times in immediate succession, we will gladly refund the duplicate transactions upon verification of the duplicate license keys (which will then be deactivated).</span>
           </li>
         </ul>
 
-        <h2>4. Contact Support</h2>
+        <h2 data-i18n="refund_page.h2_4">4. Contact Support</h2>
         <p>
-          If you are experiencing any technical issues activating your license key or have questions about duplicate transactions, please reach out to our dedicated support desk at <a href="mailto:support@verimedia.xyz">support@verimedia.xyz</a> with your **Order ID**.
+          <span data-i18n="refund_page.p4">If you are experiencing any technical issues activating your license key or have questions about duplicate transactions, please reach out to our dedicated support desk at</span> <a href="mailto:support@verimedia.xyz">support@verimedia.xyz</a> with your **Order ID**.
         </p>
 
-        <h2>5. Chargebacks and Disputes</h2>
-        <p>
+        <h2 data-i18n="refund_page.h2_5">5. Chargebacks and Disputes</h2>
+        <p data-i18n="refund_page.p5">
           Opening a chargeback or payment dispute with your bank before reaching out to support will result in the immediate and permanent deactivation of your Creator Pro license key and all associated device seats. We strive to handle all support tickets within 24 hours.
         </p>
       </div>
@@ -103,16 +111,18 @@
   <!-- Footer Section -->
   <footer>
     <div class="footer-content">
-      <p>&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
+      <p data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
       <div class="footer-links">
-        <a href="/" class="footer-link">Home</a>
-        <a href="/privacy.html" class="footer-link">Privacy</a>
-        <a href="/terms.html" class="footer-link">Terms</a>
+        <a href="/" class="footer-link" data-i18n="header.home">Home</a>
+        <a href="/privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy</a>
+        <a href="/terms.html" class="footer-link" data-i18n="footer.terms">Terms</a>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script type="module" src="/src/particles.js"></script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
 </body>
 </html>
