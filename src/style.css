@@ -1214,15 +1214,26 @@ footer {
   pointer-events: all;
 }
 
+.nav-link.profile-nav-btn::after {
+  display: none;
+}
+
 .profile-panel-card {
-  max-width: 520px;
+  max-width: 620px;
   width: 100%;
-  padding: 2.2rem 2rem 2rem;
+  padding: 2.2rem 2.5rem 2.2rem;
   text-align: left;
   border: 1px solid hsla(189, 94%, 43%, 0.2);
   position: relative;
   max-height: 90vh;
   overflow-y: auto;
+}
+
+.profile-panel-card input:disabled, 
+.profile-panel-card textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(1);
 }
 
 .profile-panel-card h3 {

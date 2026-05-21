@@ -117,7 +117,6 @@ function openProfilePanel() {
   const proOverlay = document.getElementById('proProfileOverlay');
   const activeKeyDisplay = document.getElementById('activeKeyDisplay');
   const profileKeyInput = document.getElementById('profileKeyInput');
-  const inputsWrap = document.getElementById('profileInputsWrap');
 
   if (isPro) {
     if (proOverlay) proOverlay.style.display = 'none';
@@ -127,11 +126,23 @@ function openProfilePanel() {
       profileKeyInput.value = localStorage.getItem(STORAGE_KEY_LICENSE) || 'Active';
     }
     profileSave.style.display = 'block';
+    
+    // Enable fields for Pro users
+    profileName.disabled = false;
+    profileCopy.disabled = false;
+    profileUrl.disabled = false;
+    if (profileWhitelabel) profileWhitelabel.disabled = false;
   } else {
     if (proOverlay) proOverlay.style.display = 'flex';
     if (activeKeyDisplay) activeKeyDisplay.style.display = 'none';
     if (profileWhitelabelWrap) profileWhitelabelWrap.style.display = 'none';
     profileSave.style.display = 'none';
+
+    // Lockdown fields for non-Pro users
+    profileName.disabled = true;
+    profileCopy.disabled = true;
+    profileUrl.disabled = true;
+    if (profileWhitelabel) profileWhitelabel.disabled = true;
   }
 
   profilePanel.classList.add('active');
