@@ -301,11 +301,11 @@ async function handleSingleFileUpload(file) {
   // Show animated progress UI
   reportContent.innerHTML = `
     <div class="empty-state" style="margin:auto;width:100%;">
-      <p id="progressLabel" style="font-family:var(--font-headers);font-weight:600;color:var(--accent-cyan);font-size:1.1rem;margin-bottom:0.5rem;letter-spacing:0.5px;">Initializing Neural Privacy Shield...</p>
+      <p id="progressLabel" style="font-family:var(--font-headers);font-weight:600;color:var(--accent-cyan);font-size:1.1rem;margin-bottom:0.5rem;letter-spacing:0.5px;">Preparing secure environment...</p>
       <div class="progress-bar-track">
         <div class="progress-bar-fill" id="progressBarFill" style="width:0%;"></div>
       </div>
-      <p style="font-size:0.85rem;color:var(--text-secondary);opacity:0.75;">Analyzing binary segments for forensic identifiers locally...</p>
+      <p style="font-size:0.85rem;color:var(--text-secondary);opacity:0.75;">Scanning for hidden tracking data locally on your device...</p>
     </div>
   `;
 
@@ -315,14 +315,14 @@ async function handleSingleFileUpload(file) {
   const stages = category === 'pdf'
     ? [
         { p: 25, l: 'Analyzing PDF structure...' },
-        { p: 55, l: 'Purging forensic metadata streams...' },
-        { p: 80, l: 'Neutralizing structural vulnerabilities...' },
+        { p: 55, l: 'Removing hidden author & private data...' },
+        { p: 80, l: 'Cleaning document metadata...' },
         { p: 100, l: 'Sanitization complete!' },
       ]
     : [
-        { p: 20, l: 'Detecting geographic forensic markers...' },
-        { p: 50, l: 'Purging hardware & device serials...' },
-        { p: 75, l: 'Injecting AI-Safe Content Credentials...' },
+        { p: 20, l: 'Removing GPS location tags...' },
+        { p: 50, l: 'Clearing camera & device details...' },
+        { p: 75, l: 'Adding your copyright & AI tags...' },
         { p: 100, l: 'Processing complete!' },
       ];
 
