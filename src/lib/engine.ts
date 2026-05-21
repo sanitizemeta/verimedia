@@ -577,7 +577,9 @@ const stripPngMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8Ar
       chunkView.setUint32(chunk.length - 4, newCrc, false);
       
       if (type === 'IEND') {
-        // Before final chunk, inject our identity if needed
+        // Before final chunk, inject our identity if needed.
+        // We use a "Slim & Strong" strategy: Core identity tags in both 
+        // legacy tEXt (for old viewers) and modern iTXt (for OS/Web).
         if (options.injectIdentity || options.aiOptOut) {
           const name = options.creatorName || 'Human Creator';
           const copy = options.copyright || `© ${new Date().getFullYear()} ${name}`;
@@ -585,13 +587,13 @@ const stripPngMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8Ar
           const author = options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
           const description = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
 
-          // 1. Classical tEXt chunks (Legacy support)
-          pieces.push(createPngTextChunk('Author', author));
-          pieces.push(createPngTextChunk('Copyright', copy));
+          if (options.injectIdentity) {
+            pieces.push(createPngTextChunk('Author', author));
+            pieces.push(createPngTextChunk('Copyright', copy));
+          }
           pieces.push(createPngTextChunk('Description', description));
-          pieces.push(createPngTextChunk('Software', 'VeriMedia.xyz'));
           
-          // 2. Modern iTXt XMP chunk (Adobe/Google standard)
+          // Modern iTXt XMP chunk (Adobe/Google standard)
           pieces.push(createPngItxtChunk('XML:com.adobe.xmp', createXmpPayload(options)));
         }
       }
@@ -678,18 +680,18 @@ const stripWebpMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8A
     i = chunkEnd;
   }
 
-  // Inject Identity if requested
+  // Inject Identity if requested (Slim & Strong Strategy)
   if (options.injectIdentity || options.aiOptOut) {
-    const xmpPayload = createXmpPayload(options);
+    const xmpString = createXmpPayload(options);
     const encoder = new TextEncoder();
-    const data = encoder.encode(xmpPayload);
-    const paddedSize = data.length + (data.length % 2);
+    const xmpData = encoder.encode(xmpString);
+    const paddedSize = xmpData.length + (xmpData.length % 2);
     const xmpChunk = new Uint8Array(8 + paddedSize);
     const xmpView = new DataView(xmpChunk.buffer);
     
     xmpChunk.set(encoder.encode('XMP '), 0);
-    xmpView.setUint32(4, data.length, true); // WebP uses little-endian for sizes
-    xmpChunk.set(data, 8);
+    xmpView.setUint32(4, xmpData.length, true); // WebP uses little-endian for sizes
+    xmpChunk.set(xmpData, 8);
     
     pieces.push(xmpChunk);
   }
