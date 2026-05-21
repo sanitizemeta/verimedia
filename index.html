@@ -122,12 +122,9 @@
       <a href="#calculator-section" class="nav-link" data-i18n="header.utility">Utility</a>
       <a href="#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
       <a href="#faq-section" class="nav-link" data-i18n="header.faq">FAQ</a>
-      <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile — set your name, copyright & URL">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span data-i18n="header.profile">Profile</span>
-      </button>
       
-      <!-- Custom Language Switcher -->
-      <div class="lang-switcher-wrap" style="position: relative; margin-left: 15px;">
+      <!-- Custom Language Switcher (Repositioned) -->
+      <div class="lang-switcher-wrap" style="position: relative;">
         <button id="langToggle" class="nav-link lang-btn" aria-label="Switch Language" style="display: flex; align-items: center; gap: 4px; padding: 4px 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           <span id="currentLang">EN</span>
@@ -139,6 +136,10 @@
           <button class="lang-opt" data-lang="fr">Français (FR)</button>
         </div>
       </div>
+
+      <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile — set your name, copyright & URL">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span data-i18n="header.profile">Profile</span>
+      </button>
     </nav>
   </header>
 
@@ -232,10 +233,10 @@
           <div class="price"><span data-i18n="pricing.free_price">Free</span> <span class="period" data-i18n="pricing.free_period">/ forever</span></div>
           <p class="price-desc">Perfect for casual sharing and personal privacy.</p>
           <ul class="features-list">
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> Remove GPS tracking tags</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> Clear camera & device details</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> Add AI training protection</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-rose)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> 1 file at a time</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.free_f1">Remove GPS tracking tags</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.free_f2">Clear camera & device details</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.free_f3">Add AI training protection</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-rose)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span data-i18n="pricing.free_f4">1 file at a time</span></li>
           </ul>
           <button class="pricing-btn secondary-btn">Launch Free Tool</button>
         </div>
@@ -247,10 +248,11 @@
           <div class="price"><span data-i18n="pricing.pro_price">$19</span> <span class="period" data-i18n="pricing.pro_period">one-time</span></div>
           <p class="price-desc">Pay once. Use forever. No subscriptions.</p>
           <ul class="features-list">
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <strong>Bulk Uploads</strong> (Up to 100 files)</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> Custom ownership signatures</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> Google "Licensable" badge support</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> Works on up to 3 devices</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f1">Everything in Free Tier</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f2">Bulk Uploads (Up to 100 files)</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f3">Custom ownership signatures</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f4">Google "Licensable" badge support</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f5">Works on up to 3 devices</span></li>
           </ul>
           <button class="pricing-btn primary-btn" id="paddleCheckoutBtn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:6px;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -264,16 +266,16 @@
 
     <!-- AEO Question-Led FAQ Section -->
     <section id="faq-section" class="faq-section">
-      <h2 class="section-title">Frequently Asked Questions</h2>
+      <h2 class="section-title" data-i18n="faq.title">Frequently Asked Questions</h2>
       
       <div class="faq-accordion">
         
         <div class="faq-item">
           <h3 style="display: flex; align-items: flex-start; gap: 8px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span>Where do I find my Creator Pro license key?</span>
+            <span data-i18n="faq.q1">Where do I find my Creator Pro license key?</span>
           </h3>
-          <p>
+          <p data-i18n="faq.a1">
             After purchasing, check your email for the Paddle receipt. Your license key is the <strong>Transaction ID</strong> found in the receipt (it usually starts with <code>txn_</code>). Just copy and paste that into the Activation menu if it didn't activate automatically!
           </p>
         </div>
@@ -281,9 +283,9 @@
         <div class="faq-item">
           <h3 style="display: flex; align-items: flex-start; gap: 8px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span>How do I block AI web crawlers from using my images?</span>
+            <span data-i18n="faq.q2">How do I block AI web crawlers from using my images?</span>
           </h3>
-          <p>
+          <p data-i18n="faq.a2">
             VeriMedia embeds a standard "AI Opt-Out" tag (<code>ai:opt-out = true</code>) directly into your image file. This signals to major AI web crawlers (like GPTBot and ClaudeBot) that your work is off-limits for AI model training.
           </p>
         </div>
@@ -291,9 +293,9 @@
         <div class="faq-item">
           <h3 style="display: flex; align-items: flex-start; gap: 8px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span>How do I add copyright info and licensable badges to my photos?</span>
+            <span data-i18n="faq.q3">How do I add copyright info and licensable badges to my photos?</span>
           </h3>
-          <p>
+          <p data-i18n="faq.a3">
             By embedding standard creator copyright links directly into the image files, search engines like Google can identify you as the author and display a "Licensable" badge next to your images in search results.
           </p>
         </div>
@@ -301,9 +303,9 @@
         <div class="faq-item">
           <h3 style="display: flex; align-items: flex-start; gap: 8px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span>Why should I strip location metadata before uploading photos?</span>
+            <span data-i18n="faq.q4">Why should I strip location metadata before uploading photos?</span>
           </h3>
-          <p>
+          <p data-i18n="faq.a4">
             Hidden metadata inside raw photos contains your precise GPS coordinates, camera details, and dates. Stripping this data protects your location privacy and removes identifiers that bots can scrape.
           </p>
         </div>
