@@ -28,8 +28,10 @@ export interface SanitizeOptions {
   contactUrl?: string;
   /** Whether to inject AI Opt-Out indicators. */
   aiOptOut?: boolean;
-  /** Whether the user is a Pro subscriber (affects naming/branding). */
+  /** Whether the user is a Pro subscriber. */
   isPro?: boolean;
+  /** Whether to remove all VeriMedia branding from metadata (Pro only). */
+  whitelabel?: boolean;
 }
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -514,7 +516,12 @@ const createXmpPayload = (options: SanitizeOptions): string => {
   const name = escapeXml(options.creatorName || 'Human Creator');
   const copy = escapeXml(options.copyright || `© ${new Date().getFullYear()} ${name}`);
   const url  = escapeXml(options.contactUrl || '');
-  const author = options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
+  
+  // Branding Logic: Pro users can Whitelabel. Free users get VeriMedia markers.
+  const isWhitelabel = options.isPro && options.whitelabel;
+  const author = isWhitelabel ? name : `VeriMedia Verified Creator - ${name}`;
+  const software = isWhitelabel ? 'Original Content Engine' : 'VeriMedia.xyz';
+  
   const description = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
 
   return `<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>
@@ -526,7 +533,7 @@ const createXmpPayload = (options: SanitizeOptions): string => {
     dc:creator="${author}"
     dc:rights="${copy}"
     dc:description="${description}"
-    xmp:CreatorTool="VeriMedia.xyz"/>
+    xmp:CreatorTool="${software}"/>
  </rdf:RDF>
 </x:xmpmeta>
 <?xpacket end="r"?>`;
@@ -584,14 +591,22 @@ const stripPngMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8Ar
           const name = options.creatorName || 'Human Creator';
           const copy = options.copyright || `© ${new Date().getFullYear()} ${name}`;
           const url  = options.contactUrl || '';
-          const author = options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
           const description = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+
+          // Branding Logic: Pro users can Whitelabel.
+          const isWhitelabel = options.isPro && options.whitelabel;
+          const author = isWhitelabel ? name : `VeriMedia Verified Creator - ${name}`;
+          const software = isWhitelabel ? 'Original Content Engine' : 'VeriMedia.xyz';
 
           if (options.injectIdentity) {
             pieces.push(createPngTextChunk('Author', author));
             pieces.push(createPngTextChunk('Copyright', copy));
           }
           pieces.push(createPngTextChunk('Description', description));
+          
+          if (!isWhitelabel) {
+            pieces.push(createPngTextChunk('Software', software));
+          }
           
           // Modern iTXt XMP chunk (Adobe/Google standard)
           pieces.push(createPngItxtChunk('XML:com.adobe.xmp', createXmpPayload(options)));
@@ -1127,7 +1142,12 @@ export const sanitizePDF = async (
   if (_options.injectIdentity || _options.aiOptOut) {
     const name = _options.creatorName || 'Human Creator';
     const url = _options.contactUrl || '';
-    const author = _options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
+    
+    // Branding Logic: Pro users can Whitelabel.
+    const isWhitelabel = _options.isPro && _options.whitelabel;
+    const author = isWhitelabel ? name : `VeriMedia Verified Creator - ${name}`;
+    const software = isWhitelabel ? 'Original Content Engine' : 'VeriMedia.xyz';
+    
     const subject = _options.aiOptOut ? `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}` : '';
     const keywords = _options.aiOptOut ? ['AI Opt-Out', 'Privacy Protected'] : ['Privacy Protected'];
 
@@ -1136,8 +1156,11 @@ export const sanitizePDF = async (
       pdfDoc.setAuthor(author);
       pdfDoc.setSubject(subject);
       pdfDoc.setKeywords(keywords);
-      // We no longer set Title, Creator, or Producer to keep the file "slim" 
-      // and prevent it from feeling like an automated tool-generated file.
+      
+      if (!isWhitelabel) {
+        pdfDoc.setCreator(software);
+        pdfDoc.setProducer('VeriMedia Metadata Engine');
+      }
     } else {
       pdfDoc.setSubject(subject);
       pdfDoc.setKeywords(keywords);

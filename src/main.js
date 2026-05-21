@@ -101,6 +101,8 @@ const profileName    = document.getElementById('profileName');
 const profileCopy    = document.getElementById('profileCopyright');
 const profileUrl     = document.getElementById('profileUrl');
 const profileAiOnly  = document.getElementById('profileAiOnly');
+const profileWhitelabel = document.getElementById('profileWhitelabel');
+const profileWhitelabelWrap = document.getElementById('profileWhitelabelWrap');
 const profileSave    = document.getElementById('profileSaveBtn');
 const profileClose   = document.getElementById('profileCloseBtn');
 
@@ -110,6 +112,7 @@ function openProfilePanel() {
   profileCopy.value = creatorProfile.copyright || '';
   profileUrl.value  = creatorProfile.url      || '';
   if (profileAiOnly) profileAiOnly.checked = creatorProfile.aiOnly === true;
+  if (profileWhitelabel) profileWhitelabel.checked = creatorProfile.whitelabel === true;
   
   const proOverlay = document.getElementById('proProfileOverlay');
   const activeKeyDisplay = document.getElementById('activeKeyDisplay');
@@ -119,6 +122,7 @@ function openProfilePanel() {
   if (isPro) {
     if (proOverlay) proOverlay.style.display = 'none';
     if (activeKeyDisplay) activeKeyDisplay.style.display = 'block';
+    if (profileWhitelabelWrap) profileWhitelabelWrap.style.display = 'block';
     if (profileKeyInput) {
       profileKeyInput.value = localStorage.getItem(STORAGE_KEY_LICENSE) || 'Active';
     }
@@ -126,6 +130,7 @@ function openProfilePanel() {
   } else {
     if (proOverlay) proOverlay.style.display = 'flex';
     if (activeKeyDisplay) activeKeyDisplay.style.display = 'none';
+    if (profileWhitelabelWrap) profileWhitelabelWrap.style.display = 'none';
     profileSave.style.display = 'none';
   }
 
@@ -167,7 +172,8 @@ if (profileSave) {
       name:      profileName.value.trim()  || '',
       copyright: profileCopy.value.trim()  || '',
       url:       profileUrl.value.trim()   || '',
-      aiOnly:    profileAiOnly ? profileAiOnly.checked : false
+      aiOnly:    profileAiOnly ? profileAiOnly.checked : false,
+      whitelabel: profileWhitelabel ? profileWhitelabel.checked : false
     };
     saveProfile(creatorProfile);
 
@@ -336,6 +342,7 @@ async function handleSingleFileUpload(file) {
       copyright: creatorProfile.copyright,
       contactUrl: creatorProfile.url,
       aiOptOut: creatorProfile.aiOnly === true,
+      whitelabel: creatorProfile.whitelabel === true,
       isPro: isPro
     };
 
@@ -357,18 +364,21 @@ async function handleSingleFileUpload(file) {
           const dataUrl = await blobToDataUrl(outputBlob);
           const newExif = { '0th': {}, Exif: {}, GPS: {}, '1st': {} };
 
+          const isWhitelabel = options.isPro && options.whitelabel;
+          const software = isWhitelabel ? 'Original Content Engine' : 'VeriMedia.xyz';
+
           if (options.injectIdentity) {
             const name      = options.creatorName      || 'Human Creator';
             const copyright = options.copyright || `© ${new Date().getFullYear()} Human Creator`;
             const url       = options.contactUrl       || '';
 
-            newExif['0th'][piexif.ImageIFD.Artist]           = isPro ? `VeriMedia Verified Creator - ${name}` : name;
+            newExif['0th'][piexif.ImageIFD.Artist]           = isWhitelabel ? name : `VeriMedia Verified Creator - ${name}`;
             newExif['0th'][piexif.ImageIFD.Copyright]        = copyright;
-            newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
+            newExif['0th'][piexif.ImageIFD.Software]         = software;
             newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
           } else if (options.aiOptOut) {
             newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.`;
-            newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
+            newExif['0th'][piexif.ImageIFD.Software]         = software;
           }
 
           const exifBytes = piexif.dump(newExif);
