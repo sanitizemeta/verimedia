@@ -1046,8 +1046,79 @@ function openCheckout() {
     });
   }
 
-  closeModal.addEventListener('click', closePaymentModal);
-  paymentModal.addEventListener('click', e => { if (e.target === paymentModal) closePaymentModal(); });
+  // ── Profile Export/Import ────────────────────────────────────────────────────
+  const exportBtn = document.getElementById('exportProfileBtn');
+  const importBtn = document.getElementById('importProfileBtn');
+  const importInput = document.getElementById('importProfileInput');
+
+  if (exportBtn) {
+    exportBtn.addEventListener('click', () => {
+      // Clone profile to ensure we don't accidentally include sensitive data
+      const exportData = {
+        version: "1.0",
+        timestamp: new Date().toISOString(),
+        profile: { ...creatorProfile }
+      };
+
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `verimedia-profile-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  }
+
+  if (importBtn && importInput) {
+    importBtn.addEventListener('click', () => importInput.click());
+
+    importInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      try {
+        const text = await file.text();
+        const data = JSON.parse(text);
+
+        if (data && data.profile) {
+          // Basic schema validation
+          const imported = data.profile;
+          creatorProfile = {
+            name:       String(imported.name      || ''),
+            copyright:  String(imported.copyright || ''),
+            url:        String(imported.url       || ''),
+            aiOnly:     Boolean(imported.aiOnly),
+            whitelabel: Boolean(imported.whitelabel)
+          };
+
+          saveProfile(creatorProfile);
+
+          // Refresh UI fields
+          profileName.value = creatorProfile.name;
+          profileCopy.value = creatorProfile.copyright;
+          profileUrl.value  = creatorProfile.url;
+          if (profileAiOnly) profileAiOnly.checked = creatorProfile.aiOnly;
+          if (profileWhitelabel) profileWhitelabel.checked = creatorProfile.whitelabel;
+
+          // Visual feedback
+          const originalText = importBtn.textContent;
+          importBtn.textContent = '✓ Done!';
+          setTimeout(() => { importBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Import`; }, 2000);
+        } else {
+          alert('Invalid profile file. Ensure it is a VeriMedia JSON export.');
+        }
+      } catch (err) {
+        alert('Failed to read profile file.');
+      } finally {
+        importInput.value = ''; // Reset for next time
+      }
+    });
+  }
+
+  closeModal.addEventListener('click', closePaymentModal);  paymentModal.addEventListener('click', e => { if (e.target === paymentModal) closePaymentModal(); });
   if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', closePaymentModal);
 switchToActivate.addEventListener('click', () => { clearLicenseError(); showModalView(viewActivate); });
 switchToBuy.addEventListener('click', () => showModalView(viewBuy));
