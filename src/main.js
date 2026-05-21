@@ -1,6 +1,72 @@
 import { sanitizeImage, sanitizePDF, preloadEngine, extractMetadata } from './lib/engine.ts';
 
 /* ==========================================================================
+   🌍 0.5 Localization Engine (i18n)
+   ========================================================================== */
+const LANG_KEY = 'vm_lang';
+let currentLang = localStorage.getItem(LANG_KEY) || 'en';
+let translations = {};
+
+async function loadTranslations(lang) {
+  try {
+    const response = await fetch(`/locales/${lang}.json`);
+    translations = await response.json();
+    applyTranslations();
+    document.getElementById('currentLang').textContent = lang.toUpperCase();
+    localStorage.setItem(LANG_KEY, lang);
+  } catch (err) {
+    console.error('Failed to load translations:', err);
+  }
+}
+
+function applyTranslations() {
+  const elements = document.querySelectorAll('[data-i18n]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const keys = key.split('.');
+    let value = translations;
+    keys.forEach(k => { value = value ? value[k] : null; });
+    
+    if (value) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = value;
+      } else {
+        el.textContent = value;
+      }
+    }
+  });
+}
+
+// Initialize Language Switcher
+const langToggle = document.getElementById('langToggle');
+const langDropdown = document.getElementById('langDropdown');
+const langOpts = document.querySelectorAll('.lang-opt');
+
+if (langToggle && langDropdown) {
+  langToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isVisible = langDropdown.style.display === 'block';
+    langDropdown.style.display = isVisible ? 'none' : 'block';
+  });
+
+  window.addEventListener('click', () => {
+    langDropdown.style.display = 'none';
+  });
+
+  langOpts.forEach(opt => {
+    opt.addEventListener('click', () => {
+      const lang = opt.getAttribute('data-lang');
+      currentLang = lang;
+      loadTranslations(lang);
+    });
+  });
+}
+
+// Boot with saved or default language
+loadTranslations(currentLang);
+
+
+/* ==========================================================================
    🌌 1. Space-Dust Canvas Particle Engine (Living Background)
    ========================================================================== */
 const canvas = document.getElementById('particleCanvas');

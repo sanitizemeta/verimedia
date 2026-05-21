@@ -126,12 +126,19 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span data-i18n="header.profile">Profile</span>
       </button>
       
-      <!-- Language Switcher -->
-      <select id="langSwitcher" class="nav-link" style="background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--text-secondary); font-size: 0.75rem; padding: 2px 5px; border-radius: 4px; cursor: pointer; outline: none; margin-left: 10px;">
-        <option value="en">EN</option>
-        <option value="es">ES</option>
-        <option value="fr">FR</option>
-      </select>
+      <!-- Custom Language Switcher -->
+      <div class="lang-switcher-wrap" style="position: relative; margin-left: 15px;">
+        <button id="langToggle" class="nav-link lang-btn" aria-label="Switch Language" style="display: flex; align-items: center; gap: 4px; padding: 4px 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="currentLang">EN</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5;"><path d="m6 9 6 6 6-9"/></svg>
+        </button>
+        <div id="langDropdown" class="glass-card lang-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 120px; z-index: 1000; padding: 0.5rem; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+          <button class="lang-opt" data-lang="en">English (EN)</button>
+          <button class="lang-opt" data-lang="es">Español (ES)</button>
+          <button class="lang-opt" data-lang="fr">Français (FR)</button>
+        </div>
+      </div>
     </nav>
   </header>
 
