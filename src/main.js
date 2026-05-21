@@ -25,6 +25,11 @@ async function loadTranslations(lang) {
 function applyTranslations() {
   const elements = document.querySelectorAll('[data-i18n]');
   elements.forEach(el => {
+    // Skip updating pricing button if Pro is active
+    if (isPro && (el.id === 'paddleCheckoutBtn' || el.classList.contains('paddle-checkout-btn'))) {
+      return;
+    }
+
     const key = el.getAttribute('data-i18n');
     const keys = key.split('.');
     let value = translations;
@@ -38,6 +43,9 @@ function applyTranslations() {
       }
     }
   });
+
+  // Re-apply Pro UI if active (hiding elements that might have been re-shown)
+  if (isPro) setProActiveUI();
 
   // Translate document title
   const pagePath = window.location.pathname.replace('.html', '').split('/').pop() || 'index';
@@ -400,13 +408,25 @@ if (activateKeyBtn) {
 // License UI Gating
 function setProActiveUI() {
   isPro = true;
-  document.querySelectorAll('#paddleCheckoutBtn').forEach(btn => {
-    btn.textContent = translations.checkout?.start_pro || 'Creator Pro Active';
+  document.querySelectorAll('#paddleCheckoutBtn, .paddle-checkout-btn').forEach(btn => {
+    btn.textContent = translations.checkout?.success_title || 'Creator Pro Active';
     btn.style.background = 'var(--accent-emerald)';
     btn.disabled = true;
   });
-  const actBtn = document.getElementById('activateKeyBtn');
-  if (actBtn) actBtn.style.display = 'none';
+  
+  // Hide all activation and purchase links/containers
+  const elementsToHide = [
+    '.already-have-key-link',
+    '#activateKeyBtn',
+    '#switchToActivate',
+    '.modal-switch-link',
+    '.modal-footnote'
+  ];
+  
+  elementsToHide.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => el.style.display = 'none');
+  });
+
   const fInput = document.getElementById('fileInput');
   if (fInput) fInput.multiple = true;
 }
