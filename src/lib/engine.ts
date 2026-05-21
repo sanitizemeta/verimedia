@@ -506,26 +506,27 @@ const stripPngMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8Ar
       const chunkView = new DataView(chunk.buffer, chunk.byteOffset, chunk.byteLength);
       chunkView.setUint32(chunk.length - 4, newCrc, false);
       
+      if (type === 'IEND') {
+        // Before final chunk, inject our identity if needed
+        if (options.injectIdentity) {
+          const name = options.creatorName || 'Human Creator';
+          const copy = options.copyright || `© ${new Date().getFullYear()} ${name}`;
+          const url  = options.contactUrl || '';
+          
+          pieces.push(createPngTextChunk('Author', options.isPro ? `VeriMedia Verified Creator - ${name}` : name));
+          pieces.push(createPngTextChunk('Copyright', copy));
+          pieces.push(createPngTextChunk('Description', `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`));
+          pieces.push(createPngTextChunk('Software', 'VeriMedia.xyz'));
+        } else if (options.aiOptOut) {
+          pieces.push(createPngTextChunk('Description', 'AI Opt-Out: True. Restricted from AI training.'));
+          pieces.push(createPngTextChunk('Software', 'VeriMedia.xyz'));
+        }
+      }
+
       pieces.push(chunk);
     }
 
-    if (type === 'IEND') {
-      // Before final chunk, inject our identity if needed
-      if (options.injectIdentity) {
-        const name = options.creatorName || 'Human Creator';
-        const copy = options.copyright || `© ${new Date().getFullYear()} ${name}`;
-        const url  = options.contactUrl || '';
-        
-        pieces.push(createPngTextChunk('Author', options.isPro ? `VeriMedia Verified Creator - ${name}` : name));
-        pieces.push(createPngTextChunk('Copyright', copy));
-        pieces.push(createPngTextChunk('Description', `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`));
-        pieces.push(createPngTextChunk('Software', 'VeriMedia.xyz'));
-      } else if (options.aiOptOut) {
-        pieces.push(createPngTextChunk('Description', 'AI Opt-Out: True. Restricted from AI training.'));
-        pieces.push(createPngTextChunk('Software', 'VeriMedia.xyz'));
-      }
-      break;
-    }
+    if (type === 'IEND') break;
     i = chunkEnd;
   }
 
@@ -817,7 +818,16 @@ export const sanitizePDF = async (
     ignoreEncryption: true,
   });
 
-  wipePDFMetadata(pdfDoc, PDFName);
+  // 1. Initial Metadata Clearing
+  // We don't call wipePDFMetadata yet because it deletes the Info reference 
+  // from the trailer, which we need if we are going to inject new data.
+  // Instead, we just clear the fields.
+  pdfDoc.setTitle('');
+  pdfDoc.setAuthor('');
+  pdfDoc.setSubject('');
+  pdfDoc.setKeywords([]);
+  pdfDoc.setCreator('');
+  pdfDoc.setProducer('');
 
   const catalog = (pdfDoc as any).catalog;
 
