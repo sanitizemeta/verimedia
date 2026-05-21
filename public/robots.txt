@@ -2,7 +2,15 @@ User-agent: *
 Allow: /
 Sitemap: https://verimedia.xyz/sitemap.xml
 
-# Allow AI crawlers to index details for citations
+User-agent: Google-CloudVertexBot
+Allow: /
+
+User-agent: GoogleOther-Image
+Allow: /
+
+User-agent: GoogleOther-Video
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 Allow: /llms.txt
