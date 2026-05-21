@@ -383,6 +383,17 @@
             <input type="url" id="profileUrl" class="license-input" placeholder="e.g. https://janesmith.com/license" maxlength="300" spellcheck="false" />
             <p class="profile-hint">Your website or licensing page. Embedded as the <code>WebStatement</code> XMP tag — this triggers Google Images' <strong>"Licensable" badge</strong> on your photos.</p>
           </div>
+
+          <!-- Free-tier accessible Opt-Out -->
+          <div class="profile-field" style="margin-top: 1rem; padding: 0.75rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+            <div style="display: flex; align-items: flex-start; gap: 10px;">
+              <input type="checkbox" id="profileAiOnly" checked style="margin-top: 4px; accent-color: var(--accent-cyan); width: 16px; height: 16px; cursor: pointer;">
+              <div>
+                <label for="profileAiOnly" style="font-size: 0.9rem; color: var(--text-primary); cursor: pointer; font-weight: 500;">Inject AI Opt-Out Protection</label>
+                <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">Standardized metadata signal ("ai:opt-out=true") tells AI crawlers that your media is restricted from training datasets.</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <button class="pricing-btn primary-btn" id="profileSaveBtn" style="width:100%;margin-top:1.2rem;">Save Profile</button>

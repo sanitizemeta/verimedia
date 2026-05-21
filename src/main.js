@@ -79,8 +79,11 @@ const PROFILE_KEY = 'vm_creator_profile';
 
 function loadProfile() {
   try {
-    return JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}');
-  } catch { return {}; }
+    const data = JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}');
+    // Default AI Opt-Out to true for all users if not explicitly set
+    if (data.aiOnly === undefined) data.aiOnly = true;
+    return data;
+  } catch { return { aiOnly: true }; }
 }
 
 function saveProfile(data) {
@@ -328,11 +331,11 @@ async function handleSingleFileUpload(file) {
       keepIcc: false,
       keepAnnots: false,
       keepCameraSpecs: isPro,
-      injectIdentity: isPro && (creatorProfile.name || creatorProfile.copyright),
+      injectIdentity: isPro && (creatorProfile.name || creatorProfile.copyright || creatorProfile.url),
       creatorName: creatorProfile.name,
       copyright: creatorProfile.copyright,
       contactUrl: creatorProfile.url,
-      aiOptOut: creatorProfile.aiOnly,
+      aiOptOut: creatorProfile.aiOnly === true,
       isPro: isPro
     };
 
@@ -347,32 +350,32 @@ async function handleSingleFileUpload(file) {
 
       // Re-inject creator identity metadata via piexif (JPEG only)
       // For PNG/WebP/HEIC we rely on engine.ts stripping; copyright injection
-      // is currently supported only on the JPEG output path via piexif.
+      // is handled via surgical byte-level injection inside engine.ts.
       if (outputBlob.type === 'image/jpeg' || outputBlob.type === '') {
         try {
           const { default: piexif } = await import('piexifjs');
           const dataUrl = await blobToDataUrl(outputBlob);
           const newExif = { '0th': {}, Exif: {}, GPS: {}, '1st': {} };
 
-          if (creatorProfile.aiOnly) {
-            newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.`;
-            newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
-          } else {
-            const name      = creatorProfile.name      || 'Human Creator';
-            const copyright = creatorProfile.copyright || `© ${new Date().getFullYear()} Human Creator`;
-            const url       = creatorProfile.url       || '';
+          if (options.injectIdentity) {
+            const name      = options.creatorName      || 'Human Creator';
+            const copyright = options.copyright || `© ${new Date().getFullYear()} Human Creator`;
+            const url       = options.contactUrl       || '';
 
             newExif['0th'][piexif.ImageIFD.Artist]           = isPro ? `VeriMedia Verified Creator - ${name}` : name;
             newExif['0th'][piexif.ImageIFD.Copyright]        = copyright;
             newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
             newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+          } else if (options.aiOptOut) {
+            newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.`;
+            newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
           }
 
           const exifBytes = piexif.dump(newExif);
           const finalUrl  = piexif.insert(exifBytes, dataUrl);
           outputBlob = dataUrlToBlob(finalUrl);
         } catch (e) {
-          console.warn('piexif copyright injection failed (non-JPEG output):', e);
+          console.warn('piexif copyright injection failed:', e);
         }
       }
     }
