@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Privacy Policy | VeriMedia.xyz</title>
-  <meta name="description" content="Privacy Policy for VeriMedia.xyz. Learn about our 100% local, browser-based, zero-server EXIF metadata stripping and AI shield process.">
+  <meta name="description" content="VeriMedia.xyz Zero-Data Collection and Local Processing Policy. Your privacy is our absolute core value.">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,18 +14,16 @@
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="alternate icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/favicon.png">
-
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="/src/style.css">
+  
+  <!-- Paddle.js Overlay -->
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 </head>
 <body>
 
   <!-- Interactive Space-Dust Particle Background -->
   <canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.4;"></canvas>
 
-  <!-- Background Glowing Orbs -->
   <div class="glow-orb orb-1"></div>
   <div class="glow-orb orb-2"></div>
 
@@ -55,6 +53,10 @@
           <button class="lang-opt" data-lang="fr">Français (FR)</button>
         </div>
       </div>
+
+      <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile — set your name, copyright & URL">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span data-i18n="header.profile">Profile</span>
+      </button>
     </nav>
   </header>
 
@@ -109,30 +111,30 @@
         <ul>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span data-i18n="privacy_page.li3_1"><strong>Transactions:</strong> Payments are processed securely via our Merchant of Record partners (e.g., Lemon Squeezy, Paddle, or PayPal). We do not collect or store credit card details or bank routing information.</span>
+            <span data-i18n="privacy_page.li3_1"><strong>Transactions:</strong> Payments are processed securely via our Merchant of Record partners (e.g., Paddle). We do not collect or store credit card details or bank routing information.</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
-            <span data-i18n="privacy_page.li3_2"><strong>License Keys:</strong> When validating a license key, a secure, anonymized HTTPS request is dispatched directly from your browser to the payment processor's verification endpoint. The verified status and instance token are cached locally in your browser's <code>localStorage</code>.</span>
+            <span data-i18n="privacy_page.li3_2"><strong>License Keys:</strong> When validating a license key, a secure request is dispatched directly from your browser to the payment processor. The status is cached locally.</span>
           </li>
         </ul>
 
         <h2 data-i18n="privacy_page.h2_4">4. Cookies & Analytics</h2>
         <p data-i18n="privacy_page.p4">
-          We do not deploy marketing trackers, Google Analytics, or invasive ad cookies. 
+          We do not deploy marketing trackers or invasive ad cookies. 
         </p>
         <p data-i18n="privacy_page.p4_2">
-          We utilize standard HTML5 local storage (<code>localStorage</code>) solely to memorize whether your <strong>Creator Pro</strong> tier is currently activated on your active browser instance. This allows you to close and open the application without re-entering your license credentials.
+          We use local storage only to remember your Pro activation status.
         </p>
 
         <h2 data-i18n="privacy_page.h2_5">5. Policy Changes</h2>
         <p data-i18n="privacy_page.p5">
-          We will never sell your non-existent data, nor will we ever alter this code to quietly siphon files to external servers. Any structural updates to this tool will remain open-source and visible in our local tool declarations and build trees.
+          We will never sell your non-existent data. Any structural updates will remain open-source and visible.
         </p>
 
         <h2 data-i18n="privacy_page.h2_6">6. Contact Us</h2>
         <p>
-          <span data-i18n="privacy_page.p6">For privacy audits or technical queries regarding our EXIF stripping libraries, contact us at</span> <a href="mailto:privacy@verimedia.xyz">privacy@verimedia.xyz</a>.
+          <span data-i18n="privacy_page.p6">For privacy audits, contact us at</span> <a href="mailto:privacy@verimedia.xyz">privacy@verimedia.xyz</a>.
         </p>
       </div>
     </section>
@@ -150,9 +152,49 @@
     </div>
   </footer>
 
+  <!-- Modals (Needed for global functionality) -->
+  <div class="modal-overlay" id="paymentModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card glass-card">
+      <button class="close-modal" id="closeModal" aria-label="Close modal">&times;</button>
+      <div id="modalViewBuy">
+        <h3 data-i18n="checkout.pro_title">Creator Pro Lifetime</h3>
+        <p class="modal-subtitle" data-i18n="checkout.pro_subtitle">One-time payment. Use on up to 3 devices. No subscription, ever.</p>
+        <button class="pricing-btn primary-btn" id="paddleCheckoutBtn"><span data-i18n="checkout.buy_btn">Buy Now — $19</span></button>
+        <button class="link-btn modal-switch-link" id="switchToActivate" data-i18n="checkout.already_key">Already have a key? Activate it here</button>
+      </div>
+      <div id="modalViewActivate" style="display:none;">
+        <h3 data-i18n="checkout.activate_title">Activate Your License</h3>
+        <input type="text" id="licenseKeyInput" class="license-input" placeholder="e.g. txn_01abc123xyz" />
+        <p class="license-error" id="licenseError" style="display:none;"></p>
+        <button class="pricing-btn primary-btn" id="activateLicenseBtn" data-i18n="checkout.activate_btn">Activate License</button>
+        <button class="link-btn modal-switch-link" id="switchToBuy" data-i18n="checkout.need_buy">Need to buy a license?</button>
+      </div>
+      <div id="modalViewSuccess" style="display:none;">
+        <h3 data-i18n="checkout.success_title">Creator Pro Active</h3>
+        <button class="pricing-btn primary-btn" id="closeSuccessBtn" data-i18n="checkout.start_pro">Start Using Pro</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay profile-panel-overlay" id="profilePanel" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card glass-card profile-panel-card">
+      <button class="close-modal" id="profileCloseBtn">&times;</button>
+      <h3 data-i18n="profile.title">Creator Profile</h3>
+      <form id="profileForm" autocomplete="off">
+        <div class="profile-field">
+          <label class="profile-label"><span data-i18n="profile.name_label">Creator Name</span></label>
+          <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" />
+        </div>
+        <div class="profile-field">
+          <label class="profile-label"><span data-i18n="profile.copy_label">Copyright String</span></label>
+          <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith" />
+        </div>
+        <button class="pricing-btn primary-btn" id="profileSaveBtn" data-i18n="profile.save">Save Profile</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script type="module" src="/src/main.js"></script>
-</body>
-</html>
 </body>
 </html>

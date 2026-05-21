@@ -230,7 +230,8 @@ if (profileClose) profileClose.addEventListener('click', closeProfilePanel);
 if (profilePanel) profilePanel.addEventListener('click', e => { if (e.target === profilePanel) closeProfilePanel(); });
 
 if (profileSave) {
-  profileSave.addEventListener('click', () => {
+  profileSave.addEventListener('click', (e) => {
+    e.preventDefault();
     creatorProfile = {
       name:      profileName ? profileName.value.trim() : '',
       copyright: profileCopy ? profileCopy.value.trim() : '',
@@ -240,10 +241,11 @@ if (profileSave) {
     };
     saveProfile(creatorProfile);
 
+    const originalText = profileSave.textContent;
     profileSave.textContent = translations.profile?.save || '✓ Saved!';
     profileSave.style.background = 'var(--accent-emerald)';
     setTimeout(() => {
-      profileSave.textContent = translations.profile?.save || 'Save Profile';
+      profileSave.textContent = originalText;
       profileSave.style.background = '';
     }, 1800);
     closeProfilePanel();
@@ -343,7 +345,7 @@ const paymentModal = document.getElementById('paymentModal');
 const viewBuy      = document.getElementById('modalViewBuy');
 const viewActivate = document.getElementById('modalViewActivate');
 const viewSuccess  = document.getElementById('modalViewSuccess');
-const closeModal   = document.getElementById('closePaymentModal');
+const closeModal   = document.getElementById('closeModal');
 
 const switchToActivate  = document.getElementById('switchToActivate');
 const switchToBuy       = document.getElementById('switchToBuy');
@@ -464,7 +466,7 @@ if (activateLicenseBtn && licenseKeyInput) {
   }
 })();
 
-// Paddle Initialization (Simplified)
+// Paddle Initialization
 if (window.Paddle) {
   window.Paddle.Initialize({ 
     token: 'live_2f19b88294a235307e74e44f820',
@@ -502,7 +504,6 @@ const statusBadge = document.getElementById('statusBadge');
 const reportContent = document.getElementById('reportContent');
 let processedBlob = null;
 let processedFileName = '';
-let isFirstRun = true;
 
 if (dropzone && fileInput) {
   dropzone.addEventListener('click', () => fileInput.click());
@@ -610,7 +611,8 @@ async function processBulkFiles(files) {
   processedFileName = `VeriMedia_Batch_${successCount}_Files.zip`;
   
   if(reportContent) reportContent.innerHTML = `<button class="download-sec-btn" id="downloadBtn">Download ZIP (${successCount})</button>`;
-  document.getElementById('downloadBtn').addEventListener('click', triggerDownload);
+  const dBtn = document.getElementById('downloadBtn');
+  if(dBtn) dBtn.addEventListener('click', triggerDownload);
 }
 
 function getFileCategory(file) {
@@ -659,5 +661,6 @@ function drawReport(r, f, c) {
       <button class="download-sec-btn" id="downloadBtn">Download Safe File</button>
     </div>
   `;
-  document.getElementById('downloadBtn').addEventListener('click', triggerDownload);
+  const dBtn = document.getElementById('downloadBtn');
+  if(dBtn) dBtn.addEventListener('click', triggerDownload);
 }

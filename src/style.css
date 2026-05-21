@@ -195,24 +195,10 @@ nav {
   width: 100%;
 }
 
-/* Language Switcher */
-.lang-btn {
-  font-family: var(--font-headers) !important;
-  font-weight: 600 !important;
-  font-size: 0.75rem !important;
-  color: var(--text-secondary) !important;
-  transition: var(--transition-fast);
-  cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.03);
-  border-radius: 6px;
-  padding: 4px 8px;
-}
-
-.lang-btn:hover {
-  border-color: var(--accent-cyan) !important;
-  color: var(--text-primary) !important;
-  background: rgba(255,255,255,0.06) !important;
+/* 4.5 Language Switcher */
+.lang-switcher-wrap {
+  display: flex;
+  align-items: center;
 }
 
 .lang-dropdown {

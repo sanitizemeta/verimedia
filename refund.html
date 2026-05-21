@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Refund Policy | VeriMedia.xyz</title>
-  <meta name="description" content="Refund Policy for VeriMedia.xyz. Learn about our strict no-refunds and all-sales-final policy for Creator Pro upgrades.">
+  <meta name="description" content="VeriMedia.xyz Refund Policy. Our transparent testing and strictly no-refunds policy for Creator Pro upgrades.">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,18 +14,16 @@
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="alternate icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/favicon.png">
-
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="/src/style.css">
+  
+  <!-- Paddle.js Overlay -->
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 </head>
 <body>
 
   <!-- Interactive Space-Dust Particle Background -->
   <canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.4;"></canvas>
 
-  <!-- Background Glowing Orbs -->
   <div class="glow-orb orb-1"></div>
   <div class="glow-orb orb-2"></div>
 
@@ -55,6 +53,10 @@
           <button class="lang-opt" data-lang="fr">Français (FR)</button>
         </div>
       </div>
+
+      <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile — set your name, copyright & URL">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span data-i18n="header.profile">Profile</span>
+      </button>
     </nav>
   </header>
 
@@ -118,9 +120,49 @@
     </div>
   </footer>
 
+  <!-- Modals (Needed for global functionality) -->
+  <div class="modal-overlay" id="paymentModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card glass-card">
+      <button class="close-modal" id="closeModal" aria-label="Close modal">&times;</button>
+      <div id="modalViewBuy">
+        <h3 data-i18n="checkout.pro_title">Creator Pro Lifetime</h3>
+        <p class="modal-subtitle" data-i18n="checkout.pro_subtitle">One-time payment. Use on up to 3 devices. No subscription, ever.</p>
+        <button class="pricing-btn primary-btn" id="paddleCheckoutBtn"><span data-i18n="checkout.buy_btn">Buy Now — $19</span></button>
+        <button class="link-btn modal-switch-link" id="switchToActivate" data-i18n="checkout.already_key">Already have a key? Activate it here</button>
+      </div>
+      <div id="modalViewActivate" style="display:none;">
+        <h3 data-i18n="checkout.activate_title">Activate Your License</h3>
+        <input type="text" id="licenseKeyInput" class="license-input" placeholder="e.g. txn_01abc123xyz" />
+        <p class="license-error" id="licenseError" style="display:none;"></p>
+        <button class="pricing-btn primary-btn" id="activateLicenseBtn" data-i18n="checkout.activate_btn">Activate License</button>
+        <button class="link-btn modal-switch-link" id="switchToBuy" data-i18n="checkout.need_buy">Need to buy a license?</button>
+      </div>
+      <div id="modalViewSuccess" style="display:none;">
+        <h3 data-i18n="checkout.success_title">Creator Pro Active</h3>
+        <button class="pricing-btn primary-btn" id="closeSuccessBtn" data-i18n="checkout.start_pro">Start Using Pro</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay profile-panel-overlay" id="profilePanel" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card glass-card profile-panel-card">
+      <button class="close-modal" id="profileCloseBtn">&times;</button>
+      <h3 data-i18n="profile.title">Creator Profile</h3>
+      <form id="profileForm" autocomplete="off">
+        <div class="profile-field">
+          <label class="profile-label"><span data-i18n="profile.name_label">Creator Name</span></label>
+          <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" />
+        </div>
+        <div class="profile-field">
+          <label class="profile-label"><span data-i18n="profile.copy_label">Copyright String</span></label>
+          <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith" />
+        </div>
+        <button class="pricing-btn primary-btn" id="profileSaveBtn" data-i18n="profile.save">Save Profile</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script type="module" src="/src/main.js"></script>
-</body>
-</html>
 </body>
 </html>
