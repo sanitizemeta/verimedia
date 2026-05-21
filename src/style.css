@@ -299,7 +299,66 @@ nav {
   flex-direction: column;
   gap: 1.2rem;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; Removed to allow tooltips to overflow naturally */
+}
+
+/* Custom Tooltip Styling */
+.info-icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-secondary);
+  cursor: help;
+  outline: none;
+}
+
+.info-icon-wrapper:hover .info-svg,
+.info-icon-wrapper:focus .info-svg {
+  color: var(--accent-cyan);
+}
+
+.custom-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 240px;
+  background: rgba(15, 20, 35, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #fff;
+  font-weight: 400;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 100;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+
+.info-icon-wrapper:hover .custom-tooltip,
+.info-icon-wrapper:focus .custom-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tooltip Triangle Pointer */
+.custom-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--border-color) transparent transparent transparent;
 }
 
 .feature-card h3 {
