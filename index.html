@@ -142,120 +142,131 @@
   </header>
 
   <main>
-    <!-- Hero / Zero-Click Summary Block Section -->
-    <section class="hero-section">
-      <h1 class="hero-title" data-i18n="hero.title">Protect Your Photos & PDFs from AI Scrapers</h1>
+    <!-- Bento Dashboard Layout (Above the Fold) -->
+    <section class="bento-dashboard">
       
-      <!-- AEO Zero-Click direct answer summary (40-60 words) -->
-      <article class="aeo-summary" aria-label="Tool Summary Box">
-        <p data-i18n="hero.summary">
-          VeriMedia is a secure tool that works entirely in your browser. It removes hidden location data and private tracking info from your photos and PDFs, while adding your personal copyright and AI opt-out tags in seconds.
-        </p>
-      </article>
-    </section>
-
-    <!-- Interactive Processing Sandbox (Core Utility) -->
-    <section id="calculator-section" class="interactive-sandbox">
-      <div class="sandbox-grid">
+      <!-- Left Column: Hero & Compact Features -->
+      <div class="bento-left">
+        <h1 class="hero-title" data-i18n="hero.title" style="text-align: left; font-size: 2.8rem; margin: 0 0 1rem 0;">Protect Your Photos & PDFs from AI Scrapers</h1>
         
-        <!-- Drag & Drop Container -->
-        <div class="card glass-card upload-container" id="dropzone" role="button" aria-label="Upload drag and drop area for media" tabindex="0">
-          <input type="file" id="fileInput" accept="image/*,application/pdf" class="hidden-input" aria-hidden="true">
-          <div class="upload-icon-pulse">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-            </svg>
-          </div>
-          <h3 data-i18n="sandbox.drop_title">Drag & Drop your media file</h3>
-          <p data-i18n="sandbox.drop_subtitle">or click to browse local files (max 25MB)</p>
-          <span class="file-spec-hint">Supports JPEG · PNG · WebP · HEIC/HEIF · PDF</span>
-        </div>
+        <article class="aeo-summary" aria-label="Tool Summary Box" style="text-align: left; margin: 0 0 2.5rem 0;">
+          <p data-i18n="hero.summary">
+            VeriMedia is a secure tool that works entirely in your browser. It removes hidden location data and private tracking info from your photos and PDFs, while adding your personal copyright and AI opt-out tags in seconds.
+          </p>
+        </article>
 
-        <!-- Real-Time Processing Report Log -->
-        <div class="card glass-card report-container">
-          <div class="report-header">
-            <h3 style="display: flex; align-items: center; gap: 8px;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-cyan);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span data-i18n="sandbox.audit_title">Privacy & Copyright Audit</span>
-            </h3>
-            <span class="status-indicator idle" id="statusBadge">Idle</span>
-          </div>
-          
-          <div class="report-content" id="reportContent">
-            <div class="empty-state">
-              <p data-i18n="sandbox.audit_empty">Upload a photo to strip tracking details and embed copyright and AI opt-out tags.</p>
+        <!-- Compact Features Grid (Simpllo-inspired) -->
+        <div class="features-grid compact-features">
+          <!-- Feature 1 -->
+          <article class="feature-card compact-card">
+            <div class="feature-icon-wrap" style="color: var(--accent-cyan);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
+            <div class="compact-text">
+              <h3 data-i18n="kb.privacy_title">Neural Privacy Shield</h3>
+              <p data-i18n="kb.privacy_desc">Strips GPS and camera serials.</p>
+            </div>
+          </article>
+
+          <!-- Feature 2 -->
+          <article class="feature-card compact-card">
+            <div class="feature-icon-wrap" style="color: var(--accent-emerald);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            </div>
+            <div class="compact-text">
+              <h3 data-i18n="kb.ai_title">AI Training Opt-Out</h3>
+              <p data-i18n="kb.ai_desc">Embeds 'ai:opt-out=true' tags.</p>
+            </div>
+          </article>
+
+          <!-- Feature 3 -->
+          <article class="feature-card compact-card">
+            <div class="feature-icon-wrap" style="color: var(--accent-rose);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div class="compact-text">
+              <h3 data-i18n="kb.pdf_title">Forensic PDF Scrubbing</h3>
+              <p data-i18n="kb.pdf_desc">Overwrites hidden data streams.</p>
+            </div>
+          </article>
+
+          <!-- Feature 4 (Pro) -->
+          <article class="feature-card compact-card pro-feature-highlight">
+            <div class="feature-icon-wrap" style="color: var(--accent-cyan);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+            <div class="compact-text">
+              <h3 data-i18n="kb.identity_title">Creator Identity (Pro)</h3>
+              <p data-i18n="kb.identity_desc">Embed Artist name & Copyright URL.</p>
+            </div>
+            <div class="pro-tag compact-tag">PRO</div>
+          </article>
+
+          <!-- Feature 5 (Pro) -->
+          <article class="feature-card compact-card pro-feature-highlight">
+            <div class="feature-icon-wrap" style="color: var(--accent-emerald);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <div class="compact-text">
+              <h3 data-i18n="kb.google_title">Google Licensable Badge</h3>
+              <p data-i18n="kb.google_desc">Triggers Google Images badge.</p>
+            </div>
+            <div class="pro-tag compact-tag">PRO</div>
+          </article>
+
+          <!-- Feature 6 (Pro) -->
+          <article class="feature-card compact-card pro-feature-highlight">
+            <div class="feature-icon-wrap" style="color: var(--accent-rose);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="compact-text">
+              <h3 data-i18n="kb.whitelabel_title">Whitelabel Engine (Pro)</h3>
+              <p data-i18n="kb.whitelabel_desc">Remove VeriMedia references.</p>
+            </div>
+            <div class="pro-tag compact-tag">PRO</div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Sandbox -->
+      <div class="bento-right">
+        <div class="interactive-sandbox" style="margin: 0; padding: 0;">
+          <div class="sandbox-grid" style="grid-template-columns: 1fr; gap: 1.5rem;">
+            
+            <!-- Drag & Drop Container -->
+            <div class="card glass-card upload-container" id="dropzone" role="button" aria-label="Upload drag and drop area for media" tabindex="0" style="min-height: 220px;">
+              <input type="file" id="fileInput" accept="image/*,application/pdf" class="hidden-input" aria-hidden="true">
+              <div class="upload-icon-pulse" style="width: 60px; height: 60px; margin-bottom: 1rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                </svg>
+              </div>
+              <h3 data-i18n="sandbox.drop_title" style="font-size: 1.2rem;">Drag & Drop your media file</h3>
+              <p data-i18n="sandbox.drop_subtitle" style="font-size: 0.85rem;">or click to browse local files (max 25MB)</p>
+              <span class="file-spec-hint" style="margin-top: 1rem;">Supports JPEG · PNG · WebP · HEIC/HEIF · PDF</span>
+            </div>
+
+            <!-- Real-Time Processing Report Log -->
+            <div class="card glass-card report-container" style="min-height: 250px;">
+              <div class="report-header">
+                <h3 style="display: flex; align-items: center; gap: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-cyan);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span data-i18n="sandbox.audit_title">Privacy & Copyright Audit</span>
+                </h3>
+                <span class="status-indicator idle" id="statusBadge">Idle</span>
+              </div>
+              
+              <div class="report-content" id="reportContent" style="padding: 1.5rem;">
+                <div class="empty-state">
+                  <p data-i18n="sandbox.audit_empty">Upload a photo to strip tracking details and embed copyright and AI opt-out tags.</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
-
-      </div>
-    </section>
-
-    <!-- Features / Knowledge Base Grid (Simpllo-inspired) -->
-    <section class="features-section" style="max-width: 1200px; margin: 0 auto 5.5rem auto; padding: 0 1rem;">
-      <div style="text-align: center; margin-bottom: 3.5rem;">
-        <h2 class="section-title" data-i18n="kb.title">Uncompromising Privacy & Creator Protection</h2>
-        <p class="section-subtitle" data-i18n="kb.subtitle">Professional-grade tools for photographers, journalists, and digital artists.</p>
       </div>
 
-      <div class="features-grid">
-        <!-- Feature 1: Neural Privacy Shield -->
-        <article class="card glass-card feature-card">
-          <div class="feature-icon-wrap" style="color: var(--accent-cyan);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3 data-i18n="kb.privacy_title">Neural Privacy Shield</h3>
-          <p data-i18n="kb.privacy_desc">Instantly strips invasive GPS coordinates, camera serial numbers, and device fingerprints from every image you share.</p>
-        </article>
-
-        <!-- Feature 2: AI Opt-Out Injection -->
-        <article class="card glass-card feature-card">
-          <div class="feature-icon-wrap" style="color: var(--accent-emerald);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-          </div>
-          <h3 data-i18n="kb.ai_title">AI Training Opt-Out</h3>
-          <p data-i18n="kb.ai_desc">Embeds 'ai:opt-out=true' tags recognized by major crawlers to protect your work from being used in AI training datasets.</p>
-        </article>
-
-        <!-- Feature 3: Forensic PDF Scrubbing -->
-        <article class="card glass-card feature-card">
-          <div class="feature-icon-wrap" style="color: var(--accent-rose);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <h3 data-i18n="kb.pdf_title">Forensic PDF Scrubbing</h3>
-          <p data-i18n="kb.pdf_desc">Physically overwrites hidden data streams in PDFs to ensure sensitive author info is permanently erased and unrecoverable.</p>
-        </article>
-
-        <!-- Feature 4: Creator Identity (Pro) -->
-        <article class="card glass-card feature-card pro-feature-highlight">
-          <div class="feature-icon-wrap" style="color: var(--accent-cyan);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          </div>
-          <h3 data-i18n="kb.identity_title">Creator Identity (Pro)</h3>
-          <p data-i18n="kb.identity_desc">Embed your official Artist name and Copyright URL into every file to ensure you are always credited for your original work.</p>
-          <div class="pro-tag">PRO</div>
-        </article>
-
-        <!-- Feature 5: Google Licensable Badge (Pro) -->
-        <article class="card glass-card feature-card pro-feature-highlight">
-          <div class="feature-icon-wrap" style="color: var(--accent-emerald);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          </div>
-          <h3 data-i18n="kb.google_title">Google Licensable Badge</h3>
-          <p data-i18n="kb.google_desc">Triggers the 'Licensable' badge in Google Images by embedding your portfolio link directly into your photo metadata.</p>
-          <div class="pro-tag">PRO</div>
-        </article>
-
-        <!-- Feature 6: Whitelabel Engine (Pro) -->
-        <article class="card glass-card feature-card pro-feature-highlight">
-          <div class="feature-icon-wrap" style="color: var(--accent-rose);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <h3 data-i18n="kb.whitelabel_title">Whitelabel Engine (Pro)</h3>
-          <p data-i18n="kb.whitelabel_desc">Remove all VeriMedia references from your file metadata, replacing 'Software' tags with 'Original Content Engine'.</p>
-          <div class="pro-tag">PRO</div>
-        </article>
-      </div>
     </section>
 
     <!-- Pricing / Conversion Table Section -->
