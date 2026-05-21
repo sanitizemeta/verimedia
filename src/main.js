@@ -450,11 +450,11 @@ async function processBulkFiles(files) {
         keepIcc: false,
         keepAnnots: false,
         keepCameraSpecs: isPro,
-        injectIdentity: isPro && (creatorProfile.name || creatorProfile.copyright),
+        injectIdentity: isPro && (creatorProfile.name || creatorProfile.copyright || creatorProfile.url),
         creatorName: creatorProfile.name,
         copyright: creatorProfile.copyright,
         contactUrl: creatorProfile.url,
-        aiOptOut: creatorProfile.aiOnly,
+        aiOptOut: creatorProfile.aiOnly === true,
         isPro: isPro
       };
 
@@ -488,20 +488,20 @@ async function processBulkFiles(files) {
             const dataUrl = await blobToDataUrl(outputBlob);
             const newExif = { '0th': {}, Exif: {}, GPS: {}, '1st': {} };
 
-            if (creatorProfile.aiOnly) {
-              newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.`;
-              newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
-              tagsAdded = 1;
-            } else {
-              const name      = creatorProfile.name      || 'Human Creator';
-              const copyright = creatorProfile.copyright || `© ${new Date().getFullYear()} Human Creator`;
-              const url       = creatorProfile.url       || '';
+            if (options.injectIdentity) {
+              const name      = options.creatorName      || 'Human Creator';
+              const copyright = options.copyright || `© ${new Date().getFullYear()} Human Creator`;
+              const url       = options.contactUrl       || '';
 
               newExif['0th'][piexif.ImageIFD.Artist]           = isPro ? `VeriMedia Verified Creator - ${name}` : name;
               newExif['0th'][piexif.ImageIFD.Copyright]        = copyright;
               newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
               newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
               tagsAdded = url ? 4 : 3;
+            } else if (options.aiOptOut) {
+              newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.`;
+              newExif['0th'][piexif.ImageIFD.Software]         = 'VeriMedia.xyz';
+              tagsAdded = 1;
             }
 
             const exifBytes = piexif.dump(newExif);

@@ -496,11 +496,24 @@ const createPngItxtChunk = (keyword: string, text: string): Uint8Array => {
   return result;
 };
 
-/** Creates a standard XMP payload for PNG/WebP. */
+const escapeXml = (unsafe: string): string => {
+  return unsafe.replace(/[<>&"']/g, (m) => {
+    switch (m) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case '"': return '&quot;';
+      case "'": return '&apos;';
+      default: return m;
+    }
+  });
+};
+
+/** Creates a standard XMP payload for PNG/WebP/PDF. */
 const createXmpPayload = (options: SanitizeOptions): string => {
-  const name = options.creatorName || 'Human Creator';
-  const copy = options.copyright || `© ${new Date().getFullYear()} ${name}`;
-  const url  = options.contactUrl || '';
+  const name = escapeXml(options.creatorName || 'Human Creator');
+  const copy = escapeXml(options.copyright || `© ${new Date().getFullYear()} ${name}`);
+  const url  = escapeXml(options.contactUrl || '');
   const author = options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
   const description = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
 
@@ -850,16 +863,18 @@ export const sanitizeImage = async (
  */
 export const wipePDFMetadata = (pdfDoc: any, PDFName: any): void => {
   const context = pdfDoc.context;
-  const trailer = context.trailer;
   
   // 1. Surgical Trailer Purge: Remove the Info reference from the trailer entirely.
   // This is the 'kill switch' that prevents pdf-lib from injecting defaults on save.
-  if (trailer && PDFName && trailer.has(PDFName.of('Info'))) {
-    trailer.delete(PDFName.of('Info'));
+  const trailers = [context.trailer, context.trailerInfo];
+  for (const t of trailers) {
+    if (t && PDFName && t.has(PDFName.of('Info'))) {
+      t.delete(PDFName.of('Info'));
+    }
   }
   
   // 2. Thorough Dictionary Cleaning (Secondary Layer)
-  const infoRef = context.trailerInfo?.Info;
+  const infoRef = context.trailerInfo?.Info || context.trailer?.get?.(PDFName.of('Info'));
   if (!infoRef) return;
 
   const infoDict = context.lookup(infoRef);
@@ -982,6 +997,7 @@ export const sanitizePDF = async (
   // 5. Deep Scan: Global Metadata & Asset Sanitization
   // We iterate over EVERY indirect object in the PDF to ensure no nested Metadata,
   // PieceInfo (Illustrator/Photoshop private data), or steganography survives.
+  // We don't just unreference them; we "nuke" their content to prevent carving.
   const allObjects = pdfDoc.context.enumerateIndirectObjects();
   
   for (const [ref, obj] of allObjects) {
@@ -991,11 +1007,24 @@ export const sanitizePDF = async (
       const dict = isDict ? (obj as any) : (isStream ? (obj as any).dict || (obj as any).dictionary : null);
 
       if (dict) {
-        // A. Wipe Metadata & Private App Data
+        const type = dict.get(PDFName.of('Type'));
+        const subtype = dict.get(PDFName.of('Subtype'));
+
+        // A. Overwrite Metadata & Private App Data Streams (Anti-Carving)
+        if (type === PDFName.of('Metadata') || type === PDFName.of('PieceInfo') || subtype === PDFName.of('Metadata')) {
+          if (isStream) {
+            // Overwrite original bytes with empty data so carvers find nothing.
+            const emptyStream = PDFRawStream.of(dict, new Uint8Array(0));
+            pdfDoc.context.assign(ref, emptyStream);
+          }
+        }
+
+        // B. Wipe Metadata Keys from all dictionaries
         dict.delete(PDFName.of('Metadata'));
         dict.delete(PDFName.of('PieceInfo'));
+        dict.delete(PDFName.of('XMP')); // Non-standard but sometimes present
 
-        // B. Advanced Threat Removal: Action Triggers & Multimedia
+        // C. Advanced Threat Removal: Action Triggers & Multimedia
         // We wipe a comprehensive list of interactive/multimedia vectors globally.
         const threatKeys = [
           'AA', 'A', 'JS', 'JavaScript', 'Launch', 'URI', 'SubmitForm', 'XFA',
@@ -1006,8 +1035,7 @@ export const sanitizePDF = async (
           dict.delete(PDFName.of(tk));
         }
         
-        // C. Specific Annotation Hardening
-        const subtype = dict.get(PDFName.of('Subtype'));
+        // D. Specific Annotation Hardening
         if (subtype === PDFName.of('FileAttachment')) {
           // Neutralize file attachments even if they were missed elsewhere
           dict.delete(PDFName.of('FS'));
@@ -1091,25 +1119,45 @@ export const sanitizePDF = async (
   const markInfoKey = PDFName.of('MarkInfo');
   if (catalog?.has?.(markInfoKey)) catalog.delete(markInfoKey);
 
-  // Final Footprint Wipe / Identity Injection: This is the critical moment.
-  // We explicitly neutralize all fields or inject verified identity.
-  if (_options.injectIdentity) {
+  // 7. Identity Injection & XMP Embedding: The Critical Final Step.
+  // We inject both 'Info' dictionary fields (for older tools) AND 
+  // an XMP Metadata stream (for modern readers and OS explorers).
+  if (_options.injectIdentity || _options.aiOptOut) {
     const name = _options.creatorName || 'Human Creator';
     const url = _options.contactUrl || '';
-    
-    pdfDoc.setTitle('VeriMedia Protected Document');
-    pdfDoc.setAuthor(_options.isPro ? `VeriMedia Verified Creator - ${name}` : name);
-    pdfDoc.setSubject(`AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`);
-    pdfDoc.setKeywords(['AI Opt-Out', 'Privacy Protected', 'VeriMedia']);
-    pdfDoc.setCreator('VeriMedia.xyz');
-    pdfDoc.setProducer('VeriMedia Metadata Engine');
-  } else {
-    pdfDoc.setTitle('');
-    pdfDoc.setAuthor('');
-    pdfDoc.setSubject(_options.aiOptOut ? 'AI Opt-Out: True. Restricted from AI training.' : '');
-    pdfDoc.setKeywords(_options.aiOptOut ? ['AI Opt-Out'] : []);
-    pdfDoc.setCreator('');
-    pdfDoc.setProducer('');
+    const author = _options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
+    const subject = _options.aiOptOut ? `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}` : '';
+    const keywords = _options.aiOptOut ? ['AI Opt-Out', 'Privacy Protected', 'VeriMedia'] : ['Privacy Protected', 'VeriMedia'];
+
+    if (_options.injectIdentity) {
+      pdfDoc.setTitle('VeriMedia Protected Document');
+      pdfDoc.setAuthor(author);
+      pdfDoc.setSubject(subject);
+      pdfDoc.setKeywords(keywords);
+      pdfDoc.setCreator('VeriMedia.xyz');
+      pdfDoc.setProducer('VeriMedia Metadata Engine');
+    } else {
+      pdfDoc.setSubject(subject);
+      pdfDoc.setKeywords(keywords);
+    }
+
+    // Embed XMP Metadata Stream
+    try {
+      const xmpString = createXmpPayload(_options);
+      const encoder = new TextEncoder();
+      const xmpBytes = encoder.encode(xmpString);
+      
+      const xmpDict = pdfDoc.context.obj({
+        Type: 'Metadata',
+        Subtype: 'XML',
+        Length: xmpBytes.length,
+      });
+      const xmpStream = PDFRawStream.of(xmpDict, xmpBytes);
+      const xmpRef = pdfDoc.context.register(xmpStream);
+      catalog.set(PDFName.of('Metadata'), xmpRef);
+    } catch (e) {
+      console.warn('XMP embedding failed:', e);
+    }
   }
   
   // Neutralize Timestamps
@@ -1120,12 +1168,11 @@ export const sanitizePDF = async (
   } catch (e) {}
 
   // The Final Purge: Only pull the 'kill switch' if we are NOT injecting identity or AI opt-out.
-  // If we are embedding data, we need the Info dictionary to survive.
   if (!_options.injectIdentity && !_options.aiOptOut) {
     wipePDFMetadata(pdfDoc, PDFName);
   }
 
-  return pdfDoc.save();
+  return pdfDoc.save({ useObjectStreams: false });
 };
 
 // ─── Batch Processing ────────────────────────────────────────────────────────
