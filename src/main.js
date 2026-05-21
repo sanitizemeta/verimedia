@@ -458,22 +458,27 @@ async function processBulkFiles(files) {
         isPro: isPro
       };
 
+      // Run extraction to get real privacy score and tag counts before wiping
+      try {
+        const report = await extractMetadata(file);
+        if (report) {
+          tagsRemoved = report.tags.filter(t => 
+            ['GPS Location', 'Device', 'Device ID', 'Timestamp', 'Identity', 'Origin & History', 'PDF Info'].includes(t.category)
+          ).length;
+          startScore = Math.min(90, report.privacyScore);
+        }
+      } catch(e) {}
+
       if (category === 'pdf') {
         const pdfBytes = await sanitizePDF(file, options);
         outputBlob = new Blob([pdfBytes], { type: 'application/pdf' });
-        tagsRemoved = 'All'; // PDF wipes entire dicts
-        if (options.injectIdentity) tagsAdded = 6;
-        else if (options.aiOptOut) tagsAdded = 2;
-      } else {
-        // Run extraction to get real privacy score and tag counts before wiping
-        try {
-          const report = await extractMetadata(file);
-          if (report) {
-            tagsRemoved = report.tags.filter(t => ['GPS Location', 'Device', 'Device ID', 'Timestamp', 'Identity', 'Origin & History'].includes(t.category)).length;
-            startScore = Math.min(90, report.privacyScore);
-          }
-        } catch(e) {}
         
+        // Accurate PDF embedding count (Slim & Strong Strategy): 
+        // 3 Info fields (Author, Subject, Keywords) 
+        // + 3 XMP fields (Creator, Rights, Description)
+        if (options.injectIdentity) tagsAdded = 6;
+        else if (options.aiOptOut) tagsAdded = 2; // Subject + Keywords
+      } else {
         outputBlob = await sanitizeImage(file, options);
         
         // Report tags added for PNG/WebP (handled inside engine.ts)

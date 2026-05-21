@@ -1127,21 +1127,21 @@ export const sanitizePDF = async (
     const url = _options.contactUrl || '';
     const author = _options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
     const subject = _options.aiOptOut ? `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}` : '';
-    const keywords = _options.aiOptOut ? ['AI Opt-Out', 'Privacy Protected', 'VeriMedia'] : ['Privacy Protected', 'VeriMedia'];
+    const keywords = _options.aiOptOut ? ['AI Opt-Out', 'Privacy Protected'] : ['Privacy Protected'];
 
     if (_options.injectIdentity) {
-      pdfDoc.setTitle('VeriMedia Protected Document');
+      // 1. Info Dictionary (Legacy compatibility)
       pdfDoc.setAuthor(author);
       pdfDoc.setSubject(subject);
       pdfDoc.setKeywords(keywords);
-      pdfDoc.setCreator('VeriMedia.xyz');
-      pdfDoc.setProducer('VeriMedia Metadata Engine');
+      // We no longer set Title, Creator, or Producer to keep the file "slim" 
+      // and prevent it from feeling like an automated tool-generated file.
     } else {
       pdfDoc.setSubject(subject);
       pdfDoc.setKeywords(keywords);
     }
 
-    // Embed XMP Metadata Stream
+    // 2. XMP Metadata Stream (Modern readers)
     try {
       const xmpString = createXmpPayload(_options);
       const encoder = new TextEncoder();
