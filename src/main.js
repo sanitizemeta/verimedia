@@ -535,6 +535,8 @@ if (dropzone && fileInput) {
   preloadEngine();
 }
 
+let auditStats = [];
+
 async function handleFiles(fileList) {
   const files = Array.from(fileList);
   if (files.length === 0) return;
@@ -542,6 +544,9 @@ async function handleFiles(fileList) {
     if(reportContent) reportContent.innerHTML = buildErrorItem('Bulk processing is a Creator Pro feature.');
     return;
   }
+  
+  auditStats = []; // Reset stats
+  
   if (files.length === 1) await handleSingleFileUpload(files[0]);
   else await processBulkFiles(files);
 }
@@ -575,13 +580,13 @@ async function handleSingleFileUpload(file) {
     };
 
     let outputBlob;
-    let report = null;
+    let reportBefore = await extractMetadata(file);
+    let tagsAdded = options.injectIdentity ? 4 : (options.aiOptOut ? 1 : 0);
 
     if (category === 'pdf') {
       const pdfBytes = await sanitizePDF(file, options);
       outputBlob = new Blob([pdfBytes], { type: 'application/pdf' });
     } else {
-      report = await extractMetadata(file);
       outputBlob = await sanitizeImage(file, options);
       
       if (outputBlob.type === 'image/jpeg' || outputBlob.type === '') {
@@ -601,11 +606,19 @@ async function handleSingleFileUpload(file) {
       }
     }
 
+    auditStats.push({
+      filename: file.name,
+      removed: reportBefore.tags.length,
+      added: tagsAdded,
+      scoreBefore: reportBefore.privacyScore,
+      scoreAfter: 100
+    });
+
     if(progressBarFill) progressBarFill.style.width = '100%';
     if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
     processedBlob = outputBlob;
     processedBlob._url = URL.createObjectURL(outputBlob);
-    drawReport(report, file, category);
+    drawReport([file]);
   } catch (error) {
     if(reportContent) reportContent.innerHTML = buildErrorItem('Engine error.');
   }
@@ -616,12 +629,32 @@ async function processBulkFiles(files) {
   const zip = new JSZip();
   let successCount = 0;
   
+  if(statusBadge) { statusBadge.innerText = 'Processing...'; statusBadge.className = 'status-indicator scanning'; }
+  reportContent.innerHTML = `
+    <div class="empty-state" style="margin:auto;width:100%;">
+      <p style="font-family:var(--font-headers);font-weight:600;color:var(--accent-cyan);font-size:1.1rem;margin-bottom:0.5rem;">Batch Processing...</p>
+    </div>
+  `;
+
+  const options = { isPro: true, aiOptOut: creatorProfile.aiOnly !== false, injectIdentity: !!(creatorProfile.name || creatorProfile.copyright || creatorProfile.url), ...creatorProfile };
+  let tagsAdded = options.injectIdentity ? 4 : (options.aiOptOut ? 1 : 0);
+
   for (let file of files) {
     const category = getFileCategory(file);
     if (!category) continue;
-    const options = { isPro: true, aiOptOut: true, injectIdentity: true, ...creatorProfile };
+    
+    let reportBefore = await extractMetadata(file);
     const blob = category === 'pdf' ? new Blob([await sanitizePDF(file, options)]) : await sanitizeImage(file, options);
     zip.file(file.name.replace(/\.[^/.]+$/, '') + '_safe' + getOutputExt(file), blob);
+    
+    auditStats.push({
+      filename: file.name,
+      removed: reportBefore.tags.length,
+      added: tagsAdded,
+      scoreBefore: reportBefore.privacyScore,
+      scoreAfter: 100
+    });
+    
     successCount++;
   }
   
@@ -630,9 +663,8 @@ async function processBulkFiles(files) {
   processedBlob._url = URL.createObjectURL(zipBlob);
   processedFileName = `VeriMedia_Batch_${successCount}_Files.zip`;
   
-  if(reportContent) reportContent.innerHTML = `<button class="download-sec-btn" id="downloadBtn">Download ZIP (${successCount})</button>`;
-  const dBtn = document.getElementById('downloadBtn');
-  if(dBtn) dBtn.addEventListener('click', triggerDownload);
+  if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
+  drawReport(files);
 }
 
 function getFileCategory(file) {
@@ -673,14 +705,47 @@ function triggerDownload() {
 const SUPPORTED_IMAGE_TYPES = new Set(['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/heic', 'image/heif']);
 const SUPPORTED_PDF = 'application/pdf';
 
-function drawReport(r, f, c) {
+function drawReport(files) {
+  const fileCount = files.length;
   reportContent.innerHTML = `
-    <div class="glass-card" style="padding:1rem; text-align:center;">
-      <h3 style="color:var(--accent-emerald)">Sanitization Complete</h3>
-      <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;">${f.name} is now protected.</p>
-      <button class="download-sec-btn" id="downloadBtn">Download Safe File</button>
+    <div style="padding:1rem; text-align:center;">
+      <h3 style="color:var(--accent-emerald); font-size:1.2rem; margin-bottom:0.3rem;">${fileCount} file${fileCount !== 1 ? 's' : ''} stripped</h3>
+      <button class="link-btn" id="viewAuditDetailsBtn" style="font-size:0.85rem; margin-bottom:1.5rem; text-decoration:underline;">View details</button>
+      <br/>
+      <button class="download-sec-btn" id="downloadBtn">Download ${fileCount > 1 ? `ZIP (${fileCount})` : 'Safe File'}</button>
     </div>
   `;
   const dBtn = document.getElementById('downloadBtn');
   if(dBtn) dBtn.addEventListener('click', triggerDownload);
+
+  const viewBtn = document.getElementById('viewAuditDetailsBtn');
+  if (viewBtn) {
+    viewBtn.addEventListener('click', () => {
+      const tbody = document.getElementById('auditDetailsTableBody');
+      if (tbody) {
+        tbody.innerHTML = auditStats.map(stat => `
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 0.75rem 0.5rem; word-break: break-all;">${stat.filename}</td>
+            <td style="padding: 0.75rem 0.5rem; text-align: center; color: var(--accent-rose);">${stat.removed}</td>
+            <td style="padding: 0.75rem 0.5rem; text-align: center; color: var(--accent-emerald);">${stat.added}</td>
+            <td style="padding: 0.75rem 0.5rem; text-align: right;">
+              <span style="color:var(--accent-rose); text-decoration:line-through;">${stat.scoreBefore}</span> 
+              <span style="color:var(--accent-emerald); margin-left:4px;">→ ${stat.scoreAfter}</span>
+            </td>
+          </tr>
+        `).join('');
+      }
+      openModal(document.getElementById('auditDetailsPanel'));
+    });
+  }
 }
+
+// Modal closing logic for Audit Details
+const closeAuditPanel = document.getElementById('closeAuditPanel');
+const closeAuditBtn = document.getElementById('closeAuditBtn');
+const auditDetailsPanel = document.getElementById('auditDetailsPanel');
+
+[closeAuditPanel, closeAuditBtn].forEach(btn => {
+  if (btn) btn.addEventListener('click', () => closeModal(auditDetailsPanel));
+});
+
