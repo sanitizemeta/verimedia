@@ -359,29 +359,41 @@
 
           <div class="profile-field">
             <label for="profileName" class="profile-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-              Creator Name <span style="color:var(--text-secondary);font-weight:400;">(Artist EXIF tag)</span>
+              <span style="display: flex; align-items: center;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                Creator Name <span style="color:var(--text-secondary);font-weight:400;margin-left:5px;">(Artist EXIF tag)</span>
+              </span>
+              <span class="info-trigger">i
+                <span class="tooltip-content">This becomes the <code>Artist</code> field embedded in your images. Pro users get a "VeriMedia Verified Creator" prefix.</span>
+              </span>
             </label>
             <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" maxlength="120" spellcheck="false" />
-            <p class="profile-hint">This becomes the <code>Artist</code> field embedded in your images. Pro users get a "VeriMedia Verified Creator" prefix.</p>
           </div>
 
           <div class="profile-field">
             <label for="profileCopyright" class="profile-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83a4 4 0 1 1 0-5.66"/></svg>
-              Copyright String <span style="color:var(--text-secondary);font-weight:400;">(Copyright EXIF tag)</span>
+              <span style="display: flex; align-items: center;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83a4 4 0 1 1 0-5.66"/></svg>
+                Copyright String <span style="color:var(--text-secondary);font-weight:400;margin-left:5px;">(Copyright EXIF tag)</span>
+              </span>
+              <span class="info-trigger">i
+                <span class="tooltip-content">Injected as the <code>Copyright</code> EXIF/XMP field. Used by Getty, Shutterstock, and news publishers to trace image ownership.</span>
+              </span>
             </label>
             <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith. All rights reserved." maxlength="200" spellcheck="false" />
-            <p class="profile-hint">Injected as the <code>Copyright</code> EXIF/XMP field. Used by Getty, Shutterstock, and news publishers to trace image ownership.</p>
           </div>
 
           <div class="profile-field">
             <label for="profileUrl" class="profile-label">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-              License / Portfolio URL <span style="color:var(--text-secondary);font-weight:400;">(Google Licensable Badge)</span>
+              <span style="display: flex; align-items: center;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                License / Portfolio URL <span style="color:var(--text-secondary);font-weight:400;margin-left:5px;">(WebStatement tag)</span>
+              </span>
+              <span class="info-trigger">i
+                <span class="tooltip-content">Your website or licensing page. Embedded as the <code>WebStatement</code> XMP tag — this triggers Google Images' <strong>"Licensable" badge</strong> on your photos.</span>
+              </span>
             </label>
             <input type="url" id="profileUrl" class="license-input" placeholder="e.g. https://janesmith.com/license" maxlength="300" spellcheck="false" />
-            <p class="profile-hint">Your website or licensing page. Embedded as the <code>WebStatement</code> XMP tag — this triggers Google Images' <strong>"Licensable" badge</strong> on your photos.</p>
           </div>
 
           <!-- Free-tier accessible Opt-Out -->
