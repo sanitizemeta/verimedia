@@ -323,19 +323,25 @@ async function handleSingleFileUpload(file) {
     let outputBlob;
     let report = null;
 
+    // Determine options based on Pro status and profile settings
+    const options = {
+      keepIcc: false,
+      keepAnnots: false,
+      keepCameraSpecs: isPro,
+      injectIdentity: isPro && (creatorProfile.name || creatorProfile.copyright),
+      creatorName: creatorProfile.name,
+      copyright: creatorProfile.copyright,
+      contactUrl: creatorProfile.url,
+      aiOptOut: creatorProfile.aiOnly,
+      isPro: isPro
+    };
+
     if (category === 'pdf') {
-      const pdfBytes = await sanitizePDF(file);
+      const pdfBytes = await sanitizePDF(file, options);
       outputBlob = new Blob([pdfBytes], { type: 'application/pdf' });
     } else {
       // Extract metadata report BEFORE stripping (so we know what was there)
       report = await extractMetadata(file);
-
-      // Determine Pro options
-      const options = {
-        keepIcc: false,
-        keepAnnots: false,
-        keepCameraSpecs: isPro, // Pro users can optionally retain camera specs
-      };
 
       outputBlob = await sanitizeImage(file, options);
 
@@ -436,21 +442,35 @@ async function processBulkFiles(files) {
       let tagsAdded = 0;
       let startScore = 90;
       
+      // Determine options based on Pro status and profile settings
+      const options = {
+        keepIcc: false,
+        keepAnnots: false,
+        keepCameraSpecs: isPro,
+        injectIdentity: isPro && (creatorProfile.name || creatorProfile.copyright),
+        creatorName: creatorProfile.name,
+        copyright: creatorProfile.copyright,
+        contactUrl: creatorProfile.url,
+        aiOptOut: creatorProfile.aiOnly,
+        isPro: isPro
+      };
+
       if (category === 'pdf') {
-        const pdfBytes = await sanitizePDF(file);
+        const pdfBytes = await sanitizePDF(file, options);
         outputBlob = new Blob([pdfBytes], { type: 'application/pdf' });
         tagsRemoved = 'All'; // PDF wipes entire dicts
+        if (options.injectIdentity) tagsAdded = 6;
+        else if (options.aiOptOut) tagsAdded = 2;
       } else {
         // Run extraction to get real privacy score and tag counts before wiping
         try {
           const report = await extractMetadata(file);
           if (report) {
-            tagsRemoved = report.tags.filter(t => ['GPS Location', 'Device', 'Device ID', 'Timestamp', 'Identity', 'Provenance'].includes(t.category)).length;
+            tagsRemoved = report.tags.filter(t => ['GPS Location', 'Device', 'Device ID', 'Timestamp', 'Identity', 'Origin & History'].includes(t.category)).length;
             startScore = Math.min(90, report.privacyScore);
           }
         } catch(e) {}
         
-        const options = { keepIcc: false, keepAnnots: false, keepCameraSpecs: isPro };
         outputBlob = await sanitizeImage(file, options);
         
         if (outputBlob.type === 'image/jpeg' || outputBlob.type === '') {
@@ -592,7 +612,7 @@ async function drawReport(report, file, category) {
   } else if (report) {
     // Show high-risk tags that were stripped
     const highRisk = report.tags.filter(t =>
-      ['GPS Location', 'Device', 'Device ID', 'Timestamp', 'Identity', 'Provenance'].includes(t.category)
+      ['GPS Location', 'Device', 'Device ID', 'Timestamp', 'Identity', 'Origin & History'].includes(t.category)
     );
 
     if (highRisk.length > 0) {
@@ -612,10 +632,10 @@ async function drawReport(report, file, category) {
       animDelay += 0.12;
     }
 
-    // C2PA provenance detection
-    const c2paTags = report.tags.filter(t => t.category === 'Provenance');
+    // Origin/History data detection
+    const c2paTags = report.tags.filter(t => t.category === 'Origin & History');
     if (c2paTags.length > 0) {
-      listItemsHtml += buildDangerItem(`C2PA provenance manifest detected and removed (${c2paTags.length} entries).`, animDelay);
+      listItemsHtml += buildDangerItem(`Embedded history and source manifests detected and removed.`, animDelay);
       animDelay += 0.1;
     }
 

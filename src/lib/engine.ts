@@ -16,6 +16,20 @@ export interface SanitizeOptions {
   keepAnnots?: boolean;
   /** Whether to preserve portfolio-safe camera specifications (Focal Length, Aperture, ISO, Lens Model). */
   keepCameraSpecs?: boolean;
+
+  // ── Identity Injection (Pro) ──────────────────────────────────────────────
+  /** Whether to inject creator identity metadata. */
+  injectIdentity?: boolean;
+  /** Name of the creator. */
+  creatorName?: string;
+  /** Copyright statement. */
+  copyright?: string;
+  /** Contact URL for licensing. */
+  contactUrl?: string;
+  /** Whether to inject AI Opt-Out indicators. */
+  aiOptOut?: boolean;
+  /** Whether the user is a Pro subscriber (affects naming/branding). */
+  isPro?: boolean;
 }
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -138,7 +152,7 @@ export const extractMetadata = async (file: File): Promise<MetadataReport> => {
         }
       }
 
-      // ── C2PA Provenance ──
+      // ── Content History & Origin ──
       const bytes = new Uint8Array(await file.arrayBuffer());
       const { extractC2PAMetadata } = await import('./c2pa-extractor');
       const c2paTags = extractC2PAMetadata(bytes, report.format);
@@ -424,7 +438,31 @@ const computeCrc32 = (data: Uint8Array): number => {
 };
 
 
-const stripPngMetaChunks = (data: Uint8Array, keepIcc = false, keepCameraSpecs = false): Uint8Array => {
+/** Creates a tEXt chunk for PNG metadata. */
+const createPngTextChunk = (keyword: string, text: string): Uint8Array => {
+  const encoder = new TextEncoder();
+  const keywordBytes = encoder.encode(keyword);
+  const textBytes = encoder.encode(text);
+  const data = new Uint8Array(keywordBytes.length + 1 + textBytes.length);
+  data.set(keywordBytes);
+  data[keywordBytes.length] = 0; // null separator
+  data.set(textBytes, keywordBytes.length + 1);
+
+  const chunkType = encoder.encode('tEXt');
+  const typeAndData = new Uint8Array(4 + data.length);
+  typeAndData.set(chunkType);
+  typeAndData.set(data, 4);
+
+  const crc = computeCrc32(typeAndData);
+  const result = new Uint8Array(4 + 4 + data.length + 4);
+  const view = new DataView(result.buffer);
+  view.setUint32(0, data.length, false);
+  result.set(typeAndData, 4);
+  view.setUint32(result.length - 4, crc, false);
+  return result;
+};
+
+const stripPngMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8Array => {
   // Validate PNG signature
   for (let i = 0; i < 8; i++) {
     if (data[i] !== PNG_SIGNATURE[i]) return data; // not a valid PNG - pass through
@@ -442,8 +480,8 @@ const stripPngMetaChunks = (data: Uint8Array, keepIcc = false, keepCameraSpecs =
     if (chunkEnd > data.length) break;
 
     const isCritical = (type.charCodeAt(0) & 32) === 0;
-    const isSafeAncillary = PNG_SAFE_ANCILLARY.has(type) || (type === 'iCCP' && keepIcc);
-    const isExif = type === 'eXIf' && keepCameraSpecs;
+    const isSafeAncillary = PNG_SAFE_ANCILLARY.has(type) || (type === 'iCCP' && options.keepIcc);
+    const isExif = type === 'eXIf' && options.keepCameraSpecs;
 
     if (isCritical || isSafeAncillary || isExif) {
       // Create a copy of the chunk to avoid mutating the original buffer
@@ -471,7 +509,23 @@ const stripPngMetaChunks = (data: Uint8Array, keepIcc = false, keepCameraSpecs =
       pieces.push(chunk);
     }
 
-    if (type === 'IEND') break;
+    if (type === 'IEND') {
+      // Before final chunk, inject our identity if needed
+      if (options.injectIdentity) {
+        const name = options.creatorName || 'Human Creator';
+        const copy = options.copyright || `© ${new Date().getFullYear()} ${name}`;
+        const url  = options.contactUrl || '';
+        
+        pieces.push(createPngTextChunk('Author', options.isPro ? `VeriMedia Verified Creator - ${name}` : name));
+        pieces.push(createPngTextChunk('Copyright', copy));
+        pieces.push(createPngTextChunk('Description', `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`));
+        pieces.push(createPngTextChunk('Software', 'VeriMedia.xyz'));
+      } else if (options.aiOptOut) {
+        pieces.push(createPngTextChunk('Description', 'AI Opt-Out: True. Restricted from AI training.'));
+        pieces.push(createPngTextChunk('Software', 'VeriMedia.xyz'));
+      }
+      break;
+    }
     i = chunkEnd;
   }
 
@@ -480,8 +534,42 @@ const stripPngMetaChunks = (data: Uint8Array, keepIcc = false, keepCameraSpecs =
 
 // ─── WebP RIFF Chunk Stripper ────────────────────────────────────────────────
 
+/** Creates a simple XMP chunk for WebP metadata. */
+const createWebpXmpChunk = (options: SanitizeOptions): Uint8Array => {
+  const name = options.creatorName || 'Human Creator';
+  const copy = options.copyright || `© ${new Date().getFullYear()} ${name}`;
+  const url  = options.contactUrl || '';
+  const author = options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
+  const description = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+
+  const xmpString = `<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/">
+ <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about=""
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+    dc:creator="${author}"
+    dc:rights="${copy}"
+    dc:description="${description}"
+    xmp:CreatorTool="VeriMedia.xyz"/>
+ </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="r"?>`;
+
+  const encoder = new TextEncoder();
+  const data = encoder.encode(xmpString);
+  const paddedSize = data.length + (data.length % 2);
+  const result = new Uint8Array(8 + paddedSize);
+  const view = new DataView(result.buffer);
+  
+  result.set(encoder.encode('XMP '), 0);
+  view.setUint32(4, data.length, true); // WebP uses little-endian for sizes
+  result.set(data, 8);
+  return result;
+};
+
 /** Removes EXIF and XMP chunks from a WebP RIFF container. */
-const stripWebpMetaChunks = (data: Uint8Array, keepIcc = false, keepCameraSpecs = false): Uint8Array => {
+const stripWebpMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8Array => {
   const riff = String.fromCharCode(data[0], data[1], data[2], data[3]);
   const webp = String.fromCharCode(data[8], data[9], data[10], data[11]);
   if (riff !== 'RIFF' || webp !== 'WEBP') return data; // not a valid WebP - pass through
@@ -499,9 +587,9 @@ const stripWebpMetaChunks = (data: Uint8Array, keepIcc = false, keepCameraSpecs 
     const paddedSize  = chunkSize + (chunkSize % 2); // chunks must be even-byte aligned
     const chunkEnd    = i + 8 + paddedSize;
 
-    const isExif = type === 'EXIF' && keepCameraSpecs;
+    const isExif = type === 'EXIF' && options.keepCameraSpecs;
 
-    if (WEBP_SAFE_CHUNKS.has(type) || (type === 'ICCP' && keepIcc) || isExif) {
+    if (WEBP_SAFE_CHUNKS.has(type) || (type === 'ICCP' && options.keepIcc) || isExif) {
       if (isExif) {
         const chunk = data.slice(i, chunkEnd);
         const exifPayload = chunk.slice(8);
@@ -514,6 +602,11 @@ const stripWebpMetaChunks = (data: Uint8Array, keepIcc = false, keepCameraSpecs 
     }
 
     i = chunkEnd;
+  }
+
+  // Inject Identity if requested
+  if (options.injectIdentity || options.aiOptOut) {
+    pieces.push(createWebpXmpChunk(options));
   }
 
   const result = concatUint8Arrays(pieces);
@@ -580,9 +673,9 @@ const sanitizeSupportedImageBytes = (raw: Uint8Array, mimeType: string, options:
     case 'image/jpeg':
       return stripJpegAppSegments(raw, options.keepIcc, options.keepCameraSpecs);
     case 'image/png':
-      return stripPngMetaChunks(raw, options.keepIcc, options.keepCameraSpecs);
+      return stripPngMetaChunks(raw, options);
     case 'image/webp':
-      return stripWebpMetaChunks(raw, options.keepIcc, options.keepCameraSpecs);
+      return stripWebpMetaChunks(raw, options);
     default:
       return null;
   }
@@ -634,7 +727,13 @@ const renderImageViaCanvas = async (source: Blob, outputMime: string): Promise<B
  */
 export const sanitizeImage = async (
   fileOrBlob: File | Blob,
-  options: SanitizeOptions = { keepIcc: false, keepAnnots: false, keepCameraSpecs: false },
+  options: SanitizeOptions = { 
+    keepIcc: false, 
+    keepAnnots: false, 
+    keepCameraSpecs: false,
+    injectIdentity: false,
+    aiOptOut: false
+  },
 ): Promise<Blob> => {
   const fileName = fileOrBlob instanceof File ? fileOrBlob.name : '';
   const inputBytes = new Uint8Array(await fileOrBlob.arrayBuffer());
@@ -705,7 +804,13 @@ export const wipePDFMetadata = (pdfDoc: any, PDFName: any): void => {
  */
 export const sanitizePDF = async (
   file: File,
-  _options: SanitizeOptions = { keepIcc: false, keepAnnots: false, keepCameraSpecs: false },
+  _options: SanitizeOptions = { 
+    keepIcc: false, 
+    keepAnnots: false, 
+    keepCameraSpecs: false,
+    injectIdentity: false,
+    aiOptOut: false
+  },
 ): Promise<Uint8Array> => {
   const { PDFDocument, PDFName, PDFDict, PDFRawStream, PDFNumber } = await import('pdf-lib');
   const pdfDoc = await PDFDocument.load(await file.arrayBuffer(), {
@@ -905,14 +1010,26 @@ export const sanitizePDF = async (
   const markInfoKey = PDFName.of('MarkInfo');
   if (catalog?.has?.(markInfoKey)) catalog.delete(markInfoKey);
 
-  // Final Footprint Wipe: This is the critical moment.
-  // We explicitly neutralize all fields and THEN pull the trailer kill-switch.
-  pdfDoc.setTitle('');
-  pdfDoc.setAuthor('');
-  pdfDoc.setSubject('');
-  pdfDoc.setKeywords([]);
-  pdfDoc.setCreator('');
-  pdfDoc.setProducer('');
+  // Final Footprint Wipe / Identity Injection: This is the critical moment.
+  // We explicitly neutralize all fields or inject verified identity.
+  if (_options.injectIdentity) {
+    const name = _options.creatorName || 'Human Creator';
+    const url = _options.contactUrl || '';
+    
+    pdfDoc.setTitle('VeriMedia Protected Document');
+    pdfDoc.setAuthor(_options.isPro ? `VeriMedia Verified Creator - ${name}` : name);
+    pdfDoc.setSubject(`AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`);
+    pdfDoc.setKeywords(['AI Opt-Out', 'Privacy Protected', 'VeriMedia']);
+    pdfDoc.setCreator('VeriMedia.xyz');
+    pdfDoc.setProducer('VeriMedia Metadata Engine');
+  } else {
+    pdfDoc.setTitle('');
+    pdfDoc.setAuthor('');
+    pdfDoc.setSubject(_options.aiOptOut ? 'AI Opt-Out: True. Restricted from AI training.' : '');
+    pdfDoc.setKeywords(_options.aiOptOut ? ['AI Opt-Out'] : []);
+    pdfDoc.setCreator('');
+    pdfDoc.setProducer('');
+  }
   
   // Neutralize Timestamps
   const blankDate = new Date(0); 
@@ -921,8 +1038,11 @@ export const sanitizePDF = async (
     (pdfDoc as any).setModificationDate(blankDate);
   } catch (e) {}
 
-  // The Final Purge: Disconnect the Info dictionary from the trailer.
-  wipePDFMetadata(pdfDoc, PDFName);
+  // The Final Purge: Only pull the 'kill switch' if we are NOT injecting identity or AI opt-out.
+  // If we are embedding data, we need the Info dictionary to survive.
+  if (!_options.injectIdentity && !_options.aiOptOut) {
+    wipePDFMetadata(pdfDoc, PDFName);
+  }
 
   return pdfDoc.save();
 };

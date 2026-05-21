@@ -180,7 +180,7 @@ const extractAssertions = (cborData: Uint8Array): Tag[] => {
   try {
     const manifest = decode(cborData);
     if (manifest.claim_generator) {
-      tags.push({ name: 'C2PA Generator', value: String(manifest.claim_generator), category: 'Provenance' });
+      tags.push({ name: 'C2PA Generator', value: String(manifest.claim_generator), category: 'Origin & History' });
     }
     if (manifest.assertions) {
       for (const assertion of manifest.assertions) {
@@ -189,16 +189,16 @@ const extractAssertions = (cborData: Uint8Array): Tag[] => {
           const actionData = assertion.data;
           if (actionData?.actions) {
             const actions = actionData.actions.map((a: any) => a.action).join(', ');
-            tags.push({ name: 'Provenance Actions', value: actions, category: 'Provenance' });
+            tags.push({ name: 'Provenance Actions', value: actions, category: 'Origin & History' });
             const agent = actionData.actions.find((a: any) => a.softwareAgent)?.softwareAgent;
             if (agent) {
               const value = typeof agent === 'object' ? `${agent.name || ''} ${agent.version || ''}`.trim() : String(agent);
-              if (value) tags.push({ name: 'Software Agent', value, category: 'Provenance' });
+              if (value) tags.push({ name: 'Software Agent', value, category: 'Origin & History' });
             }
           }
         }
         if (label.startsWith('c2pa.digital_source_type')) {
-          tags.push({ name: 'Digital Source', value: String(assertion.data), category: 'Provenance' });
+          tags.push({ name: 'Digital Source', value: String(assertion.data), category: 'Origin & History' });
         }
       }
     }
