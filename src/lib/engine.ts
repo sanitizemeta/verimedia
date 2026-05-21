@@ -462,6 +462,63 @@ const createPngTextChunk = (keyword: string, text: string): Uint8Array => {
   return result;
 };
 
+/** Creates a modern iTXt chunk (UTF-8) for PNG metadata. */
+const createPngItxtChunk = (keyword: string, text: string): Uint8Array => {
+  const encoder = new TextEncoder();
+  const keywordBytes = encoder.encode(keyword);
+  const textBytes = encoder.encode(text);
+  
+  // iTXt structure:
+  // Keyword (1-79 bytes) + Null (1) + Compression Flag (1) + Compression Method (1) 
+  // + Language Tag (0+) + Null (1) + Translated Keyword (0+) + Null (1) + Text (0+)
+  const data = new Uint8Array(keywordBytes.length + 1 + 1 + 1 + 1 + 1 + textBytes.length);
+  let offset = 0;
+  data.set(keywordBytes, offset);
+  offset += keywordBytes.length;
+  data[offset++] = 0; // null separator
+  data[offset++] = 0; // compression flag: 0 (uncompressed)
+  data[offset++] = 0; // compression method: 0
+  data[offset++] = 0; // null for language tag
+  data[offset++] = 0; // null for translated keyword
+  data.set(textBytes, offset);
+
+  const chunkType = encoder.encode('iTXt');
+  const typeAndData = new Uint8Array(4 + data.length);
+  typeAndData.set(chunkType);
+  typeAndData.set(data, 4);
+
+  const crc = computeCrc32(typeAndData);
+  const result = new Uint8Array(4 + 4 + data.length + 4);
+  const view = new DataView(result.buffer);
+  view.setUint32(0, data.length, false);
+  result.set(typeAndData, 4);
+  view.setUint32(result.length - 4, crc, false);
+  return result;
+};
+
+/** Creates a standard XMP payload for PNG/WebP. */
+const createXmpPayload = (options: SanitizeOptions): string => {
+  const name = options.creatorName || 'Human Creator';
+  const copy = options.copyright || `© ${new Date().getFullYear()} ${name}`;
+  const url  = options.contactUrl || '';
+  const author = options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
+  const description = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+
+  return `<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/">
+ <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about=""
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+    dc:creator="${author}"
+    dc:rights="${copy}"
+    dc:description="${description}"
+    xmp:CreatorTool="VeriMedia.xyz"/>
+ </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="r"?>`;
+};
+
 const stripPngMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8Array => {
   // Validate PNG signature
   for (let i = 0; i < 8; i++) {
@@ -508,18 +565,21 @@ const stripPngMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8Ar
       
       if (type === 'IEND') {
         // Before final chunk, inject our identity if needed
-        if (options.injectIdentity) {
+        if (options.injectIdentity || options.aiOptOut) {
           const name = options.creatorName || 'Human Creator';
           const copy = options.copyright || `© ${new Date().getFullYear()} ${name}`;
           const url  = options.contactUrl || '';
-          
-          pieces.push(createPngTextChunk('Author', options.isPro ? `VeriMedia Verified Creator - ${name}` : name));
+          const author = options.isPro ? `VeriMedia Verified Creator - ${name}` : name;
+          const description = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;
+
+          // 1. Classical tEXt chunks (Legacy support)
+          pieces.push(createPngTextChunk('Author', author));
           pieces.push(createPngTextChunk('Copyright', copy));
-          pieces.push(createPngTextChunk('Description', `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`));
+          pieces.push(createPngTextChunk('Description', description));
           pieces.push(createPngTextChunk('Software', 'VeriMedia.xyz'));
-        } else if (options.aiOptOut) {
-          pieces.push(createPngTextChunk('Description', 'AI Opt-Out: True. Restricted from AI training.'));
-          pieces.push(createPngTextChunk('Software', 'VeriMedia.xyz'));
+          
+          // 2. Modern iTXt XMP chunk (Adobe/Google standard)
+          pieces.push(createPngItxtChunk('XML:com.adobe.xmp', createXmpPayload(options)));
         }
       }
 
@@ -607,7 +667,18 @@ const stripWebpMetaChunks = (data: Uint8Array, options: SanitizeOptions): Uint8A
 
   // Inject Identity if requested
   if (options.injectIdentity || options.aiOptOut) {
-    pieces.push(createWebpXmpChunk(options));
+    const xmpPayload = createXmpPayload(options);
+    const encoder = new TextEncoder();
+    const data = encoder.encode(xmpPayload);
+    const paddedSize = data.length + (data.length % 2);
+    const xmpChunk = new Uint8Array(8 + paddedSize);
+    const xmpView = new DataView(xmpChunk.buffer);
+    
+    xmpChunk.set(encoder.encode('XMP '), 0);
+    xmpView.setUint32(4, data.length, true); // WebP uses little-endian for sizes
+    xmpChunk.set(data, 8);
+    
+    pieces.push(xmpChunk);
   }
 
   const result = concatUint8Arrays(pieces);
