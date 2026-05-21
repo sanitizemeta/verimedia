@@ -1028,13 +1028,27 @@ function openCheckout() {
 
   // ── Events: Upgrade / Activate buttons ───────────────────────────────────────
   if (activateKeyBtn) {
-  activateKeyBtn.addEventListener('click', () => openModal(viewActivate));
+    activateKeyBtn.addEventListener('click', () => openModal(viewActivate));
   }
 
-closeModal.addEventListener('click', closePaymentModal);
-paymentModal.addEventListener('click', e => { if (e.target === paymentModal) closePaymentModal(); });
-if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', closePaymentModal);
+  // ── Active Key Visibility Toggle ─────────────────────────────────────────────
+  const toggleKeyBtn = document.getElementById('toggleKeyVisibility');
+  const keyInput = document.getElementById('profileKeyInput');
+  const eyeOpen = document.getElementById('eyeIconOpen');
+  const eyeClosed = document.getElementById('eyeIconClosed');
 
+  if (toggleKeyBtn && keyInput) {
+    toggleKeyBtn.addEventListener('click', () => {
+      const isHidden = keyInput.type === 'password';
+      keyInput.type = isHidden ? 'text' : 'password';
+      eyeOpen.style.display = isHidden ? 'none' : 'block';
+      eyeClosed.style.display = isHidden ? 'block' : 'none';
+    });
+  }
+
+  closeModal.addEventListener('click', closePaymentModal);
+  paymentModal.addEventListener('click', e => { if (e.target === paymentModal) closePaymentModal(); });
+  if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', closePaymentModal);
 switchToActivate.addEventListener('click', () => { clearLicenseError(); showModalView(viewActivate); });
 switchToBuy.addEventListener('click', () => showModalView(viewBuy));
 
