@@ -735,17 +735,26 @@ function drawReport(files) {
           </tr>
         `).join('');
       }
-      openModal(document.getElementById('auditDetailsPanel'));
+      const panel = document.getElementById('auditDetailsPanel');
+      if (panel) panel.classList.add('active');
     });
   }
 }
 
 // Modal closing logic for Audit Details
-const closeAuditPanel = document.getElementById('closeAuditPanel');
+const closeAuditPanelBtn = document.getElementById('closeAuditPanel');
 const closeAuditBtn = document.getElementById('closeAuditBtn');
 const auditDetailsPanel = document.getElementById('auditDetailsPanel');
 
-[closeAuditPanel, closeAuditBtn].forEach(btn => {
-  if (btn) btn.addEventListener('click', () => closeModal(auditDetailsPanel));
+[closeAuditPanelBtn, closeAuditBtn].forEach(btn => {
+  if (btn) btn.addEventListener('click', () => {
+    if (auditDetailsPanel) auditDetailsPanel.classList.remove('active');
+  });
 });
+
+if (auditDetailsPanel) {
+  auditDetailsPanel.addEventListener('click', e => { 
+    if (e.target === auditDetailsPanel) auditDetailsPanel.classList.remove('active'); 
+  });
+}
 
