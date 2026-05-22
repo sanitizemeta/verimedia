@@ -38,7 +38,7 @@
     "drop_title": "Drag & Drop your media file",
     "drop_subtitle": "or click to browse local files (max 25MB)",
     "sample_link_text": "Don't have a file handy? <span class='sample-highlight'>Try our metadata-heavy sample photo.</span>",
-    "social_proof_text": "⚡ <span id='liveCount'>...</span> images sanitized locally today. Zero bytes uploaded to the cloud.",
+    "social_proof_text": "⚡ <span id='liveCount'>{{count}}</span> images sanitized locally today. Zero bytes uploaded to the cloud.",
     "audit_title": "Privacy & Copyright Audit",
     "audit_empty": "Upload a photo to strip tracking details and embed copyright and AI opt-out tags.",
     "try_sample": "Try Sample File",

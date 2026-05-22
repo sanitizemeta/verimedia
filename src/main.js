@@ -38,6 +38,11 @@ async function loadTranslations(lang) {
   }
 }
 
+/**
+ * ⚡ Live Social Proof Ticker State
+ */
+let liveStrippedCount = 14582 + Math.floor(Math.random() * 200);
+
 function applyTranslations() {
   const elements = document.querySelectorAll('[data-i18n], [data-i18n-alt], [data-i18n-html]');
   elements.forEach(el => {
@@ -78,7 +83,12 @@ function applyTranslations() {
       let value = translations;
       keys.forEach(k => { value = value ? value[k] : null; });
       if (value) {
-        el.innerHTML = value;
+        // Special handling for the live counter placeholder
+        if (value.includes('{{count}}')) {
+          el.innerHTML = value.replace('{{count}}', `<span id="liveCount">${liveStrippedCount.toLocaleString()}</span>`);
+        } else {
+          el.innerHTML = value;
+        }
       }
     }
   });
@@ -117,9 +127,6 @@ function applyTranslations() {
 
   // Update Localized JSON-LD Structured Data
   updateStructuredData(lang, translations, pagePath);
-  
-  // Re-bind live ticker
-  runLiveTicker();
 }
 
 /**
@@ -706,24 +713,18 @@ if (dropzone && fileInput) {
   });
 
   preloadEngine();
-  runLiveTicker();
+  // Initial ticker run
+  setTimeout(runLiveTicker, 100);
 }
 
 /**
  * ⚡ Live Social Proof Ticker
  */
-let liveStrippedCount = 14582 + Math.floor(Math.random() * 200);
-
-function applyTranslations() {
-  const elements = document.querySelectorAll('[data-i18n], [data-i18n-alt], [data-i18n-html]');
-  // ... existing logic ...
-  // (I'll do a surgical replace)
-}
-
 function runLiveTicker() {
-  const liveCountEl = document.getElementById('liveCount');
-  if (!liveCountEl) return;
-  liveCountEl.innerText = liveStrippedCount.toLocaleString();
+  const el = document.getElementById('liveCount');
+  if (el) {
+    el.innerText = liveStrippedCount.toLocaleString();
+  }
 }
 
 // Update the interval logic to just increment the global variable and update the UI if element exists
@@ -1019,15 +1020,16 @@ const closeAuditPanelBtn = document.getElementById('closeAuditPanel');
 const closeAuditBtn = document.getElementById('closeAuditBtn');
 const auditDetailsPanel = document.getElementById('auditDetailsPanel');
 
-[closeAuditPanelBtn, closeAuditBtn].forEach(btn => {
-  if (btn) btn.addEventListener('click', () => {
-    if (auditDetailsPanel) auditDetailsPanel.classList.remove('active');
+if (closeAuditPanelBtn && closeAuditBtn) {
+  [closeAuditPanelBtn, closeAuditBtn].forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (auditDetailsPanel) auditDetailsPanel.classList.remove('active');
+    });
   });
-});
+}
 
 if (auditDetailsPanel) {
   auditDetailsPanel.addEventListener('click', e => { 
     if (e.target === auditDetailsPanel) auditDetailsPanel.classList.remove('active'); 
   });
 }
-
