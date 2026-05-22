@@ -639,6 +639,7 @@ nav {
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.35);
   transition: transform var(--transition-spring), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  overflow: visible !important; /* Prevent internal shadow clipping */
 }
 
 .glass-card:hover {
@@ -648,7 +649,12 @@ nav {
 }
 
 section {
-  padding: 1rem 1.5rem; /* Add vertical breathing room for floating cards */
+  padding: 3rem 1.5rem; /* Increased vertical padding to prevent clipping at section edges */
+  overflow: visible !important;
+}
+
+main {
+  overflow: visible !important;
 }
 
 .interactive-sandbox {

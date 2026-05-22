@@ -1,4 +1,6 @@
 import { sanitizeImage, sanitizePDF, preloadEngine, extractMetadata } from './lib/engine.ts';
+import piexif from 'piexifjs';
+import JSZip from 'https://esm.sh/jszip@3.10.1';
 
 /* ==========================================================================
    🌍 0. Localization & i18n Engine
@@ -14,13 +16,19 @@ let currentLang = (urlLang && supportedLangs.includes(urlLang))
 
 let translations = {};
 
+// Lucide-style SVG Constants for Performance
+const ICON_SCRUBBING = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="audit-icon pulse"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`;
+const ICON_CLEANED   = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="audit-icon" style="color:var(--accent-emerald);"><polyline points="20 6 9 17 4 12"/></svg>`;
+const ICON_ERROR     = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="audit-icon" style="color:var(--accent-rose);"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+const ICON_SKIP      = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="audit-icon" style="color:var(--accent-rose);"><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+
 async function loadTranslations(lang) {
   try {
     const response = await fetch(`/locales/${lang}.json`);
     translations = await response.json();
     
-    // Fetch global stats FIRST to ensure {{count}} is accurate in the HTML
-    await fetchGlobalStats();
+    // Fetch global stats as a non-blocking background task
+    fetchGlobalStats();
     
     applyTranslations();
     
@@ -742,7 +750,7 @@ let processedFileName = '';
 if (dropzone && fileInput) {
   dropzone.addEventListener('click', () => fileInput.click());
   dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
-  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragleave'));
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
   dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('dragover'); if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files); });
   fileInput.addEventListener('change', e => { if (e.target.files.length) handleFiles(e.target.files); });
 
@@ -811,12 +819,12 @@ async function runInteractiveDemo() {
 
   for (const s of stages) {
     // Demo delay only
-    await new Promise(r => setTimeout(r, 400));
+    await new Promise(r => setTimeout(r, 150));
     if(progressBarFill) progressBarFill.style.width = s.p + '%';
     if(progressLabel) progressLabel.innerText = s.l;
   }
 
-  await new Promise(r => setTimeout(r, 200));
+  await new Promise(r => setTimeout(r, 100));
   if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
   
   auditStats = [{
@@ -895,7 +903,6 @@ async function handleSingleFileUpload(file) {
       
       if (outputBlob.type === 'image/jpeg' || outputBlob.type === '') {
         try {
-          const { default: piexif } = await import('piexifjs');
           const dataUrl = await blobToDataUrl(outputBlob);
           const newExif = { '0th': {}, Exif: {}, GPS: {}, '1st': {} };
           const software = (options.isPro && options.whitelabel) ? 'Original Content Engine' : 'VeriMedia.xyz';
@@ -930,7 +937,6 @@ async function handleSingleFileUpload(file) {
 }
 
 async function processBulkFiles(files) {
-  const { default: JSZip } = await import('https://esm.sh/jszip@3.10.1');
   const zip = new JSZip();
   let successCount = 0;
   const total = files.length;
@@ -965,7 +971,7 @@ async function processBulkFiles(files) {
     // Add file to the live list as "Scrubbing"
     const fileItem = document.createElement('div');
     fileItem.className = 'audit-item';
-    fileItem.innerHTML = `<span class="audit-icon pulse"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="opacity:0.6;">SCRUBBING</span>`;
+    fileItem.innerHTML = `<span class="audit-icon pulse">${ICON_SCRUBBING}</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="opacity:0.6;">SCRUBBING</span>`;
     batchFileList.prepend(fileItem);
 
     if (category) {
@@ -984,21 +990,18 @@ async function processBulkFiles(files) {
         
         successCount++;
         // Update item to "Cleaned"
-        fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-emerald);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
+        fileItem.innerHTML = `<span class="audit-icon">${ICON_CLEANED}</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
       } catch (e) {
-        fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-rose);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
+        fileItem.innerHTML = `<span class="audit-icon">${ICON_ERROR}</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
       }
     } else {
-      fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-rose);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag">SKIP</span>`;
+      fileItem.innerHTML = `<span class="audit-icon">${ICON_SKIP}</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag">SKIP</span>`;
     }
 
     // Update global progress
     const progress = Math.round(((i + 1) / total) * 100);
     if (progressBarFill) progressBarFill.style.width = progress + '%';
     if (statusBadge) statusBadge.innerText = `Processing (${i+1}/${total})...`;
-    
-    // Minimal delay to keep UI responsive
-    await new Promise(r => requestAnimationFrame(r));
   }
   
   const zipBlob = await zip.generateAsync({ type: 'blob' });
