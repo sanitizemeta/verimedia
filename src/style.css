@@ -571,6 +571,29 @@ nav {
   animation: none;
 }
 
+/* Sample File Button Polish */
+#sampleFileBtn {
+  margin-top: 1.2rem;
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: var(--text-primary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#sampleFileBtn:hover {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: var(--accent-cyan);
+  transform: translateY(-1px);
+}
+
 .sample-highlight {
   color: var(--accent-cyan);
   text-decoration: underline;
@@ -578,10 +601,11 @@ nav {
   font-weight: 500;
 }
 
-.social-proof-ticker #liveCount {
+#liveCount {
   color: var(--accent-emerald);
   font-weight: 800;
   font-family: var(--font-headers);
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
 }
 
 /* 6. Main Cards & Translucent Grid Layout */
@@ -604,12 +628,11 @@ nav {
 .interactive-sandbox {
   max-width: 1200px;
   margin: 0 auto 4.5rem auto;
-}
-
 .sandbox-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.2rem;
+  align-items: stretch;
 }
 
 @media (max-width: 900px) {
@@ -624,7 +647,11 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4.5rem 2rem;
+  padding: 2.5rem;
+  cursor: pointer;
+  min-height: 280px; /* Aligned with report container */
+  height: 100%;
+}
   text-align: center;
   cursor: pointer;
   position: relative;
@@ -712,10 +739,11 @@ nav {
 
 /* 8. Metadata Report Log */
 .report-container {
-  padding: 1.5rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  height: 240px; /* Fixed height to prevent layout shifts */
+  min-height: 280px;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -724,7 +752,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1rem;
+  padding: 1.2rem 1.5rem;
   flex-shrink: 0;
 }
 
@@ -773,12 +801,13 @@ nav {
 }
 
 .report-content {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  padding: 1.5rem;
+  width: 100%;
 }
 
 .empty-state {

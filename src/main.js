@@ -41,7 +41,29 @@ async function loadTranslations(lang) {
 /**
  * ⚡ Live Social Proof Ticker State
  */
-let liveStrippedCount = 14582 + Math.floor(Math.random() * 200);
+let liveStrippedCount = 14582;
+
+async function fetchGlobalStats() {
+  try {
+    const res = await fetch(STATS_URL);
+    const data = await res.json();
+    if (data.count) {
+      liveStrippedCount = data.count;
+      runLiveTicker();
+    }
+  } catch(e) { runLiveTicker(); }
+}
+
+async function incrementGlobalStats() {
+  try {
+    const res = await fetch(INCREMENT_STATS_URL, { method: 'POST' });
+    const data = await res.json();
+    if (data.count) {
+      liveStrippedCount = data.count;
+      runLiveTicker();
+    }
+  } catch(e) {}
+}
 
 function applyTranslations() {
   const elements = document.querySelectorAll('[data-i18n], [data-i18n-alt], [data-i18n-html]');
@@ -505,6 +527,8 @@ if (toggleKeyBtn) {
    📊 3. Growth & License Logic
    ========================================================================== */
 const LICENSE_VALIDATE_URL = 'https://license.verimedia.xyz/validate';
+const STATS_URL = 'https://license.verimedia.xyz/stats';
+const INCREMENT_STATS_URL = 'https://license.verimedia.xyz/increment-stats';
 
 function getDeviceId() {
   let id = localStorage.getItem('vm_device_id');
@@ -713,8 +737,8 @@ if (dropzone && fileInput) {
   });
 
   preloadEngine();
-  // Initial ticker run
-  setTimeout(runLiveTicker, 100);
+  // Initial stats fetch
+  fetchGlobalStats();
 }
 
 /**
@@ -727,9 +751,9 @@ function runLiveTicker() {
   }
 }
 
-// Update the interval logic to just increment the global variable and update the UI if element exists
+// Phantom increments every 25s to simulate other global users
 setInterval(() => {
-  liveStrippedCount += Math.floor(Math.random() * 3) + 1;
+  liveStrippedCount += 1;
   const el = document.getElementById('liveCount');
   if (el) {
     el.innerText = liveStrippedCount.toLocaleString();
@@ -737,7 +761,7 @@ setInterval(() => {
     el.style.color = '#fff';
     setTimeout(() => { el.style.color = 'var(--accent-emerald)'; }, 300);
   }
-}, 5000);
+}, 25000);
 
 async function runInteractiveDemo() {
   if (!reportContent) return;
@@ -887,6 +911,7 @@ async function handleSingleFileUpload(file) {
     processedBlob = outputBlob;
     processedBlob._url = URL.createObjectURL(outputBlob);
     drawReport([file]);
+    incrementGlobalStats();
   } catch (error) {
     if(reportContent) reportContent.innerHTML = buildErrorItem('Engine error.');
   }
@@ -933,6 +958,7 @@ async function processBulkFiles(files) {
   
   if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
   drawReport(files);
+  incrementGlobalStats();
 }
 
 function getFileCategory(file) {

@@ -111,7 +111,7 @@
     </section>
 
     <!-- 2. Interactive Sandbox (The Primary Focus) -->
-    <section id="calculator-section" class="interactive-sandbox" style="max-width: 1200px; margin: 0 auto 4.5rem auto; padding: 0 1.5rem;">
+    <section id="calculator-section" class="interactive-sandbox">
       <div class="sandbox-grid">
         
         <!-- Drag & Drop Container -->
@@ -127,7 +127,7 @@
           <span class="file-spec-hint">Supports JPEG · PNG · WebP · HEIC/HEIF · PDF</span>
           
           <!-- Sample Action Component -->
-          <button type="button" id="sampleFileBtn" data-i18n-html="sandbox.sample_link_text" style="margin-top: 15px; background: rgba(6, 182, 212, 0.1); border: 1px dashed var(--accent-cyan); color: #fff; padding: 8px 16px; border-radius: 8px; font-size: 0.78rem; cursor: pointer; transition: all 0.2s; font-family: var(--font-body); display: flex; align-items: center; gap: 8px; margin-left: auto; margin-right: auto;">
+          <button type="button" id="sampleFileBtn" data-i18n-html="sandbox.sample_link_text">
             <span>💡 No file ready? Try our metadata-heavy sample photo</span>
           </button>
         </div>
@@ -135,7 +135,7 @@
         <!-- Real-Time Processing Report Log -->
         <div class="card glass-card report-container">
           <div class="report-header">
-            <h3 style="display: flex; align-items: center; gap: 8px;">
+            <h3>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-cyan);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               <span data-i18n="sandbox.audit_title">Privacy & Copyright Audit</span>
             </h3>
@@ -145,14 +145,14 @@
           <div class="report-content" id="reportContent">
             <div class="empty-state">
               <p data-i18n="sandbox.audit_empty">Upload a photo to strip tracking details and embed copyright and AI opt-out tags.</p>
-              <button class="link-btn" id="trySampleBtn" style="margin-top: 0.8rem; font-size: 0.85rem;" data-i18n="sandbox.try_sample">Try Sample File</button>
+              <button class="link-btn" id="trySampleBtn" data-i18n="sandbox.try_sample">Try Sample File</button>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Social Proof Ticker -->
-      <div class="social-proof-ticker" id="socialProofTicker" style="margin-top: 2rem; text-align: center; font-size: 0.85rem; color: var(--text-secondary); opacity: 0.9;">
+      <div class="social-proof-ticker" id="socialProofTicker">
         <p data-i18n-html="sandbox.social_proof_text">⚡ <span id="liveCount">{{count}}</span> images sanitized locally today. Zero bytes uploaded to the cloud.</p>
       </div>
     </section>

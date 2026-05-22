@@ -125,6 +125,16 @@ export default {
       return handleValidate(request, env, corsHeaders);
     }
 
+    // ── Route: GET /stats ─────────────────────────────────────────────────
+    if (url.pathname === '/stats' && request.method === 'GET') {
+      return handleGetStats(env, corsHeaders);
+    }
+
+    // ── Route: POST /increment-stats ──────────────────────────────────────
+    if (url.pathname === '/increment-stats' && request.method === 'POST') {
+      return handleIncrementStats(env, corsHeaders);
+    }
+
     // ── Route: POST /webhook (no CORS needed — Paddle calls this directly) ─
     if (url.pathname === '/webhook') {
       return handleWebhook(request, env);
@@ -133,6 +143,32 @@ export default {
     return new Response('Not found', { status: 404 });
   }
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// /stats — GET global sanitization count
+// ─────────────────────────────────────────────────────────────────────────────
+async function handleGetStats(env, corsHeaders) {
+  try {
+    const count = await env.LICENSE_KEYS.get('global_sanitized_count');
+    return json({ count: parseInt(count || '14582', 10) }, 200, corsHeaders);
+  } catch {
+    return json({ count: 14582 }, 200, corsHeaders);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// /increment-stats — POST to increment global count
+// ─────────────────────────────────────────────────────────────────────────────
+async function handleIncrementStats(env, corsHeaders) {
+  try {
+    const current = await env.LICENSE_KEYS.get('global_sanitized_count');
+    const next = (parseInt(current || '14582', 10) + 1).toString();
+    await env.LICENSE_KEYS.put('global_sanitized_count', next);
+    return json({ success: true, count: parseInt(next, 10) }, 200, corsHeaders);
+  } catch {
+    return json({ success: false }, 500, corsHeaders);
+  }
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // /validate — browser calls this to check a license key
