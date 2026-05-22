@@ -1,58 +1,41 @@
 # VeriMedia - Project Architecture & Technical Context
 
 ## Overview
-VeriMedia is a 100% client-side privacy tool that removes sensitive metadata (GPS, EXIF, etc.) from images and PDFs, while injecting creator identity, copyright, and AI opt-out indicators.
+VeriMedia is a 100% client-side privacy tool that removes sensitive metadata (GPS, EXIF, etc.) from images and PDFs, while injecting creator identity, copyright, and AI training opt-out tags. It is designed for high performance (sub-100ms processing) and maximum privacy.
 
-## Tech Stack
-- **Frontend:** Vanilla HTML/CSS/JS (Vite 5 build system)
-- **UI Theme:** "Cosmic Cyberpunk" (Dark navy `#090D19`, Cyan `#06B6D4`, Emerald `#10B981`)
-- **Metadata Engine:** `piexifjs` (JPEG), `exifr` (analysis), `pdf-lib` (PDF), `heic2any` (HEIC support), `cbor-x` (CBOR/C2PA).
-- **Batch Processing:** `jszip` (dynamically imported for Pro users)
-- **Deployment:** Cloudflare Pages (Frontend) & Cloudflare Workers (Backend validation)
-- **Localization:** Custom zero-dependency i18n engine using local JSON bundles (EN, ES, FR).
+## Core Mandates
+- **Zero-Server Policy:** No media files must ever be uploaded to a server. All sanitization must happen in the user's browser using `engine.ts`.
+- **AIO/GEO First:** The codebase must maintain its **Elite 100/100 Search & AI Rating**. Any content changes must preserve high-density technical keywords and localized JSON-LD schemas.
+- **Conversion Discipline:** The "Interactive Sandbox" and "Try Sample" triggers are high-priority conversion anchors. Keep them above the fold.
+- **Premium Aesthetic:** Maintain the "Cosmic Cyberpunk" (Glassmorphism) theme with Lucide SVG icons. No emojis in the core UI.
 
-## Licensing & Payment Architecture (Paddle Billing v2)
-The application uses a hybrid client/edge architecture for secure, automated licensing.
-
-### 1. Paddle Integration (Frontend)
-- **Library:** Paddle.js v2 (Overlay mode)
-- **Product Model:** Single Lifetime Deal ($19). Quantity is restricted to 1 via Paddle Dashboard settings.
-- **Client Token:** `live_2f19b88294a235307e74e44f820`
-- **Price ID:** `pri_01ks3bgn6zyh2bsvqk438c3dcv`
-- **Critical Implementation Detail:** The `eventCallback` MUST be placed inside `Paddle.Initialize()`, not inside `Paddle.Checkout.open()`.
-- **Auto-Activation:** On `checkout.completed`, the frontend extracts `event.data.transaction_id` and polls the CF Worker to verify the key. `successUrl` must be omitted to prevent premature page reloads that kill the polling script.
-
-### 2. License Validation (Cloudflare Worker)
-- **Location:** `cf-worker/license-validator.js`
-- **Database:** Cloudflare KV (`LICENSE_KEYS` namespace).
-- **Format:** Keys are Paddle Transaction IDs (`TXN_...`). Values are JSON objects tracking status and devices: `{ status: 'active', device_ids: [], purchase_date: '...' }`
-- **Endpoints:**
-  - `POST /validate`: Called by the browser. Verifies the key and enforces a **3-device limit** by tracking unique browser-generated `device_id`s.
-  - `POST /webhook`: Called by Paddle. Listens for `transaction.completed` or `transaction.paid`, validates the HMAC-SHA256 signature using `PADDLE_WEBHOOK_SECRET`, and idempotently registers the key in KV.
-
-## Core Capabilities
+## High-Impact Features
 - **Neural Privacy Shield:** Intelligent metadata stripping for Images (JPEG, PNG, WebP, HEIC) and PDFs.
-- **Forensic PDF Scrubbing:** 'Nuke and Pave' strategy that physically overwrites metadata streams with empty data to prevent forensic recovery/carving.
-- **AI Opt-Out Injection:** Standardized `ai:opt-out=true` embedding recognized by major model crawlers (GPTBot, ClaudeBot).
-- **Creator Identity (Pro):** Custom Author, Copyright, and License URL (Google Licensable Badge) injection across all supported formats.
-- **Whitelabel (Pro):** Pro-exclusive toggle to remove all VeriMedia branding from file metadata, replacing 'Software' tags with 'Original Content Engine'.
-- **Multi-Lingual (i18n):** 100% localized interface for English (EN), Spanish (ES), and French (FR) with persistent real-time language switching and AI-aware URL routing (`?lang=`).
-- **Profile Portability:** Export/Import creator settings via secure JSON (license keys excluded for security).
-- **SEO/AIO Optimized:** Elite 100/100 rating. High-density semantic data and dynamic Schema.org integration (HowTo, SoftwareApplication, Organization, BreadcrumbList) for Google AI Mode (Gemini/SGE) and automated sitemap hreflang support.
+- **AI Training Shield:** Standardized `ai:opt-out=true` binary tag injection.
+- **E-E-A-T Signer:** Google Licensable Badge support via automated IPTC/XMP metadata embedding.
+- **Multi-Lingual (i18n):** 100% localized for EN, ES, and FR with AI-aware URL routing (`?lang=`) and dynamic document titles/meta tags.
+- **Global Social Proof:** Real-time sanitization counter linked to Cloudflare Workers KV.
+- **Sitemap Elite:** Multi-language `hreflang` support integrated directly into `sitemap.xml`.
 
 ## Specialized Agent Skills
-- **skill-fetcher:** A custom, project-agnostic "Smart CTO" skill that autonomously researches and evaluating top-tier FREE and OPEN-SOURCE tools based on adoption metrics (Stars, Downloads).
+- **search-optimization:** (Local) Custom framework to rate and optimize the site for Generative AI search (SGE/Gemini). Run `node search-optimization/scripts/rate_site.cjs` to verify.
+- **skill-fetcher:** CTO-level researcher for identifying top-tier open-source tools.
 
 ## Tech Stack
-- **Frontend:** Vanilla HTML/CSS/JS (Vite 5 build system).
-- **Localization:** Custom zero-dependency i18n engine using local JSON bundles.
-- **UI Theme:** "Cosmic Cyberpunk" (Glassmorphism, Neon Cyan/Emerald, Dark Space background).
-- **Metadata Engine:** `piexifjs` (JPEG), `pdf-lib` (PDF), Custom surgical byte injection (PNG/WebP).
-- **Security:** 100% Client-side. Local processing via WebWorkers and ArrayBuffers. No serverside storage.
-- **Licensing:** Paddle.js v2 + Cloudflare Workers/KV (3-device hardware locking).
+- **Frontend:** Vanilla JS (ES Modules) + Vite.
+- **Styling:** Vanilla CSS (Cyberpunk/Glassmorphism).
+- **Backend (Licensing):** Cloudflare Workers + Workers KV + Paddle Billing v2.
+- **Core Engine:** `exifr`, `pdf-lib`, `piexifjs`, `cbor-x`.
 
-## Critical Implementation Details
-- **Branding Logic:** Free users get "VeriMedia Verified Creator" branding. Pro users can toggle "Whitelabel" to remove it.
-- **Global Modals:** Profile and Payment modals must be present on every page (`index`, `privacy`, `terms`, `refund`) to ensure consistent functional access.
-- **Form Safety:** All profile/license buttons must use `e.preventDefault()` to prevent accidental form-triggered page refreshes.
-- **C2PA Awareness:** The engine detects and handles C2PA manifests for content provenance verification.
+## Critical Technical Paths
+- **Worker Endpoints:**
+  - `POST /validate`: License key verification with 3-device locking.
+  - `GET /stats`: Fetch global sanitization count.
+  - `POST /increment-stats`: Update global count (accepts `{ amount: n }`).
+  - `POST /webhook`: Paddle-to-KV automated activation.
+- **SEO Sync:** `src/main.js` -> `applyTranslations()` must always update `document.documentElement.lang`, `meta[name="description"]`, and localized `JSON-LD`.
+
+## Visual Standards
+- **Hover Transitions:** Use `translateY(-2px)` to prevent vertical clipping.
+- **Overflow:** Parent containers (`main`, `section`) must use `overflow: visible` to accommodate glowing card shadows.
+- **Icons:** Use SVG only (Lucide style). Default color: `var(--accent-cyan)`.
