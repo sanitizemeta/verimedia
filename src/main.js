@@ -39,7 +39,7 @@ async function loadTranslations(lang) {
 }
 
 function applyTranslations() {
-  const elements = document.querySelectorAll('[data-i18n], [data-i18n-alt]');
+  const elements = document.querySelectorAll('[data-i18n], [data-i18n-alt], [data-i18n-html]');
   elements.forEach(el => {
     // Skip updating pricing button if Pro is active
     if (isPro && (el.id === 'paddleCheckoutBtn' || el.classList.contains('paddle-checkout-btn'))) {
@@ -48,6 +48,7 @@ function applyTranslations() {
 
     const key = el.getAttribute('data-i18n');
     const altKey = el.getAttribute('data-i18n-alt');
+    const htmlKey = el.getAttribute('data-i18n-html');
 
     if (key) {
       const keys = key.split('.');
@@ -69,6 +70,15 @@ function applyTranslations() {
       keys.forEach(k => { value = value ? value[k] : null; });
       if (value && el.tagName === 'IMG') {
         el.alt = value;
+      }
+    }
+
+    if (htmlKey) {
+      const keys = htmlKey.split('.');
+      let value = translations;
+      keys.forEach(k => { value = value ? value[k] : null; });
+      if (value) {
+        el.innerHTML = value;
       }
     }
   });
@@ -107,6 +117,9 @@ function applyTranslations() {
 
   // Update Localized JSON-LD Structured Data
   updateStructuredData(lang, translations, pagePath);
+  
+  // Re-bind live ticker
+  runLiveTicker();
 }
 
 /**
@@ -699,25 +712,31 @@ if (dropzone && fileInput) {
 /**
  * ⚡ Live Social Proof Ticker
  */
+let liveStrippedCount = 14582 + Math.floor(Math.random() * 200);
+
+function applyTranslations() {
+  const elements = document.querySelectorAll('[data-i18n], [data-i18n-alt], [data-i18n-html]');
+  // ... existing logic ...
+  // (I'll do a surgical replace)
+}
+
 function runLiveTicker() {
   const liveCountEl = document.getElementById('liveCount');
   if (!liveCountEl) return;
-
-  // Start with a realistic base for the day
-  let count = 14582 + Math.floor(Math.random() * 200);
-  liveCountEl.innerText = count.toLocaleString();
-
-  // Increment randomly every few seconds
-  setInterval(() => {
-    count += Math.floor(Math.random() * 3) + 1;
-    liveCountEl.innerText = count.toLocaleString();
-    
-    // Subtle flash effect on update
-    liveCountEl.style.transition = 'color 0.2s ease';
-    liveCountEl.style.color = '#fff';
-    setTimeout(() => { liveCountEl.style.color = 'var(--accent-emerald)'; }, 300);
-  }, 5000);
+  liveCountEl.innerText = liveStrippedCount.toLocaleString();
 }
+
+// Update the interval logic to just increment the global variable and update the UI if element exists
+setInterval(() => {
+  liveStrippedCount += Math.floor(Math.random() * 3) + 1;
+  const el = document.getElementById('liveCount');
+  if (el) {
+    el.innerText = liveStrippedCount.toLocaleString();
+    el.style.transition = 'color 0.2s ease';
+    el.style.color = '#fff';
+    setTimeout(() => { el.style.color = 'var(--accent-emerald)'; }, 300);
+  }
+}, 5000);
 
 async function runInteractiveDemo() {
   if (!reportContent) return;
