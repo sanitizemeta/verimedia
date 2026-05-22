@@ -55,12 +55,27 @@ async function fetchGlobalStats() {
 }
 
 async function incrementGlobalStats() {
+  // 1. Immediate local feedback
+  liveStrippedCount += 1;
+  const el = document.getElementById('liveCount');
+  if (el) {
+    el.innerText = liveStrippedCount.toLocaleString();
+    el.style.transition = 'color 0.2s ease, transform 0.2s ease';
+    el.style.color = '#fff';
+    el.style.transform = 'scale(1.1)';
+    setTimeout(() => { 
+      el.style.color = 'var(--accent-emerald)'; 
+      el.style.transform = 'scale(1)';
+    }, 400);
+  }
+
+  // 2. Persist to Cloudflare
   try {
     const res = await fetch(INCREMENT_STATS_URL, { method: 'POST' });
     const data = await res.json();
-    if (data.count) {
+    if (data.count && data.count > liveStrippedCount) {
       liveStrippedCount = data.count;
-      runLiveTicker();
+      if (el) el.innerText = liveStrippedCount.toLocaleString();
     }
   } catch(e) {}
 }
@@ -751,18 +766,6 @@ function runLiveTicker() {
   }
 }
 
-// Phantom increments every 25s to simulate other global users
-setInterval(() => {
-  liveStrippedCount += 1;
-  const el = document.getElementById('liveCount');
-  if (el) {
-    el.innerText = liveStrippedCount.toLocaleString();
-    el.style.transition = 'color 0.2s ease';
-    el.style.color = '#fff';
-    setTimeout(() => { el.style.color = 'var(--accent-emerald)'; }, 300);
-  }
-}, 25000);
-
 async function runInteractiveDemo() {
   if (!reportContent) return;
   
@@ -817,6 +820,7 @@ async function runInteractiveDemo() {
 
   processedBlob = null; 
   drawReport([{ name: 'demo_iphone_photo.jpg' }]);
+  incrementGlobalStats();
   
   const dBtn = document.getElementById('downloadBtn');
   if (dBtn) {
