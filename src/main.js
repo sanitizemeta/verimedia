@@ -18,6 +18,10 @@ async function loadTranslations(lang) {
   try {
     const response = await fetch(`/locales/${lang}.json`);
     translations = await response.json();
+    
+    // Fetch global stats FIRST to ensure {{count}} is accurate in the HTML
+    await fetchGlobalStats();
+    
     applyTranslations();
     
     const langDisplay = document.getElementById('currentLang');
@@ -756,8 +760,6 @@ if (dropzone && fileInput) {
   });
 
   preloadEngine();
-  // Initial stats fetch
-  fetchGlobalStats();
 }
 
 /**
