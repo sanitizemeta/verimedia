@@ -931,34 +931,72 @@ async function processBulkFiles(files) {
   const { default: JSZip } = await import('https://esm.sh/jszip@3.10.1');
   const zip = new JSZip();
   let successCount = 0;
+  const total = files.length;
   
-  if(statusBadge) { statusBadge.innerText = 'Processing...'; statusBadge.className = 'status-indicator scanning'; }
+  if(statusBadge) { 
+    statusBadge.innerText = `Processing (0/${total})...`; 
+    statusBadge.className = 'status-indicator scanning'; 
+  }
+
+  // Set up the batch processing view
   reportContent.innerHTML = `
-    <div class="empty-state" style="margin:auto;width:100%;">
-      <p style="font-family:var(--font-headers);font-weight:600;color:var(--accent-cyan);font-size:1.1rem;margin-bottom:0.5rem;">Batch Processing...</p>
+    <div class="batch-process-view" style="width:100%; text-align:left;">
+      <div class="progress-bar-track" style="margin-bottom:1rem;">
+        <div class="progress-bar-fill" id="batchProgressBarFill" style="width:0%;"></div>
+      </div>
+      <div id="batchFileList" class="audit-list" style="max-height:180px; overflow-y:auto; padding-right:5px;">
+        <!-- Files will be prepended here -->
+      </div>
     </div>
   `;
+
+  const progressBarFill = document.getElementById('batchProgressBarFill');
+  const batchFileList = document.getElementById('batchFileList');
 
   const options = { isPro: true, aiOptOut: creatorProfile.aiOnly !== false, injectIdentity: !!(creatorProfile.name || creatorProfile.copyright || creatorProfile.url), ...creatorProfile };
   let tagsAdded = options.injectIdentity ? 4 : (options.aiOptOut ? 1 : 0);
 
-  for (let file of files) {
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
     const category = getFileCategory(file);
-    if (!category) continue;
     
-    let reportBefore = await extractMetadata(file);
-    const blob = category === 'pdf' ? new Blob([await sanitizePDF(file, options)]) : await sanitizeImage(file, options);
-    zip.file(file.name.replace(/\.[^/.]+$/, '') + '_safe' + getOutputExt(file), blob);
+    // Add file to the live list as "Scrubbing"
+    const fileItem = document.createElement('div');
+    fileItem.className = 'audit-item';
+    fileItem.innerHTML = `<span class="audit-icon pulse">⚙️</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="opacity:0.6;">SCRUBBING</span>`;
+    batchFileList.prepend(fileItem);
+
+    if (category) {
+      try {
+        let reportBefore = await extractMetadata(file);
+        const blob = category === 'pdf' ? new Blob([await sanitizePDF(file, options)]) : await sanitizeImage(file, options);
+        zip.file(file.name.replace(/\.[^/.]+$/, '') + '_safe' + getOutputExt(file), blob);
+        
+        auditStats.push({
+          filename: file.name,
+          removed: reportBefore.tags.length,
+          added: tagsAdded,
+          scoreBefore: reportBefore.privacyScore,
+          scoreAfter: 100
+        });
+        
+        successCount++;
+        // Update item to "Cleaned"
+        fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-emerald);">✓</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
+      } catch (e) {
+        fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-rose);">×</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
+      }
+    } else {
+      fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-rose);">!</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag">SKIP</span>`;
+    }
+
+    // Update global progress
+    const progress = Math.round(((i + 1) / total) * 100);
+    if (progressBarFill) progressBarFill.style.width = progress + '%';
+    if (statusBadge) statusBadge.innerText = `Processing (${i+1}/${total})...`;
     
-    auditStats.push({
-      filename: file.name,
-      removed: reportBefore.tags.length,
-      added: tagsAdded,
-      scoreBefore: reportBefore.privacyScore,
-      scoreAfter: 100
-    });
-    
-    successCount++;
+    // Tiny delay to keep UI responsive and visible
+    await new Promise(r => setTimeout(r, 50));
   }
   
   const zipBlob = await zip.generateAsync({ type: 'blob' });
