@@ -9,6 +9,10 @@
   <meta name="description" content="Protect your photos from AI scrapers. Remove private location data, GPS tags, and camera details directly in your browser. Add your creator copyright securely.">
   <meta name="keywords" content="protect images from AI, remove EXIF data, image copyright, AI opt out, secure photo cleaner, PDF metadata removal, Google Licensable Badge, C2PA extractor, privacy metadata, batch exif stripper">
   <link rel="canonical" href="https://verimedia.xyz" />
+  <link rel="alternate" hreflang="en" href="https://verimedia.xyz" />
+  <link rel="alternate" hreflang="es" href="https://verimedia.xyz?lang=es" />
+  <link rel="alternate" hreflang="fr" href="https://verimedia.xyz?lang=fr" />
+  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz" />
   
   <!-- OpenGraph Tags -->
   <meta property="og:title" content="VeriMedia | Browser-Based AI Shield & Metadata Stripper">
@@ -35,22 +39,6 @@
 
   <!-- Software Application JSON-LD Structured Schema -->
   <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "VeriMedia",
-      "operatingSystem": "Web Browser",
-      "applicationCategory": "UtilitiesApplication",
-      "featureList": "EXIF Stripping, PDF Sanitization, AI Opt-Out Injection, Google Licensable Badge Support, Batch Processing",
-      "offers": {
-        "@type": "Offer",
-        "price": "19.00",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      },
-      "description": "A secure, 100% browser-based tool to remove sensitive location data from photos and PDFs, and embed creator copyrights and AI opt-out tags."
-    },
     {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -69,36 +57,7 @@
         "https://verimedia.xyz/privacy.html",
         "https://verimedia.xyz/refund.html"
       ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "How to Protect Photos from AI Scrapers",
-      "description": "Learn how to use VeriMedia to remove tracking metadata and inject AI opt-out tags into your images and PDFs.",
-      "step": [
-        {
-          "@type": "HowToStep",
-          "name": "Upload Media",
-          "text": "Drag and drop your JPEG, PNG, WebP, HEIC, or PDF files into the secure VeriMedia sandbox."
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Set Creator Identity",
-          "text": "Open your Profile to set your Creator Name and Copyright string for professional embedding."
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Enable AI Opt-Out",
-          "text": "Ensure the 'AI Opt-Out' toggle is active to inject standardized 'ai:opt-out=true' tags."
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Download Safe File",
-          "text": "Download your sanitized, AI-protected files instantly. No data ever leaves your device."
-        }
-      ]
     }
-  ]
   </script>
 </head>
 <body>
@@ -114,7 +73,7 @@
   <header>
     <div class="logo-container">
       <span class="logo-text" style="display: flex; align-items: center; gap: 8px;">
-        <img src="/icon.svg" alt="VeriMedia Logo" width="32" height="32" style="filter: drop-shadow(0 0 8px var(--accent-cyan-glow));">
+        <img src="/icon.svg" alt="VeriMedia Logo" data-i18n-alt="header.logo_alt" width="32" height="32" style="filter: drop-shadow(0 0 8px var(--accent-cyan-glow));">
         VeriMedia<span class="dot">.xyz</span>
       </span>
     </div>
@@ -278,6 +237,11 @@
               <h3 data-i18n="sandbox.drop_title" style="font-size: 1.1rem;">Drag & Drop your media file</h3>
               <p data-i18n="sandbox.drop_subtitle" style="font-size: 0.8rem;">or click to browse local files (max 25MB)</p>
               <span class="file-spec-hint" style="margin-top: 0.8rem;">Supports JPEG · PNG · WebP · HEIC/HEIF · PDF</span>
+              
+              <!-- Sample Trigger Link -->
+              <p class="sample-trigger-wrap" style="margin-top: 1.2rem; font-size: 0.75rem; opacity: 0.8;">
+                <button class="link-btn" id="sampleLinkBtn" data-i18n="sandbox.sample_link_text">Don't have a file handy? Try our metadata-heavy sample photo.</button>
+              </p>
             </div>
 
             <!-- Real-Time Processing Report Log -->
@@ -293,11 +257,19 @@
               <div class="report-content" id="reportContent">
                 <div class="empty-state">
                   <p data-i18n="sandbox.audit_empty">Upload a photo to strip tracking details and embed copyright and AI opt-out tags.</p>
+                  <button class="link-btn" id="trySampleBtn" style="margin-top: 0.8rem; font-size: 0.85rem;" data-i18n="sandbox.try_sample">Try Sample File</button>
                 </div>
               </div>
             </div>
 
           </div>
+
+          <!-- Social Proof Ticker -->
+          <div class="social-proof-ticker" id="socialProofTicker" style="margin-top: 2rem; text-align: center; font-size: 0.85rem; color: var(--text-secondary); opacity: 0.9;">
+            <p data-i18n="sandbox.social_proof_text">⚡ <span id="liveCount">...</span> images sanitized locally today. Zero bytes uploaded to the cloud.</p>
+          </div>
+        </div>
+      </div>
         </div>
       </div>
 
@@ -400,7 +372,7 @@
   <!-- Footer Section -->
   <footer>
     <div class="footer-content">
-      <p data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
+      <p data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz. Processed 100% locally in your browser. No files are stored or uploaded.</p>
       <div class="footer-links">
         <a href="/privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy</a>
         <a href="/terms.html" class="footer-link" data-i18n="footer.terms">Terms</a>
@@ -419,25 +391,25 @@
         <div class="modal-icon-wrap">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <h3>Creator Pro Lifetime</h3>
-        <p class="modal-subtitle">One-time payment. Use on up to 3 devices. No subscription, ever.</p>
+        <h3 data-i18n="checkout.pro_title">Creator Pro Lifetime</h3>
+        <p class="modal-subtitle" data-i18n="checkout.pro_subtitle">One-time payment. Use on up to 3 devices. No subscription, ever.</p>
         <div class="payment-summary">
           <div class="summary-row">
-            <span>Creator Pro Lifetime</span>
+            <span data-i18n="checkout.item">Creator Pro Lifetime</span>
             <strong>$19.00</strong>
           </div>
           <div class="summary-row total-row">
-            <span>Total</span>
+            <span data-i18n="checkout.total">Total</span>
             <strong>$19.00</strong>
           </div>
         </div>
         <!-- TODO: Replace href with your Paddle checkout URL from Paddle Dashboard → Products → Share → Checkout Link -->
         <button class="pricing-btn primary-btn paddle-checkout-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:6px;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Buy Now — $19
+          <span data-i18n="checkout.buy_btn">Buy Now — $19</span>
         </button>
-        <p class="modal-footnote">After payment, Paddle will email you a license key.</p>
-        <button class="link-btn modal-switch-link" id="switchToActivate">Already have a key? Activate it here</button>
+        <p class="modal-footnote" data-i18n="checkout.buy_footnote">After payment, Paddle will email you a license key.</p>
+        <button class="link-btn modal-switch-link" id="switchToActivate" data-i18n="checkout.already_key">Already have a key? Activate it here</button>
       </div>
 
       <!-- View 2: Activate Key -->
@@ -445,14 +417,14 @@
         <div class="modal-icon-wrap">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
         </div>
-        <h3>Activate Your License</h3>
-        <p class="modal-subtitle">Enter the license key from your purchase confirmation email.</p>
+        <h3 data-i18n="checkout.activate_title">Activate Your License</h3>
+        <p class="modal-subtitle" data-i18n="checkout.activate_subtitle">Enter the license key from your purchase confirmation email.</p>
         <div class="license-input-group">
           <input type="text" id="licenseKeyInput" class="license-input" placeholder="e.g. txn_01abc123xyz (from your Paddle receipt email)" autocomplete="off" spellcheck="false" />
           <p class="license-error" id="licenseError" style="display:none;"></p>
         </div>
-        <button class="pricing-btn primary-btn" id="activateLicenseBtn">Activate License</button>
-        <button class="link-btn modal-switch-link" id="switchToBuy">Need to buy a license?</button>
+        <button class="pricing-btn primary-btn" id="activateLicenseBtn" data-i18n="checkout.activate_btn">Activate License</button>
+        <button class="link-btn modal-switch-link" id="switchToBuy" data-i18n="checkout.need_buy">Need to buy a license?</button>
       </div>
 
       <!-- View 3: Success -->
@@ -460,12 +432,12 @@
         <div class="modal-icon-wrap success-icon">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
-        <h3>Creator Pro Active</h3>
-        <p class="modal-subtitle">Your license is valid and active on this device.</p>
+        <h3 data-i18n="checkout.success_title">Creator Pro Active</h3>
+        <p class="modal-subtitle" data-i18n="checkout.success_subtitle">Your license is valid and active on this device.</p>
         <div class="success-feature-list">
-          <p><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>Bulk uploads unlocked</p>
-          <p><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>Custom verified creator signatures active</p>
-          <p><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>Google Licensable Badge Schema enabled</p>
+          <p><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="checkout.unlocked_bulk">Bulk uploads unlocked</span></p>
+          <p><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="checkout.unlocked_sig">Custom verified creator signatures active</span></p>
+          <p><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="checkout.unlocked_badge">Google Licensable Badge Schema enabled</span></p>
         </div>
         <button class="pricing-btn primary-btn" id="closeSuccessBtn" style="background: var(--accent-emerald);" data-i18n="checkout.start_pro">Start Using Pro</button>
       </div>
@@ -482,17 +454,17 @@
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
       </div>
 
-      <h3>Creator Profile</h3>
-      <p class="modal-subtitle">Your identity is embedded into every processed file's metadata. Set it once, use it forever.</p>
+      <h3 data-i18n="profile.title">Creator Profile</h3>
+      <p class="modal-subtitle" data-i18n="profile.subtitle">Your identity is embedded into every processed file's metadata. Set it once, use it forever.</p>
 
       <form id="profileForm" autocomplete="off">
         <div id="profileInputsWrap" style="position: relative;">
           <!-- Pro Lock Overlay -->
           <div id="proProfileOverlay" class="pro-overlay" style="display:none;">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 0.5rem;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <h4 style="color: white; margin-bottom: 0.5rem; font-family: var(--font-headers);">Creator Pro Feature</h4>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Upgrade to embed your identity and enable Google Licensable Badges.</p>
-            <button class="pricing-btn primary-btn" id="profileUpgradeBtn" type="button">Upgrade to Pro</button>
+            <h4 style="color: white; margin-bottom: 0.5rem; font-family: var(--font-headers);" data-i18n="profile.pro_badge">Creator Pro Feature</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;" data-i18n="profile.pro_unlock">Upgrade to embed your identity and enable Google Licensable Badges.</p>
+            <button class="pricing-btn primary-btn" id="profileUpgradeBtn" type="button" data-i18n="profile.upgrade_btn">Upgrade to Pro</button>
           </div>
 
           <div class="profile-field">

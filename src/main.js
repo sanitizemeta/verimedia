@@ -4,7 +4,14 @@ import { sanitizeImage, sanitizePDF, preloadEngine, extractMetadata } from './li
    🌍 0. Localization & i18n Engine
    ========================================================================== */
 const LANG_KEY = 'vm_lang';
-let currentLang = localStorage.getItem(LANG_KEY) || 'en';
+const urlParams = new URLSearchParams(window.location.search);
+const urlLang = urlParams.get('lang');
+const supportedLangs = ['en', 'es', 'fr'];
+
+let currentLang = (urlLang && supportedLangs.includes(urlLang)) 
+  ? urlLang 
+  : (localStorage.getItem(LANG_KEY) || 'en');
+
 let translations = {};
 
 async function loadTranslations(lang) {
@@ -17,13 +24,22 @@ async function loadTranslations(lang) {
     if (langDisplay) langDisplay.textContent = lang.toUpperCase();
     
     localStorage.setItem(LANG_KEY, lang);
+
+    // Update URL parameter without reloading (for SEO/User sharing)
+    const newUrl = new URL(window.location);
+    if (lang === 'en') {
+      newUrl.searchParams.delete('lang');
+    } else {
+      newUrl.searchParams.set('lang', lang);
+    }
+    window.history.replaceState({}, '', newUrl);
   } catch (err) {
     console.error('Failed to load translations:', err);
   }
 }
 
 function applyTranslations() {
-  const elements = document.querySelectorAll('[data-i18n]');
+  const elements = document.querySelectorAll('[data-i18n], [data-i18n-alt]');
   elements.forEach(el => {
     // Skip updating pricing button if Pro is active
     if (isPro && (el.id === 'paddleCheckoutBtn' || el.classList.contains('paddle-checkout-btn'))) {
@@ -31,31 +47,162 @@ function applyTranslations() {
     }
 
     const key = el.getAttribute('data-i18n');
-    const keys = key.split('.');
-    let value = translations;
-    keys.forEach(k => { value = value ? value[k] : null; });
-    
-    if (value) {
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = value;
-      } else {
-        el.textContent = value;
+    const altKey = el.getAttribute('data-i18n-alt');
+
+    if (key) {
+      const keys = key.split('.');
+      let value = translations;
+      keys.forEach(k => { value = value ? value[k] : null; });
+      
+      if (value) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = value;
+        } else {
+          el.textContent = value;
+        }
+      }
+    }
+
+    if (altKey) {
+      const keys = altKey.split('.');
+      let value = translations;
+      keys.forEach(k => { value = value ? value[k] : null; });
+      if (value && el.tagName === 'IMG') {
+        el.alt = value;
       }
     }
   });
 
-  // Re-apply Pro UI if active (hiding elements that might have been re-shown)
+  // Re-apply Pro UI if active
   if (isPro) setProActiveUI();
+
+  // ── SEO & Metadata Synchronization ───────────────────────────────────────
+  const lang = currentLang || 'en';
+  document.documentElement.lang = lang;
 
   // Translate document title
   const pagePath = window.location.pathname.replace('.html', '').split('/').pop() || 'index';
   let titleVal = '';
   if (pagePath === 'index' || pagePath === '') {
-    titleVal = translations.hero?.title || 'VeriMedia';
+    titleVal = translations.hero?.title ? `${translations.hero.title} | VeriMedia` : 'VeriMedia | Browser-Based AI Shield';
   } else if (translations[`${pagePath}_page`]?.h1) {
     titleVal = `${translations[`${pagePath}_page`].h1} | VeriMedia.xyz`;
   }
   if (titleVal) document.title = titleVal;
+
+  // Update Meta Description
+  const metaDesc = document.querySelector('meta[name="description"]');
+  const pageKey = `${pagePath}_page`;
+  const pageSummary = translations[pageKey]?.intro || translations.hero?.summary;
+  
+  if (metaDesc && pageSummary) {
+    metaDesc.setAttribute('content', pageSummary);
+  }
+
+  // Update OpenGraph Description
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc && pageSummary) {
+    ogDesc.setAttribute('content', pageSummary);
+  }
+
+  // Update Localized JSON-LD Structured Data
+  updateStructuredData(lang, translations, pagePath);
+}
+
+/**
+ * 🛠️ Updates the JSON-LD structured data for the current language.
+ */
+function updateStructuredData(lang, trans, pagePath) {
+  let script = document.getElementById('localized-schema');
+  if (!script) return; // Only update if placeholder exists
+
+  const pageKey = `${pagePath}_page`;
+  const isIndex = pagePath === 'index' || pagePath === '';
+  const langQuery = lang === 'en' ? '' : `?lang=${lang}`;
+
+  const schema = [];
+
+  // Breadcrumb Schema (Always included)
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": trans.header?.home || "Home",
+        "item": `https://verimedia.xyz/${langQuery}`
+      }
+    ]
+  };
+
+  if (!isIndex) {
+    breadcrumbs.itemListElement.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": trans[pageKey]?.h1 || document.title,
+      "item": `https://verimedia.xyz/${pagePath}.html${langQuery}`
+    });
+  }
+  schema.push(breadcrumbs);
+
+  if (isIndex) {
+    schema.push(
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "VeriMedia",
+        "operatingSystem": "Web Browser",
+        "applicationCategory": "UtilitiesApplication",
+        "featureList": trans.pricing?.pro_f2 + ", " + trans.kb?.ai_title + ", " + trans.kb?.pdf_title,
+        "offers": {
+          "@type": "Offer",
+          "price": "19.00",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "description": trans.hero?.summary
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": trans.faq?.q2 || "How to Protect Photos",
+        "description": trans.hero?.summary,
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": trans.sandbox?.drop_title,
+            "text": trans.sandbox?.drop_subtitle
+          },
+          {
+            "@type": "HowToStep",
+            "name": trans.profile?.title,
+            "text": trans.profile?.subtitle
+          },
+          {
+            "@type": "HowToStep",
+            "name": trans.profile?.save,
+            "text": trans.sandbox?.stage_img_4
+          }
+        ]
+      }
+    );
+  } else {
+    // Secondary Page Schema (WebPage + specific breadcrumbs/policy info)
+    schema.push({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": trans[pageKey]?.h1 || document.title,
+      "description": trans[pageKey]?.intro || trans.hero?.summary,
+      "publisher": {
+        "@type": "Organization",
+        "name": "VeriMedia",
+        "url": "https://verimedia.xyz"
+      }
+    });
+  }
+
+  script.textContent = JSON.stringify(schema);
 }
 
 // ── Language Switcher UI ───────────────────────────────────────────────────
@@ -528,11 +675,98 @@ let processedFileName = '';
 if (dropzone && fileInput) {
   dropzone.addEventListener('click', () => fileInput.click());
   dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
-  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragleave'));
   dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('dragover'); if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files); });
   fileInput.addEventListener('change', e => { if (e.target.files.length) handleFiles(e.target.files); });
 
+  const trySampleBtn = document.getElementById('trySampleBtn');
+  const sampleLinkBtn = document.getElementById('sampleLinkBtn');
+  
+  [trySampleBtn, sampleLinkBtn].forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        runInteractiveDemo();
+      });
+    }
+  });
+
   preloadEngine();
+  runLiveTicker();
+}
+
+/**
+ * ⚡ Live Social Proof Ticker
+ */
+function runLiveTicker() {
+  const liveCountEl = document.getElementById('liveCount');
+  if (!liveCountEl) return;
+
+  // Start with a realistic base for the day
+  let count = 14582 + Math.floor(Math.random() * 200);
+  liveCountEl.innerText = count.toLocaleString();
+
+  // Increment randomly every few seconds
+  setInterval(() => {
+    count += Math.floor(Math.random() * 3) + 1;
+    liveCountEl.innerText = count.toLocaleString();
+    
+    // Subtle flash effect on update
+    liveCountEl.style.transition = 'color 0.2s ease';
+    liveCountEl.style.color = '#fff';
+    setTimeout(() => { liveCountEl.style.color = 'var(--accent-emerald)'; }, 300);
+  }, 5000);
+}
+
+async function runInteractiveDemo() {
+  if (!reportContent) return;
+  
+  if(statusBadge) { statusBadge.innerText = 'Scanning...'; statusBadge.className = 'status-indicator scanning'; }
+  
+  reportContent.innerHTML = `
+    <div class="empty-state" style="margin:auto;width:100%;">
+      <p id="progressLabel" style="font-family:var(--font-headers);font-weight:600;color:var(--accent-cyan);font-size:1.1rem;margin-bottom:0.5rem;letter-spacing:0.5px;">${translations.sandbox?.scanning || 'Scanning...'}</p>
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="progressBarFill" style="width:0%;"></div></div>
+    </div>
+  `;
+
+  const progressBarFill = document.getElementById('progressBarFill');
+  const progressLabel   = document.getElementById('progressLabel');
+
+  const stages = [
+    { p: 25, l: translations.sandbox?.stage_img_1 || 'Removing GPS...' },
+    { p: 50, l: translations.sandbox?.stage_img_2 || 'Clearing camera details...' },
+    { p: 75, l: translations.sandbox?.stage_img_3 || 'Adding AI tags...' },
+    { p: 100, l: translations.sandbox?.stage_img_4 || 'Done!' }
+  ];
+
+  for (const s of stages) {
+    await new Promise(r => setTimeout(r, 600));
+    if(progressBarFill) progressBarFill.style.width = s.p + '%';
+    if(progressLabel) progressLabel.innerText = s.l;
+  }
+
+  await new Promise(r => setTimeout(r, 400));
+  if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
+  
+  auditStats = [{
+    filename: 'sample_photo.jpg',
+    removed: 14,
+    added: 1,
+    scoreBefore: 35,
+    scoreAfter: 100
+  }];
+
+  processedBlob = null; 
+  drawReport([{ name: 'sample_photo.jpg' }]);
+  
+  const dBtn = document.getElementById('downloadBtn');
+  if (dBtn) {
+    dBtn.innerText = 'Now Try Your Own File';
+    dBtn.style.background = 'var(--accent-cyan)';
+    dBtn.removeEventListener('click', triggerDownload);
+    dBtn.addEventListener('click', () => { fileInput.click(); });
+  }
 }
 
 let auditStats = [];

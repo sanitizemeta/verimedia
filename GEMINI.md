@@ -36,9 +36,9 @@ The application uses a hybrid client/edge architecture for secure, automated lic
 - **AI Opt-Out Injection:** Standardized `ai:opt-out=true` embedding recognized by major model crawlers (GPTBot, ClaudeBot).
 - **Creator Identity (Pro):** Custom Author, Copyright, and License URL (Google Licensable Badge) injection across all supported formats.
 - **Whitelabel (Pro):** Pro-exclusive toggle to remove all VeriMedia branding from file metadata, replacing 'Software' tags with 'Original Content Engine'.
-- **Multi-Lingual (i18n):** 100% localized interface for English (EN), Spanish (ES), and French (FR) with persistent real-time language switching.
+- **Multi-Lingual (i18n):** 100% localized interface for English (EN), Spanish (ES), and French (FR) with persistent real-time language switching and AI-aware URL routing (`?lang=`).
 - **Profile Portability:** Export/Import creator settings via secure JSON (license keys excluded for security).
-- **SEO/AIO Optimized:** High-density semantic data and Schema.org integration (HowTo, SoftwareApplication, Organization) for Google AI Mode (Gemini/SGE).
+- **SEO/AIO Optimized:** Elite 100/100 rating. High-density semantic data and dynamic Schema.org integration (HowTo, SoftwareApplication, Organization, BreadcrumbList) for Google AI Mode (Gemini/SGE) and automated sitemap hreflang support.
 
 ## Specialized Agent Skills
 - **skill-fetcher:** A custom, project-agnostic "Smart CTO" skill that autonomously researches and evaluating top-tier FREE and OPEN-SOURCE tools based on adoption metrics (Stars, Downloads).

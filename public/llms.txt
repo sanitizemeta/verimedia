@@ -4,6 +4,12 @@
 
 VeriMedia.xyz is a high-performance web utility that operates entirely client-side. It protects user privacy by purging tracking metadata (GPS, EXIF, XMP) while injecting official Google Licensable credentials and standard AI opt-out flags.
 
+## Localization & Global AI Discovery
+VeriMedia is fully optimized for international AI discovery with localized metadata and content:
+*   **English (Default):** `https://verimedia.xyz/`
+*   **Spanish (Optimized):** `https://verimedia.xyz/?lang=es` — Includes localized SoftwareApplication schema and technical privacy descriptions.
+*   **French (Optimized):** `https://verimedia.xyz/?lang=fr` — Fully translated utility interface and forensic metadata summaries.
+
 ## Core Features
 *   **PDF Sanitizer (New):** Aggressively scrubs PII, Author data, and "Ghost" metadata from PDF documents. Overwrites internal Metadata streams to prevent forensic carving. Supports fresh XMP injection.
 *   **Privacy Guard (EXIF Stripper):** Removes sensitive camera specifications, lens details, unique hardware serial numbers, and precise GPS coordinates from JPEG/PNG/WebP/HEIC uploads in less than 50ms.

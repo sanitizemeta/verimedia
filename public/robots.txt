@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Sitemap: https://verimedia.xyz/sitemap.xml
+Allow: /ai-access.json
 
 User-agent: Google-CloudVertexBot
 Allow: /
@@ -14,10 +15,12 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 Allow: /llms.txt
+Allow: /ai-access.json
 
 User-agent: ClaudeBot
 Allow: /
 Allow: /llms.txt
+Allow: /ai-access.json
 
 User-agent: PerplexityBot
 Allow: /

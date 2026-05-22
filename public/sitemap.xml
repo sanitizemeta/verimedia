@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://verimedia.xyz/</loc>
-<lastmod>2026-05-21</lastmod>
-<priority>1.0</priority>
-</url>
-<url>
-<loc>https://verimedia.xyz/privacy.html</loc>
-<lastmod>2026-05-21</lastmod>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://verimedia.xyz/terms.html</loc>
-<lastmod>2026-05-21</lastmod>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>https://verimedia.xyz/refund.html</loc>
-<lastmod>2026-05-21</lastmod>
-<priority>0.8</priority>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Home Page -->
+  <url>
+    <loc>https://verimedia.xyz/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://verimedia.xyz/?lang=es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/" />
+    <lastmod>2026-05-22</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://verimedia.xyz/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://verimedia.xyz/privacy.html?lang=es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/privacy.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/privacy.html" />
+    <lastmod>2026-05-22</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://verimedia.xyz/terms.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/terms.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://verimedia.xyz/terms.html?lang=es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/terms.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/terms.html" />
+    <lastmod>2026-05-22</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Refund Policy -->
+  <url>
+    <loc>https://verimedia.xyz/refund.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/refund.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://verimedia.xyz/refund.html?lang=es" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/refund.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/refund.html" />
+    <lastmod>2026-05-22</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>
