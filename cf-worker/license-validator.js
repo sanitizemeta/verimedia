@@ -159,10 +159,18 @@ async function handleGetStats(env, corsHeaders) {
 // ─────────────────────────────────────────────────────────────────────────────
 // /increment-stats — POST to increment global count
 // ─────────────────────────────────────────────────────────────────────────────
-async function handleIncrementStats(env, corsHeaders) {
+async function handleIncrementStats(request, env, corsHeaders) {
   try {
+    let amount = 1;
+    try {
+      const body = await request.json();
+      if (body.amount && !isNaN(body.amount)) {
+        amount = Math.max(1, parseInt(body.amount, 10));
+      }
+    } catch { /* use default 1 */ }
+
     const current = await env.LICENSE_KEYS.get('global_sanitized_count');
-    const next = (parseInt(current || '14582', 10) + 1).toString();
+    const next = (parseInt(current || '14582', 10) + amount).toString();
     await env.LICENSE_KEYS.put('global_sanitized_count', next);
     return json({ success: true, count: parseInt(next, 10) }, 200, corsHeaders);
   } catch {

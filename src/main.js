@@ -54,9 +54,9 @@ async function fetchGlobalStats() {
   } catch(e) { runLiveTicker(); }
 }
 
-async function incrementGlobalStats() {
+async function incrementGlobalStats(amount = 1) {
   // 1. Immediate local feedback
-  liveStrippedCount += 1;
+  liveStrippedCount += amount;
   const el = document.getElementById('liveCount');
   if (el) {
     el.innerText = liveStrippedCount.toLocaleString();
@@ -71,7 +71,11 @@ async function incrementGlobalStats() {
 
   // 2. Persist to Cloudflare
   try {
-    const res = await fetch(INCREMENT_STATS_URL, { method: 'POST' });
+    const res = await fetch(INCREMENT_STATS_URL, { 
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount })
+    });
     const data = await res.json();
     if (data.count && data.count > liveStrippedCount) {
       liveStrippedCount = data.count;
@@ -820,7 +824,7 @@ async function runInteractiveDemo() {
 
   processedBlob = null; 
   drawReport([{ name: 'demo_iphone_photo.jpg' }]);
-  incrementGlobalStats();
+  incrementGlobalStats(1);
   
   const dBtn = document.getElementById('downloadBtn');
   if (dBtn) {
@@ -915,7 +919,7 @@ async function handleSingleFileUpload(file) {
     processedBlob = outputBlob;
     processedBlob._url = URL.createObjectURL(outputBlob);
     drawReport([file]);
-    incrementGlobalStats();
+    incrementGlobalStats(1);
   } catch (error) {
     if(reportContent) reportContent.innerHTML = buildErrorItem('Engine error.');
   }
@@ -962,7 +966,7 @@ async function processBulkFiles(files) {
   
   if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
   drawReport(files);
-  incrementGlobalStats();
+  incrementGlobalStats(successCount);
 }
 
 function getFileCategory(file) {
