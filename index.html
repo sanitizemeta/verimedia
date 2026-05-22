@@ -101,178 +101,128 @@
   </header>
 
   <main>
-    <!-- Bento Dashboard Layout (Above the Fold) -->
-    <section class="bento-dashboard">
+    <!-- 1. Hero Section (Ultra-focused) -->
+    <section class="hero-section" style="max-width: 1000px; margin: 3.5rem auto 3rem auto; text-align: center; padding: 0 1.5rem;">
+      <h1 class="hero-title" data-i18n="hero.title" style="font-size: clamp(2.3rem, 5.5vw, 3.8rem); line-height: 1.1; letter-spacing: -1.5px; margin: 0 0 1.5rem 0;">Stop AI Scrapers from Stealing Your Work.</h1>
       
-      <!-- Left Column: Hero & Compact Features -->
-      <div class="bento-left">
-        <h1 class="hero-title" data-i18n="hero.title" style="text-align: left; font-size: 3.2rem; line-height: 1.1; letter-spacing: -1.5px; margin: 0 0 0.8rem 0;">Protect Your Photos & PDFs from AI Scrapers</h1>
+      <article class="aeo-summary" aria-label="Tool Summary Box">
+        <p data-i18n="hero.summary">VeriMedia is a secure, 100% browser-based utility that strips hidden tracking data and injects AI opt-out tags in under 100ms. Your files never leave your device, ensuring your privacy remains absolute while your work stays professionally credited.</p>
+      </article>
+    </section>
+
+    <!-- 2. Interactive Sandbox (The Primary Focus) -->
+    <section id="calculator-section" class="interactive-sandbox" style="max-width: 1200px; margin: 0 auto 5.5rem auto; padding: 0 1.5rem;">
+      <div class="sandbox-grid">
         
-        <p class="hero-lead" data-i18n="hero.summary" style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.5; margin: 0 0 1.5rem 0; max-width: 95%;">
-          VeriMedia is a secure, 100% browser-based utility designed to protect digital privacy. It surgically removes invasive GPS coordinates, hardware serial numbers, and forensic EXIF metadata from photos and PDFs. Simultaneously, it injects standardized AI opt-out tags and Google Licensable credentials, ensuring your work remains private and professionally credited without ever leaving your local device.
-        </p>
-
-        <!-- Compact Features Grid (Simpllo-inspired) -->
-        <div class="features-grid compact-features">
-          <!-- Feature 1 -->
-          <article class="feature-card compact-card">
-            <div class="feature-icon-wrap" style="color: var(--accent-cyan);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="compact-text">
-              <h3 style="display:flex; align-items:center; gap:6px;">
-                <span data-i18n="kb.privacy_title">Neural Privacy Shield</span>
-                <div class="info-icon-wrapper" tabindex="0">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                  <div class="custom-tooltip" data-i18n="kb.privacy_desc">Instantly strips invasive GPS coordinates, camera serial numbers, and device fingerprints from every image you share.</div>
-                </div>
-              </h3>
-              <p data-i18n="kb.privacy_short">Strips GPS & camera tracking data.</p>
-            </div>
-          </article>
-
-          <!-- Feature 2 -->
-          <article class="feature-card compact-card">
-            <div class="feature-icon-wrap" style="color: var(--accent-emerald);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-            </div>
-            <div class="compact-text">
-              <h3 style="display:flex; align-items:center; gap:6px;">
-                <span data-i18n="kb.ai_title">AI Training Opt-Out</span>
-                <div class="info-icon-wrapper" tabindex="0">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                  <div class="custom-tooltip" data-i18n="kb.ai_desc">Embeds 'ai:opt-out=true' tags recognized by major crawlers to protect your work from being used in AI training datasets.</div>
-                </div>
-              </h3>
-              <p data-i18n="kb.ai_short">Blocks AI scrapers via metadata.</p>
-            </div>
-          </article>
-
-          <!-- Feature 3 -->
-          <article class="feature-card compact-card">
-            <div class="feature-icon-wrap" style="color: var(--accent-rose);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-            </div>
-            <div class="compact-text">
-              <h3 style="display:flex; align-items:center; gap:6px;">
-                <span data-i18n="kb.pdf_title">Forensic PDF Scrubbing</span>
-                <div class="info-icon-wrapper" tabindex="0">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                  <div class="custom-tooltip" data-i18n="kb.pdf_desc">Physically overwrites hidden data streams in PDFs to ensure sensitive author info is permanently erased and unrecoverable.</div>
-                </div>
-              </h3>
-              <p data-i18n="kb.pdf_short">Deeply sanitizes PDF streams.</p>
-            </div>
-          </article>
-
-          <!-- Feature 4 (Pro) -->
-          <article class="feature-card compact-card pro-feature-highlight">
-            <div class="feature-icon-wrap" style="color: var(--accent-cyan);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-            </div>
-            <div class="compact-text">
-              <h3 style="display:flex; align-items:center; gap:6px;">
-                <span data-i18n="kb.identity_title">Creator Identity (Pro)</span>
-                <div class="info-icon-wrapper" tabindex="0">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                  <div class="custom-tooltip" data-i18n="kb.identity_desc">Embed your official Artist name and Copyright URL into every file to ensure you are always credited for your original work.</div>
-                </div>
-                <div class="pro-tag compact-tag">PRO</div>
-              </h3>
-              <p data-i18n="kb.identity_short">Injects your Author & Copyright.</p>
-            </div>
-          </article>
-
-          <!-- Feature 5 (Pro) -->
-          <article class="feature-card compact-card pro-feature-highlight">
-            <div class="feature-icon-wrap" style="color: var(--accent-emerald);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            </div>
-            <div class="compact-text">
-              <h3 style="display:flex; align-items:center; gap:6px;">
-                <span data-i18n="kb.google_title">Google Licensable Badge</span>
-                <div class="info-icon-wrapper" tabindex="0">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                  <div class="custom-tooltip" data-i18n="kb.google_desc">Triggers the 'Licensable' badge in Google Images by embedding your portfolio link directly into your photo metadata.</div>
-                </div>
-                <div class="pro-tag compact-tag">PRO</div>
-              </h3>
-              <p data-i18n="kb.google_short">Enables 'Licensable' image badges.</p>
-            </div>
-          </article>
-
-          <!-- Feature 6 (Pro) -->
-          <article class="feature-card compact-card pro-feature-highlight">
-            <div class="feature-icon-wrap" style="color: var(--accent-rose);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
-            <div class="compact-text">
-              <h3 style="display:flex; align-items:center; gap:6px;">
-                <span data-i18n="kb.whitelabel_title">Whitelabel Engine (Pro)</span>
-                <div class="info-icon-wrapper" tabindex="0">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                  <div class="custom-tooltip" data-i18n="kb.whitelabel_desc">Remove all VeriMedia references from your file metadata, replacing 'Software' tags with 'Original Content Engine'.</div>
-                </div>
-                <div class="pro-tag compact-tag">PRO</div>
-              </h3>
-              <p data-i18n="kb.whitelabel_short">Removes 'VeriMedia' branding.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <!-- Right Column: Interactive Sandbox -->
-      <div class="bento-right">
-        <div class="interactive-sandbox" style="margin: 0; padding: 0;">
-          <div class="sandbox-grid" style="grid-template-columns: 1fr; gap: 1.5rem;">
-            
-            <!-- Drag & Drop Container -->
-            <div class="card glass-card upload-container" id="dropzone" role="button" aria-label="Upload drag and drop area for media" tabindex="0" style="min-height: 180px;">
-              <input type="file" id="fileInput" accept="image/*,application/pdf" class="hidden-input" aria-hidden="true">
-              <div class="upload-icon-pulse" style="width: 50px; height: 50px; margin-bottom: 0.8rem;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-                </svg>
-              </div>
-              <h3 data-i18n="sandbox.drop_title" style="font-size: 1.1rem;">Drag & Drop your media file</h3>
-              <p data-i18n="sandbox.drop_subtitle" style="font-size: 0.8rem;">or click to browse local files (max 25MB)</p>
-              <span class="file-spec-hint" style="margin-top: 0.8rem;">Supports JPEG · PNG · WebP · HEIC/HEIF · PDF</span>
-              
-              <!-- Sample Trigger Link -->
-              <p class="sample-trigger-wrap" style="margin-top: 1.2rem; font-size: 0.75rem; opacity: 0.8;">
-                <button class="link-btn" id="sampleLinkBtn" data-i18n="sandbox.sample_link_text">Don't have a file handy? Try our metadata-heavy sample photo.</button>
-              </p>
-            </div>
-
-            <!-- Real-Time Processing Report Log -->
-            <div class="card glass-card report-container">
-              <div class="report-header">
-                <h3 style="display: flex; align-items: center; gap: 8px;">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-cyan);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                  <span data-i18n="sandbox.audit_title">Privacy & Copyright Audit</span>
-                </h3>
-                <span class="status-indicator idle" id="statusBadge">Idle</span>
-              </div>
-              
-              <div class="report-content" id="reportContent">
-                <div class="empty-state">
-                  <p data-i18n="sandbox.audit_empty">Upload a photo to strip tracking details and embed copyright and AI opt-out tags.</p>
-                  <button class="link-btn" id="trySampleBtn" style="margin-top: 0.8rem; font-size: 0.85rem;" data-i18n="sandbox.try_sample">Try Sample File</button>
-                </div>
-              </div>
-            </div>
-
+        <!-- Drag & Drop Container -->
+        <div class="card glass-card upload-container" id="dropzone" role="button" aria-label="Upload drag and drop area for media" tabindex="0">
+          <input type="file" id="fileInput" accept="image/*,application/pdf" class="hidden-input" aria-hidden="true">
+          <div class="upload-icon-pulse">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+            </svg>
           </div>
+          <h3 data-i18n="sandbox.drop_title">Drag & Drop your media file</h3>
+          <p data-i18n="sandbox.drop_subtitle">or click to browse local files (max 25MB)</p>
+          <span class="file-spec-hint">Supports JPEG · PNG · WebP · HEIC/HEIF · PDF</span>
+          
+          <!-- Sample Action Component -->
+          <button type="button" id="sampleFileBtn" style="margin-top: 15px; background: rgba(6, 182, 212, 0.1); border: 1px dashed var(--accent-cyan); color: #fff; padding: 8px 16px; border-radius: 8px; font-size: 0.78rem; cursor: pointer; transition: all 0.2s; font-family: var(--font-body); display: flex; align-items: center; gap: 8px; margin-left: auto; margin-right: auto;">
+            <span>💡 No file ready? Try our metadata-heavy sample photo</span>
+          </button>
+        </div>
 
-          <!-- Social Proof Ticker -->
-          <div class="social-proof-ticker" id="socialProofTicker" style="margin-top: 2rem; text-align: center; font-size: 0.85rem; color: var(--text-secondary); opacity: 0.9;">
-            <p data-i18n="sandbox.social_proof_text">⚡ <span id="liveCount">...</span> images sanitized locally today. Zero bytes uploaded to the cloud.</p>
+        <!-- Real-Time Processing Report Log -->
+        <div class="card glass-card report-container">
+          <div class="report-header">
+            <h3 style="display: flex; align-items: center; gap: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-cyan);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span data-i18n="sandbox.audit_title">Privacy & Copyright Audit</span>
+            </h3>
+            <span class="status-indicator idle" id="statusBadge">Idle</span>
+          </div>
+          
+          <div class="report-content" id="reportContent">
+            <div class="empty-state">
+              <p data-i18n="sandbox.audit_empty">Upload a photo to strip tracking details and embed copyright and AI opt-out tags.</p>
+              <button class="link-btn" id="trySampleBtn" style="margin-top: 0.8rem; font-size: 0.85rem;" data-i18n="sandbox.try_sample">Try Sample File</button>
+            </div>
           </div>
         </div>
       </div>
-        </div>
-      </div>
 
+      <!-- Social Proof Ticker -->
+      <div class="social-proof-ticker" id="socialProofTicker" style="margin-top: 2rem; text-align: center; font-size: 0.85rem; color: var(--text-secondary); opacity: 0.9;">
+        <p data-i18n="sandbox.social_proof_text">⚡ <span id="liveCount">...</span> images sanitized locally today. Zero bytes uploaded to the cloud.</p>
+      </div>
+    </section>
+
+    <!-- 3. Features & Proof Section (Secondary Focus) -->
+    <section class="semantic-kb-section" style="max-width: 1200px; margin: 0 auto 6rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" data-i18n="kb.title" style="text-align: center; margin-bottom: 3.5rem;">Uncompromising Privacy & Creator Protection</h2>
+      
+      <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem;">
+        <!-- Feature 1 -->
+        <article class="feature-card glass-card">
+          <div class="feature-icon-wrap" style="color: var(--accent-cyan);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 style="display:flex; align-items:center; gap:8px;">
+            <span data-i18n="kb.privacy_title">Neural Privacy Shield</span>
+            <div class="info-icon-wrapper" tabindex="0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div class="custom-tooltip" data-i18n="kb.privacy_desc">Instantly remove invasive GPS coordinates, camera serial numbers, and device fingerprints before you share.</div>
+            </div>
+          </h3>
+          <p data-i18n="kb.privacy_short">Strip GPS & hidden tracking data.</p>
+        </article>
+
+        <!-- Feature 2 -->
+        <article class="feature-card glass-card">
+          <div class="feature-icon-wrap" style="color: var(--accent-emerald);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+          </div>
+          <h3 style="display:flex; align-items:center; gap:8px;">
+            <span data-i18n="kb.ai_title">AI Training Opt-Out</span>
+            <div class="info-icon-wrapper" tabindex="0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div class="custom-tooltip" data-i18n="kb.ai_desc">Embeds standardized 'ai:opt-out=true' tags to signal to AI crawlers that your work is off-limits for model training.</div>
+            </div>
+          </h3>
+          <p data-i18n="kb.ai_short">Block AI scrapers with 'ai:opt-out' tags.</p>
+        </article>
+
+        <!-- Feature 3 -->
+        <article class="feature-card glass-card">
+          <div class="feature-icon-wrap" style="color: var(--accent-rose);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <h3 style="display:flex; align-items:center; gap:8px;">
+            <span data-i18n="kb.pdf_title">Forensic PDF Scrubbing</span>
+            <div class="info-icon-wrapper" tabindex="0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div class="custom-tooltip" data-i18n="kb.pdf_desc">Physically overwrites hidden document metadata streams to ensure sensitive author info is permanently unrecoverable.</div>
+            </div>
+          </h3>
+          <p data-i18n="kb.pdf_short">Deep-clean private PDF metadata.</p>
+        </article>
+
+        <!-- Feature 4 (Pro) -->
+        <article class="feature-card glass-card pro-feature-highlight">
+          <div class="feature-icon-wrap" style="color: var(--accent-cyan);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <h3 style="display:flex; align-items:center; gap:8px;">
+            <span data-i18n="kb.identity_title">Creator Identity (Pro)</span>
+            <div class="info-icon-wrapper" tabindex="0">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="info-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div class="custom-tooltip" data-i18n="kb.identity_desc">Embed your official Artist name and Copyright URL into every file to ensure you are always credited for your original work.</div>
+            </div>
+            <div class="pro-tag">PRO</div>
+          </h3>
+          <p data-i18n="kb.identity_short">Inject your Author & Copyright.</p>
+        </article>
+      </div>
     </section>
 
     <!-- Pricing / Conversion Table Section -->
@@ -293,101 +243,65 @@
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.free_f3">Add AI training protection</span></li>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-rose)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span data-i18n="pricing.free_f4">1 file at a time</span></li>
           </ul>
-          <button class="pricing-btn secondary-btn" data-i18n="pricing.launch_free">Launch Free Tool</button>
+          <button class="pricing-btn secondary-btn" data-i18n="pricing.launch_free">Try Free Sandbox</button>
         </div>
 
         <!-- Pro Plan -->
         <div class="card glass-card price-card popular-card">
           <div class="popular-badge" data-i18n="pricing.popular_badge">LIFETIME DEAL</div>
           <h3 data-i18n="pricing.pro_title">Creator Pro</h3>
-          <div class="price"><span data-i18n="pricing.pro_price">$19</span> <span class="period" data-i18n="pricing.pro_period">one-time</span></div>
-          <p class="price-desc" data-i18n="pricing.pro_desc">Pay once. Use forever. No subscriptions.</p>
+          <div class="price">$19 <span class="period" data-i18n="pricing.pro_period">one-time</span></div>
+          <p class="price-desc" data-i18n="pricing.pro_desc">Pay once. Use forever. 100% Private.</p>
           <ul class="features-list">
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f1">Everything in Free Tier</span></li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f2">Bulk Uploads (Up to 100 files)</span></li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f3">Custom ownership signatures</span></li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f4">Google "Licensable" badge support</span></li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f5">Works on up to 3 devices</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f1">Everything in Free Tier</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f2">Bulk Uploads (Up to 100 files)</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f3">Custom ownership signatures</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f4">Google "Licensable" badge support</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="pricing.pro_f5">Works on up to 3 devices</span></li>
           </ul>
-          <button class="pricing-btn primary-btn paddle-checkout-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:6px;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span data-i18n="pricing.buy_now">Buy Now - $19</span>
-          </button>
-          <p class="already-have-key-link"><span data-i18n="pricing.already_bought">Already purchased?</span> <button class="link-btn" id="activateKeyBtn" data-i18n="pricing.activate">Enter your license key</button></p>
+          <button class="pricing-btn primary-btn paddle-checkout-btn" data-i18n="pricing.buy_now">Buy Now - $19</button>
+          <button class="link-btn already-have-key-link" id="activateManualBtn" data-i18n="pricing.already_bought">Already purchased?</button>
         </div>
 
       </div>
     </section>
 
-    <!-- AEO Question-Led FAQ Section -->
+    <!-- FAQ Section -->
     <section id="faq-section" class="faq-section">
-      <h2 class="section-title" data-i18n="faq.title">Frequently Asked Questions</h2>
-      
+      <h2 class="section-title" data-i18n="faq.title" style="text-align: center;">Frequently Asked Questions</h2>
       <div class="faq-accordion">
-        
         <div class="faq-item">
-          <h3 style="display: flex; align-items: flex-start; gap: 8px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span data-i18n="faq.q1">Where do I find my Creator Pro license key?</span>
-          </h3>
-          <p data-i18n="faq.a1">
-            After purchasing, check your email for the Paddle receipt. Your license key is the <strong>Transaction ID</strong> found in the receipt (it usually starts with <code>txn_</code>). Just copy and paste that into the Activation menu if it didn't activate automatically!
-          </p>
+          <h3 data-i18n="faq.q1">Where do I find my Creator Pro license key?</h3>
+          <p data-i18n="faq.a1">After purchasing, check your email for the Paddle receipt. Your license key is the Transaction ID found in the receipt (it usually starts with txn_). Just copy and paste that into the Activation menu if it didn't activate automatically!</p>
         </div>
-
         <div class="faq-item">
-          <h3 style="display: flex; align-items: flex-start; gap: 8px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span data-i18n="faq.q2">How do I block AI web crawlers from using my images?</span>
-          </h3>
-          <p data-i18n="faq.a2">
-            VeriMedia embeds a standard "AI Opt-Out" tag (<code>ai:opt-out = true</code>) directly into your image file. This signals to major AI web crawlers (like GPTBot and ClaudeBot) that your work is off-limits for AI model training.
-          </p>
+          <h3 data-i18n="faq.q2">How do I block AI web crawlers from using my images?</h3>
+          <p data-i18n="faq.a2">VeriMedia embeds a standard "AI Opt-Out" tag (ai:opt-out = true) directly into your image file. This signals to major AI web crawlers (like GPTBot and ClaudeBot) that your work is off-limits for AI model training.</p>
         </div>
-
         <div class="faq-item">
-          <h3 style="display: flex; align-items: flex-start; gap: 8px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span data-i18n="faq.q3">How do I add copyright info and licensable badges to my photos?</span>
-          </h3>
-          <p data-i18n="faq.a3">
-            By embedding standard creator copyright links directly into the image files, search engines like Google can identify you as the author and display a "Licensable" badge next to your images in search results.
-          </p>
+          <h3 data-i18n="faq.q3">How do I add copyright info and licensable badges to my photos?</h3>
+          <p data-i18n="faq.a3">By embedding standard creator copyright links directly into the image files, search engines like Google can identify you as the author and display a "Licensable" badge next to your images in search results.</p>
         </div>
-
         <div class="faq-item">
-          <h3 style="display: flex; align-items: flex-start; gap: 8px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span data-i18n="faq.q4">Why should I strip location metadata before uploading photos?</span>
-          </h3>
-          <p data-i18n="faq.a4">
-            Hidden metadata inside raw photos contains your precise GPS coordinates, camera details, and dates. Stripping this data protects your location privacy and removes identifiers that bots can scrape.
-          </p>
+          <h3 data-i18n="faq.q4">Why should I strip location metadata before uploading photos?</h3>
+          <p data-i18n="faq.a4">Hidden metadata inside raw photos contains your precise GPS coordinates, camera details, and dates. Stripping this data protects your location privacy and removes identifiers that bots can scrape.</p>
         </div>
-
       </div>
     </section>
   </main>
 
-  <!-- Footer Section -->
-  <footer>
-    <div class="footer-content">
-      <p data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz. Processed 100% locally in your browser. No files are stored or uploaded.</p>
-      <div class="footer-links">
-        <a href="/privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy</a>
-        <a href="/terms.html" class="footer-link" data-i18n="footer.terms">Terms</a>
-        <a href="/refund.html" class="footer-link" data-i18n="footer.refunds">Refunds</a>
-      </div>
-    </div>
-  </footer>
+  <!-- Localized JSON-LD Placeholder -->
+  <script type="application/ld+json" id="localized-schema"></script>
 
-  <!-- Lemon Squeezy Pro License Modal (3 states: buy / activate / success) -->
-  <div class="modal-overlay" id="paymentModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <!-- Overlay Modals -->
+  
+  <!-- 1. Paddle Checkout / License Modal -->
+  <div class="modal-overlay" id="checkoutModal">
     <div class="modal-card glass-card">
-      <button class="close-modal" id="closeModal" aria-label="Close modal">&times;</button>
-
-      <!-- View 1: Buy -->
-      <div id="modalViewBuy">
+      <button class="close-modal" id="closeCheckoutBtn">&times;</button>
+      
+      <!-- View 1: Buy Now -->
+      <div id="checkoutViewBuy">
         <div class="modal-icon-wrap">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
@@ -403,7 +317,6 @@
             <strong>$19.00</strong>
           </div>
         </div>
-        <!-- TODO: Replace href with your Paddle checkout URL from Paddle Dashboard → Products → Share → Checkout Link -->
         <button class="pricing-btn primary-btn paddle-checkout-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:6px;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           <span data-i18n="checkout.buy_btn">Buy Now — $19</span>
@@ -413,7 +326,7 @@
       </div>
 
       <!-- View 2: Activate Key -->
-      <div id="modalViewActivate" style="display:none;">
+      <div id="checkoutViewActivate" style="display:none;">
         <div class="modal-icon-wrap">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
         </div>
@@ -428,7 +341,7 @@
       </div>
 
       <!-- View 3: Success -->
-      <div id="modalViewSuccess" style="display:none;">
+      <div id="checkoutViewSuccess" style="display:none;">
         <div class="modal-icon-wrap success-icon">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
@@ -445,11 +358,11 @@
     </div>
   </div>
 
-  <!-- Creator Profile Slide-In Panel -->
-  <div class="modal-overlay profile-panel-overlay" id="profilePanel" role="dialog" aria-modal="true" aria-label="Creator Profile Settings" aria-hidden="true">
+  <!-- 2. Creator Profile Panel -->
+  <div class="modal-overlay profile-panel-overlay" id="profilePanel">
     <div class="modal-card glass-card profile-panel-card">
-      <button class="close-modal" id="profileCloseBtn" aria-label="Close profile panel">&times;</button>
-
+      <button class="close-modal" id="profileCloseBtn">&times;</button>
+      
       <div class="modal-icon-wrap">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
       </div>
@@ -468,142 +381,110 @@
           </div>
 
           <div class="profile-field">
-            <label for="profileName" class="profile-label">
-              <span style="display: flex; align-items: center;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-                <span data-i18n="profile.name_label">Creator Name</span> <span style="color:var(--text-secondary);font-weight:400;margin-left:5px;">(Artist EXIF tag)</span>
-              </span>
-              <span class="info-trigger" onclick="event.preventDefault(); event.stopPropagation();">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                <span class="tooltip-content" data-i18n="profile.tooltip_artist">This becomes the Artist field embedded in your images. Pro users get a "VeriMedia Verified Creator" prefix.</span>
-              </span>
+            <label class="profile-label">
+              <span data-i18n="profile.name_label">Creator Name</span>
+              <div class="info-trigger">?
+                <div class="tooltip-content" data-i18n="profile.tooltip_artist">This becomes the Artist field embedded in your images. Pro users get a "VeriMedia Verified Creator" prefix.</div>
+              </div>
             </label>
-            <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" maxlength="120" spellcheck="false" />
+            <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" />
           </div>
 
           <div class="profile-field">
-            <label for="profileCopyright" class="profile-label">
-              <span style="display: flex; align-items: center;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="12" r="10"/><path d="M14.83 14.83a4 4 0 1 1 0-5.66"/></svg>
-                <span data-i18n="profile.copy_label">Copyright String</span> <span style="color:var(--text-secondary);font-weight:400;margin-left:5px;">(Copyright EXIF tag)</span>
-              </span>
-              <span class="info-trigger" onclick="event.preventDefault(); event.stopPropagation();">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                <span class="tooltip-content" data-i18n="profile.tooltip_copyright">Injected as the Copyright EXIF/XMP field. Used by Getty, Shutterstock, and news publishers to trace image ownership.</span>
-              </span>
+            <label class="profile-label">
+              <span data-i18n="profile.copy_label">Copyright String</span>
+              <div class="info-trigger">?
+                <div class="tooltip-content" data-i18n="profile.tooltip_copyright">Injected as the Copyright EXIF/XMP field. Used by Getty, Shutterstock, and news publishers to trace image ownership.</div>
+              </div>
             </label>
-            <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith. All rights reserved." maxlength="200" spellcheck="false" />
+            <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith" />
           </div>
 
           <div class="profile-field">
-            <label for="profileUrl" class="profile-label">
-              <span style="display: flex; align-items: center;">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                <span data-i18n="profile.url_label">License / Portfolio URL</span> <span style="color:var(--text-secondary);font-weight:400;margin-left:5px;">(WebStatement tag)</span>
-              </span>
-              <span class="info-trigger" onclick="event.preventDefault(); event.stopPropagation();">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                <span class="tooltip-content" data-i18n="profile.tooltip_webstatement">Your website or licensing page. Embedded as the WebStatement XMP tag — this triggers Google Images' "Licensable" badge on your photos.</span>
-              </span>
+            <label class="profile-label">
+              <span data-i18n="profile.url_label">License / Portfolio URL</span>
+              <div class="info-trigger">?
+                <div class="tooltip-content" data-i18n="profile.tooltip_webstatement">Your website or licensing page. Embedded as the WebStatement XMP tag — this triggers Google Images' "Licensable" badge on your photos.</div>
+              </div>
             </label>
-            <input type="url" id="profileUrl" class="license-input" placeholder="e.g. https://janesmith.com/license" maxlength="300" spellcheck="false" />
-          </div>
-
-          <!-- Settings Toggles (Side-by-Side) -->
-          <div style="display: flex; gap: 1.2rem; margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
-            <!-- Free-tier accessible Opt-Out -->
-            <div class="profile-field" style="margin-bottom: 0; flex: 1;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <input type="checkbox" id="profileAiOnly" checked style="accent-color: var(--accent-cyan); width: 17px; height: 17px; cursor: pointer; flex-shrink: 0;">
-                <label for="profileAiOnly" style="font-size: 0.85rem; color: var(--text-primary); cursor: pointer; font-weight: 500; display: flex; align-items: center; width: 100%;">
-                  <span data-i18n="profile.ai_label">AI Opt-Out</span>
-                  <span class="info-trigger" onclick="event.preventDefault(); event.stopPropagation();">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                    <span class="tooltip-content" data-i18n="profile.tooltip_ai">Standardized metadata signal ("ai:opt-out=true") tells AI crawlers that your media is restricted from training datasets.</span>
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Pro-only Whitelabel Toggle -->
-            <div class="profile-field pro-only-feature" id="profileWhitelabelWrap" style="margin-bottom: 0; flex: 1; display: none;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <input type="checkbox" id="profileWhitelabel" style="accent-color: var(--accent-emerald); width: 17px; height: 17px; cursor: pointer; flex-shrink: 0;">
-                <label for="profileWhitelabel" style="font-size: 0.85rem; color: var(--text-primary); cursor: pointer; font-weight: 500; display: flex; align-items: center; width: 100%;">
-                  <span data-i18n="profile.white_label">Whitelabel</span>
-                  <span class="info-trigger" onclick="event.preventDefault(); event.stopPropagation();">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                    <span class="tooltip-content" data-i18n="profile.tooltip_whitelabel">Remove all "VeriMedia" references from embedded metadata for a 100% clean, professional footprint.</span>
-                  </span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Profile Portability (Export/Import) -->
-          <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.02); border: 1px dashed var(--border-color); border-radius: 8px;">
-            <div style="flex: 1;">
-              <p style="font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Profile Portability</p>
-              <div style="display: flex; gap: 0.5rem;">
-                <button type="button" id="exportProfileBtn" class="pricing-btn secondary-btn" style="width: auto; padding: 0.4rem 0.8rem; font-size: 0.75rem; flex: 1;">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export
-                </button>
-                <button type="button" id="importProfileBtn" class="pricing-btn secondary-btn" style="width: auto; padding: 0.4rem 0.8rem; font-size: 0.75rem; flex: 1;">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Import
-                </button>
-                <input type="file" id="importProfileInput" accept=".json" style="display: none;">
-              </div>
-            </div>
+            <input type="url" id="profileUrl" class="license-input" placeholder="e.g. https://myportfolio.com/license" />
           </div>
         </div>
 
-        <button class="pricing-btn primary-btn" id="profileSaveBtn" style="width:100%;margin-top:1.2rem;">Save Profile</button>
+        <div class="profile-field">
+          <label class="profile-label">
+            <span data-i18n="profile.ai_label">AI Opt-Out</span>
+            <div class="info-trigger">?
+              <div class="tooltip-content" data-i18n="profile.tooltip_ai">Standardized metadata signal ("ai:opt-out=true") tells AI crawlers that your media is restricted from training datasets.</div>
+            </div>
+          </label>
+          <div style="display:flex; align-items:center; gap:12px; margin-top:4px;">
+            <input type="checkbox" id="profileAiOptOut" checked style="width:18px; height:18px; accent-color:var(--accent-cyan); cursor:pointer;" />
+            <span style="font-size:0.85rem; color:var(--text-secondary);">Inject 'ai:opt-out=true' header</span>
+          </div>
+        </div>
+
+        <div class="profile-field">
+          <label class="profile-label">
+            <span data-i18n="profile.white_label">Whitelabel</span>
+            <div class="info-trigger">?
+              <div class="tooltip-content" data-i18n="profile.tooltip_whitelabel">Remove all "VeriMedia" references from embedded metadata for a 100% clean, professional footprint.</div>
+            </div>
+          </label>
+          <div style="display:flex; align-items:center; gap:12px; margin-top:4px;">
+            <input type="checkbox" id="profileWhitelabel" style="width:18px; height:18px; accent-color:var(--accent-cyan); cursor:pointer;" />
+            <span style="font-size:0.85rem; color:var(--text-secondary);">Remove VeriMedia branding</span>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:2rem;">
+          <button class="pricing-btn secondary-btn" id="profileExportBtn" type="button" data-i18n="profile.export">Export</button>
+          <button class="pricing-btn secondary-btn" id="profileImportBtn" type="button" data-i18n="profile.import">Import</button>
+        </div>
+        <button class="pricing-btn primary-btn" id="profileSaveBtn" style="margin-top:1rem; width:100%;" data-i18n="profile.save">Save Profile</button>
+        <p class="modal-footnote" style="margin-top:1rem;" data-i18n="profile.footnote">Profile is stored in your browser's local storage. Never uploaded.</p>
       </form>
-
-      <!-- Active Key Display (Pro Only) -->
-      <div id="activeKeyDisplay" style="display:none; margin-top: 1.5rem; padding: 1rem; background: rgba(6, 182, 212, 0.05); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: 8px;">
-        <p style="font-size: 0.75rem; color: var(--accent-cyan); margin-bottom: 0.4rem; font-weight: 600; text-transform: uppercase;">Creator Pro Active Key</p>
-        <div style="display: flex; gap: 0.5rem;">
-          <div style="position: relative; flex: 1;">
-            <input type="password" id="profileKeyInput" readonly class="license-input" style="padding: 0.5rem; padding-right: 2.5rem; color: var(--text-secondary); cursor: text;" />
-            <button type="button" id="toggleKeyVisibility" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--accent-cyan); cursor: pointer; opacity: 0.7; padding: 4px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" id="eyeIconOpen"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" id="eyeIconClosed" style="display: none;"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.52 13.16 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
-            </button>
-          </div>
-          <button type="button" id="copyKeyBtn" class="pricing-btn secondary-btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem;">Copy</button>
-        </div>
-      </div>
-      <p class="modal-footnote" style="margin-top:0.75rem;">Profile is stored in your browser's local storage. Never uploaded.</p>
     </div>
   </div>
 
-  <!-- Audit Details Panel -->
-  <div class="modal-overlay profile-panel-overlay" id="auditDetailsPanel" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-card glass-card profile-panel-card" style="max-width:650px;">
-      <button class="close-modal" id="closeAuditPanel" aria-label="Close modal">&times;</button>
-      <h3 style="margin-bottom: 1.5rem; color: var(--accent-emerald); display: flex; align-items: center; gap: 8px;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Audit Report
-      </h3>
-      <div style="overflow-x: auto; width: 100%;">
+  <!-- 3. Audit Details Panel -->
+  <div class="modal-overlay profile-panel-overlay" id="auditDetailsPanel">
+    <div class="modal-card glass-card profile-panel-card" style="max-width: 700px;">
+      <button class="close-modal" id="closeAuditPanel">&times;</button>
+      <h3 data-i18n="sandbox.audit_title">Privacy & Copyright Audit</h3>
+      <p class="modal-subtitle" style="margin-bottom:1.5rem;">Detailed metadata forensic report.</p>
+      
+      <div style="overflow-x: auto;">
         <table class="audit-table">
           <thead>
             <tr>
-              <th>Filename</th>
+              <th style="text-align: left;">File Name</th>
               <th style="text-align: center;">Removed</th>
               <th style="text-align: center;">Added</th>
               <th style="text-align: right;">Privacy Score</th>
             </tr>
           </thead>
           <tbody id="auditDetailsTableBody">
-            <!-- Populated via JS -->
+            <!-- Dynamic rows -->
           </tbody>
         </table>
       </div>
-      <button class="pricing-btn secondary-btn" id="closeAuditBtn" style="margin-top: 2rem; width:100%;">Close Report</button>
+      
+      <button class="pricing-btn secondary-btn" id="closeAuditBtn" style="margin-top:2rem; width:100%;">Close Report</button>
     </div>
   </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <p data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz. Processed 100% locally in your browser. No files are ever stored or uploaded.</p>
+      <div class="footer-links">
+        <a href="/privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy</a>
+        <a href="/terms.html" class="footer-link" data-i18n="footer.terms">Terms</a>
+        <a href="/refund.html" class="footer-link" data-i18n="footer.refunds">Refunds</a>
+      </div>
+    </div>
+  </footer>
 
   <!-- Scripts -->
   <script type="module" src="/src/main.js"></script>

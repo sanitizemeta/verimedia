@@ -681,8 +681,9 @@ if (dropzone && fileInput) {
 
   const trySampleBtn = document.getElementById('trySampleBtn');
   const sampleLinkBtn = document.getElementById('sampleLinkBtn');
+  const sampleFileBtn = document.getElementById('sampleFileBtn');
   
-  [trySampleBtn, sampleLinkBtn].forEach(btn => {
+  [trySampleBtn, sampleLinkBtn, sampleFileBtn].forEach(btn => {
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -723,25 +724,38 @@ async function runInteractiveDemo() {
   
   if(statusBadge) { statusBadge.innerText = 'Scanning...'; statusBadge.className = 'status-indicator scanning'; }
   
+  // Show initial "Scary" Mock Metadata discovery
   reportContent.innerHTML = `
-    <div class="empty-state" style="margin:auto;width:100%;">
-      <p id="progressLabel" style="font-family:var(--font-headers);font-weight:600;color:var(--accent-cyan);font-size:1.1rem;margin-bottom:0.5rem;letter-spacing:0.5px;">${translations.sandbox?.scanning || 'Scanning...'}</p>
-      <div class="progress-bar-track"><div class="progress-bar-fill" id="progressBarFill" style="width:0%;"></div></div>
+    <div class="audit-list" style="width:100%; text-align:left;">
+      <div class="audit-item danger" style="animation-delay: 0.1s;">
+        <span class="audit-icon">📍</span>
+        <span>GPS: 37.7749° N, 122.4194° W (San Francisco)</span>
+      </div>
+      <div class="audit-item danger" style="animation-delay: 0.2s;">
+        <span class="audit-icon">📱</span>
+        <span>Device: iPhone 15 Pro (Apple iOS 17.4)</span>
+      </div>
+      <div class="audit-item danger" style="animation-delay: 0.3s;">
+        <span class="audit-icon">📷</span>
+        <span>Lens: 24mm f/1.78 (Serial: #88294A23)</span>
+      </div>
     </div>
+    <div class="progress-bar-track" style="margin-top:1.5rem;"><div class="progress-bar-fill" id="progressBarFill" style="width:0%;"></div></div>
+    <p id="progressLabel" style="font-size:0.8rem; color:var(--accent-cyan); margin-top:0.5rem;">Forensic Scrubbing Active...</p>
   `;
 
   const progressBarFill = document.getElementById('progressBarFill');
   const progressLabel   = document.getElementById('progressLabel');
 
   const stages = [
-    { p: 25, l: translations.sandbox?.stage_img_1 || 'Removing GPS...' },
-    { p: 50, l: translations.sandbox?.stage_img_2 || 'Clearing camera details...' },
-    { p: 75, l: translations.sandbox?.stage_img_3 || 'Adding AI tags...' },
-    { p: 100, l: translations.sandbox?.stage_img_4 || 'Done!' }
+    { p: 30, l: 'Purging GPS IFD segments...' },
+    { p: 60, l: 'Scrubbing hardware identifiers...' },
+    { p: 90, l: 'Injecting AI Opt-Out tags...' },
+    { p: 100, l: 'Sanitization Complete.' }
   ];
 
   for (const s of stages) {
-    await new Promise(r => setTimeout(r, 600));
+    await new Promise(r => setTimeout(r, 700));
     if(progressBarFill) progressBarFill.style.width = s.p + '%';
     if(progressLabel) progressLabel.innerText = s.l;
   }
@@ -750,15 +764,15 @@ async function runInteractiveDemo() {
   if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
   
   auditStats = [{
-    filename: 'sample_photo.jpg',
-    removed: 14,
+    filename: 'demo_iphone_photo.jpg',
+    removed: 28,
     added: 1,
-    scoreBefore: 35,
+    scoreBefore: 12,
     scoreAfter: 100
   }];
 
   processedBlob = null; 
-  drawReport([{ name: 'sample_photo.jpg' }]);
+  drawReport([{ name: 'demo_iphone_photo.jpg' }]);
   
   const dBtn = document.getElementById('downloadBtn');
   if (dBtn) {

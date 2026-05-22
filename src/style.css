@@ -518,7 +518,7 @@ nav {
 
 /* Upload Container Customizations */
 .upload-container.glass-card {
-  border: 2px dashed rgba(6, 182, 212, 0.4);
+  border: 1px dashed rgba(6, 182, 212, 0.4) !important;
   background: rgba(6, 182, 212, 0.02);
   transition: all 0.3s ease;
   animation: border-pulse 4s infinite ease-in-out;
@@ -526,13 +526,14 @@ nav {
 
 @keyframes border-pulse {
   0% { border-color: rgba(6, 182, 212, 0.3); }
-  50% { border-color: rgba(6, 182, 212, 0.7); box-shadow: 0 0 15px rgba(6, 182, 212, 0.05); }
+  50% { border-color: rgba(6, 182, 212, 0.6); box-shadow: 0 0 15px rgba(6, 182, 212, 0.05); }
   100% { border-color: rgba(6, 182, 212, 0.3); }
 }
 
 .upload-container.glass-card:hover, .upload-container.glass-card.dragover {
-  border-color: var(--accent-cyan);
+  border-color: var(--accent-cyan) !important;
   background: rgba(6, 182, 212, 0.06);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
   animation: none;
 }
 
@@ -1051,13 +1052,13 @@ nav {
 }
 
 .secondary-btn {
-  background: transparent;
+  background: transparent !important;
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
 }
 
 .secondary-btn:hover {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.04) !important;
   border-color: var(--text-secondary);
   color: var(--text-primary);
   transform: translateY(-1px);
