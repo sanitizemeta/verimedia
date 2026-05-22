@@ -281,7 +281,7 @@
             </div>
 
             <!-- Real-Time Processing Report Log -->
-            <div class="card glass-card report-container" style="min-height: 200px;">
+            <div class="card glass-card report-container">
               <div class="report-header">
                 <h3 style="display: flex; align-items: center; gap: 8px;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-cyan);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -290,7 +290,7 @@
                 <span class="status-indicator idle" id="statusBadge">Idle</span>
               </div>
               
-              <div class="report-content" id="reportContent" style="padding: 1.5rem;">
+              <div class="report-content" id="reportContent">
                 <div class="empty-state">
                   <p data-i18n="sandbox.audit_empty">Upload a photo to strip tracking details and embed copyright and AI opt-out tags.</p>
                 </div>
@@ -615,13 +615,13 @@
         Audit Report
       </h3>
       <div style="overflow-x: auto; width: 100%;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+        <table class="audit-table">
           <thead>
-            <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
-              <th style="padding: 0.75rem 0.5rem;">Filename</th>
-              <th style="padding: 0.75rem 0.5rem; text-align: center;">Tags Removed</th>
-              <th style="padding: 0.75rem 0.5rem; text-align: center;">Tags Added</th>
-              <th style="padding: 0.75rem 0.5rem; text-align: right;">Privacy Score</th>
+            <tr>
+              <th>Filename</th>
+              <th style="text-align: center;">Removed</th>
+              <th style="text-align: center;">Added</th>
+              <th style="text-align: right;">Privacy Score</th>
             </tr>
           </thead>
           <tbody id="auditDetailsTableBody">
@@ -629,7 +629,7 @@
           </tbody>
         </table>
       </div>
-      <button class="pricing-btn primary-btn" id="closeAuditBtn" style="margin-top: 1.5rem;">Close Report</button>
+      <button class="pricing-btn secondary-btn" id="closeAuditBtn" style="margin-top: 2rem; width:100%;">Close Report</button>
     </div>
   </div>
 

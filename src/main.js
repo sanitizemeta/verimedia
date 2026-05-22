@@ -708,9 +708,9 @@ const SUPPORTED_PDF = 'application/pdf';
 function drawReport(files) {
   const fileCount = files.length;
   reportContent.innerHTML = `
-    <div style="padding:1rem; text-align:center;">
-      <h3 style="color:var(--accent-emerald); font-size:1.2rem; margin-bottom:0.3rem;">${fileCount} file${fileCount !== 1 ? 's' : ''} stripped</h3>
-      <button class="link-btn" id="viewAuditDetailsBtn" style="font-size:0.85rem; margin-bottom:1.5rem; text-decoration:underline;">View details</button>
+    <div style="text-align:center;">
+      <h3 style="color:var(--accent-emerald); font-size:1.35rem; margin-bottom:0.4rem; font-family:var(--font-headers); font-weight:700;">${fileCount} file${fileCount !== 1 ? 's' : ''} stripped</h3>
+      <button class="link-btn" id="viewAuditDetailsBtn" style="font-size:0.85rem; margin-bottom:1.5rem; text-decoration:underline; opacity:0.8;">View details</button>
       <br/>
       <button class="download-sec-btn" id="downloadBtn">Download ${fileCount > 1 ? `ZIP (${fileCount})` : 'Safe File'}</button>
     </div>
@@ -723,17 +723,23 @@ function drawReport(files) {
     viewBtn.addEventListener('click', () => {
       const tbody = document.getElementById('auditDetailsTableBody');
       if (tbody) {
-        tbody.innerHTML = auditStats.map(stat => `
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 0.75rem 0.5rem; word-break: break-all;">${stat.filename}</td>
-            <td style="padding: 0.75rem 0.5rem; text-align: center; color: var(--accent-rose);">${stat.removed}</td>
-            <td style="padding: 0.75rem 0.5rem; text-align: center; color: var(--accent-emerald);">${stat.added}</td>
-            <td style="padding: 0.75rem 0.5rem; text-align: right;">
-              <span style="color:var(--accent-rose); text-decoration:line-through;">${stat.scoreBefore}</span> 
-              <span style="color:var(--accent-emerald); margin-left:4px;">→ ${stat.scoreAfter}</span>
-            </td>
-          </tr>
-        `).join('');
+        tbody.innerHTML = auditStats.map(stat => {
+          const displayFilename = stat.filename.length > 28 
+            ? stat.filename.substring(0, 15) + '...' + stat.filename.substring(stat.filename.length - 10)
+            : stat.filename;
+
+          return `
+            <tr>
+              <td style="word-break: break-all; font-weight:500;">${displayFilename}</td>
+              <td style="text-align: center; color: var(--accent-rose); font-weight:700;">${stat.removed}</td>
+              <td style="text-align: center; color: var(--accent-emerald); font-weight:700;">${stat.added}</td>
+              <td style="text-align: right;" class="score-jump">
+                <span class="score-old">${stat.scoreBefore}</span> 
+                <span class="score-new">→ ${stat.scoreAfter}</span>
+              </td>
+            </tr>
+          `;
+        }).join('');
       }
       const panel = document.getElementById('auditDetailsPanel');
       if (panel) panel.classList.add('active');
