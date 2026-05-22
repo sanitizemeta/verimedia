@@ -10,6 +10,7 @@
   <link rel="alternate" hreflang="en" href="https://verimedia.xyz/privacy.html" />
   <link rel="alternate" hreflang="es" href="https://verimedia.xyz/privacy.html?lang=es" />
   <link rel="alternate" hreflang="fr" href="https://verimedia.xyz/privacy.html?lang=fr" />
+  <link rel="alternate" hreflang="de" href="https://verimedia.xyz/privacy.html?lang=de" />
   <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/privacy.html" />
   
   <!-- OpenGraph Tags -->
@@ -33,6 +34,9 @@
   
   <!-- Paddle.js Overlay -->
   <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
@@ -66,11 +70,13 @@
           <button class="lang-opt" data-lang="en">English (EN)</button>
           <button class="lang-opt" data-lang="es">Español (ES)</button>
           <button class="lang-opt" data-lang="fr">Français (FR)</button>
+          <button class="lang-opt" data-lang="de">Deutsch (DE)</button>
         </div>
       </div>
 
       <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile — set your name, copyright & URL">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span data-i18n="header.profile">Profile</span>
+        <i data-lucide="user" style="width: 16px; height: 16px;"></i>
+        <span data-i18n="header.profile">Profile</span>
       </button>
     </nav>
   </header>
@@ -79,7 +85,7 @@
     <section class="policy-section">
       <div class="card glass-card policy-card">
         <h1 data-i18n="privacy_page.h1">Privacy Policy</h1>
-        <span class="last-updated" data-i18n="privacy_page.last_updated">Last Updated: May 20, 2026</span>
+        <span class="last-updated" data-i18n="privacy_page.last_updated">Last Updated: May 23, 2026</span>
 
         <p data-i18n="privacy_page.intro">
           At <strong>VeriMedia.xyz</strong>, privacy is not just a feature—it is our absolute core value. Because this tool is engineered to help you strip invasive location tracking and camera serial numbers, we enforce a strict <strong>Zero-Data Collection Policy</strong>.
@@ -91,11 +97,11 @@
         </p>
         <ul>
           <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
+            <i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i>
             <span data-i18n="privacy_page.li1_1"><strong>No Uploads:</strong> Your images are never sent, uploaded, or transmitted to any external server or backend.</span>
           </li>
           <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
+            <i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i>
             <span data-i18n="privacy_page.li1_2"><strong>Edge Computation:</strong> The EXIF purging, verified copyright injection, and AI opt-out (ai:opt-out=true) tag insertions happen strictly inside your browser's local sandbox memory cache.</span>
           </li>
         </ul>
@@ -106,15 +112,15 @@
         </p>
         <ul>
           <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            <i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
             <span data-i18n="privacy_page.li2_1">We do not store, view, or retain your uploaded photos or their metadata.</span>
           </li>
           <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            <i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
             <span data-i18n="privacy_page.li2_2">We do not log coordinates, device models, or timestamp details.</span>
           </li>
           <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            <i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
             <span data-i18n="privacy_page.li2_3">We do not maintain user profile databases, track user IPs, or record conversion metrics.</span>
           </li>
         </ul>
@@ -125,11 +131,11 @@
         </p>
         <ul>
           <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
+            <i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
             <span data-i18n="privacy_page.li3_1"><strong>Transactions:</strong> Payments are processed securely via our Merchant of Record partners (e.g., Paddle). We do not collect or store credit card details or bank routing information.</span>
           </li>
           <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:4px;"><polyline points="20 6 9 17 4 12"/></svg>
+            <i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
             <span data-i18n="privacy_page.li3_2"><strong>License Keys:</strong> When validating a license key, a secure request is dispatched directly from your browser to the payment processor. The status is cached locally.</span>
           </li>
         </ul>
@@ -172,12 +178,21 @@
     <div class="modal-card glass-card">
       <button class="close-modal" id="closeModal" aria-label="Close modal">&times;</button>
       <div id="modalViewBuy">
+        <div class="modal-icon-wrap">
+          <i data-lucide="shield-check" style="width:32px; height:32px; color:var(--accent-cyan);"></i>
+        </div>
         <h3 data-i18n="checkout.pro_title">Creator Pro Lifetime</h3>
         <p class="modal-subtitle" data-i18n="checkout.pro_subtitle">One-time payment. Use on up to 3 devices. No subscription, ever.</p>
-        <button class="pricing-btn primary-btn paddle-checkout-btn"><span data-i18n="checkout.buy_btn">Buy Now — $19</span></button>
+        <button class="pricing-btn primary-btn paddle-checkout-btn">
+          <i data-lucide="lock" style="width: 16px; height: 16px; vertical-align:middle; margin-right:6px;"></i>
+          <span data-i18n="checkout.buy_btn">Buy Now — $19</span>
+        </button>
         <button class="link-btn modal-switch-link" id="switchToActivate" data-i18n="checkout.already_key">Already have a key? Activate it here</button>
       </div>
       <div id="modalViewActivate" style="display:none;">
+        <div class="modal-icon-wrap">
+          <i data-lucide="key" style="width:32px; height:32px; color:var(--accent-cyan);"></i>
+        </div>
         <h3 data-i18n="checkout.activate_title">Activate Your License</h3>
         <input type="text" id="licenseKeyInput" class="license-input" placeholder="e.g. txn_01abc123xyz" />
         <p class="license-error" id="licenseError" style="display:none;"></p>
@@ -185,6 +200,9 @@
         <button class="link-btn modal-switch-link" id="switchToBuy" data-i18n="checkout.need_buy">Need to buy a license?</button>
       </div>
       <div id="modalViewSuccess" style="display:none;">
+        <div class="modal-icon-wrap success-icon">
+          <i data-lucide="check-circle-2" style="width:40px; height:40px; color:var(--accent-emerald);"></i>
+        </div>
         <h3 data-i18n="checkout.success_title">Creator Pro Active</h3>
         <button class="pricing-btn primary-btn" id="closeSuccessBtn" data-i18n="checkout.start_pro">Start Using Pro</button>
       </div>
@@ -194,6 +212,9 @@
   <div class="modal-overlay profile-panel-overlay" id="profilePanel" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-card glass-card profile-panel-card">
       <button class="close-modal" id="profileCloseBtn">&times;</button>
+      <div class="modal-icon-wrap">
+        <i data-lucide="user-circle-2" style="width:28px; height:28px; color:var(--accent-cyan);"></i>
+      </div>
       <h3 data-i18n="profile.title">Creator Profile</h3>
       <form id="profileForm" autocomplete="off">
         <div class="profile-field">
