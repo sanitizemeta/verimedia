@@ -101,17 +101,16 @@ async function verifyPaddleSignature(rawBody, signatureHeader, secret) {
 // ── Main fetch handler ────────────────────────────────────────────────────────
 export default {
   async fetch(request, env) {
-
     const url = new URL(request.url);
 
-    // ── CORS: restrict to verimedia.xyz (+ localhost for dev) ──────────────
+    // ── CORS configuration ────────────────────────────────────────────────────
     const allowedOrigin = env.CORS_ORIGIN || 'https://verimedia.xyz';
     const origin = request.headers.get('Origin') || '';
     const isAllowedOrigin = origin === allowedOrigin || origin.startsWith('http://localhost');
 
     const corsHeaders = {
       'Access-Control-Allow-Origin':  isAllowedOrigin ? origin : allowedOrigin,
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Max-Age':       '86400',
     };
@@ -120,27 +119,28 @@ export default {
       return new Response(null, { status: 204, headers: corsHeaders });
     }
 
-    // ── Route: POST /validate ─────────────────────────────────────────────
-    if (url.pathname === '/validate') {
-      return handleValidate(request, env, corsHeaders);
+    // ── Routing ───────────────────────────────────────────────────────────────
+    try {
+      if (url.pathname === '/validate') {
+        return handleValidate(request, env, corsHeaders);
+      }
+
+      if (url.pathname === '/stats' && request.method === 'GET') {
+        return handleGetStats(env, corsHeaders);
+      }
+
+      if (url.pathname === '/increment-stats' && request.method === 'POST') {
+        return handleIncrementStats(request, env, corsHeaders);
+      }
+
+      if (url.pathname === '/webhook') {
+        return handleWebhook(request, env);
+      }
+    } catch (err) {
+      return json({ success: false, error: err.message }, 500, corsHeaders);
     }
 
-    // ── Route: GET /stats ─────────────────────────────────────────────────
-    if (url.pathname === '/stats' && request.method === 'GET') {
-      return handleGetStats(env, corsHeaders);
-    }
-
-    // ── Route: POST /increment-stats ──────────────────────────────────────
-    if (url.pathname === '/increment-stats' && request.method === 'POST') {
-      return handleIncrementStats(env, corsHeaders);
-    }
-
-    // ── Route: POST /webhook (no CORS needed — Paddle calls this directly) ─
-    if (url.pathname === '/webhook') {
-      return handleWebhook(request, env);
-    }
-
-    return new Response('Not found', { status: 404 });
+    return new Response('Not found', { status: 404, headers: corsHeaders });
   }
 };
 
@@ -148,34 +148,29 @@ export default {
 // /stats — GET global sanitization count
 // ─────────────────────────────────────────────────────────────────────────────
 async function handleGetStats(env, corsHeaders) {
-  try {
-    const count = await env.LICENSE_KEYS.get('global_sanitized_count');
-    return json({ count: parseInt(count || '14582', 10) }, 200, corsHeaders);
-  } catch {
-    return json({ count: 14582 }, 200, corsHeaders);
-  }
+  const current = await env.LICENSE_KEYS.get('global_sanitized_count');
+  const count = parseInt(current || '14582', 10);
+  return json({ count }, 200, corsHeaders);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // /increment-stats — POST to increment global count
 // ─────────────────────────────────────────────────────────────────────────────
 async function handleIncrementStats(request, env, corsHeaders) {
+  let amount = 1;
   try {
-    let amount = 1;
-    try {
-      const body = await request.json();
-      if (body.amount && !isNaN(body.amount)) {
-        amount = Math.max(1, parseInt(body.amount, 10));
-      }
-    } catch { /* use default 1 */ }
+    const body = await request.json();
+    if (body.amount && !isNaN(body.amount)) {
+      amount = Math.max(1, parseInt(body.amount, 10));
+    }
+  } catch (e) { /* fallback to 1 */ }
 
-    const current = await env.LICENSE_KEYS.get('global_sanitized_count');
-    const next = (parseInt(current || '14582', 10) + amount).toString();
-    await env.LICENSE_KEYS.put('global_sanitized_count', next);
-    return json({ success: true, count: parseInt(next, 10) }, 200, corsHeaders);
-  } catch {
-    return json({ success: false }, 500, corsHeaders);
-  }
+  const currentStr = await env.LICENSE_KEYS.get('global_sanitized_count');
+  const currentNum = parseInt(currentStr || '14582', 10);
+  const next = (currentNum + amount).toString();
+  
+  await env.LICENSE_KEYS.put('global_sanitized_count', next);
+  return json({ success: true, count: parseInt(next, 10) }, 200, corsHeaders);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
