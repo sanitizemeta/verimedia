@@ -760,6 +760,8 @@ if (dropzone && fileInput) {
   });
 
   preloadEngine();
+  // Initial stats fetch
+  fetchGlobalStats();
 }
 
 /**
@@ -781,15 +783,15 @@ async function runInteractiveDemo() {
   reportContent.innerHTML = `
     <div class="audit-list" style="width:100%; text-align:left;">
       <div class="audit-item danger" style="animation-delay: 0.1s;">
-        <span class="audit-icon">📍</span>
+        <span class="audit-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
         <span>GPS: 37.7749° N, 122.4194° W (San Francisco)</span>
       </div>
       <div class="audit-item danger" style="animation-delay: 0.2s;">
-        <span class="audit-icon">📱</span>
+        <span class="audit-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
         <span>Device: iPhone 15 Pro (Apple iOS 17.4)</span>
       </div>
       <div class="audit-item danger" style="animation-delay: 0.3s;">
-        <span class="audit-icon">📷</span>
+        <span class="audit-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
         <span>Lens: 24mm f/1.78 (Serial: #88294A23)</span>
       </div>
     </div>
@@ -808,12 +810,13 @@ async function runInteractiveDemo() {
   ];
 
   for (const s of stages) {
-    await new Promise(r => setTimeout(r, 700));
+    // Demo delay only
+    await new Promise(r => setTimeout(r, 400));
     if(progressBarFill) progressBarFill.style.width = s.p + '%';
     if(progressLabel) progressLabel.innerText = s.l;
   }
 
-  await new Promise(r => setTimeout(r, 400));
+  await new Promise(r => setTimeout(r, 200));
   if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
   
   auditStats = [{
@@ -871,7 +874,6 @@ async function handleSingleFileUpload(file) {
   `;
 
   const progressBarFill = document.getElementById('progressBarFill');
-  const progressLabel   = document.getElementById('progressLabel');
 
   try {
     const options = {
@@ -963,7 +965,7 @@ async function processBulkFiles(files) {
     // Add file to the live list as "Scrubbing"
     const fileItem = document.createElement('div');
     fileItem.className = 'audit-item';
-    fileItem.innerHTML = `<span class="audit-icon pulse">⚙️</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="opacity:0.6;">SCRUBBING</span>`;
+    fileItem.innerHTML = `<span class="audit-icon pulse"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="opacity:0.6;">SCRUBBING</span>`;
     batchFileList.prepend(fileItem);
 
     if (category) {
@@ -982,12 +984,12 @@ async function processBulkFiles(files) {
         
         successCount++;
         // Update item to "Cleaned"
-        fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-emerald);">✓</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
+        fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-emerald);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
       } catch (e) {
-        fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-rose);">×</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
+        fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-rose);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
       }
     } else {
-      fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-rose);">!</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag">SKIP</span>`;
+      fileItem.innerHTML = `<span class="audit-icon" style="color:var(--accent-rose);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag">SKIP</span>`;
     }
 
     // Update global progress
@@ -995,8 +997,8 @@ async function processBulkFiles(files) {
     if (progressBarFill) progressBarFill.style.width = progress + '%';
     if (statusBadge) statusBadge.innerText = `Processing (${i+1}/${total})...`;
     
-    // Tiny delay to keep UI responsive and visible
-    await new Promise(r => setTimeout(r, 50));
+    // Minimal delay to keep UI responsive
+    await new Promise(r => requestAnimationFrame(r));
   }
   
   const zipBlob = await zip.generateAsync({ type: 'blob' });
@@ -1076,7 +1078,7 @@ function drawReport(files) {
               <td style="text-align: center; color: var(--accent-rose); font-weight:700;">${stat.removed}</td>
               <td style="text-align: center; color: var(--accent-emerald); font-weight:700;">${stat.added}</td>
               <td style="text-align: right;" class="score-jump">
-                <span class="score-old">${stat.scoreBefore}</span> 
+                <span class="score-old">${stat.scoreOld || stat.scoreBefore}</span> 
                 <span class="score-new">→ ${stat.scoreAfter}</span>
               </td>
             </tr>
