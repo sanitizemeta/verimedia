@@ -1,5 +1,4 @@
 import { sanitizeImage, sanitizePDF, preloadEngine, extractMetadata } from './lib/engine.ts';
-import piexif from 'piexifjs';
 import JSZip from 'https://esm.sh/jszip@3.10.1';
 
 /* ==========================================================================
@@ -8,7 +7,7 @@ import JSZip from 'https://esm.sh/jszip@3.10.1';
 const LANG_KEY = 'vm_lang';
 const urlParams = new URLSearchParams(window.location.search);
 const urlLang = urlParams.get('lang');
-const supportedLangs = ['en', 'es', 'fr'];
+const supportedLangs = ['en', 'es', 'fr', 'de'];
 
 let currentLang = (urlLang && supportedLangs.includes(urlLang)) 
   ? urlLang 
@@ -45,6 +44,11 @@ async function loadTranslations(lang) {
       newUrl.searchParams.set('lang', lang);
     }
     window.history.replaceState({}, '', newUrl);
+
+    // Refresh Lucide icons after translation swap
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
   } catch (err) {
     console.error('Failed to load translations:', err);
   }
@@ -145,6 +149,11 @@ function applyTranslations() {
       }
     }
   });
+
+  // Refresh Lucide icons for any icons inside translated elements
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
 
   // Re-apply Pro UI if active
   if (isPro) setProActiveUI();
@@ -469,12 +478,16 @@ if (profileSave) {
     };
     saveProfile(creatorProfile);
 
-    const originalText = profileSave.textContent;
-    profileSave.textContent = translations.profile?.save || '✓ Saved!';
+    const originalText = profileSave.innerHTML;
+    const successMsg = translations.profile?.save_success || 'Saved!';
+    profileSave.innerHTML = `<i data-lucide="check" style="width:14px; height:14px; vertical-align:middle; margin-right:4px;"></i> ${successMsg}`;
     profileSave.style.background = 'var(--accent-emerald)';
+    if (window.lucide) window.lucide.createIcons();
+    
     setTimeout(() => {
-      profileSave.textContent = originalText;
+      profileSave.innerHTML = originalText;
       profileSave.style.background = '';
+      if (window.lucide) window.lucide.createIcons();
     }, 1800);
     closeProfilePanel();
   });
@@ -516,8 +529,13 @@ if (importBtn && importInput) {
         };
         saveProfile(creatorProfile);
         openProfilePanel(); // Refresh UI
-        importBtn.textContent = '✓ Done!';
-        setTimeout(() => { importBtn.textContent = translations.profile?.import || 'Import'; }, 2000);
+        const doneMsg = translations.profile?.import_done || 'Done!';
+        importBtn.innerHTML = `<i data-lucide="check" style="width:14px; height:14px; vertical-align:middle; margin-right:4px;"></i> ${doneMsg}`;
+        if (window.lucide) window.lucide.createIcons();
+        setTimeout(() => { 
+          importBtn.textContent = translations.profile?.import || 'Import'; 
+          if (window.lucide) window.lucide.createIcons();
+        }, 2000);
       }
     } catch (err) { alert('Failed to read profile file.'); }
     finally { importInput.value = ''; }
@@ -891,38 +909,30 @@ async function handleSingleFileUpload(file) {
       aiOptOut: creatorProfile.aiOnly === true, whitelabel: creatorProfile.whitelabel === true, isPro: isPro
     };
 
-    let outputBlob;
     let reportBefore = await extractMetadata(file);
     let tagsAdded = options.injectIdentity ? 4 : (options.aiOptOut ? 1 : 0);
 
-    if (category === 'pdf') {
-      const pdfBytes = await sanitizePDF(file, options);
-      outputBlob = new Blob([pdfBytes], { type: 'application/pdf' });
-    } else {
-      outputBlob = await sanitizeImage(file, options);
-      
-      if (outputBlob.type === 'image/jpeg' || outputBlob.type === '') {
-        try {
-          const dataUrl = await blobToDataUrl(outputBlob);
-          const newExif = { '0th': {}, Exif: {}, GPS: {}, '1st': {} };
-          const software = (options.isPro && options.whitelabel) ? 'Original Content Engine' : 'VeriMedia.xyz';
-          if (options.injectIdentity) {
-            newExif['0th'][piexif.ImageIFD.Artist] = (options.isPro && options.whitelabel) ? options.creatorName : `VeriMedia Verified Creator - ${options.creatorName}`;
-            newExif['0th'][piexif.ImageIFD.Copyright] = options.copyright;
-            newExif['0th'][piexif.ImageIFD.Software] = software;
-            newExif['0th'][piexif.ImageIFD.ImageDescription] = `AI Opt-Out: True. Restricted from AI training.${options.contactUrl ? ' License: ' + options.contactUrl : ''}`;
-          }
-          outputBlob = dataUrlToBlob(piexif.insert(piexif.dump(newExif), dataUrl));
-        } catch(e) {}
-      }
-    }
+    // Core Engine Call (Now handles JPEG identity efficiently)
+    const outputBlob = category === 'pdf' 
+      ? new Blob([await sanitizePDF(file, options)], { type: 'application/pdf' })
+      : await sanitizeImage(file, options);
 
     auditStats.push({
       filename: file.name,
       removed: reportBefore.tags.length,
       added: tagsAdded,
       scoreBefore: reportBefore.privacyScore,
-      scoreAfter: 100
+      scoreAfter: 100,
+      removedTags: reportBefore.tags,
+      addedTags: [
+        ...(options.injectIdentity ? [
+          { name: 'Artist', value: options.creatorName, category: 'Creator' },
+          { name: 'Copyright', value: options.copyright, category: 'Creator' },
+          { name: 'Software', value: options.whitelabel ? 'Original Content Engine' : 'VeriMedia.xyz', category: 'Source' }
+        ] : []),
+        ...(options.aiOptOut ? [{ name: 'AI Opt-Out', value: 'True', category: 'Privacy' }] : []),
+        ...(options.contactUrl ? [{ name: 'WebStatement', value: options.contactUrl, category: 'License' }] : [])
+      ]
     });
 
     if(progressBarFill) progressBarFill.style.width = '100%';
@@ -985,7 +995,17 @@ async function processBulkFiles(files) {
           removed: reportBefore.tags.length,
           added: tagsAdded,
           scoreBefore: reportBefore.privacyScore,
-          scoreAfter: 100
+          scoreAfter: 100,
+          removedTags: reportBefore.tags,
+          addedTags: [
+            ...(options.injectIdentity ? [
+              { name: 'Artist', value: options.creatorName, category: 'Creator' },
+              { name: 'Copyright', value: options.copyright, category: 'Creator' },
+              { name: 'Software', value: options.whitelabel ? 'Original Content Engine' : 'VeriMedia.xyz', category: 'Source' }
+            ] : []),
+            ...(options.aiOptOut ? [{ name: 'AI Opt-Out', value: 'True', category: 'Privacy' }] : []),
+            ...(options.contactUrl ? [{ name: 'WebStatement', value: options.contactUrl, category: 'License' }] : [])
+          ]
         });
         
         successCount++;
@@ -1026,19 +1046,6 @@ function getOutputExt(file) {
   return (file.name.match(/\.[^/.]+$/)?.[0] || '.jpg').toLowerCase();
 }
 
-async function blobToDataUrl(blob) {
-  return new Promise(r => { const f = new FileReader(); f.onload = e => r(e.target.result); f.readAsDataURL(blob); });
-}
-
-function dataUrlToBlob(du) {
-  const [m, b] = du.split(',');
-  const mime = m.split(':')[1].split(';')[0];
-  const bt = atob(b);
-  const a = new Uint8Array(bt.length);
-  for (let i=0; i<bt.length; i++) a[i] = bt.charCodeAt(i);
-  return new Blob([a], { type: mime });
-}
-
 function buildErrorItem(m) { return `<div class="audit-item danger"><span>${m}</span></div>`; }
 
 function triggerDownload() {
@@ -1054,12 +1061,15 @@ const SUPPORTED_PDF = 'application/pdf';
 
 function drawReport(files) {
   const fileCount = files.length;
+  const strippedText = translations.sandbox?.files_stripped || 'stripped';
+  const fileLabel = fileCount === 1 ? (translations.sandbox?.file_label || 'file') : (translations.sandbox?.files_label || 'files');
+  
   reportContent.innerHTML = `
     <div style="text-align:center;">
-      <h3 style="color:var(--accent-emerald); font-size:1.35rem; margin-bottom:0.4rem; font-family:var(--font-headers); font-weight:700;">${fileCount} file${fileCount !== 1 ? 's' : ''} stripped</h3>
-      <button class="link-btn" id="viewAuditDetailsBtn" style="font-size:0.85rem; margin-bottom:1.5rem; text-decoration:underline; opacity:0.8;">View details</button>
+      <h3 style="color:var(--accent-emerald); font-size:1.35rem; margin-bottom:0.4rem; font-family:var(--font-headers); font-weight:700;">${fileCount} ${fileLabel} ${strippedText}</h3>
+      <button class="link-btn" id="viewAuditDetailsBtn" style="font-size:0.85rem; margin-bottom:1.5rem; text-decoration:underline; opacity:0.8;">${translations.sandbox?.view_details_btn || 'View details'}</button>
       <br/>
-      <button class="download-sec-btn" id="downloadBtn">Download ${fileCount > 1 ? `ZIP (${fileCount})` : 'Safe File'}</button>
+      <button class="download-sec-btn" id="downloadBtn">${fileCount > 1 ? (translations.sandbox?.download_zip || 'Download ZIP').replace('{{count}}', fileCount) : (translations.sandbox?.download_safe_file || 'Download Safe File')}</button>
     </div>
   `;
   const dBtn = document.getElementById('downloadBtn');
@@ -1069,8 +1079,14 @@ function drawReport(files) {
   if (viewBtn) {
     viewBtn.addEventListener('click', () => {
       const tbody = document.getElementById('auditDetailsTableBody');
+      const tableWrapper = document.getElementById('auditTableWrapper');
+      const subPanel = document.getElementById('tagDetailsSubPanel');
+      
+      if (subPanel) subPanel.style.display = 'none';
+      if (tableWrapper) tableWrapper.style.display = 'block';
+
       if (tbody) {
-        tbody.innerHTML = auditStats.map(stat => {
+        tbody.innerHTML = auditStats.map((stat, index) => {
           const displayFilename = stat.filename.length > 28 
             ? stat.filename.substring(0, 15) + '...' + stat.filename.substring(stat.filename.length - 10)
             : stat.filename;
@@ -1084,14 +1100,68 @@ function drawReport(files) {
                 <span class="score-old">${stat.scoreOld || stat.scoreBefore}</span> 
                 <span class="score-new">→ ${stat.scoreAfter}</span>
               </td>
+              <td style="text-align: center;">
+                <button class="details-icon-btn view-tag-details" data-index="${index}" title="${translations.sandbox?.details_label || 'Details'}">
+                  <i data-lucide="eye" style="width:14px; height:14px;"></i>
+                </button>
+              </td>
             </tr>
           `;
         }).join('');
+        
+        if (window.lucide) window.lucide.createIcons();
+
+        // Attach details view events
+        document.querySelectorAll('.view-tag-details').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const index = parseInt(btn.getAttribute('data-index'));
+            showTagDetails(index);
+          });
+        });
       }
       const panel = document.getElementById('auditDetailsPanel');
       if (panel) panel.classList.add('active');
     });
   }
+}
+
+function showTagDetails(index) {
+  const stat = auditStats[index];
+  if (!stat) return;
+
+  const tableWrapper = document.getElementById('auditTableWrapper');
+  const subPanel = document.getElementById('tagDetailsSubPanel');
+  const title = document.getElementById('tagDetailsTitle');
+  const removedList = document.getElementById('removedTagsList');
+  const addedList = document.getElementById('addedTagsList');
+
+  const prefix = translations.sandbox?.forensic_title_prefix || 'Forensic: ';
+  if (title) title.textContent = `${prefix}${stat.filename}`;
+  
+  if (removedList) {
+    removedList.innerHTML = stat.removedTags && stat.removedTags.length > 0 
+      ? stat.removedTags.map(t => `<div class="tag-item-forensic"><span class="tag-name-label">${t.name}</span><span class="tag-value-text" title="${t.value}">${t.value}</span></div>`).join('')
+      : `<p style="font-size:0.75rem; opacity:0.5; font-style:italic;">${translations.sandbox?.no_meta_found || 'No sensitive metadata found.'}</p>`;
+  }
+
+  if (addedList) {
+    addedList.innerHTML = stat.addedTags && stat.addedTags.length > 0
+      ? stat.addedTags.map(t => `<div class="tag-item-forensic"><span class="tag-name-label">${t.name}</span><span class="tag-value-text" title="${t.value}">${t.value}</span></div>`).join('')
+      : `<p style="font-size:0.75rem; opacity:0.5; font-style:italic;">${translations.sandbox?.no_tags_added || 'No tags added.'}</p>`;
+  }
+
+  if (tableWrapper) tableWrapper.style.display = 'none';
+  if (subPanel) subPanel.style.display = 'block';
+}
+
+const hideTagDetailsBtn = document.getElementById('hideTagDetailsBtn');
+if (hideTagDetailsBtn) {
+  hideTagDetailsBtn.addEventListener('click', () => {
+    const tableWrapper = document.getElementById('auditTableWrapper');
+    const subPanel = document.getElementById('tagDetailsSubPanel');
+    if (subPanel) subPanel.style.display = 'none';
+    if (tableWrapper) tableWrapper.style.display = 'block';
+  });
 }
 
 // Modal closing logic for Audit Details

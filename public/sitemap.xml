@@ -7,8 +7,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://verimedia.xyz/?lang=es" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://verimedia.xyz/?lang=de" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/" />
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-05-23</lastmod>
     <priority>1.0</priority>
   </url>
 
@@ -18,8 +19,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/privacy.html" />
     <xhtml:link rel="alternate" hreflang="es" href="https://verimedia.xyz/privacy.html?lang=es" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/privacy.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://verimedia.xyz/privacy.html?lang=de" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/privacy.html" />
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-05-23</lastmod>
     <priority>0.8</priority>
   </url>
 
@@ -29,8 +31,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/terms.html" />
     <xhtml:link rel="alternate" hreflang="es" href="https://verimedia.xyz/terms.html?lang=es" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/terms.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://verimedia.xyz/terms.html?lang=de" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/terms.html" />
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-05-23</lastmod>
     <priority>0.8</priority>
   </url>
 
@@ -40,8 +43,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/refund.html" />
     <xhtml:link rel="alternate" hreflang="es" href="https://verimedia.xyz/refund.html?lang=es" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/refund.html?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://verimedia.xyz/refund.html?lang=de" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/refund.html" />
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-05-23</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

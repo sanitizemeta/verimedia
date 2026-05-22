@@ -660,11 +660,14 @@ main {
 .interactive-sandbox {
   max-width: 1200px;
   margin: 0 auto 4.5rem auto;
+}
+
 .sandbox-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.2rem;
   align-items: stretch;
+  overflow: visible !important;
 }
 
 @media (max-width: 900px) {
@@ -683,11 +686,9 @@ main {
   cursor: pointer;
   min-height: 280px; /* Aligned with report container */
   height: 100%;
-}
   text-align: center;
-  cursor: pointer;
   position: relative;
-  overflow: hidden;
+  overflow: visible !important;
 }
 
 .hidden-input {
@@ -776,7 +777,7 @@ main {
   flex-direction: column;
   min-height: 280px;
   height: 100%;
-  overflow: hidden;
+  overflow: visible !important;
 }
 
 .report-header {
@@ -893,6 +894,74 @@ main {
 
 .score-new {
   color: var(--accent-emerald);
+}
+
+/* Tag Details Sub-Panel Styling */
+.tag-list-scrollable {
+  max-height: 300px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tag-list-scrollable::-webkit-scrollbar {
+  width: 4px;
+}
+.tag-list-scrollable::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
+
+.tag-item-forensic {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+}
+
+.tag-item-forensic:last-child {
+  border-bottom: none;
+}
+
+.tag-name-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.tag-value-text {
+  color: var(--text-primary);
+  font-family: monospace;
+  opacity: 0.9;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.details-icon-btn {
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  color: var(--accent-cyan);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0 auto;
+}
+
+.details-icon-btn:hover {
+  background: var(--accent-cyan);
+  color: black;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--accent-cyan-glow);
 }
 
 /* 9. Report Logs & Animated Progress Bars */

@@ -771,16 +771,49 @@ const resolveOutputMime = (mimeType: string, fileName: string): string => {
 };
 
 const sanitizeSupportedImageBytes = (raw: Uint8Array, mimeType: string, options: SanitizeOptions): Uint8Array | null => {
+  let sanitized = null;
   switch (mimeType) {
     case 'image/jpeg':
-      return stripJpegAppSegments(raw, options.keepIcc, options.keepCameraSpecs);
+      sanitized = stripJpegAppSegments(raw, options.keepIcc, options.keepCameraSpecs);
+      break;
     case 'image/png':
-      return stripPngMetaChunks(raw, options);
+      sanitized = stripPngMetaChunks(raw, options);
+      break;
     case 'image/webp':
-      return stripWebpMetaChunks(raw, options);
+      sanitized = stripWebpMetaChunks(raw, options);
+      break;
     default:
       return null;
   }
+
+  // Identity Injection for JPEG (PNG/WebP handled in their respective strippers)
+  if (mimeType === 'image/jpeg' && sanitized && (options.injectIdentity || options.aiOptOut)) {
+    const xmpString = createXmpPayload(options);
+    const encoder = new TextEncoder();
+    const xmpBytes = encoder.encode(xmpString);
+    
+    // APP1 Header: 0xFFE1 + Length (2 bytes) + "http://ns.adobe.com/xap/1.0/\0"
+    const namespace = 'http://ns.adobe.com/xap/1.0/\0';
+    const nsBytes = encoder.encode(namespace);
+    const segLen = 2 + nsBytes.length + xmpBytes.length;
+    
+    const app1 = new Uint8Array(2 + segLen);
+    app1[0] = 0xFF;
+    app1[1] = 0xE1;
+    app1[2] = (segLen >> 8) & 0xFF;
+    app1[3] = segLen & 0xFF;
+    app1.set(nsBytes, 4);
+    app1.set(xmpBytes, 4 + nsBytes.length);
+    
+    // Insert after SOI (first 2 bytes)
+    const result = new Uint8Array(sanitized.length + app1.length);
+    result.set(sanitized.slice(0, 2), 0);
+    result.set(app1, 2);
+    result.set(sanitized.slice(2), 2 + app1.length);
+    return result;
+  }
+
+  return sanitized;
 };
 
 const renderImageViaCanvas = async (source: Blob, outputMime: string): Promise<Blob> => {
