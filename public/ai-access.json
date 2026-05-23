@@ -6,7 +6,8 @@
       "ClaudeBot": "allow",
       "CCBot": "allow",
       "Google-Extended": "allow",
-      "PerplexityBot": "allow"
+      "PerplexityBot": "allow",
+      "Bingbot": "allow"
     },
     "metadata_requirements": {
       "require_c2pa": true,
