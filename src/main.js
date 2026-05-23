@@ -264,7 +264,7 @@ function updateStructuredData(lang, trans, pagePath) {
       "@type": "ListItem",
       "position": 2,
       "name": trans[pageKey]?.h1 || document.title,
-      "item": `https://verimedia.xyz/${pagePath}.html${langQuery}`
+      "item": `https://verimedia.xyz/${pagePath}${langQuery}`
     });
   }
   schema.push(breadcrumbs);
