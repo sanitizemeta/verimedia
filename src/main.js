@@ -1060,6 +1060,10 @@ async function processBulkFiles(files) {
   const batchFileList = document.getElementById('batchFileList');
 
   const options = { isPro: true, aiOptOut: creatorProfile.aiOnly !== false, injectIdentity: !!(creatorProfile.name || creatorProfile.copyright || creatorProfile.url), ...creatorProfile };
+  options.creatorName = creatorProfile.name || '';
+  options.copyright = creatorProfile.copyright || '';
+  options.contactUrl = creatorProfile.url || '';
+  options.whitelabel = creatorProfile.whitelabel === true;
   let tagsAdded = options.injectIdentity ? 4 : (options.aiOptOut ? 1 : 0);
 
   for (let i = 0; i < files.length; i++) {
@@ -1088,8 +1092,8 @@ async function processBulkFiles(files) {
           removedTags: reportBefore.tags,
           addedTags: [
             ...(options.injectIdentity ? [
-              { name: 'Artist', value: options.creatorName, category: 'Creator' },
-              { name: 'Copyright', value: options.copyright, category: 'Creator' },
+              { name: 'Artist', value: options.creatorName || 'N/A', category: 'Creator' },
+              { name: 'Copyright', value: options.copyright || 'N/A', category: 'Creator' },
               { name: 'Software', value: options.whitelabel ? 'Original Content Engine' : 'VeriMedia.xyz', category: 'Source' }
             ] : []),
             ...(options.aiOptOut ? [{ name: 'AI Opt-Out', value: 'True', category: 'Privacy' }] : []),
