@@ -6,7 +6,7 @@
   
   <!-- SEO Primary Tags -->
   <title>VeriMedia | Remove Location Data & Protect Your Photos</title>
-  <meta name="description" content="Protect your photos from AI scrapers. Remove private location data, GPS tags, and camera details directly in your browser. Add your creator copyright securely.">
+  <meta name="description" content="Protect your photos from AI scrapers. Strip private GPS location data and EXIF metadata locally in your browser. Add creator copyright and AI opt-out tags.">
   <meta name="keywords" content="protect images from AI, remove EXIF data, image copyright, AI opt out, secure photo cleaner, PDF metadata removal, Google Licensable Badge, C2PA extractor, privacy metadata, batch exif stripper">
   <link rel="canonical" href="https://verimedia.xyz/" />
   <link rel="alternate" hreflang="en" href="https://verimedia.xyz/" />
@@ -536,39 +536,40 @@
     </div>
   </main>
 
-  <!-- 4. Hidden Semantic Context for Search Indexing (AEO/SEO Optimization) -->
-  <section id="semantic-index-content" style="display:none;" aria-hidden="true">
-    <h2>How to Protect Images from AI Scrapers and Remove EXIF Data</h2>
-    <p>
-      VeriMedia provides an advanced, browser-based solution for photographers and digital creators to maintain privacy and ownership. 
-      Our primary utility is an <strong>EXIF data remover</strong> and <strong>GPS metadata stripper</strong> that ensures no private location 
-      tracking remains in your shared media. By physically purging camera serial numbers and device fingerprints, we prevent forensic carving 
-      of your private data.
-    </p>
-    <p>
-      In response to the rise of generative AI, VeriMedia serves as an <strong>AI Training Shield</strong>. We embed the standardized 
-      <code>ai:opt-out=true</code> header directly into the JPEG and PDF binary structures. This signals to ethical AI scrapers like 
-      GPTBot, ClaudeBot, and Common Crawl that your work is restricted from model training datasets.
-    </p>
-    <h3>Enabling the Google Licensable Badge</h3>
-    <p>
-      Beyond privacy, VeriMedia enhances your professional presence by enabling the <strong>Google Images Licensable Badge</strong>. 
-      By injecting IPTC Copyright fields and a WebStatement URL into your image metadata, search engines can correctly attribute 
-      authorship and provide a direct link to your licensing terms or portfolio.
-    </p>
-    <h3>Secure PDF Scrubbing</h3>
-    <p>
-      Our <strong>PDF Forensic Cleaner</strong> goes beyond simple property removal. It scans the internal document streams to 
-      physically overwrite hidden author names, creation timestamps, and software signatures that standard PDF readers often miss. 
-      This ensures your documents are safe for legal, corporate, or sensitive public distribution.
-    </p>
-    <ul>
-      <li>Remove GPS coordinates from photos instantly.</li>
-      <li>Strip camera metadata and lens specifications.</li>
-      <li>Add creator copyright and artist name securely.</li>
-      <li>Opt-out of AI training with binary-level tags.</li>
-      <li>No files are ever uploaded—100% private processing.</li>
-    </ul>
+  <!-- 4. Semantic Content for Search Indexing (Visible for Crawlers) -->
+  <section id="semantic-index-content" style="max-width: 1000px; margin: 0 auto 5rem auto; padding: 3rem 1.5rem; border-top: 1px solid var(--border-color); opacity: 0.7;">
+    <div style="max-width: 800px; margin: 0 auto; line-height: 1.6; font-size: 0.95rem;">
+      <h2 style="font-family: var(--font-headers); color: var(--accent-cyan); margin-bottom: 1.5rem; font-size: 1.5rem;">How to Protect Images from AI Scrapers and Remove EXIF Data</h2>
+      <p style="margin-bottom: 1.2rem;">
+        VeriMedia provides an advanced, browser-based solution for photographers and digital creators to maintain privacy and ownership. 
+        Our primary utility is an <strong>EXIF data remover</strong> and <strong>GPS metadata stripper</strong> that ensures no private location 
+        tracking remains in your shared media. By physically purging camera serial numbers and device fingerprints, we prevent forensic carving 
+        of your private data.
+      </p>
+      <p style="margin-bottom: 1.2rem;">
+        In response to the rise of generative AI, VeriMedia serves as an <strong>AI Training Shield</strong>. We embed the standardized 
+        <code>ai:opt-out=true</code> header directly into the JPEG and PDF binary structures. This signals to ethical AI scrapers like 
+        GPTBot, ClaudeBot, and Common Crawl that your work is restricted from model training datasets.
+      </p>
+      <h3 style="font-family: var(--font-headers); color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem; font-size: 1.2rem;">Enabling the Google Licensable Badge</h3>
+      <p style="margin-bottom: 1.2rem;">
+        Beyond privacy, VeriMedia enhances your professional presence by enabling the <strong>Google Images Licensable Badge</strong>. 
+        By injecting IPTC Copyright fields and a WebStatement URL into your image metadata, search engines can correctly attribute 
+        authorship and provide a direct link to your licensing terms or portfolio.
+      </p>
+      <h3 style="font-family: var(--font-headers); color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem; font-size: 1.2rem;">Secure PDF Scrubbing</h3>
+      <p style="margin-bottom: 1.2rem;">
+        Our <strong>PDF Forensic Cleaner</strong> goes beyond simple property removal. It scans the internal document streams to 
+        physically overwrite hidden author names, creation timestamps, and software signatures that standard PDF readers often miss. 
+        This ensures your documents are safe for legal, corporate, or sensitive public distribution.
+      </p>
+      <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+        <li style="display: flex; align-items: center; gap: 8px;"><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-emerald);"></i> Remove GPS coordinates</li>
+        <li style="display: flex; align-items: center; gap: 8px;"><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-emerald);"></i> Strip camera metadata</li>
+        <li style="display: flex; align-items: center; gap: 8px;"><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-emerald);"></i> Add creator copyright</li>
+        <li style="display: flex; align-items: center; gap: 8px;"><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-emerald);"></i> AI Training Opt-Out</li>
+      </ul>
+    </div>
   </section>
 
   <!-- Footer Section -->
