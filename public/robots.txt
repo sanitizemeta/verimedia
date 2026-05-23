@@ -1,31 +1,27 @@
 User-agent: *
 Allow: /
 Sitemap: https://verimedia.xyz/sitemap.xml
-Allow: /ai-access.json
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: AdIdxBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
 
 User-agent: Google-CloudVertexBot
 Allow: /
 
-User-agent: GoogleOther-Image
-Allow: /
-
-User-agent: GoogleOther-Video
-Allow: /
-
 User-agent: GPTBot
 Allow: /
-Allow: /llms.txt
-Allow: /ai-access.json
 
 User-agent: ClaudeBot
 Allow: /
-Allow: /llms.txt
-Allow: /ai-access.json
 
 User-agent: PerplexityBot
 Allow: /
-Allow: /llms.txt
-
-User-agent: Google-Extended
-Allow: /
-Allow: /llms.txt
