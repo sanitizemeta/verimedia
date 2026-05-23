@@ -438,24 +438,26 @@
             <button class="pricing-btn primary-btn" id="profileUpgradeBtn" type="button" data-i18n="profile.upgrade_btn">Upgrade to Pro</button>
           </div>
 
-          <div class="profile-field">
-            <label class="profile-label">
-              <span data-i18n="profile.name_label">Creator Name</span>
-              <div class="info-trigger">?
-                <div class="tooltip-content" data-i18n="profile.tooltip_artist">This becomes the Artist field embedded in your images. Pro users get a "VeriMedia Verified Creator" prefix.</div>
-              </div>
-            </label>
-            <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" />
-          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="profile-field">
+              <label class="profile-label">
+                <span data-i18n="profile.name_label">Creator Name</span>
+                <div class="info-trigger">?
+                  <div class="tooltip-content" data-i18n="profile.tooltip_artist">This becomes the Artist field embedded in your images. Pro users get a "VeriMedia Verified Creator" prefix.</div>
+                </div>
+              </label>
+              <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" />
+            </div>
 
-          <div class="profile-field">
-            <label class="profile-label">
-              <span data-i18n="profile.copy_label">Copyright String</span>
-              <div class="info-trigger">?
-                <div class="tooltip-content" data-i18n="profile.tooltip_copyright">Injected as the Copyright EXIF/XMP field. Used by Getty, Shutterstock, and news publishers to trace image ownership.</div>
-              </div>
-            </label>
-            <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith" />
+            <div class="profile-field">
+              <label class="profile-label">
+                <span data-i18n="profile.copy_label">Copyright String</span>
+                <div class="info-trigger">?
+                  <div class="tooltip-content" data-i18n="profile.tooltip_copyright">Injected as the Copyright EXIF/XMP field. Used by Getty, Shutterstock, and news publishers to trace image ownership.</div>
+                </div>
+              </label>
+              <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith" />
+            </div>
           </div>
 
           <div class="profile-field">
@@ -469,29 +471,45 @@
           </div>
         </div>
 
-        <div class="profile-field">
-          <label class="profile-label">
-            <span data-i18n="profile.ai_label">AI Opt-Out</span>
-            <div class="info-trigger">?
-              <div class="tooltip-content" data-i18n="profile.tooltip_ai">Standardized metadata signal ("ai:opt-out=true") tells AI crawlers that your media is restricted from training datasets.</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+          <div class="profile-field">
+            <label class="profile-label">
+              <span data-i18n="profile.ai_label">AI Opt-Out</span>
+              <div class="info-trigger">?
+                <div class="tooltip-content" data-i18n="profile.tooltip_ai">Standardized metadata signal ("ai:opt-out=true") tells AI crawlers that your media is restricted from training datasets.</div>
+              </div>
+            </label>
+            <div style="display:flex; align-items:center; gap:12px; margin-top:4px;">
+              <input type="checkbox" id="profileAiOptOut" checked style="width:18px; height:18px; accent-color:var(--accent-cyan); cursor:pointer;" />
+              <span style="font-size:0.85rem; color:var(--text-secondary);">Inject 'ai:opt-out=true' header</span>
             </div>
-          </label>
-          <div style="display:flex; align-items:center; gap:12px; margin-top:4px;">
-            <input type="checkbox" id="profileAiOptOut" checked style="width:18px; height:18px; accent-color:var(--accent-cyan); cursor:pointer;" />
-            <span style="font-size:0.85rem; color:var(--text-secondary);">Inject 'ai:opt-out=true' header</span>
+          </div>
+
+          <div class="profile-field">
+            <label class="profile-label">
+              <span data-i18n="profile.white_label">Whitelabel</span>
+              <div class="info-trigger">?
+                <div class="tooltip-content" data-i18n="profile.tooltip_whitelabel">Remove all "VeriMedia" references from embedded metadata for a 100% clean, professional footprint.</div>
+              </div>
+            </label>
+            <div style="display:flex; align-items:center; gap:12px; margin-top:4px;">
+              <input type="checkbox" id="profileWhitelabel" style="width:18px; height:18px; accent-color:var(--accent-cyan); cursor:pointer;" />
+              <span style="font-size:0.85rem; color:var(--text-secondary);">Remove VeriMedia branding</span>
+            </div>
           </div>
         </div>
 
         <div class="profile-field">
           <label class="profile-label">
-            <span data-i18n="profile.white_label">Whitelabel</span>
-            <div class="info-trigger">?
-              <div class="tooltip-content" data-i18n="profile.tooltip_whitelabel">Remove all "VeriMedia" references from embedded metadata for a 100% clean, professional footprint.</div>
-            </div>
+            <span data-i18n="profile.active_key">Creator Pro Active Key</span>
           </label>
-          <div style="display:flex; align-items:center; gap:12px; margin-top:4px;">
-            <input type="checkbox" id="profileWhitelabel" style="width:18px; height:18px; accent-color:var(--accent-cyan); cursor:pointer;" />
-            <span style="font-size:0.85rem; color:var(--text-secondary);">Remove VeriMedia branding</span>
+          <div style="display:grid; grid-template-columns: 1fr auto auto; gap:0.6rem;">
+            <input type="password" id="profileKeyInput" class="license-input" readonly value="" placeholder="License key will appear after activation" />
+            <button type="button" class="pricing-btn secondary-btn" id="toggleKeyVisibility" style="width:auto; padding:0.65rem 0.85rem;">
+              <i id="eyeIconOpen" data-lucide="eye" style="width:16px; height:16px;"></i>
+              <i id="eyeIconClosed" data-lucide="eye-off" style="width:16px; height:16px; display:none;"></i>
+            </button>
+            <button type="button" class="pricing-btn secondary-btn" id="copyKeyBtn" style="width:auto; padding:0.65rem 0.85rem;" data-i18n="profile.copy">Copy</button>
           </div>
         </div>
 
