@@ -20,7 +20,7 @@
   "citations": [
     {
       "title": "EXIF specification resources",
-      "url": "https://www.cipa.jp/std/documents/e/DC-008-Translation-2019-E.pdf"
+      "url": "https://www.cipa.jp/e/std/std-sec.html"
     },
     {
       "title": "XMP standard overview",
@@ -28,7 +28,7 @@
     },
     {
       "title": "PDF metadata concepts",
-      "url": "https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/"
+      "url": "https://developer.adobe.com/document-services/docs/overview/pdf-services-api/"
     }
   ]
 }
