@@ -863,6 +863,7 @@ main {
 .audit-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
   font-size: 0.82rem;
   margin-top: 0.5rem;
 }
@@ -884,6 +885,9 @@ main {
   color: var(--text-primary);
   font-size: 0.86rem;
   vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .audit-table tr:last-child td {
@@ -1934,15 +1938,30 @@ footer {
 #auditTableWrapper {
   max-height: 56vh;
   overflow: auto;
+  overflow-x: hidden;
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 10px;
 }
 
 .audit-table td:first-child {
-  max-width: 260px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  width: 42%;
+}
+
+.audit-table th:nth-child(2),
+.audit-table td:nth-child(2),
+.audit-table th:nth-child(3),
+.audit-table td:nth-child(3) {
+  width: 12%;
+}
+
+.audit-table th:nth-child(4),
+.audit-table td:nth-child(4) {
+  width: 20%;
+}
+
+.audit-table th:nth-child(5),
+.audit-table td:nth-child(5) {
+  width: 14%;
 }
 
 #auditTableWrapper table thead th {
