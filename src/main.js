@@ -1073,7 +1073,7 @@ async function processBulkFiles(files) {
     // Add file to the live list as "Scrubbing"
     const fileItem = document.createElement('div');
     fileItem.className = 'audit-item';
-    fileItem.innerHTML = `<span class="audit-icon pulse">${ICON_SCRUBBING}</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="opacity:0.6;">SCRUBBING</span>`;
+    fileItem.innerHTML = `<span class="audit-icon pulse">${ICON_SCRUBBING}</span> <span class="batch-file-name" title="${file.name}">${file.name}</span> <span class="compact-tag" style="opacity:0.6;">SCRUBBING</span>`;
     batchFileList.prepend(fileItem);
 
     if (category) {
@@ -1103,12 +1103,12 @@ async function processBulkFiles(files) {
         
         successCount++;
         // Update item to "Cleaned"
-        fileItem.innerHTML = `<span class="audit-icon">${ICON_CLEANED}</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
+        fileItem.innerHTML = `<span class="audit-icon">${ICON_CLEANED}</span> <span class="batch-file-name" title="${file.name}">${file.name}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
       } catch (e) {
-        fileItem.innerHTML = `<span class="audit-icon">${ICON_ERROR}</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
+        fileItem.innerHTML = `<span class="audit-icon">${ICON_ERROR}</span> <span class="batch-file-name" title="${file.name}">${file.name}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
       }
     } else {
-      fileItem.innerHTML = `<span class="audit-icon">${ICON_SKIP}</span> <span style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${file.name}</span> <span class="compact-tag">SKIP</span>`;
+      fileItem.innerHTML = `<span class="audit-icon">${ICON_SKIP}</span> <span class="batch-file-name" title="${file.name}">${file.name}</span> <span class="compact-tag">SKIP</span>`;
     }
 
     // Update global progress
@@ -1119,7 +1119,22 @@ async function processBulkFiles(files) {
   }
 
   if (statusBadge) statusBadge.innerText = `Finalizing ZIP (${successCount}/${total})...`;
-  const zipBlob = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
+  const zipStart = performance.now();
+  let lastStatusUpdate = 0;
+  const zipBlob = await zip.generateAsync(
+    { type: 'blob', compression: 'STORE' },
+    (meta) => {
+      if (!statusBadge) return;
+      const now = performance.now();
+      if (now - lastStatusUpdate < 200) return;
+      lastStatusUpdate = now;
+      const elapsedSec = (now - zipStart) / 1000;
+      const progress = Math.max(0.1, Math.min(100, meta.percent || 0));
+      const estimatedTotalSec = elapsedSec / (progress / 100);
+      const remainingSec = Math.max(0, Math.round(estimatedTotalSec - elapsedSec));
+      statusBadge.innerText = `Finalizing ZIP ${Math.round(progress)}% (~${remainingSec}s)`;
+    }
+  );
   processedBlob = zipBlob;
   processedBlob._url = URL.createObjectURL(zipBlob);
   processedFileName = `VeriMedia_Batch_${successCount}_Files.zip`;

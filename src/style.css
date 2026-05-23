@@ -1035,6 +1035,7 @@ main {
   opacity: 0;
   transform: translateY(10px);
   animation: slide-in 0.4s forwards var(--ease-spring);
+  min-width: 0;
 }
 
 @keyframes slide-in {
@@ -1057,6 +1058,19 @@ main {
 .audit-icon {
   font-size: 1.15rem;
   flex-shrink: 0;
+}
+
+.batch-file-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+#batchFileList .audit-item {
+  width: 100%;
 }
 
 /* Animated Security Count */
