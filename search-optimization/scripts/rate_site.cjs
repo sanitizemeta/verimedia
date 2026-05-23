@@ -23,6 +23,9 @@ const failOnArg = args.find((a) => a.startsWith('--fail-on=')) || null;
 const failOn = failOnArg ? failOnArg.split('=')[1] : null;
 const primaryFiles = [
   'index.html',
+  'ai-opt-out-metadata.html',
+  'remove-exif-from-photos.html',
+  'remove-pdf-metadata.html',
   'privacy.html',
   'terms.html',
   'refund.html',

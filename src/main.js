@@ -1,5 +1,36 @@
 import { sanitizeImage, sanitizePDF, preloadEngine, extractMetadata } from './lib/engine.ts';
 import JSZip from 'https://esm.sh/jszip@3.10.1';
+import { trackEvent } from './lib/local-analytics.js';
+
+/* ==========================================================================
+   📈 0a. Analytics Bootstrapping (Cloudflare / Umami)
+   ========================================================================== */
+function bootAnalytics() {
+  const cfToken = document.querySelector('meta[name="cf-beacon-token"]')?.getAttribute('content')?.trim();
+  if (cfToken && !cfToken.includes('YOUR_')) {
+    const cf = document.createElement('script');
+    cf.defer = true;
+    cf.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    cf.setAttribute('data-cf-beacon', JSON.stringify({ token: cfToken, spa: true }));
+    document.head.appendChild(cf);
+  }
+
+  const umamiScriptUrl = document.querySelector('meta[name="umami-script-url"]')?.getAttribute('content')?.trim();
+  const umamiWebsiteId = document.querySelector('meta[name="umami-website-id"]')?.getAttribute('content')?.trim();
+  if (
+    umamiScriptUrl &&
+    umamiWebsiteId &&
+    !umamiScriptUrl.includes('YOUR_') &&
+    !umamiWebsiteId.includes('YOUR_')
+  ) {
+    const um = document.createElement('script');
+    um.defer = true;
+    um.src = umamiScriptUrl;
+    um.setAttribute('data-website-id', umamiWebsiteId);
+    document.head.appendChild(um);
+  }
+}
+bootAnalytics();
 
 /* ==========================================================================
    🌍 0. Localization & i18n Engine
@@ -629,6 +660,7 @@ function openModal(startView = viewBuy) {
   modalTriggerElement = document.activeElement;
   showModalView(startView);
   paymentModal.classList.add('active');
+  trackEvent('pricing_opened', { view: startView?.id || 'unknown' });
 }
 
 function closePaymentModal() {
@@ -749,6 +781,7 @@ function initPaddleOnce() {
           localStorage.setItem(STORAGE_KEY_LICENSE, txnId.toUpperCase());
           setProActiveUI();
           openModal(viewSuccess);
+          trackEvent('purchase_success', { provider: 'paddle' });
         }
       }
     }
@@ -781,6 +814,7 @@ function ensurePaddleLoaded() {
 paddleCheckoutBtns.forEach(btn => {
   btn.addEventListener('click', async () => {
     try {
+      trackEvent('checkout_started', { source: btn.className || 'paddle_btn' });
       await ensurePaddleLoaded();
       if (window.Paddle) {
         window.Paddle.Checkout.open({
@@ -810,11 +844,14 @@ let processedBlob = null;
 let processedFileName = '';
 
 if (dropzone && fileInput) {
-  dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('click', () => {
+    trackEvent('upload_started', { source: 'dropzone_click' });
+    fileInput.click();
+  });
   dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
   dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
-  dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('dragover'); if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files); });
-  fileInput.addEventListener('change', e => { if (e.target.files.length) handleFiles(e.target.files); });
+  dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('dragover'); if (e.dataTransfer.files.length) { trackEvent('upload_started', { source: 'drop', files: e.dataTransfer.files.length }); handleFiles(e.dataTransfer.files); } });
+  fileInput.addEventListener('change', e => { if (e.target.files.length) { trackEvent('upload_started', { source: 'file_picker', files: e.target.files.length }); handleFiles(e.target.files); } });
 
   const trySampleBtn = document.getElementById('trySampleBtn');
   const sampleLinkBtn = document.getElementById('sampleLinkBtn');
@@ -985,6 +1022,7 @@ async function handleSingleFileUpload(file) {
     processedBlob._url = URL.createObjectURL(outputBlob);
     drawReport([file]);
     incrementGlobalStats(1);
+    trackEvent('file_processed', { mode: 'single', type: category, count: 1 });
   } catch (error) {
     if(reportContent) reportContent.innerHTML = buildErrorItem('Engine error.');
   }
@@ -1076,6 +1114,7 @@ async function processBulkFiles(files) {
   if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
   drawReport(files);
   incrementGlobalStats(successCount);
+  trackEvent('file_processed', { mode: 'bulk', count: successCount });
 }
 
 function getFileCategory(file) {

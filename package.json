@@ -6,7 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seo:check": "node search-optimization/scripts/rate_site.cjs --fail-on=high",
+    "seo:report": "node search-optimization/scripts/rate_site.cjs --json",
+    "growth:index-pack": "node growth/scripts/build_manual_indexing_pack.cjs",
+    "growth:schema-manifest": "node growth/scripts/build_schema_manifest.cjs",
+    "growth:noapi-pack": "npm run seo:check && npm run growth:index-pack && npm run growth:schema-manifest",
+    "growth:bing-submit": "node growth/scripts/submit_bing_urls.cjs",
+    "growth:query-plan": "node growth/scripts/build_query_plan.cjs",
+    "growth:enrich-topic": "node growth/scripts/enrich_topic.cjs",
+    "growth:schema-check": "node growth/scripts/check_schema_coverage.cjs"
   },
   "dependencies": {
     "cbor-x": "^1.6.4",

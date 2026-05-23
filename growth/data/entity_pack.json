@@ -1,0 +1,34 @@
+{
+  "topic": "AI Opt-Out Metadata Protection",
+  "entities": [
+    {
+      "name": "AI training opt-out metadata",
+      "summary": "Machine-readable metadata signal indicating training restrictions for media files.",
+      "applies_to": ["JPEG", "PNG", "WebP", "HEIC", "PDF"]
+    },
+    {
+      "name": "Creator ownership metadata",
+      "summary": "Embedded author, copyright, and licensing metadata to preserve attribution context.",
+      "applies_to": ["Image files", "Document files"]
+    },
+    {
+      "name": "EXIF privacy cleanup",
+      "summary": "Removal of GPS and device metadata that can reveal personal information.",
+      "applies_to": ["Photo files"]
+    }
+  ],
+  "citations": [
+    {
+      "title": "EXIF specification resources",
+      "url": "https://www.cipa.jp/std/documents/e/DC-008-Translation-2019-E.pdf"
+    },
+    {
+      "title": "XMP standard overview",
+      "url": "https://www.adobe.com/devnet/xmp.html"
+    },
+    {
+      "title": "PDF metadata concepts",
+      "url": "https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/"
+    }
+  ]
+}

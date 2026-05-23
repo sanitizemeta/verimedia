@@ -1,0 +1,85 @@
+{
+  "generatedAt": "2026-05-23T11:49:57.064Z",
+  "report": [
+    {
+      "file": "ai-opt-out-metadata.html",
+      "blocks": 2,
+      "types": [
+        "HowTo",
+        "FAQPage"
+      ]
+    },
+    {
+      "file": "index.html",
+      "blocks": 2,
+      "types": [
+        "Organization",
+        "INVALID_JSON"
+      ]
+    },
+    {
+      "file": "privacy.html",
+      "blocks": 2,
+      "types": [
+        "WebPage",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "file": "refund.html",
+      "blocks": 2,
+      "types": [
+        "WebPage",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "file": "remove-exif-from-photos.html",
+      "blocks": 2,
+      "types": [
+        "HowTo",
+        "FAQPage"
+      ]
+    },
+    {
+      "file": "remove-pdf-metadata.html",
+      "blocks": 2,
+      "types": [
+        "HowTo",
+        "FAQPage"
+      ]
+    },
+    {
+      "file": "terms.html",
+      "blocks": 2,
+      "types": [
+        "WebPage",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "file": "es/index.html",
+      "blocks": 2,
+      "types": [
+        "Organization",
+        "INVALID_JSON"
+      ]
+    },
+    {
+      "file": "fr/index.html",
+      "blocks": 2,
+      "types": [
+        "Organization",
+        "INVALID_JSON"
+      ]
+    },
+    {
+      "file": "de/index.html",
+      "blocks": 2,
+      "types": [
+        "Organization",
+        "INVALID_JSON"
+      ]
+    }
+  ]
+}

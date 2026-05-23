@@ -1,0 +1,12 @@
+{
+  "siteUrl": "https://verimedia.xyz",
+  "bing": {
+    "apiKey": "YOUR_BING_API_KEY",
+    "siteUrl": "https://verimedia.xyz"
+  },
+  "analytics": {
+    "cloudflareBeaconToken": "YOUR_CLOUDFLARE_BEACON_TOKEN",
+    "umamiScriptUrl": "https://umami.example.com/script.js",
+    "umamiWebsiteId": "YOUR_UMAMI_WEBSITE_ID"
+  }
+}
