@@ -748,6 +748,57 @@ function applyPaidTierUI(plan) {
   else if (plan === 'plus') setPlusActiveUI();
 }
 
+function initDebugPlanControls() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('debugplans') !== '1') return;
+
+  const wrap = document.createElement('div');
+  wrap.style.position = 'fixed';
+  wrap.style.right = '14px';
+  wrap.style.bottom = '14px';
+  wrap.style.zIndex = '99999';
+  wrap.style.display = 'flex';
+  wrap.style.gap = '8px';
+  wrap.style.flexWrap = 'wrap';
+  wrap.style.maxWidth = '280px';
+
+  const mkBtn = (label, bg) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = label;
+    b.style.padding = '8px 10px';
+    b.style.borderRadius = '8px';
+    b.style.border = '1px solid rgba(255,255,255,0.18)';
+    b.style.background = bg;
+    b.style.color = '#fff';
+    b.style.fontSize = '12px';
+    b.style.cursor = 'pointer';
+    return b;
+  };
+
+  const plusBtn = mkBtn('Debug: Plus', '#0f766e');
+  plusBtn.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_KEY_LICENSE, 'DEBUG_PLUS');
+    applyPaidTierUI('plus');
+  });
+
+  const proBtn = mkBtn('Debug: Pro', '#1d4ed8');
+  proBtn.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_KEY_LICENSE, 'DEBUG_PRO');
+    applyPaidTierUI('pro');
+  });
+
+  const resetBtn = mkBtn('Debug: Reset', '#374151');
+  resetBtn.addEventListener('click', () => {
+    localStorage.removeItem(STORAGE_KEY_LICENSE);
+    localStorage.removeItem(STORAGE_KEY_LICENSE_TIER);
+    window.location.reload();
+  });
+
+  wrap.append(plusBtn, proBtn, resetBtn);
+  document.body.appendChild(wrap);
+}
+
 async function verifyLicense(key) {
   const res = await fetch(LICENSE_VALIDATE_URL, {
     method: 'POST',
@@ -886,6 +937,8 @@ paddleCheckoutBtns.forEach(btn => {
 if (window.Paddle) {
   initPaddleOnce();
 }
+
+initDebugPlanControls();
 
 
 /* ==========================================================================
