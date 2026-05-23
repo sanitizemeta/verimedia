@@ -34,6 +34,10 @@ export interface SanitizeOptions {
   whitelabel?: boolean;
 }
 
+type EngineDependency = {
+  default?: any;
+};
+
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const HIGH_RISK_TAGS = new Set([
@@ -97,11 +101,10 @@ export const preloadEngine = () => {
   if (engineInitialized || typeof window === 'undefined') return;
   engineInitialized = true;
   
-  // Give the UI a moment to finish rendering before starting heavy network/parse work
+  // Give the UI a moment to finish rendering before starting light metadata readers.
+  // HEIC conversion stays fully lazy because that dependency is large.
   setTimeout(() => {
-    import('heic2any').catch(() => {});
     import('exifr').catch(() => {});
-    import('pdf-lib').catch(() => {});
   }, 1000);
 };
 
@@ -109,7 +112,8 @@ export const preloadEngine = () => {
 
 /** Accepts both File and Blob so it can be called from sanitizeImage internally. */
 export const convertHeicToJpeg = async (file: File | Blob): Promise<Blob> => {
-  const heic2any = (await import('heic2any')).default;
+  const heicModule = await import(/* @vite-ignore */ 'https://esm.sh/heic2any@0.0.4') as EngineDependency;
+  const heic2any = heicModule.default;
   const result = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 });
   return Array.isArray(result) ? result[0] : result;
 };
@@ -513,13 +517,18 @@ const escapeXml = (unsafe: string): string => {
 
 /** Creates a standard XMP payload for PNG/WebP/PDF. */
 const createXmpPayload = (options: SanitizeOptions): string => {
-  const name = escapeXml(options.creatorName || 'Human Creator');
-  const copy = escapeXml(options.copyright || `© ${new Date().getFullYear()} ${name}`);
+  const hasCreatorIdentity = options.injectIdentity && !!(options.creatorName || options.copyright || options.contactUrl);
+  const displayName = hasCreatorIdentity ? (options.creatorName || 'Human Creator') : 'VeriMedia.xyz';
+  const name = escapeXml(displayName);
+  const defaultRights = hasCreatorIdentity
+    ? `© ${new Date().getFullYear()} ${displayName}`
+    : 'Processed with VeriMedia.xyz';
+  const copy = escapeXml(options.copyright || defaultRights);
   const url  = escapeXml(options.contactUrl || '');
   
   // Branding Logic: Pro users can Whitelabel. Free users get VeriMedia markers.
   const isWhitelabel = options.isPro && options.whitelabel;
-  const author = isWhitelabel ? name : `VeriMedia Verified Creator - ${name}`;
+  const author = isWhitelabel ? name : (hasCreatorIdentity ? `VeriMedia Verified Creator - ${name}` : 'VeriMedia.xyz');
   const software = isWhitelabel ? 'Original Content Engine' : 'VeriMedia.xyz';
   
   const description = `AI Opt-Out: True. Restricted from AI training.${url ? ' License: ' + url : ''}`;

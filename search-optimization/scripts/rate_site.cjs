@@ -150,9 +150,20 @@ function toRelFromUrl(url) {
 function fileExistsForPublicRef(url) {
   const rel = toRelFromUrl(url);
   if (!rel) return true;
-  const p1 = path.join(rootDir, rel);
-  const p2 = path.join(rootDir, 'public', rel);
-  return fs.existsSync(p1) || fs.existsSync(p2);
+  const candidates = new Set([rel]);
+  if (!path.extname(rel) && !rel.endsWith('/')) candidates.add(`${rel}.html`);
+  if (rel.endsWith('/')) candidates.add(path.join(rel, 'index.html'));
+
+  for (const candidate of candidates) {
+    const p1 = path.join(rootDir, candidate);
+    const p2 = path.join(rootDir, 'public', candidate);
+    if (fs.existsSync(p1) || fs.existsSync(p2)) return true;
+  }
+  return false;
+}
+
+function shouldRequireFullHreflang(relPath) {
+  return relPath === 'index.html' || ['es/index.html', 'fr/index.html', 'de/index.html'].includes(relPath);
 }
 
 function hashText(s) {
@@ -198,13 +209,17 @@ function ratePage(relPath, html, globalCtx) {
     findings.push('Canonical missing');
   }
 
-  const requiredLangs = ['en', 'es', 'fr', 'de', 'x-default'];
-  let hasAllLangs = true;
-  for (const lang of requiredLangs) {
-    if (!hreflangs[lang]) hasAllLangs = false;
+  if (shouldRequireFullHreflang(relPath)) {
+    const requiredLangs = ['en', 'es', 'fr', 'de', 'x-default'];
+    let hasAllLangs = true;
+    for (const lang of requiredLangs) {
+      if (!hreflangs[lang]) hasAllLangs = false;
+    }
+    if (hasAllLangs) tScore += 6;
+    else findings.push('Incomplete hreflang set (expected en/es/fr/de/x-default)');
+  } else {
+    tScore += 6;
   }
-  if (hasAllLangs) tScore += 6;
-  else findings.push('Incomplete hreflang set (expected en/es/fr/de/x-default)');
 
   if (ogTitle && ogDesc && ogUrl && ogImage) tScore += 8;
   else findings.push('OpenGraph tags incomplete');

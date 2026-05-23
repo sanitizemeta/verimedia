@@ -130,11 +130,29 @@
       <p style="color: var(--text-secondary); margin-bottom: 1rem;">
         PDF files can expose sensitive document context. Metadata cleaning reduces privacy risk before publishing or sending files externally.
       </p>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        A PDF can contain visible content, document properties, embedded metadata streams, software producer fields,
+        author names, creation timestamps, outlines, attachments, and other structural data. Some of this information
+        is harmless inside a private workflow but unnecessary when sending a document outside your organization.
+      </p>
       <ul style="margin-left: 1rem; color: var(--text-secondary);">
         <li>Removes author and producer metadata fields.</li>
         <li>Reduces traceability from hidden document properties.</li>
         <li>Keeps PDF content intact while sanitizing metadata.</li>
       </ul>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Best Practice Before Sharing PDFs</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Keep the source document and an internal archive copy untouched. Before sending a public copy, remove hidden
+        metadata, confirm the visible content is final, and use a file name that does not reveal private client,
+        draft, or project information. For sensitive documents, review the PDF manually after cleaning.
+      </p>
+      <p style="color: var(--text-secondary);">
+        VeriMedia runs PDF cleanup locally in the browser. This is important for legal, business, and creative files
+        because the document does not need to be uploaded to a third-party conversion server.
+      </p>
     </section>
 
     <section class="faq-section" style="max-width:1000px; margin: 0 auto 4rem auto; padding: 0 1.5rem;">
@@ -147,6 +165,10 @@
         <div class="faq-item">
           <h3>Does this change the visible text in my PDF?</h3>
           <p>No, metadata cleanup targets hidden document properties.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Should I still review the cleaned PDF?</h3>
+          <p>Yes. Metadata removal is one privacy layer; sensitive visible content still needs a normal document review.</p>
         </div>
       </div>
     </section>

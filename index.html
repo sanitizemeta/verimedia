@@ -109,12 +109,21 @@
 
   <main>
     <!-- 1. Hero Section (Ultra-focused) -->
-    <section class="hero-section" style="max-width: 1000px; margin: 2.5rem auto 2.5rem auto; text-align: center; padding: 0 1.5rem;">
+    <section class="hero-section" style="max-width: 1120px; margin: 2.5rem auto 2.2rem auto; text-align: center; padding: 0 1.5rem;">
       <h1 class="hero-title" data-i18n="hero.title" style="font-size: clamp(2.3rem, 5.5vw, 3.8rem); line-height: 1.2; letter-spacing: -1.5px; margin: 0 0 1.2rem 0;">Stop AI Scrapers from Stealing Your Work.</h1>
       
       <article class="aeo-summary" aria-label="Tool Summary Box">
         <p data-i18n="hero.summary">VeriMedia embeds AI training opt-out and creator ownership signals directly into your files in under 100ms. Everything runs locally in your browser, so your media never leaves your device.</p>
       </article>
+      <div class="hero-action-row" aria-label="Primary actions">
+        <a href="#calculator-section" class="pricing-btn primary-btn">Clean a File Now</a>
+        <a href="#pricing-section" class="pricing-btn secondary-btn">Compare Plans</a>
+      </div>
+      <div class="hero-trust-strip" aria-label="Privacy and ownership guarantees">
+        <span><i data-lucide="hard-drive" aria-hidden="true"></i> Local browser processing</span>
+        <span><i data-lucide="bot-off" aria-hidden="true"></i> AI opt-out metadata</span>
+        <span><i data-lucide="copyright" aria-hidden="true"></i> Creator ownership tags</span>
+      </div>
     </section>
 
     <!-- 2. Interactive Sandbox (The Primary Focus) -->
@@ -158,6 +167,21 @@
               <button class="link-btn" id="trySampleBtn" data-i18n="sandbox.try_sample">Try Sample File</button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="sandbox-proof-row" aria-label="Tier behavior">
+        <div>
+          <strong>Free</strong>
+          <span>VeriMedia privacy and AI opt-out metadata</span>
+        </div>
+        <div>
+          <strong>Plus</strong>
+          <span>Your creator copyright plus VeriMedia verification</span>
+        </div>
+        <div>
+          <strong>Pro</strong>
+          <span>Whitelabel metadata for client and studio delivery</span>
         </div>
       </div>
 
@@ -385,21 +409,21 @@
         <div class="modal-icon-wrap">
           <i data-lucide="shield-check" style="width:32px; height:32px; color:var(--accent-cyan);"></i>
         </div>
-        <h3 data-i18n="checkout.pro_title">Creator Pro Lifetime</h3>
-        <p class="modal-subtitle" data-i18n="checkout.pro_subtitle">One-time payment. Use on up to 3 devices. No subscription, ever.</p>
+        <h3>Creator Plus Lifetime</h3>
+        <p class="modal-subtitle">One-time payment. Clean up to 100 files per batch and add creator copyright metadata.</p>
         <div class="payment-summary">
           <div class="summary-row">
-            <span data-i18n="checkout.item">Creator Pro Lifetime</span>
-            <strong>$19.00</strong>
+            <span>Creator Plus Lifetime</span>
+            <strong>$9.99</strong>
           </div>
           <div class="summary-row total-row">
             <span data-i18n="checkout.total">Total</span>
-            <strong>$19.00</strong>
+            <strong>$9.99</strong>
           </div>
         </div>
-        <button class="pricing-btn primary-btn paddle-checkout-btn">
+        <button class="pricing-btn primary-btn paddle-checkout-btn" data-plan="plus">
           <i data-lucide="lock" style="width: 16px; height: 16px; vertical-align:middle; margin-right:6px;"></i>
-          <span data-i18n="checkout.buy_btn">Buy Now — $19</span>
+          <span>Buy Plus - $9.99</span>
         </button>
         <p class="modal-footnote" data-i18n="checkout.buy_footnote">After payment, Paddle will email you a license key.</p>
         <button class="link-btn modal-switch-link" id="switchToActivate" data-i18n="checkout.already_key">Already have a key? Activate it here</button>
@@ -425,14 +449,14 @@
         <div class="modal-icon-wrap success-icon">
           <i data-lucide="check-circle-2" style="width:40px; height:40px; color:var(--accent-emerald);"></i>
         </div>
-        <h3 data-i18n="checkout.success_title">Creator Pro Active</h3>
+        <h3>Creator Plus Active</h3>
         <p class="modal-subtitle" data-i18n="checkout.success_subtitle">Your license is valid and active on this device.</p>
         <div class="success-feature-list">
-          <p><i data-lucide="check" style="width: 13px; height: 13px; color: var(--accent-emerald); vertical-align:middle; margin-right:6px;"></i><span data-i18n="checkout.unlocked_bulk">Bulk uploads unlocked</span></p>
-          <p><i data-lucide="check" style="width: 13px; height: 13px; color: var(--accent-emerald); vertical-align:middle; margin-right:6px;"></i><span data-i18n="checkout.unlocked_sig">Custom verified creator signatures active</span></p>
-          <p><i data-lucide="check" style="width: 13px; height: 13px; color: var(--accent-emerald); vertical-align:middle; margin-right:6px;"></i><span data-i18n="checkout.unlocked_badge">Google Licensable Badge Schema enabled</span></p>
+          <p><i data-lucide="check" style="width: 13px; height: 13px; color: var(--accent-emerald); vertical-align:middle; margin-right:6px;"></i><span>100-file batches unlocked</span></p>
+          <p><i data-lucide="check" style="width: 13px; height: 13px; color: var(--accent-emerald); vertical-align:middle; margin-right:6px;"></i><span>Creator profile metadata active</span></p>
+          <p><i data-lucide="check" style="width: 13px; height: 13px; color: var(--accent-emerald); vertical-align:middle; margin-right:6px;"></i><span>25MB file limit enabled</span></p>
         </div>
-        <button class="pricing-btn primary-btn" id="closeSuccessBtn" style="background: var(--accent-emerald);" data-i18n="checkout.start_pro">Start Using Pro</button>
+        <button class="pricing-btn primary-btn" id="closeSuccessBtn" style="background: var(--accent-emerald);">Start Using Plus</button>
       </div>
 
     </div>

@@ -1,6 +1,14 @@
-import { sanitizeImage, sanitizePDF, preloadEngine, extractMetadata } from './lib/engine.ts';
 import JSZip from 'https://esm.sh/jszip@3.10.1';
 import { trackEvent } from './lib/local-analytics.js';
+
+let engineModulePromise = null;
+
+function loadEngine() {
+  if (!engineModulePromise) {
+    engineModulePromise = import('./lib/engine.ts');
+  }
+  return engineModulePromise;
+}
 
 /* ==========================================================================
    📈 0a. Analytics Bootstrapping (Cloudflare / Umami)
@@ -144,8 +152,8 @@ async function incrementGlobalStats(amount = 1) {
 function applyTranslations() {
   const elements = document.querySelectorAll('[data-i18n], [data-i18n-alt], [data-i18n-html]');
   elements.forEach(el => {
-    // Skip updating pricing button if Pro is active
-    if (isPro && (el.id === 'paddleCheckoutBtn' || el.classList.contains('paddle-checkout-btn'))) {
+    // Keep paid CTA state visible after activation.
+    if ((isPro || isPlus) && (el.id === 'paddleCheckoutBtn' || el.classList.contains('paddle-checkout-btn'))) {
       return;
     }
 
@@ -196,8 +204,9 @@ function applyTranslations() {
     window.lucide.createIcons();
   }
 
-  // Re-apply Pro UI if active
+  // Re-apply paid UI if active
   if (isPro) setProActiveUI();
+  else if (isPlus) setPlusActiveUI();
 
   // ── SEO & Metadata Synchronization ───────────────────────────────────────
   const lang = currentLang || 'en';
@@ -652,8 +661,78 @@ const closeSuccessBtn   = document.getElementById('closeSuccessBtn');
 const paddleCheckoutBtns = document.querySelectorAll('#paddleCheckoutBtn, .paddle-checkout-btn');
 let paddleReadyPromise = null;
 let paddleInitialized = false;
+let pendingCheckoutPlan = 'plus';
 
 let modalTriggerElement = null;
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function getPlanCopy(plan = 'plus') {
+  return plan === 'pro'
+    ? {
+        title: 'Creator Pro Lifetime',
+        subtitle: 'One-time payment. Unlimited batches, 100MB files, whitelabel mode, and up to 3 devices.',
+        item: 'Creator Pro Lifetime',
+        price: '$19.00',
+        buy: 'Buy Pro - $19',
+        successTitle: 'Creator Pro Active',
+        start: 'Start Using Pro',
+        features: ['Everything in Plus unlocked', 'Unlimited batch processing active', 'Whitelabel metadata mode enabled']
+      }
+    : {
+        title: 'Creator Plus Lifetime',
+        subtitle: 'One-time payment. Clean up to 100 files per batch and add creator copyright metadata.',
+        item: 'Creator Plus Lifetime',
+        price: '$9.99',
+        buy: 'Buy Plus - $9.99',
+        successTitle: 'Creator Plus Active',
+        start: 'Start Using Plus',
+        features: ['100-file batches unlocked', 'Creator profile metadata active', '25MB file limit enabled']
+      };
+}
+
+function updateCheckoutModal(plan = pendingCheckoutPlan) {
+  pendingCheckoutPlan = plan === 'pro' ? 'pro' : 'plus';
+  const copy = getPlanCopy(pendingCheckoutPlan);
+  if (!viewBuy || !viewSuccess) return;
+
+  const title = viewBuy.querySelector('h3');
+  const subtitle = viewBuy.querySelector('.modal-subtitle');
+  const summaryRows = viewBuy.querySelectorAll('.summary-row');
+  const buyBtn = viewBuy.querySelector('.paddle-checkout-btn');
+  const buyText = buyBtn?.querySelector('span');
+
+  if (title) title.textContent = copy.title;
+  if (subtitle) subtitle.textContent = copy.subtitle;
+  if (summaryRows[0]) {
+    const item = summaryRows[0].querySelector('span');
+    const price = summaryRows[0].querySelector('strong');
+    if (item) item.textContent = copy.item;
+    if (price) price.textContent = copy.price;
+  }
+  if (summaryRows[1]) {
+    const total = summaryRows[1].querySelector('strong');
+    if (total) total.textContent = copy.price;
+  }
+  if (buyBtn) buyBtn.dataset.plan = pendingCheckoutPlan;
+  if (buyText) buyText.textContent = copy.buy;
+
+  const successTitle = viewSuccess.querySelector('h3');
+  const successFeatures = viewSuccess.querySelectorAll('.success-feature-list span');
+  const startBtn = viewSuccess.querySelector('#closeSuccessBtn');
+  if (successTitle) successTitle.textContent = copy.successTitle;
+  successFeatures.forEach((el, index) => {
+    if (copy.features[index]) el.textContent = copy.features[index];
+  });
+  if (startBtn) startBtn.textContent = copy.start;
+}
 
 function showModalView(view) {
   if (!viewBuy || !viewActivate || !viewSuccess) return;
@@ -664,6 +743,7 @@ function showModalView(view) {
 function openModal(startView = viewBuy) {
   if (!paymentModal) return;
   modalTriggerElement = document.activeElement;
+  if (startView === viewBuy) updateCheckoutModal(pendingCheckoutPlan);
   showModalView(startView);
   paymentModal.classList.add('active');
   trackEvent('pricing_opened', { view: startView?.id || 'unknown' });
@@ -686,6 +766,7 @@ const profileUpgradeBtn = document.getElementById('profileUpgradeBtn');
 if (profileUpgradeBtn) {
   profileUpgradeBtn.addEventListener('click', () => {
     closeProfilePanel();
+    updateCheckoutModal('plus');
     openModal(viewBuy);
   });
 }
@@ -789,17 +870,18 @@ if (activateLicenseBtn && licenseKeyInput) {
     try {
       const data = await verifyLicense(key);
       if (data.valid) applyPaidTierUI(data.plan === 'plus' ? 'plus' : 'pro');
-      else localStorage.removeItem(STORAGE_KEY_LICENSE);
+      else {
+        localStorage.removeItem(STORAGE_KEY_LICENSE);
+        localStorage.removeItem(STORAGE_KEY_LICENSE_TIER);
+      }
     } catch {
-      const cachedTier = localStorage.getItem(STORAGE_KEY_LICENSE_TIER);
-      if (cachedTier === 'plus') setPlusActiveUI();
-      else setProActiveUI();
+      console.warn('License validation unavailable; paid features remain locked until validation succeeds.');
     }
   }
   
   const params = new URLSearchParams(window.location.search);
   const lCode = params.get('license') || params.get('license_code');
-  if (lCode && !isPro) {
+  if (lCode && !isPro && !isPlus) {
     openModal(viewActivate);
     if (licenseKeyInput) {
       licenseKeyInput.value = lCode;
@@ -815,17 +897,22 @@ function initPaddleOnce() {
     eventCallback: function(event) {
       if (event.name === 'checkout.completed') {
         const txnId = event.data?.transaction_id || event.data?.id;
+        const eventPlan = event.data?.custom_data?.plan === 'pro'
+          ? 'pro'
+          : (event.data?.custom_data?.plan === 'plus' ? 'plus' : pendingCheckoutPlan);
         if (txnId) {
           localStorage.setItem(STORAGE_KEY_LICENSE, txnId.toUpperCase());
           verifyLicense(txnId.toUpperCase())
             .then((validation) => {
-              const plan = validation?.plan === 'plus' ? 'plus' : 'pro';
+              const plan = validation?.plan === 'plus' ? 'plus' : (validation?.plan === 'pro' ? 'pro' : eventPlan);
               applyPaidTierUI(plan);
+              updateCheckoutModal(plan);
               trackEvent('purchase_success', { provider: 'paddle', plan });
             })
             .catch(() => {
-              setProActiveUI();
-              trackEvent('purchase_success', { provider: 'paddle', plan: 'pro_fallback' });
+              applyPaidTierUI(eventPlan);
+              updateCheckoutModal(eventPlan);
+              trackEvent('purchase_success', { provider: 'paddle', plan: eventPlan, validation: 'pending' });
             })
             .finally(() => {
               openModal(viewSuccess);
@@ -866,6 +953,8 @@ paddleCheckoutBtns.forEach(btn => {
   btn.addEventListener('click', async () => {
     try {
       const selectedPlan = btn.dataset.plan || (btn.classList.contains('paddle-plus-checkout-btn') ? 'plus' : 'pro');
+      pendingCheckoutPlan = selectedPlan;
+      updateCheckoutModal(selectedPlan);
       const priceId = selectedPlan === 'plus' ? PLUS_PRICE_ID : PRO_PRICE_ID;
       trackEvent('plan_selected', { plan: selectedPlan, source: btn.className || 'paddle_btn' });
       trackEvent('checkout_started', { source: btn.className || 'paddle_btn', plan: selectedPlan });
@@ -965,7 +1054,7 @@ function renderQueuedAuditState() {
       <h4>Files are queued</h4>
       <p class="queue-meta">${queuedFiles.length} file${queuedFiles.length === 1 ? '' : 's'} loaded • ${totalMb}MB total • ${maxMb}MB/file limit</p>
       <ul class="queue-file-preview">
-        ${preview.map((f) => `<li title="${f.name}">${f.name}</li>`).join('')}
+        ${preview.map((f) => `<li title="${escapeHtml(f.name)}">${escapeHtml(f.name)}</li>`).join('')}
         ${overflow > 0 ? `<li>+${overflow} more</li>` : ''}
       </ul>
       <p class="queue-hint">Click <strong>Clean Now</strong> to start secure processing.</p>
@@ -1004,7 +1093,9 @@ if (dropzone && fileInput) {
     }
   });
 
-  preloadEngine();
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(() => loadEngine(), { timeout: 3500 });
+  }
   // Initial stats fetch
   fetchGlobalStats();
 }
@@ -1153,15 +1244,16 @@ async function handleSingleFileUpload(file) {
   const progressBarFill = document.getElementById('progressBarFill');
 
   try {
+    const { extractMetadata, sanitizeImage, sanitizePDF } = await loadEngine();
     const options = {
       keepIcc: false, keepAnnots: false, keepCameraSpecs: isPro,
-      injectIdentity: isPro && (creatorProfile.name || creatorProfile.copyright || creatorProfile.url),
+      injectIdentity: (isPro || isPlus) && (creatorProfile.name || creatorProfile.copyright || creatorProfile.url),
       creatorName: creatorProfile.name, copyright: creatorProfile.copyright, contactUrl: creatorProfile.url,
-      aiOptOut: creatorProfile.aiOnly === true, whitelabel: creatorProfile.whitelabel === true, isPro: isPro
+      aiOptOut: creatorProfile.aiOnly === true, whitelabel: isPro && creatorProfile.whitelabel === true, isPro: isPro
     };
 
     let reportBefore = await extractMetadata(file);
-    let tagsAdded = options.injectIdentity ? 4 : (options.aiOptOut ? 1 : 0);
+    let tagsAdded = options.injectIdentity ? 4 : (options.aiOptOut ? 2 : 0);
 
     // Core Engine Call (Now handles JPEG identity efficiently)
     const outputBlob = category === 'pdf' 
@@ -1180,6 +1272,9 @@ async function handleSingleFileUpload(file) {
           { name: 'Artist', value: options.creatorName, category: 'Creator' },
           { name: 'Copyright', value: options.copyright, category: 'Creator' },
           { name: 'Software', value: options.whitelabel ? 'Original Content Engine' : 'VeriMedia.xyz', category: 'Source' }
+        ] : []),
+        ...(!options.injectIdentity && options.aiOptOut && !options.whitelabel ? [
+          { name: 'Software', value: 'VeriMedia.xyz', category: 'Source' }
         ] : []),
         ...(options.aiOptOut ? [{ name: 'AI Opt-Out', value: 'True', category: 'Privacy' }] : []),
         ...(options.contactUrl ? [{ name: 'WebStatement', value: options.contactUrl, category: 'License' }] : [])
@@ -1222,13 +1317,20 @@ async function processBulkFiles(files) {
 
   const progressBarFill = document.getElementById('batchProgressBarFill');
   const batchFileList = document.getElementById('batchFileList');
+  const { extractMetadata, sanitizeImage, sanitizePDF } = await loadEngine();
 
-  const options = { isPro: isPro, aiOptOut: creatorProfile.aiOnly !== false, injectIdentity: !!(creatorProfile.name || creatorProfile.copyright || creatorProfile.url), ...creatorProfile };
+  const hasPaidPlan = isPro || isPlus;
+  const options = {
+    ...creatorProfile,
+    isPro,
+    aiOptOut: creatorProfile.aiOnly !== false,
+    injectIdentity: hasPaidPlan && !!(creatorProfile.name || creatorProfile.copyright || creatorProfile.url)
+  };
   options.creatorName = creatorProfile.name || '';
   options.copyright = creatorProfile.copyright || '';
   options.contactUrl = creatorProfile.url || '';
-  options.whitelabel = creatorProfile.whitelabel === true;
-  let tagsAdded = options.injectIdentity ? 4 : (options.aiOptOut ? 1 : 0);
+  options.whitelabel = isPro && creatorProfile.whitelabel === true;
+  let tagsAdded = options.injectIdentity ? 4 : (options.aiOptOut ? 2 : 0);
 
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
@@ -1237,7 +1339,8 @@ async function processBulkFiles(files) {
     // Add file to the live list as "Scrubbing"
     const fileItem = document.createElement('div');
     fileItem.className = 'audit-item';
-    fileItem.innerHTML = `<span class="audit-icon pulse">${ICON_SCRUBBING}</span> <span class="batch-file-name" title="${file.name}">${file.name}</span> <span class="compact-tag" style="opacity:0.6;">SCRUBBING</span>`;
+    const safeFileName = escapeHtml(file.name);
+    fileItem.innerHTML = `<span class="audit-icon pulse">${ICON_SCRUBBING}</span> <span class="batch-file-name" title="${safeFileName}">${safeFileName}</span> <span class="compact-tag" style="opacity:0.6;">SCRUBBING</span>`;
     batchFileList.prepend(fileItem);
 
     if (category) {
@@ -1260,6 +1363,9 @@ async function processBulkFiles(files) {
               { name: 'Copyright', value: options.copyright || 'N/A', category: 'Creator' },
               { name: 'Software', value: options.whitelabel ? 'Original Content Engine' : 'VeriMedia.xyz', category: 'Source' }
             ] : []),
+            ...(!options.injectIdentity && options.aiOptOut && !options.whitelabel ? [
+              { name: 'Software', value: 'VeriMedia.xyz', category: 'Source' }
+            ] : []),
             ...(options.aiOptOut ? [{ name: 'AI Opt-Out', value: 'True', category: 'Privacy' }] : []),
             ...(options.contactUrl ? [{ name: 'WebStatement', value: options.contactUrl, category: 'License' }] : [])
           ]
@@ -1267,12 +1373,12 @@ async function processBulkFiles(files) {
         
         successCount++;
         // Update item to "Cleaned"
-        fileItem.innerHTML = `<span class="audit-icon">${ICON_CLEANED}</span> <span class="batch-file-name" title="${file.name}">${file.name}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
+        fileItem.innerHTML = `<span class="audit-icon">${ICON_CLEANED}</span> <span class="batch-file-name" title="${safeFileName}">${safeFileName}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
       } catch (e) {
-        fileItem.innerHTML = `<span class="audit-icon">${ICON_ERROR}</span> <span class="batch-file-name" title="${file.name}">${file.name}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
+        fileItem.innerHTML = `<span class="audit-icon">${ICON_ERROR}</span> <span class="batch-file-name" title="${safeFileName}">${safeFileName}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
       }
     } else {
-      fileItem.innerHTML = `<span class="audit-icon">${ICON_SKIP}</span> <span class="batch-file-name" title="${file.name}">${file.name}</span> <span class="compact-tag">SKIP</span>`;
+      fileItem.innerHTML = `<span class="audit-icon">${ICON_SKIP}</span> <span class="batch-file-name" title="${safeFileName}">${safeFileName}</span> <span class="compact-tag">SKIP</span>`;
     }
 
     // Update global progress

@@ -131,11 +131,30 @@
 
     <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
       <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">What This Signal Covers</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        AI opt-out metadata is useful because many image files travel far beyond the page where they were first published.
+        A file can be downloaded, re-uploaded, sent to clients, pinned to mood boards, or stored in media libraries.
+        Embedding the usage signal inside the file gives the work a portable notice that remains attached after export.
+      </p>
       <ul style="margin-left: 1rem; color: var(--text-secondary);">
         <li>Adds standardized AI opt-out metadata tags in processed files.</li>
         <li>Optionally includes creator name, copyright, and licensing URL tags.</li>
         <li>Runs 100% locally in your browser with no file upload.</li>
       </ul>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Recommended Publishing Workflow</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Start by removing private metadata, especially GPS coordinates and device identifiers. Then add AI opt-out
+        metadata and creator ownership fields before publishing the final file. If you publish on your own website,
+        pair file-level metadata with visible licensing terms, an image credit, and a clear portfolio or contact page.
+      </p>
+      <p style="color: var(--text-secondary);">
+        Free users can add VeriMedia-branded opt-out metadata. Creator Plus users can add creator copyright fields
+        while keeping VeriMedia verification metadata. Creator Pro users can remove VeriMedia branding with whitelabel
+        metadata for client delivery or studio workflows.
+      </p>
     </section>
 
     <section class="faq-section" style="max-width:1000px; margin: 0 auto 4rem auto; padding: 0 1.5rem;">
@@ -148,6 +167,10 @@
         <div class="faq-item">
           <h3>Can I use this on client work before delivery?</h3>
           <p>Yes, it helps set explicit AI usage intent and creator attribution before publication.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Will every AI company honor the metadata?</h3>
+          <p>No metadata signal can force every crawler to comply. The value is that responsible systems can detect a clear machine-readable restriction.</p>
         </div>
       </div>
     </section>

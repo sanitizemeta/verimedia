@@ -132,11 +132,29 @@
         EXIF cleanup removes metadata embedded by phones and cameras, including geolocation and device fingerprints.
         This helps protect personal privacy before posting to social platforms, marketplaces, or client portals.
       </p>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Photos often contain more than visible pixels. A phone camera can store latitude, longitude, capture time,
+        device model, lens information, software history, and sometimes unique identifiers. These fields are useful
+        inside a private photo library, but they can become risky when the image is published publicly.
+      </p>
       <ul style="margin-left: 1rem; color: var(--text-secondary);">
         <li>Removes GPS location coordinates and place hints.</li>
         <li>Removes camera model, lens, and device identifier tags.</li>
         <li>Preserves visual quality while stripping metadata payloads.</li>
       </ul>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">When To Strip EXIF Data</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Strip EXIF before publishing home photos, location-sensitive reporting, marketplace listings, creator previews,
+        portfolio samples, or any image sent to a public channel. For professional photography, keep an untouched
+        archive copy privately, then publish a sanitized version online.
+      </p>
+      <p style="color: var(--text-secondary);">
+        VeriMedia combines privacy cleanup with optional AI opt-out and copyright metadata. That means the published
+        copy can remove private data while still carrying a clear ownership and usage signal.
+      </p>
     </section>
 
     <section class="faq-section" style="max-width:1000px; margin: 0 auto 4rem auto; padding: 0 1.5rem;">
@@ -149,6 +167,10 @@
         <div class="faq-item">
           <h3>Can I remove metadata from multiple photos?</h3>
           <p>Bulk processing is available in Creator Pro, while single-file cleanup works in the free tier.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does removing EXIF reduce image quality?</h3>
+          <p>For supported formats, VeriMedia uses byte-level metadata cleanup where possible so the image content is preserved.</p>
         </div>
       </div>
     </section>
