@@ -1203,14 +1203,14 @@ function drawReport(files) {
 
           return `
             <tr>
-              <td style="word-break: break-all; font-weight:500;">${displayFilename}</td>
-              <td style="text-align: center; color: var(--accent-rose); font-weight:700;">${stat.removed}</td>
-              <td style="text-align: center; color: var(--accent-emerald); font-weight:700;">${stat.added}</td>
-              <td style="text-align: right;" class="score-jump">
+              <td class="audit-file-col" title="${stat.filename}">${displayFilename}</td>
+              <td class="audit-removed-col">${stat.removed}</td>
+              <td class="audit-added-col">${stat.added}</td>
+              <td class="audit-score-col score-jump">
                 <span class="score-old">${stat.scoreOld || stat.scoreBefore}</span> 
                 <span class="score-new">→ ${stat.scoreAfter}</span>
               </td>
-              <td style="text-align: center;">
+              <td class="audit-details-col">
                 <button class="details-icon-btn view-tag-details" data-index="${index}" title="${translations.sandbox?.details_label || 'Details'}">
                   <i data-lucide="eye" style="width:14px; height:14px;"></i>
                 </button>
