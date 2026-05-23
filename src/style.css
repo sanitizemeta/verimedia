@@ -664,7 +664,7 @@ main {
 
 .sandbox-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 2.2rem;
   align-items: stretch;
   overflow: visible !important;
@@ -689,6 +689,7 @@ main {
   text-align: center;
   position: relative;
   overflow: visible !important;
+  min-width: 0;
 }
 
 .hidden-input {
@@ -778,6 +779,7 @@ main {
   min-height: 280px;
   height: 100%;
   overflow: visible !important;
+  min-width: 0;
 }
 
 .report-header {
@@ -846,6 +848,7 @@ main {
   align-items: center;
   padding: 1.5rem;
   width: 100%;
+  min-width: 0;
 }
 
 .empty-state {
@@ -1036,6 +1039,8 @@ main {
   transform: translateY(10px);
   animation: slide-in 0.4s forwards var(--ease-spring);
   min-width: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 @keyframes slide-in {
@@ -1067,6 +1072,7 @@ main {
   text-overflow: ellipsis;
   white-space: nowrap;
   display: block;
+  max-width: 100%;
 }
 
 #batchFileList .audit-item {
