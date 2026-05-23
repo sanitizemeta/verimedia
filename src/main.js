@@ -842,6 +842,8 @@ const statusBadge = document.getElementById('statusBadge');
 const reportContent = document.getElementById('reportContent');
 let processedBlob = null;
 let processedFileName = '';
+const MAX_FREE_FILES = 1;
+const MAX_PRO_FILES = 100;
 
 if (dropzone && fileInput) {
   dropzone.addEventListener('click', () => {
@@ -952,8 +954,12 @@ let auditStats = [];
 async function handleFiles(fileList) {
   const files = Array.from(fileList);
   if (files.length === 0) return;
-  if (files.length > 1 && !isPro) {
-    if(reportContent) reportContent.innerHTML = buildErrorItem('Bulk processing is a Creator Pro feature.');
+  if (!isPro && files.length > MAX_FREE_FILES) {
+    if(reportContent) reportContent.innerHTML = buildErrorItem('Bulk processing is a Creator Pro feature (up to 100 files).');
+    return;
+  }
+  if (isPro && files.length > MAX_PRO_FILES) {
+    if(reportContent) reportContent.innerHTML = buildErrorItem(`Creator Pro supports up to ${MAX_PRO_FILES} files per batch.`);
     return;
   }
   
@@ -970,7 +976,7 @@ async function handleSingleFileUpload(file) {
     return;
   }
 
-  processedFileName = file.name.replace(/\.[^/.]+$/, '') + (category === 'pdf' ? '_clean.pdf' : '_ai_safe' + getOutputExt(file));
+  processedFileName = getNormalizedOutputName(file, category);
   if(statusBadge) { statusBadge.innerText = 'Scanning...'; statusBadge.className = 'status-indicator scanning'; }
 
   reportContent.innerHTML = `
@@ -1070,7 +1076,8 @@ async function processBulkFiles(files) {
       try {
         let reportBefore = await extractMetadata(file);
         const blob = category === 'pdf' ? new Blob([await sanitizePDF(file, options)]) : await sanitizeImage(file, options);
-        zip.file(file.name.replace(/\.[^/.]+$/, '') + '_safe' + getOutputExt(file), blob);
+        const cleanName = getNormalizedOutputName(file, category, '_safe');
+        zip.file(cleanName, blob);
         
         auditStats.push({
           filename: file.name,
@@ -1104,9 +1111,11 @@ async function processBulkFiles(files) {
     const progress = Math.round(((i + 1) / total) * 100);
     if (progressBarFill) progressBarFill.style.width = progress + '%';
     if (statusBadge) statusBadge.innerText = `Processing (${i+1}/${total})...`;
+    if ((i + 1) % 10 === 0) await new Promise(resolve => setTimeout(resolve, 0));
   }
-  
-  const zipBlob = await zip.generateAsync({ type: 'blob' });
+
+  if (statusBadge) statusBadge.innerText = `Finalizing ZIP (${successCount}/${total})...`;
+  const zipBlob = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
   processedBlob = zipBlob;
   processedBlob._url = URL.createObjectURL(zipBlob);
   processedFileName = `VeriMedia_Batch_${successCount}_Files.zip`;
@@ -1127,6 +1136,20 @@ function getFileCategory(file) {
 function getOutputExt(file) {
   if (/\.(heic|heif)$/i.test(file.name)) return '.jpg';
   return (file.name.match(/\.[^/.]+$/)?.[0] || '.jpg').toLowerCase();
+}
+
+function getBaseNameWithoutSafeSuffix(fileName) {
+  const base = fileName.replace(/\.[^/.]+$/, '');
+  return base
+    .replace(/(_ai_safe)+$/i, '')
+    .replace(/(_safe)+$/i, '')
+    .replace(/(_clean)+$/i, '');
+}
+
+function getNormalizedOutputName(file, category, imageSuffix = '_ai_safe') {
+  const base = getBaseNameWithoutSafeSuffix(file.name);
+  if (category === 'pdf') return `${base}_clean.pdf`;
+  return `${base}${imageSuffix}${getOutputExt(file)}`;
 }
 
 function buildErrorItem(m) { return `<div class="audit-item danger"><span>${m}</span></div>`; }

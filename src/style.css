@@ -806,6 +806,11 @@ main {
   border-radius: 4px;
   border: 1px solid transparent;
   transition: var(--transition-fast);
+  min-width: 190px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .status-indicator.idle {
@@ -1730,9 +1735,9 @@ footer {
 
 /* Profile panel overlay — reuses modal-overlay structure */
 .profile-panel-overlay {
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  overflow-y: auto; /* Allow the entire page to scroll if modal is tall */
+  overflow-y: auto;
   padding: 3rem 1.5rem;
 }
 
@@ -1747,14 +1752,14 @@ footer {
 }
 
 .profile-panel-card {
-  max-width: 620px;
+  max-width: 760px;
   width: 100%;
-  padding: 2.8rem 3.5rem;
+  padding: 2.4rem 2.2rem;
   text-align: left;
   border: 1px solid hsla(189, 94%, 43%, 0.2);
   position: relative;
   /* Visual Polish: Hidden scroller but still functional */
-  max-height: 88vh;
+  max-height: min(900px, 88vh);
   overflow-y: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
@@ -1855,13 +1860,39 @@ footer {
 }
 
 .profile-label {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-primary);
   letter-spacing: 0.02em;
   text-transform: uppercase;
   display: flex;
   align-items: center;
+}
+
+.audit-panel-card {
+  max-width: 980px;
+  width: min(980px, 96vw);
+  padding: 2rem 1.8rem;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.audit-panel-card .modal-subtitle {
+  margin-bottom: 1.1rem;
+}
+
+#auditTableWrapper {
+  max-height: 52vh;
+  overflow: auto;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+}
+
+#auditTableWrapper table thead th {
+  position: sticky;
+  top: 0;
+  background: rgba(7, 12, 22, 0.95);
+  z-index: 2;
 }
 
 .profile-hint {
@@ -1915,4 +1946,3 @@ footer {
 .modal-switch-link {
   margin-top: 1rem; /* More space above "Already have a key?" */
 }
-
