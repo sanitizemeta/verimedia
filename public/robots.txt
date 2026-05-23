@@ -1,6 +1,7 @@
+Sitemap: https://verimedia.xyz/sitemap.xml
+
 User-agent: *
 Allow: /
-Sitemap: https://verimedia.xyz/sitemap.xml
 
 User-agent: Bingbot
 Allow: /
