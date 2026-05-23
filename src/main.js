@@ -748,57 +748,6 @@ function applyPaidTierUI(plan) {
   else if (plan === 'plus') setPlusActiveUI();
 }
 
-function initDebugPlanControls() {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('debugplans') !== '1') return;
-
-  const wrap = document.createElement('div');
-  wrap.style.position = 'fixed';
-  wrap.style.right = '14px';
-  wrap.style.bottom = '14px';
-  wrap.style.zIndex = '99999';
-  wrap.style.display = 'flex';
-  wrap.style.gap = '8px';
-  wrap.style.flexWrap = 'wrap';
-  wrap.style.maxWidth = '280px';
-
-  const mkBtn = (label, bg) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = label;
-    b.style.padding = '8px 10px';
-    b.style.borderRadius = '8px';
-    b.style.border = '1px solid rgba(255,255,255,0.18)';
-    b.style.background = bg;
-    b.style.color = '#fff';
-    b.style.fontSize = '12px';
-    b.style.cursor = 'pointer';
-    return b;
-  };
-
-  const plusBtn = mkBtn('Debug: Plus', '#0f766e');
-  plusBtn.addEventListener('click', () => {
-    localStorage.setItem(STORAGE_KEY_LICENSE, 'DEBUG_PLUS');
-    applyPaidTierUI('plus');
-  });
-
-  const proBtn = mkBtn('Debug: Pro', '#1d4ed8');
-  proBtn.addEventListener('click', () => {
-    localStorage.setItem(STORAGE_KEY_LICENSE, 'DEBUG_PRO');
-    applyPaidTierUI('pro');
-  });
-
-  const resetBtn = mkBtn('Debug: Reset', '#374151');
-  resetBtn.addEventListener('click', () => {
-    localStorage.removeItem(STORAGE_KEY_LICENSE);
-    localStorage.removeItem(STORAGE_KEY_LICENSE_TIER);
-    window.location.reload();
-  });
-
-  wrap.append(plusBtn, proBtn, resetBtn);
-  document.body.appendChild(wrap);
-}
-
 async function verifyLicense(key) {
   const res = await fetch(LICENSE_VALIDATE_URL, {
     method: 'POST',
@@ -938,8 +887,6 @@ if (window.Paddle) {
   initPaddleOnce();
 }
 
-initDebugPlanControls();
-
 
 /* ==========================================================================
    ⚙️ 4. Main Processing Engine (Index Only)
@@ -950,6 +897,13 @@ const statusBadge = document.getElementById('statusBadge');
 const reportContent = document.getElementById('reportContent');
 let processedBlob = null;
 let processedFileName = '';
+const cleanNowBtn = document.getElementById('cleanNowBtn');
+const queuedFilesMeta = document.getElementById('queuedFilesMeta');
+const sampleFileBtn = document.getElementById('sampleFileBtn');
+const trySampleBtn = document.getElementById('trySampleBtn');
+let isProcessing = false;
+let queuedFiles = [];
+
 const MAX_FREE_FILES = 1;
 const MAX_PLUS_FILES = 100;
 const MAX_PRO_FILES = Number.POSITIVE_INFINITY;
@@ -959,23 +913,62 @@ const MAX_FILE_MB = {
   pro: 100
 };
 
+function setProcessingState(active) {
+  isProcessing = active;
+  if (dropzone) {
+    dropzone.classList.toggle('processing-disabled', active);
+    dropzone.setAttribute('aria-disabled', active ? 'true' : 'false');
+  }
+  if (fileInput) fileInput.disabled = active;
+  if (sampleFileBtn) sampleFileBtn.style.display = active ? 'none' : '';
+  if (trySampleBtn) trySampleBtn.style.display = active ? 'none' : '';
+  if (cleanNowBtn) cleanNowBtn.disabled = active;
+}
+
+function updateQueueUI() {
+  if (!queuedFilesMeta || !cleanNowBtn) return;
+  const count = queuedFiles.length;
+  if (count > 0) {
+    queuedFilesMeta.textContent = `${count} file${count === 1 ? '' : 's'} loaded`;
+    queuedFilesMeta.style.display = 'block';
+    cleanNowBtn.style.display = 'inline-flex';
+  } else {
+    queuedFilesMeta.style.display = 'none';
+    cleanNowBtn.style.display = 'none';
+  }
+}
+
+function queueFiles(fileList) {
+  if (isProcessing) return;
+  queuedFiles = Array.from(fileList || []);
+  updateQueueUI();
+}
+
 if (dropzone && fileInput) {
   dropzone.addEventListener('click', () => {
+    if (isProcessing) return;
     trackEvent('upload_started', { source: 'dropzone_click' });
     fileInput.click();
   });
-  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+  dropzone.addEventListener('dragover', e => { if (isProcessing) return; e.preventDefault(); dropzone.classList.add('dragover'); });
   dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
-  dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('dragover'); if (e.dataTransfer.files.length) { trackEvent('upload_started', { source: 'drop', files: e.dataTransfer.files.length }); handleFiles(e.dataTransfer.files); } });
-  fileInput.addEventListener('change', e => { if (e.target.files.length) { trackEvent('upload_started', { source: 'file_picker', files: e.target.files.length }); handleFiles(e.target.files); } });
+  dropzone.addEventListener('drop', e => {
+    if (isProcessing) return;
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+    if (e.dataTransfer.files.length) {
+      trackEvent('upload_started', { source: 'drop', files: e.dataTransfer.files.length });
+      queueFiles(e.dataTransfer.files);
+    }
+  });
+  fileInput.addEventListener('change', e => { if (!isProcessing && e.target.files.length) { trackEvent('upload_started', { source: 'file_picker', files: e.target.files.length }); queueFiles(e.target.files); } });
 
-  const trySampleBtn = document.getElementById('trySampleBtn');
   const sampleLinkBtn = document.getElementById('sampleLinkBtn');
-  const sampleFileBtn = document.getElementById('sampleFileBtn');
   
   [trySampleBtn, sampleLinkBtn, sampleFileBtn].forEach(btn => {
     if (btn) {
       btn.addEventListener('click', (e) => {
+        if (isProcessing) return;
         e.stopPropagation();
         runInteractiveDemo();
       });
@@ -985,6 +978,17 @@ if (dropzone && fileInput) {
   preloadEngine();
   // Initial stats fetch
   fetchGlobalStats();
+}
+
+if (cleanNowBtn) {
+  cleanNowBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (isProcessing || queuedFiles.length === 0) return;
+    const filesToProcess = queuedFiles.slice();
+    queuedFiles = [];
+    updateQueueUI();
+    await handleFiles(filesToProcess);
+  });
 }
 
 /**
@@ -999,6 +1003,7 @@ function runLiveTicker() {
 
 async function runInteractiveDemo() {
   if (!reportContent) return;
+  setProcessingState(true);
   
   if(statusBadge) { statusBadge.innerText = 'Scanning...'; statusBadge.className = 'status-indicator scanning'; }
   
@@ -1040,7 +1045,7 @@ async function runInteractiveDemo() {
   }
 
   await new Promise(r => setTimeout(r, 100));
-  if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
+  if(statusBadge) { statusBadge.innerText = 'Complete · 1 cleaned'; statusBadge.className = 'status-indicator complete'; }
   
   auditStats = [{
     filename: 'demo_iphone_photo.jpg',
@@ -1059,8 +1064,9 @@ async function runInteractiveDemo() {
     dBtn.innerText = 'Now Try Your Own File';
     dBtn.style.background = 'var(--accent-cyan)';
     dBtn.removeEventListener('click', triggerDownload);
-    dBtn.addEventListener('click', () => { fileInput.click(); });
+    dBtn.addEventListener('click', () => { if (!isProcessing) fileInput.click(); });
   }
+  setProcessingState(false);
 }
 
 let auditStats = [];
@@ -1089,9 +1095,13 @@ async function handleFiles(fileList) {
   }
   
   auditStats = []; // Reset stats
-  
-  if (files.length === 1) await handleSingleFileUpload(files[0]);
-  else await processBulkFiles(files);
+  setProcessingState(true);
+  try {
+    if (files.length === 1) await handleSingleFileUpload(files[0]);
+    else await processBulkFiles(files);
+  } finally {
+    setProcessingState(false);
+  }
 }
 
 async function handleSingleFileUpload(file) {
@@ -1148,7 +1158,7 @@ async function handleSingleFileUpload(file) {
     });
 
     if(progressBarFill) progressBarFill.style.width = '100%';
-    if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
+    if(statusBadge) { statusBadge.innerText = 'Complete · 1 cleaned'; statusBadge.className = 'status-indicator complete'; }
     processedBlob = outputBlob;
     processedBlob._url = URL.createObjectURL(outputBlob);
     drawReport([file]);
@@ -1264,7 +1274,7 @@ async function processBulkFiles(files) {
   processedBlob._url = URL.createObjectURL(zipBlob);
   processedFileName = `VeriMedia_Batch_${successCount}_Files.zip`;
   
-  if(statusBadge) { statusBadge.innerText = 'Complete'; statusBadge.className = 'status-indicator complete'; }
+  if(statusBadge) { statusBadge.innerText = `Complete · ${successCount} cleaned`; statusBadge.className = 'status-indicator complete'; }
   drawReport(files);
   incrementGlobalStats(successCount);
   trackEvent('file_processed', { mode: 'bulk', count: successCount });
@@ -1311,12 +1321,11 @@ const SUPPORTED_PDF = 'application/pdf';
 
 function drawReport(files) {
   const fileCount = files.length;
-  const strippedText = translations.sandbox?.files_stripped || 'stripped';
-  const fileLabel = fileCount === 1 ? (translations.sandbox?.file_label || 'file') : (translations.sandbox?.files_label || 'files');
   
   reportContent.innerHTML = `
     <div style="text-align:center;">
-      <h3 style="color:var(--accent-emerald); font-size:1.35rem; margin-bottom:0.4rem; font-family:var(--font-headers); font-weight:700;">${fileCount} ${fileLabel} ${strippedText}</h3>
+      <h3 style="color:var(--accent-emerald); font-size:1.15rem; margin-bottom:0.5rem; font-family:var(--font-headers); font-weight:700;">Ready for secure download</h3>
+      <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.65rem;">${fileCount} cleaned file${fileCount === 1 ? '' : 's'}</p>
       <button class="link-btn" id="viewAuditDetailsBtn" style="font-size:0.85rem; margin-bottom:1.5rem; text-decoration:underline; opacity:0.8;">${translations.sandbox?.view_details_btn || 'View details'}</button>
       <br/>
       <button class="download-sec-btn" id="downloadBtn">${fileCount > 1 ? (translations.sandbox?.download_zip || 'Download ZIP').replace('{{count}}', fileCount) : (translations.sandbox?.download_safe_file || 'Download Safe File')}</button>
