@@ -1338,6 +1338,51 @@ main {
   pointer-events: none;
 }
 
+.queue-ready-panel {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.queue-ready-panel h4 {
+  font-family: var(--font-headers);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 0.45rem;
+}
+
+.queue-meta {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.9rem;
+}
+
+.queue-file-preview {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.queue-file-preview li {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.queue-hint {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
 /* 11. FAQ Accordions (AEO-optimized) */
 .faq-section {
   max-width: 800px;

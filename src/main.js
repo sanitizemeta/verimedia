@@ -948,6 +948,29 @@ function queueFiles(fileList) {
   if (isProcessing) return;
   queuedFiles = Array.from(fileList || []);
   updateQueueUI();
+  renderQueuedAuditState();
+}
+
+function renderQueuedAuditState() {
+  if (!reportContent || queuedFiles.length === 0 || isProcessing) return;
+  const tier = isPro ? 'pro' : (isPlus ? 'plus' : 'free');
+  const maxMb = MAX_FILE_MB[tier];
+  const totalBytes = queuedFiles.reduce((sum, f) => sum + (f.size || 0), 0);
+  const totalMb = (totalBytes / (1024 * 1024)).toFixed(1);
+  const preview = queuedFiles.slice(0, 4);
+  const overflow = queuedFiles.length - preview.length;
+
+  reportContent.innerHTML = `
+    <div class="queue-ready-panel">
+      <h4>Files are queued</h4>
+      <p class="queue-meta">${queuedFiles.length} file${queuedFiles.length === 1 ? '' : 's'} loaded • ${totalMb}MB total • ${maxMb}MB/file limit</p>
+      <ul class="queue-file-preview">
+        ${preview.map((f) => `<li title="${f.name}">${f.name}</li>`).join('')}
+        ${overflow > 0 ? `<li>+${overflow} more</li>` : ''}
+      </ul>
+      <p class="queue-hint">Click <strong>Clean Now</strong> to start secure processing.</p>
+    </div>
+  `;
 }
 
 if (dropzone && fileInput) {
