@@ -1103,6 +1103,7 @@ if (dropzone && fileInput) {
 if (cleanNowBtn) {
   cleanNowBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     if (isProcessing || queuedFiles.length === 0) return;
     const filesToProcess = queuedFiles.slice();
     queuedFiles = [];

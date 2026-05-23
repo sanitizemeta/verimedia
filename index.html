@@ -108,30 +108,35 @@
   </header>
 
   <main>
-    <!-- 1. Hero Section (Ultra-focused) -->
-    <section class="hero-section" style="max-width: 1120px; margin: 2.5rem auto 2.2rem auto; text-align: center; padding: 0 1.5rem;">
-      <h1 class="hero-title" data-i18n="hero.title" style="font-size: clamp(2.3rem, 5.5vw, 3.8rem); line-height: 1.2; letter-spacing: -1.5px; margin: 0 0 1.2rem 0;">Stop AI Scrapers from Stealing Your Work.</h1>
-      
-      <article class="aeo-summary" aria-label="Tool Summary Box">
-        <p data-i18n="hero.summary">VeriMedia embeds AI training opt-out and creator ownership signals directly into your files in under 100ms. Everything runs locally in your browser, so your media never leaves your device.</p>
-      </article>
-      <div class="hero-action-row" aria-label="Primary actions">
-        <a href="#calculator-section" class="pricing-btn primary-btn">Clean a File Now</a>
-        <a href="#pricing-section" class="pricing-btn secondary-btn">Compare Plans</a>
-      </div>
-      <div class="hero-trust-strip" aria-label="Privacy and ownership guarantees">
-        <span><i data-lucide="hard-drive" aria-hidden="true"></i> Local browser processing</span>
-        <span><i data-lucide="bot-off" aria-hidden="true"></i> AI opt-out metadata</span>
-        <span><i data-lucide="copyright" aria-hidden="true"></i> Creator ownership tags</span>
-      </div>
-    </section>
+    <!-- 1. Hero Utility (Main conversion surface) -->
+    <section id="calculator-section" class="interactive-sandbox tool-hero-section">
+      <div class="tool-hero-layout">
+        <div class="tool-hero-copy">
+          <h1 class="hero-title" data-i18n="hero.title" style="font-size: clamp(2.3rem, 5.5vw, 3.8rem); line-height: 1.2; letter-spacing: -1.5px; margin: 0 0 1.2rem 0;">Stop AI Scrapers from Stealing Your Work.</h1>
+          <article class="aeo-summary" aria-label="Tool Summary Box">
+            <p data-i18n="hero.summary">VeriMedia embeds AI training opt-out and creator ownership signals directly into your files in under 100ms. Everything runs locally in your browser, so your media never leaves your device.</p>
+          </article>
+          <div class="hero-trust-strip" aria-label="Privacy and ownership guarantees">
+            <span><i data-lucide="hard-drive" aria-hidden="true"></i> Local browser processing</span>
+            <span><i data-lucide="bot-off" aria-hidden="true"></i> AI opt-out metadata</span>
+            <span><i data-lucide="copyright" aria-hidden="true"></i> Creator ownership tags</span>
+          </div>
+          <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link">Compare Plus and Pro</a>
+        </div>
 
-    <!-- 2. Interactive Sandbox (The Primary Focus) -->
-    <section id="calculator-section" class="interactive-sandbox">
-      <div class="sandbox-grid">
+        <div class="unified-tool-panel glass-card" aria-label="VeriMedia cleaner">
+          <div class="unified-tool-header">
+            <h2>
+              <i data-lucide="shield-check" style="width: 20px; height: 20px; color: var(--accent-cyan); vertical-align: middle; margin-right: 6px;"></i>
+              <span data-i18n="sandbox.audit_title">Privacy & Copyright Audit</span>
+            </h2>
+            <span class="status-indicator idle" id="statusBadge">Idle</span>
+          </div>
+
+          <div class="sandbox-grid unified-tool-body">
         
         <!-- Drag & Drop Container -->
-        <div class="card glass-card upload-container" id="dropzone" role="button" aria-label="Upload drag and drop area for media" tabindex="0">
+        <div class="upload-container" id="dropzone" role="button" aria-label="Upload drag and drop area for media" tabindex="0">
           <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.heic,.heif,.pdf,image/jpeg,image/png,image/webp,image/heic,image/heif,application/pdf" class="hidden-input" aria-hidden="true">
           <div class="upload-icon-pulse">
             <i data-lucide="upload-cloud" style="width: 28px; height: 28px;"></i>
@@ -152,20 +157,14 @@
         </div>
 
         <!-- Real-Time Processing Report Log -->
-        <div class="card glass-card report-container">
-          <div class="report-header">
-            <h3>
-              <i data-lucide="shield-check" style="width: 20px; height: 20px; color: var(--accent-cyan); vertical-align: middle; margin-right: 6px;"></i>
-              <span data-i18n="sandbox.audit_title">Privacy & Copyright Audit</span>
-            </h3>
-            <span class="status-indicator idle" id="statusBadge">Idle</span>
-          </div>
-          
+        <div class="report-container">
           <div class="report-content" id="reportContent">
             <div class="empty-state">
               <p data-i18n="sandbox.audit_empty">Upload a photo to strip tracking details and embed copyright and AI opt-out tags.</p>
               <button class="link-btn" id="trySampleBtn" data-i18n="sandbox.try_sample">Try Sample File</button>
             </div>
+          </div>
+        </div>
           </div>
         </div>
       </div>
