@@ -131,13 +131,15 @@
           <p data-i18n="sandbox.drop_subtitle">or click to browse local files (max 25MB)</p>
           <span class="file-spec-hint">Supports JPEG · PNG · WebP · HEIC/HEIF · PDF</span>
           
-          <!-- Sample Action Component -->
-          <button type="button" id="sampleFileBtn">
-            <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
-            <span data-i18n="sandbox.sample_btn_text">No file ready? Try our sample photo</span>
-          </button>
-          <div id="queuedFilesMeta" class="queued-files-meta" style="display:none;">0 files loaded</div>
-          <button type="button" id="cleanNowBtn" class="pricing-btn primary-btn" style="display:none; margin-top: 0.75rem;">Clean Now</button>
+          <div class="upload-actions-slot">
+            <!-- Sample Action Component -->
+            <button type="button" id="sampleFileBtn">
+              <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+              <span data-i18n="sandbox.sample_btn_text">No file ready? Try our sample photo</span>
+            </button>
+            <div id="queuedFilesMeta" class="queued-files-meta" style="display:none;">0 files loaded</div>
+            <button type="button" id="cleanNowBtn" class="pricing-btn primary-btn" style="display:none; margin-top: 0.75rem;">Clean Now</button>
+          </div>
         </div>
 
         <!-- Real-Time Processing Report Log -->

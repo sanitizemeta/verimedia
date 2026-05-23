@@ -932,9 +932,15 @@ function updateQueueUI() {
     queuedFilesMeta.textContent = `${count} file${count === 1 ? '' : 's'} loaded`;
     queuedFilesMeta.style.display = 'block';
     cleanNowBtn.style.display = 'inline-flex';
+    if (sampleFileBtn) sampleFileBtn.style.display = 'none';
+    if (trySampleBtn) trySampleBtn.style.display = 'none';
   } else {
     queuedFilesMeta.style.display = 'none';
     cleanNowBtn.style.display = 'none';
+    if (!isProcessing) {
+      if (sampleFileBtn) sampleFileBtn.style.display = '';
+      if (trySampleBtn) trySampleBtn.style.display = '';
+    }
   }
 }
 

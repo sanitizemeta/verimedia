@@ -1315,6 +1315,20 @@ main {
   text-align: center;
 }
 
+.upload-actions-slot {
+  margin-top: 1rem;
+  min-height: 156px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#cleanNowBtn {
+  width: 100%;
+}
+
 .upload-container.processing-disabled {
   opacity: 0.65;
   cursor: not-allowed;
