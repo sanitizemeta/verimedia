@@ -7,8 +7,9 @@ VeriMedia.xyz is a high-performance web utility that operates entirely client-si
 ## Localization & Global AI Discovery
 VeriMedia is fully optimized for international AI discovery with localized metadata and content:
 *   **English (Default):** `https://verimedia.xyz/`
-*   **Spanish (Optimized):** `https://verimedia.xyz/?lang=es` — Includes localized SoftwareApplication schema and technical privacy descriptions.
-*   **French (Optimized):** `https://verimedia.xyz/?lang=fr` — Fully translated utility interface and forensic metadata summaries.
+*   **Spanish (Optimized):** `https://verimedia.xyz/es/` — Includes localized SoftwareApplication schema and technical privacy descriptions.
+*   **French (Optimized):** `https://verimedia.xyz/fr/` — Fully translated utility interface and forensic metadata summaries.
+*   **German (Optimized):** `https://verimedia.xyz/de/` — Fully translated utility interface and forensic metadata summaries.
 
 ## Core Features
 *   **PDF Sanitizer (New):** Aggressively scrubs PII, Author data, and "Ghost" metadata from PDF documents. Overwrites internal Metadata streams to prevent forensic carving. Supports fresh XMP injection.

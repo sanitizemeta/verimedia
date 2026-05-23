@@ -13,10 +13,10 @@
       "require_c2pa": true,
       "enforce_opt_out": true
     },
-    "licensing_contact": "https://verimedia.xyz/license",
+    "licensing_contact": "https://verimedia.xyz/terms.html",
     "declarations": {
       "purpose": "Metadata sanitization and E-E-A-T authentication",
-      "verifiability": "did:key:zQ3s"
+      "verifiability": "self-asserted"
     }
   }
 }

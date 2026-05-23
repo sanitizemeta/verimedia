@@ -8,9 +8,13 @@ const LANG_KEY = 'vm_lang';
 const urlParams = new URLSearchParams(window.location.search);
 const urlLang = urlParams.get('lang');
 const supportedLangs = ['en', 'es', 'fr', 'de'];
+const pathParts = window.location.pathname.split('/').filter(Boolean);
+const pathLang = supportedLangs.includes(pathParts[0]) ? pathParts[0] : null;
 
-let currentLang = (urlLang && supportedLangs.includes(urlLang)) 
+let currentLang = (urlLang && supportedLangs.includes(urlLang))
   ? urlLang 
+  : (pathLang && supportedLangs.includes(pathLang))
+    ? pathLang
   : (localStorage.getItem(LANG_KEY) || 'en');
 
 let translations = {};
@@ -36,12 +40,18 @@ async function loadTranslations(lang) {
     
     localStorage.setItem(LANG_KEY, lang);
 
-    // Update URL parameter without reloading (for SEO/User sharing)
+    // Update URL without reloading (supports /es/ style locale paths)
     const newUrl = new URL(window.location);
+    const parts = newUrl.pathname.split('/').filter(Boolean);
+    const hasLocalePrefix = supportedLangs.includes(parts[0]);
+    const page = hasLocalePrefix ? parts.slice(1).join('/') : parts.join('/');
+
     if (lang === 'en') {
+      newUrl.pathname = page ? `/${page}` : '/';
       newUrl.searchParams.delete('lang');
     } else {
-      newUrl.searchParams.set('lang', lang);
+      newUrl.pathname = page ? `/${lang}/${page}` : `/${lang}/`;
+      newUrl.searchParams.delete('lang');
     }
     window.history.replaceState({}, '', newUrl);
 
@@ -236,14 +246,14 @@ function updateStructuredData(lang, trans, pagePath) {
         "name": "VeriMedia",
         "operatingSystem": "Web Browser",
         "applicationCategory": "UtilitiesApplication",
-        "featureList": trans.pricing?.pro_f2 + ", " + trans.kb?.ai_title + ", " + trans.kb?.pdf_title,
+        "featureList": trans.kb?.ai_title + ", " + trans.kb?.identity_title + ", " + trans.pricing?.pro_f2,
         "offers": {
           "@type": "Offer",
           "price": "19.00",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock"
         },
-        "description": trans.hero?.summary
+        "description": trans.hero?.summary || "Embed AI training opt-out and creator ownership signals directly in media files."
       },
       {
         "@context": "https://schema.org",
@@ -603,6 +613,8 @@ const licenseError      = document.getElementById('licenseError');
 const closeSuccessBtn   = document.getElementById('closeSuccessBtn');
 
 const paddleCheckoutBtns = document.querySelectorAll('#paddleCheckoutBtn, .paddle-checkout-btn');
+let paddleReadyPromise = null;
+let paddleInitialized = false;
 
 let modalTriggerElement = null;
 
@@ -726,13 +738,13 @@ if (activateLicenseBtn && licenseKeyInput) {
   }
 })();
 
-// Paddle Initialization
-if (window.Paddle) {
-  window.Paddle.Initialize({ 
+function initPaddleOnce() {
+  if (paddleInitialized || !window.Paddle) return;
+  window.Paddle.Initialize({
     token: 'live_2f19b88294a235307e74e44f820',
     eventCallback: function(event) {
       if (event.name === 'checkout.completed') {
-        const txnId = event.data?.transaction_id || event.data?.id; 
+        const txnId = event.data?.transaction_id || event.data?.id;
         if (txnId) {
           localStorage.setItem(STORAGE_KEY_LICENSE, txnId.toUpperCase());
           setProActiveUI();
@@ -741,18 +753,50 @@ if (window.Paddle) {
       }
     }
   });
+  paddleInitialized = true;
+}
+
+function ensurePaddleLoaded() {
+  if (window.Paddle) {
+    initPaddleOnce();
+    return Promise.resolve();
+  }
+  if (paddleReadyPromise) return paddleReadyPromise;
+
+  paddleReadyPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
+    script.async = true;
+    script.onload = () => {
+      initPaddleOnce();
+      resolve();
+    };
+    script.onerror = () => reject(new Error('Failed to load Paddle SDK.'));
+    document.head.appendChild(script);
+  });
+
+  return paddleReadyPromise;
 }
 
 paddleCheckoutBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (window.Paddle) {
-      window.Paddle.Checkout.open({
-        items: [{ priceId: 'pri_01ks3bgn6zyh2bsvqk438c3dcv', quantity: 1 }],
-        settings: { displayMode: 'overlay', theme: 'dark' }
-      });
+  btn.addEventListener('click', async () => {
+    try {
+      await ensurePaddleLoaded();
+      if (window.Paddle) {
+        window.Paddle.Checkout.open({
+          items: [{ priceId: 'pri_01ks3bgn6zyh2bsvqk438c3dcv', quantity: 1 }],
+          settings: { displayMode: 'overlay', theme: 'dark' }
+        });
+      }
+    } catch (err) {
+      console.error(err);
     }
   });
 });
+
+if (window.Paddle) {
+  initPaddleOnce();
+}
 
 
 /* ==========================================================================

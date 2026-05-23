@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Add AI Opt-Out Metadata to Images | VeriMedia.xyz</title>
+  <meta name="description" content="Add AI opt-out metadata to your images locally in your browser. Signal training restrictions and embed creator ownership tags in seconds.">
+  <meta http-equiv="content-language" content="en" />
+  <link rel="canonical" href="https://verimedia.xyz/ai-opt-out-metadata.html" />
+  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/ai-opt-out-metadata.html" />
+  <link rel="alternate" hreflang="es" href="https://verimedia.xyz/es/" />
+  <link rel="alternate" hreflang="fr" href="https://verimedia.xyz/fr/" />
+  <link rel="alternate" hreflang="de" href="https://verimedia.xyz/de/" />
+  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/ai-opt-out-metadata.html" />
+
+  <meta property="og:title" content="Add AI Opt-Out Metadata to Images | VeriMedia.xyz">
+  <meta property="og:description" content="Embed AI training opt-out and ownership signals directly in your media files with local browser processing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://verimedia.xyz/ai-opt-out-metadata.html">
+  <meta property="og:image" content="https://verimedia.xyz/logo.png">
+
+  <script type="application/ld+json" id="localized-schema">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to add AI opt-out metadata to image files",
+      "description": "Add machine-readable AI opt-out and ownership signals to media files before publishing online.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Upload media",
+          "text": "Open VeriMedia and add your image or PDF file."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Enable AI opt-out",
+          "text": "Keep AI opt-out enabled and optionally add creator identity fields."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Download protected file",
+          "text": "Download the processed file with opt-out and ownership metadata signals."
+        }
+      ],
+      "tool": {
+        "@type": "SoftwareApplication",
+        "name": "VeriMedia.xyz",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web Browser",
+        "url": "https://verimedia.xyz/"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does AI opt-out metadata legally block scraping?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI opt-out metadata is a technical policy signal that responsible crawlers can honor. It is not a legal guarantee of enforcement by every scraper."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I add ownership and AI opt-out together?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. VeriMedia can add AI opt-out signaling and creator ownership metadata in one pass."
+          }
+        }
+      ]
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+  <canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.4;"></canvas>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <header>
+    <div class="logo-container">
+      <a href="/" style="text-decoration: none; color: inherit;">
+        <span class="logo-text" style="display: flex; align-items: center; gap: 8px;">
+          <img src="/icon.svg" alt="VeriMedia Logo" width="32" height="32" style="filter: drop-shadow(0 0 8px var(--accent-cyan-glow));">
+          VeriMedia<span class="dot">.xyz</span>
+        </span>
+      </a>
+    </div>
+    <nav>
+      <a href="/" class="nav-link">Home</a>
+      <a href="/#calculator-section" class="nav-link">Tool</a>
+      <a href="/#pricing-section" class="nav-link">Pricing</a>
+      <a href="/#faq-section" class="nav-link">FAQ</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-section" style="max-width: 1000px; margin: 2.5rem auto 2rem auto; text-align: left; padding: 0 1.5rem;">
+      <h1 class="hero-title" style="font-size: clamp(2.1rem, 4.8vw, 3.3rem); line-height: 1.2; margin: 0 0 1rem 0;">
+        Add AI Opt-Out Metadata Before You Publish
+      </h1>
+      <p style="font-size: 1.02rem; color: var(--text-secondary); max-width: 860px;">
+        VeriMedia adds machine-readable AI training opt-out and ownership metadata directly to your files using local browser processing.
+        This creates a clear usage signal for responsible AI crawlers while preserving creator attribution.
+      </p>
+      <p style="font-size: 0.92rem; color: var(--text-secondary); max-width: 860px; margin-top: 0.7rem;">
+        Important: metadata opt-out is a policy signal, not guaranteed legal enforcement against every unauthorized scraper.
+      </p>
+      <div style="display:flex; gap:0.8rem; margin-top:1.2rem; flex-wrap: wrap;">
+        <a href="/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
+          Protect This File From AI Training
+        </a>
+        <a href="/terms.html" class="pricing-btn secondary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
+          Usage Terms
+        </a>
+      </div>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">What This Signal Covers</h2>
+      <ul style="margin-left: 1rem; color: var(--text-secondary);">
+        <li>Adds standardized AI opt-out metadata tags in processed files.</li>
+        <li>Optionally includes creator name, copyright, and licensing URL tags.</li>
+        <li>Runs 100% locally in your browser with no file upload.</li>
+      </ul>
+    </section>
+
+    <section class="faq-section" style="max-width:1000px; margin: 0 auto 4rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1.2rem;">Quick Answers</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <h3>Should I still remove EXIF location metadata?</h3>
+          <p>Yes. AI opt-out signaling and privacy cleanup address different risks and should be used together.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can I use this on client work before delivery?</h3>
+          <p>Yes, it helps set explicit AI usage intent and creator attribution before publication.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
+      <div class="footer-links">
+        <a href="/terms.html" class="footer-link">Terms</a>
+        <a href="/privacy.html" class="footer-link">Privacy</a>
+        <a href="/refund.html" class="footer-link">Refunds</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

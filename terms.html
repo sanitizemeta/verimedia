@@ -19,10 +19,48 @@
   <meta property="og:description" content="VeriMedia.xyz Terms of Service. Usage agreements for our browser-based metadata purging and copyright shield utility.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://verimedia.xyz/terms.html">
-  <meta property="og:image" content="https://verimedia.xyz/assets/verimedia-og-badge.png">
+  <meta property="og:image" content="https://verimedia.xyz/logo.png">
 
-  <!-- Localized JSON-LD Placeholder -->
-  <script type="application/ld+json" id="localized-schema"></script>
+  <!-- Structured Data -->
+  <script type="application/ld+json" id="localized-schema">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Terms of Service | VeriMedia.xyz",
+      "url": "https://verimedia.xyz/terms.html",
+      "description": "VeriMedia.xyz Terms of Service. Usage agreements for our browser-based metadata purging and copyright shield utility.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "VeriMedia.xyz",
+        "url": "https://verimedia.xyz/"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Terms of Service"
+      },
+      "inLanguage": "en"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://verimedia.xyz/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Terms of Service",
+          "item": "https://verimedia.xyz/terms.html"
+        }
+      ]
+    }
+  </script>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,11 +71,8 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/src/style.css">
   
-  <!-- Paddle.js Overlay -->
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-
   <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
 
