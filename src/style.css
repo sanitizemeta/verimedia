@@ -69,6 +69,10 @@ body {
   position: relative;
   overflow-x: hidden;
   padding: 0 1.5rem;
+  background:
+    radial-gradient(circle at 50% 4%, rgba(6, 182, 212, 0.11), transparent 32rem),
+    radial-gradient(circle at 82% 38%, rgba(16, 185, 129, 0.08), transparent 28rem),
+    linear-gradient(180deg, rgba(7, 11, 22, 0.1), rgba(5, 8, 17, 0.74) 42%, var(--bg-color));
 }
 
 /* Subtle Scanline Overlay */
@@ -121,12 +125,12 @@ body::before {
 
 /* 4. Header & Branding */
 header {
-  max-width: 1200px;
+  max-width: 1220px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2.2rem 0;
+  padding: 1.55rem 0 1.1rem;
 }
 
 .logo-container {
@@ -161,7 +165,8 @@ header {
 
 nav {
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  gap: 1.35rem;
 }
 
 .hero-action-row {
@@ -1508,6 +1513,410 @@ main {
   border-radius: 4px;
   font-size: 0.85rem;
   color: var(--accent-cyan);
+}
+
+/* 11.5 Landing Page Polish */
+.hero-section {
+  max-width: 1040px !important;
+  margin: 1.1rem auto 2rem auto !important;
+  padding-top: 0.8rem !important;
+  position: relative;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: -4rem 8% auto;
+  height: 19rem;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(6, 182, 212, 0.16), transparent 62%),
+    radial-gradient(circle at 64% 58%, rgba(16, 185, 129, 0.1), transparent 55%);
+  filter: blur(18px);
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-title {
+  max-width: 920px;
+  margin: 0 auto 1.1rem;
+  font-size: clamp(2.9rem, 6vw, 5.25rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}
+
+.aeo-summary {
+  max-width: 720px;
+  padding: 1rem 1.25rem;
+  border-left-width: 4px;
+  border-color: rgba(6, 182, 212, 0.22);
+  background:
+    linear-gradient(90deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.025) 34%, rgba(16, 185, 129, 0.035));
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(14px);
+}
+
+.hero-action-row {
+  margin: 1.45rem 0 1rem;
+}
+
+.hero-action-row .pricing-btn {
+  min-width: 168px;
+  padding: 0.86rem 1.25rem;
+}
+
+.hero-trust-strip {
+  gap: 0.55rem;
+  font-size: 0.78rem;
+}
+
+.hero-trust-strip span {
+  border-radius: 999px;
+  border-color: rgba(6, 182, 212, 0.16);
+  background: rgba(6, 182, 212, 0.035);
+}
+
+.interactive-sandbox {
+  max-width: 1180px;
+  margin: 0 auto 5.4rem auto;
+}
+
+.sandbox-grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 1.15rem;
+  padding: 0.7rem;
+  border: 1px solid rgba(6, 182, 212, 0.13);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(6, 182, 212, 0.055), rgba(16, 185, 129, 0.025) 42%, rgba(255, 255, 255, 0.015)),
+    rgba(5, 8, 17, 0.38);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.34);
+}
+
+.upload-container,
+.report-container {
+  min-height: 380px;
+}
+
+.upload-container {
+  padding: 2.4rem;
+  border-radius: 14px;
+}
+
+.upload-container h3 {
+  font-size: clamp(1.65rem, 2.7vw, 2.2rem);
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+
+.upload-container p {
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.file-spec-hint {
+  margin-bottom: 1.1rem;
+  color: hsla(215, 20%, 65%, 0.58);
+}
+
+.upload-icon-pulse {
+  padding: 1.45rem;
+  margin-bottom: 1.8rem;
+  box-shadow: inset 0 0 35px rgba(6, 182, 212, 0.04);
+}
+
+.upload-actions-slot {
+  min-height: 118px;
+  justify-content: center;
+}
+
+.sample-btn {
+  border-color: rgba(6, 182, 212, 0.2);
+  background: rgba(6, 182, 212, 0.055);
+}
+
+#cleanNowBtn {
+  max-width: 520px;
+  min-height: 58px;
+  font-size: 1.05rem;
+  border-radius: 12px;
+  box-shadow: 0 18px 34px rgba(6, 182, 212, 0.2);
+}
+
+.report-container {
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0.006)),
+    rgba(12, 14, 26, 0.72);
+}
+
+.report-header {
+  padding: 1.05rem 1.25rem;
+}
+
+.report-header h3 {
+  font-size: 1.08rem;
+}
+
+.status-indicator {
+  min-width: 154px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.report-content {
+  padding: 1.7rem;
+}
+
+.empty-state {
+  max-width: 340px;
+}
+
+.empty-state p {
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.sandbox-proof-row {
+  max-width: 1180px;
+  margin-top: 0.85rem;
+  gap: 0.75rem;
+}
+
+.sandbox-proof-row div {
+  padding: 0.85rem 1rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(6, 182, 212, 0.025)),
+    rgba(8, 12, 23, 0.56);
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
+.social-proof-ticker {
+  margin-top: 1.2rem;
+}
+
+.features-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 1.15rem !important;
+}
+
+.feature-card {
+  min-height: 176px;
+  padding: 1.65rem 1.5rem;
+  gap: 0.82rem;
+  border-radius: 14px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.042), rgba(255, 255, 255, 0.012)),
+    rgba(12, 14, 26, 0.68);
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(6, 182, 212, 0.26);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+}
+
+.feature-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  margin-bottom: 0.15rem;
+}
+
+.feature-card h3 {
+  font-size: 1.02rem;
+  line-height: 1.25;
+}
+
+.feature-card p {
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.pricing-section {
+  max-width: 1120px;
+  margin-bottom: 5.2rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.65rem);
+  letter-spacing: 0;
+}
+
+.section-subtitle {
+  margin-bottom: 2.6rem;
+}
+
+.pricing-grid {
+  max-width: 1060px;
+  gap: 1rem;
+}
+
+.price-card {
+  padding: 2.4rem 1.65rem 1.65rem;
+  border-radius: 14px;
+}
+
+.price-card .price {
+  font-size: 2.75rem;
+}
+
+.price-desc {
+  min-height: 46px;
+  margin-bottom: 1.65rem;
+}
+
+.features-list {
+  gap: 0.72rem;
+  margin-bottom: 1.8rem;
+}
+
+.features-list li {
+  font-size: 0.84rem;
+}
+
+.faq-section {
+  max-width: 780px;
+  margin-bottom: 5.5rem;
+}
+
+.faq-accordion {
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+.faq-item {
+  padding: 1.3rem 1.35rem;
+  border-radius: 12px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)),
+    rgba(12, 14, 26, 0.64);
+}
+
+.faq-item h3 {
+  font-size: 1rem;
+  margin-bottom: 0.55rem;
+}
+
+.faq-item p {
+  font-size: 0.88rem;
+}
+
+#semantic-index-content {
+  max-width: 1080px !important;
+  margin: 0 auto 5rem auto !important;
+  padding: 3.25rem 2rem !important;
+  border: 1px solid rgba(148, 163, 184, 0.12) !important;
+  border-radius: 18px;
+  opacity: 1 !important;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(16, 185, 129, 0.08), transparent 24rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.01)),
+    rgba(7, 10, 20, 0.54);
+}
+
+#semantic-index-content h2 {
+  color: var(--accent-cyan) !important;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.2;
+  margin-bottom: 1.25rem !important;
+}
+
+#semantic-index-content h3 {
+  color: var(--text-primary);
+  margin-top: 2rem;
+}
+
+#semantic-index-content p {
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+#semantic-index-content > div {
+  max-width: 920px !important;
+}
+
+#semantic-index-content ul {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem !important;
+}
+
+#semantic-index-content li {
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(16, 185, 129, 0.13);
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.035);
+}
+
+@media (max-width: 980px) {
+  .features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .hero-title {
+    font-size: clamp(2.45rem, 9vw, 4.1rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .sandbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-container,
+  .report-container {
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 0 1rem;
+  }
+
+  header {
+    padding-top: 1.1rem;
+  }
+
+  nav {
+    gap: 0.75rem;
+  }
+
+  .sandbox-grid {
+    padding: 0.45rem;
+  }
+
+  .sandbox-proof-row,
+  #semantic-index-content ul {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 640px) {
+  .features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-action-row .pricing-btn {
+    width: 100%;
+  }
+
+  .upload-container {
+    padding: 2rem 1.25rem;
+  }
+
+  .hero-trust-strip span {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* 12. Modal Checkout System */
