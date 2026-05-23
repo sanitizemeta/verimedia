@@ -433,7 +433,10 @@ if (ctx) {
    ========================================================================== */
 const PROFILE_KEY = 'vm_creator_profile';
 const STORAGE_KEY_LICENSE = 'vm_license_key';
+const STORAGE_KEY_LICENSE_TIER = 'vm_license_tier';
 let isPro = false;
+let isPlus = false;
+let activeTier = 'free';
 
 function loadProfile() {
   try {
@@ -456,7 +459,7 @@ const profileForm    = document.getElementById('profileForm');
 const profileName    = document.getElementById('profileName');
 const profileCopy    = document.getElementById('profileCopyright');
 const profileUrl     = document.getElementById('profileUrl');
-const profileAiOnly  = document.getElementById('profileAiOnly');
+const profileAiOnly  = document.getElementById('profileAiOptOut');
 const profileWhitelabel = document.getElementById('profileWhitelabel');
 const profileWhitelabelWrap = document.getElementById('profileWhitelabelWrap');
 const profileSave    = document.getElementById('profileSaveBtn');
@@ -476,16 +479,19 @@ function openProfilePanel() {
   const activeKeyDisplay = document.getElementById('activeKeyDisplay');
   const profileKeyInput = document.getElementById('profileKeyInput');
 
-  if (isPro) {
+  const hasPaidPlan = isPro || isPlus;
+  if (hasPaidPlan) {
     if (proOverlay) proOverlay.style.display = 'none';
     if (activeKeyDisplay) activeKeyDisplay.style.display = 'block';
-    if (profileWhitelabelWrap) profileWhitelabelWrap.style.display = 'block';
+    if (profileWhitelabelWrap) profileWhitelabelWrap.style.display = isPro ? 'block' : 'none';
     if (profileKeyInput) {
       profileKeyInput.value = localStorage.getItem(STORAGE_KEY_LICENSE) || 'Active';
     }
     if (profileSave) profileSave.style.display = 'block';
     
-    [profileName, profileCopy, profileUrl, profileWhitelabel].forEach(el => { if(el) el.disabled = false; });
+    [profileName, profileCopy, profileUrl].forEach(el => { if(el) el.disabled = false; });
+    if (profileWhitelabel) profileWhitelabel.disabled = !isPro;
+    if (!isPro && profileWhitelabel) profileWhitelabel.checked = false;
   } else {
     if (proOverlay) proOverlay.style.display = 'flex';
     if (activeKeyDisplay) activeKeyDisplay.style.display = 'none';
@@ -535,8 +541,8 @@ if (profileSave) {
 }
 
 // ── Profile Export/Import ────────────────────────────────────────────────────
-const exportBtn = document.getElementById('exportProfileBtn');
-const importBtn = document.getElementById('importProfileBtn');
+const exportBtn = document.getElementById('profileExportBtn');
+const importBtn = document.getElementById('profileImportBtn');
 const importInput = document.getElementById('importProfileInput');
 
 if (exportBtn) {
@@ -630,11 +636,11 @@ function getDeviceId() {
 }
 
 // Modal View Switcher
-const paymentModal = document.getElementById('paymentModal');
-const viewBuy      = document.getElementById('modalViewBuy');
-const viewActivate = document.getElementById('modalViewActivate');
-const viewSuccess  = document.getElementById('modalViewSuccess');
-const closeModal   = document.getElementById('closeModal');
+const paymentModal = document.getElementById('checkoutModal');
+const viewBuy      = document.getElementById('checkoutViewBuy');
+const viewActivate = document.getElementById('checkoutViewActivate');
+const viewSuccess  = document.getElementById('checkoutViewSuccess');
+const closeModal   = document.getElementById('closeCheckoutBtn');
 
 const switchToActivate  = document.getElementById('switchToActivate');
 const switchToBuy       = document.getElementById('switchToBuy');
@@ -692,9 +698,14 @@ if (activateKeyBtn) {
 // License UI Gating
 function setProActiveUI() {
   isPro = true;
+  isPlus = false;
+  activeTier = 'pro';
+  localStorage.setItem(STORAGE_KEY_LICENSE_TIER, 'pro');
   document.querySelectorAll('#paddleCheckoutBtn, .paddle-checkout-btn').forEach(btn => {
-    btn.textContent = translations.checkout?.success_title || 'Creator Pro Active';
-    btn.style.background = 'var(--accent-emerald)';
+    const isProBtn = btn.classList.contains('paddle-pro-checkout-btn');
+    btn.textContent = isProBtn ? 'Creator Pro Active' : 'Included in Pro';
+    btn.style.background = isProBtn ? 'var(--accent-emerald)' : '';
+    btn.style.opacity = isProBtn ? '' : '0.65';
     btn.disabled = true;
   });
   
@@ -713,6 +724,28 @@ function setProActiveUI() {
 
   const fInput = document.getElementById('fileInput');
   if (fInput) fInput.multiple = true;
+}
+
+function setPlusActiveUI() {
+  isPlus = true;
+  isPro = false;
+  activeTier = 'plus';
+  localStorage.setItem(STORAGE_KEY_LICENSE_TIER, 'plus');
+  document.querySelectorAll('.paddle-checkout-btn').forEach(btn => {
+    const isPlusBtn = btn.classList.contains('paddle-plus-checkout-btn');
+    btn.textContent = isPlusBtn ? 'Creator Plus Active' : 'Upgrade to Pro';
+    btn.style.background = isPlusBtn ? 'var(--accent-emerald)' : '';
+    btn.style.opacity = isPlusBtn ? '' : '0.9';
+    btn.disabled = isPlusBtn;
+  });
+
+  const fInput = document.getElementById('fileInput');
+  if (fInput) fInput.multiple = true;
+}
+
+function applyPaidTierUI(plan) {
+  if (plan === 'pro') setProActiveUI();
+  else if (plan === 'plus') setPlusActiveUI();
 }
 
 async function verifyLicense(key) {
@@ -735,7 +768,8 @@ if (activateLicenseBtn && licenseKeyInput) {
       const data = await verifyLicense(key);
       if (data.valid) {
         localStorage.setItem(STORAGE_KEY_LICENSE, key);
-        setProActiveUI();
+        const plan = data.plan === 'plus' ? 'plus' : 'pro';
+        applyPaidTierUI(plan);
         showModalView(viewSuccess);
       } else {
         if(licenseError) {
@@ -754,9 +788,13 @@ if (activateLicenseBtn && licenseKeyInput) {
   if (key) {
     try {
       const data = await verifyLicense(key);
-      if (data.valid) setProActiveUI();
+      if (data.valid) applyPaidTierUI(data.plan === 'plus' ? 'plus' : 'pro');
       else localStorage.removeItem(STORAGE_KEY_LICENSE);
-    } catch { setProActiveUI(); }
+    } catch {
+      const cachedTier = localStorage.getItem(STORAGE_KEY_LICENSE_TIER);
+      if (cachedTier === 'plus') setPlusActiveUI();
+      else setProActiveUI();
+    }
   }
   
   const params = new URLSearchParams(window.location.search);
@@ -779,9 +817,19 @@ function initPaddleOnce() {
         const txnId = event.data?.transaction_id || event.data?.id;
         if (txnId) {
           localStorage.setItem(STORAGE_KEY_LICENSE, txnId.toUpperCase());
-          setProActiveUI();
-          openModal(viewSuccess);
-          trackEvent('purchase_success', { provider: 'paddle' });
+          verifyLicense(txnId.toUpperCase())
+            .then((validation) => {
+              const plan = validation?.plan === 'plus' ? 'plus' : 'pro';
+              applyPaidTierUI(plan);
+              trackEvent('purchase_success', { provider: 'paddle', plan });
+            })
+            .catch(() => {
+              setProActiveUI();
+              trackEvent('purchase_success', { provider: 'paddle', plan: 'pro_fallback' });
+            })
+            .finally(() => {
+              openModal(viewSuccess);
+            });
         }
       }
     }
@@ -811,14 +859,21 @@ function ensurePaddleLoaded() {
   return paddleReadyPromise;
 }
 
+const PLUS_PRICE_ID = 'pri_01ksb8cp542z2be2nt8tkmctwp';
+const PRO_PRICE_ID = 'pri_01ks3bgn6zyh2bsvqk438c3dcv';
+
 paddleCheckoutBtns.forEach(btn => {
   btn.addEventListener('click', async () => {
     try {
-      trackEvent('checkout_started', { source: btn.className || 'paddle_btn' });
+      const selectedPlan = btn.dataset.plan || (btn.classList.contains('paddle-plus-checkout-btn') ? 'plus' : 'pro');
+      const priceId = selectedPlan === 'plus' ? PLUS_PRICE_ID : PRO_PRICE_ID;
+      trackEvent('plan_selected', { plan: selectedPlan, source: btn.className || 'paddle_btn' });
+      trackEvent('checkout_started', { source: btn.className || 'paddle_btn', plan: selectedPlan });
       await ensurePaddleLoaded();
       if (window.Paddle) {
         window.Paddle.Checkout.open({
-          items: [{ priceId: 'pri_01ks3bgn6zyh2bsvqk438c3dcv', quantity: 1 }],
+          items: [{ priceId, quantity: 1 }],
+          customData: { plan: selectedPlan, product: 'verimedia_lifetime' },
           settings: { displayMode: 'overlay', theme: 'dark' }
         });
       }
@@ -843,7 +898,13 @@ const reportContent = document.getElementById('reportContent');
 let processedBlob = null;
 let processedFileName = '';
 const MAX_FREE_FILES = 1;
-const MAX_PRO_FILES = 100;
+const MAX_PLUS_FILES = 100;
+const MAX_PRO_FILES = Number.POSITIVE_INFINITY;
+const MAX_FILE_MB = {
+  free: 5,
+  plus: 25,
+  pro: 100
+};
 
 if (dropzone && fileInput) {
   dropzone.addEventListener('click', () => {
@@ -954,12 +1015,23 @@ let auditStats = [];
 async function handleFiles(fileList) {
   const files = Array.from(fileList);
   if (files.length === 0) return;
-  if (!isPro && files.length > MAX_FREE_FILES) {
-    if(reportContent) reportContent.innerHTML = buildErrorItem('Bulk processing is a Creator Pro feature (up to 100 files).');
+
+  const tier = isPro ? 'pro' : (isPlus ? 'plus' : 'free');
+  const maxFiles = tier === 'free' ? MAX_FREE_FILES : (tier === 'plus' ? MAX_PLUS_FILES : MAX_PRO_FILES);
+  const maxMb = MAX_FILE_MB[tier];
+
+  if (files.length > maxFiles) {
+    if (tier === 'free') {
+      if(reportContent) reportContent.innerHTML = buildErrorItem('Bulk processing is a paid feature. Plus supports up to 100 files per batch.');
+    } else if (tier === 'plus') {
+      if(reportContent) reportContent.innerHTML = buildErrorItem(`Creator Plus supports up to ${MAX_PLUS_FILES} files per batch. Upgrade to Pro for unlimited batch processing.`);
+    }
     return;
   }
-  if (isPro && files.length > MAX_PRO_FILES) {
-    if(reportContent) reportContent.innerHTML = buildErrorItem(`Creator Pro supports up to ${MAX_PRO_FILES} files per batch.`);
+
+  const oversize = files.find((f) => (f.size / (1024 * 1024)) > maxMb);
+  if (oversize) {
+    if(reportContent) reportContent.innerHTML = buildErrorItem(`${oversize.name} exceeds your ${tier.toUpperCase()} limit of ${maxMb}MB per file.`);
     return;
   }
   
@@ -1059,7 +1131,7 @@ async function processBulkFiles(files) {
   const progressBarFill = document.getElementById('batchProgressBarFill');
   const batchFileList = document.getElementById('batchFileList');
 
-  const options = { isPro: true, aiOptOut: creatorProfile.aiOnly !== false, injectIdentity: !!(creatorProfile.name || creatorProfile.copyright || creatorProfile.url), ...creatorProfile };
+  const options = { isPro: isPro, aiOptOut: creatorProfile.aiOnly !== false, injectIdentity: !!(creatorProfile.name || creatorProfile.copyright || creatorProfile.url), ...creatorProfile };
   options.creatorName = creatorProfile.name || '';
   options.copyright = creatorProfile.copyright || '';
   options.contactUrl = creatorProfile.url || '';

@@ -144,6 +144,17 @@ export default {
   }
 };
 
+const PLUS_PRICE_ID = 'pri_01ksb8cp542z2be2nt8tkmctwp';
+const PRO_PRICE_ID = 'pri_01ks3bgn6zyh2bsvqk438c3dcv';
+
+function normalizePlan(rawPlan) {
+  return rawPlan === 'plus' ? 'plus' : 'pro';
+}
+
+function deviceLimitForPlan(plan) {
+  return plan === 'plus' ? 1 : 3;
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // /stats — GET global sanitization count
 // ─────────────────────────────────────────────────────────────────────────────
@@ -202,7 +213,7 @@ async function handleValidate(request, env, corsHeaders) {
     }
 
     // Parse the license data (support both old 'active' string and new JSON format)
-    let license = { status: 'active', device_ids: [] };
+    let license = { status: 'active', device_ids: [], plan: 'pro', device_limit: 3 };
     try {
       if (kvData !== 'active' && kvData !== 'revoked') {
         license = JSON.parse(kvData);
@@ -211,6 +222,11 @@ async function handleValidate(request, env, corsHeaders) {
       }
     } catch { /* fallback to default */ }
 
+    const plan = normalizePlan(license.plan || 'pro');
+    const deviceLimit = Number.isFinite(license.device_limit) ? license.device_limit : deviceLimitForPlan(plan);
+    license.plan = plan;
+    license.device_limit = deviceLimit;
+
     if (license.status === 'revoked') {
       return json({ valid: false, error: 'This license has been revoked. Contact support@verimedia.xyz.' }, 200, corsHeaders);
     }
@@ -218,10 +234,10 @@ async function handleValidate(request, env, corsHeaders) {
     // ── Device Limit Logic (3 Devices Max) ──────────────────────────────────
     if (deviceId) {
       if (!license.device_ids.includes(deviceId)) {
-        if (license.device_ids.length >= 3) {
+        if (license.device_ids.length >= deviceLimit) {
           return json({ 
             valid: false, 
-            error: 'Device limit reached. This license is already active on 3 other devices. Contact support to reset.' 
+            error: `Device limit reached. This ${plan.toUpperCase()} license is already active on ${deviceLimit} device(s). Contact support to reset.` 
           }, 200, corsHeaders);
         }
         // Register new device
@@ -230,7 +246,7 @@ async function handleValidate(request, env, corsHeaders) {
       }
     }
 
-    return json({ valid: true }, 200, corsHeaders);
+    return json({ valid: true, plan, device_limit: deviceLimit }, 200, corsHeaders);
 
   } catch (err) {
     console.error('KV lookup error:', err.message);
@@ -282,6 +298,16 @@ async function handleWebhook(request, env) {
     const licenseKey = transactionId.toUpperCase();
     console.log(`Processing activation for key: ${licenseKey}`);
 
+    const items = event.data?.items || event.data?.details?.line_items || [];
+    const firstItem = items[0] || {};
+    const priceId = firstItem.price?.id || firstItem.price_id || firstItem.priceId || '';
+    const customPlan = event.data?.custom_data?.plan || event.data?.customData?.plan || '';
+    const inferredPlan = normalizePlan(
+      customPlan ||
+      (priceId === PLUS_PRICE_ID ? 'plus' : 'pro')
+    );
+    const inferredDeviceLimit = deviceLimitForPlan(inferredPlan);
+
     try {
       const existing = await env.LICENSE_KEYS.get(licenseKey);
       if (!existing) {
@@ -289,9 +315,12 @@ async function handleWebhook(request, env) {
         await env.LICENSE_KEYS.put(licenseKey, JSON.stringify({
           status: 'active',
           device_ids: [],
+          plan: inferredPlan,
+          device_limit: inferredDeviceLimit,
+          price_id: priceId || null,
           purchase_date: new Date().toISOString()
         }));
-        console.log(`✅ Success: Activated new license key: ${licenseKey}`);
+        console.log(`✅ Success: Activated new ${inferredPlan.toUpperCase()} license key: ${licenseKey}`);
       } else {
         console.log(`ℹ️ Info: License key already active: ${licenseKey}`);
       }

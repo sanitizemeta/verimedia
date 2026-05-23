@@ -7,13 +7,22 @@ This document is the day-to-day operating manual for SEO/AIO/GEO + conversion ex
 - Day 1: get indexed pages and first visitors.
 - Month 1: target first 10 conversions.
 
+## Pricing & Limits (Current)
+
+- `Free`: 1 file/batch, 5MB/file, no paid license.
+- `Plus ($9.99 one-time)`: 100 files/batch, 25MB/file, 1 device license.
+- `Pro ($19 one-time)`: unlimited batch, 100MB/file, whitelabel, 3 device license.
+
 ## Core URLs
 
 - `https://verimedia.xyz/`
-- `https://verimedia.xyz/ai-opt-out-metadata.html`
-- `https://verimedia.xyz/remove-exif-from-photos.html`
-- `https://verimedia.xyz/remove-pdf-metadata.html`
-- `https://verimedia.xyz/knowledge.html`
+- `https://verimedia.xyz/ai-opt-out-metadata`
+- `https://verimedia.xyz/remove-exif-from-photos`
+- `https://verimedia.xyz/remove-pdf-metadata`
+- `https://verimedia.xyz/knowledge`
+- `https://verimedia.xyz/privacy`
+- `https://verimedia.xyz/terms`
+- `https://verimedia.xyz/refund`
 
 ## Daily Checklist (Do Every Day)
 
@@ -24,6 +33,7 @@ This document is the day-to-day operating manual for SEO/AIO/GEO + conversion ex
 3. Check indexing status manually in:
    - Google Search Console
    - Bing Webmaster Tools
+   - Ahrefs Site Audit issues diff (latest crawl vs previous crawl)
 4. Check search performance manually:
    - Impressions
    - Clicks
@@ -36,6 +46,7 @@ This document is the day-to-day operating manual for SEO/AIO/GEO + conversion ex
 6. Export local events at end of day:
    - Run: `window.VerimediaGrowth.exportEventsJson()`
    - Save exported file in `growth/reports/` for tracking history.
+7. Re-request indexing for changed URLs in both GSC and Bing.
 
 ## How To Do Funnel Baseline (Step 1)
 
@@ -100,6 +111,32 @@ Regenerate anytime sitemap changes:
 
 - `npm run growth:index-pack`
 
+## Technical SEO Audit Triage (Daily)
+
+When Ahrefs reports errors/warnings:
+
+1. Fix in this order:
+   - 4xx/broken internal links
+   - Canonical-to-redirect
+   - Hreflang errors
+   - Orphan pages
+   - Low word count on indexable pages
+2. After fixes:
+   - `npm run build`
+   - push to `main`
+   - request indexing for changed URLs in GSC/Bing
+3. Re-crawl in Ahrefs and compare issue deltas.
+
+## Recent Fix Log (2026-05-24)
+
+- Canonicals moved to extensionless 200 URLs (removed `.html` canonical redirects).
+- Sitemap and internal links updated to extensionless URLs.
+- Removed broken external references in `knowledge`.
+- Removed broken Cloudflare email-protection crawl path source from policy pages.
+- Simplified hreflang sets to avoid non-canonical/incomplete group errors.
+- Added internal link to `knowledge` from homepage footer (orphan fix).
+- Expanded `knowledge` content above low-word threshold.
+
 ## Content/SEO Operations
 
 ### Every 2-3 days
@@ -144,10 +181,10 @@ Use this section daily:
 
 - Date:
 - Indexing status:
+- Ahrefs issue counts (errors/warnings):
 - Top page by impressions:
 - Top page by clicks:
 - Funnel counts:
 - Biggest leak:
 - Change shipped:
 - Next action:
-

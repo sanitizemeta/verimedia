@@ -284,21 +284,39 @@
           <button class="pricing-btn secondary-btn" data-i18n="pricing.launch_free">Try Free Sandbox</button>
         </div>
 
-        <!-- Pro Plan -->
+        <!-- Plus Plan -->
         <div class="card glass-card price-card popular-card">
+          <div class="popular-badge">MOST CREATOR-FRIENDLY</div>
+          <h3>Creator Plus</h3>
+          <div class="price">$9.99 <span class="period">one-time</span></div>
+          <p class="price-desc">Best value to protect and publish your work at scale.</p>
+          <ul class="features-list">
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span>Everything in Free Tier</span></li>
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span>Up to 100 files per batch</span></li>
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span>Up to 25MB per file</span></li>
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span>Creator profile + copyright metadata</span></li>
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span>1 device license</span></li>
+          </ul>
+          <button class="pricing-btn primary-btn paddle-checkout-btn paddle-plus-checkout-btn" data-plan="plus">Buy Plus - $9.99</button>
+          <button class="link-btn already-have-key-link" id="activateManualBtn" data-i18n="pricing.already_bought">Already purchased?</button>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="card glass-card price-card">
           <div class="popular-badge" data-i18n="pricing.popular_badge">LIFETIME DEAL</div>
           <h3 data-i18n="pricing.pro_title">Creator Pro</h3>
           <div class="price">$19 <span class="period" data-i18n="pricing.pro_period">one-time</span></div>
-          <p class="price-desc" data-i18n="pricing.pro_desc">Pay once. Use forever. 100% Private.</p>
+          <p class="price-desc">For studios and heavy workflows that need no limits.</p>
           <ul class="features-list">
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.pro_f1">Everything in Free Tier</span></li>
-            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.pro_f2">Bulk Uploads (Up to 100 files)</span></li>
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span>Unlimited batch processing</span></li>
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.pro_f3">Custom ownership signatures</span></li>
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.pro_f4">Google "Licensable" badge support</span></li>
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span>Up to 100MB per file</span></li>
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span>Whitelabel metadata mode</span></li>
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-cyan); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.pro_f5">Works on up to 3 devices</span></li>
           </ul>
-          <button class="pricing-btn primary-btn paddle-checkout-btn" data-i18n="pricing.buy_now">Buy Now - $19</button>
-          <button class="link-btn already-have-key-link" id="activateManualBtn" data-i18n="pricing.already_bought">Already purchased?</button>
+          <button class="pricing-btn secondary-btn paddle-checkout-btn paddle-pro-checkout-btn" data-plan="pro">Buy Pro - $19</button>
         </div>
 
       </div>
@@ -517,6 +535,7 @@
           <button class="pricing-btn secondary-btn" id="profileExportBtn" type="button" data-i18n="profile.export">Export</button>
           <button class="pricing-btn secondary-btn" id="profileImportBtn" type="button" data-i18n="profile.import">Import</button>
         </div>
+        <input type="file" id="importProfileInput" accept="application/json,.json" style="display:none;" />
         <button class="pricing-btn primary-btn" id="profileSaveBtn" style="margin-top:1rem; width:100%;" data-i18n="profile.save">Save Profile</button>
         <p class="modal-footnote" style="margin-top:1rem;" data-i18n="profile.footnote">Profile is stored in your browser's local storage. Never uploaded.</p>
       </form>
