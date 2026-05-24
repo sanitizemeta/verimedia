@@ -19,6 +19,7 @@ export default defineConfig({
         terms: resolve(__dirname, 'terms/index.html'),
         refund: resolve(__dirname, 'refund/index.html'),
         notFound: resolve(__dirname, '404.html'),
+        knowledge: resolve(__dirname, 'knowledge/index.html'),
       }
     }
   }

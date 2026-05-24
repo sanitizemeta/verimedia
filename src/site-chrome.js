@@ -5,7 +5,7 @@
 
 const NAV_HTML = `
   <div class="logo-container">
-    <a href="/" style="text-decoration:none;">
+    <a href="/">
       <span class="logo-text">
         <img src="/icon.svg" alt="VeriMedia" width="24" height="24">
         VeriMedia<span class="dot">.xyz</span>
@@ -13,16 +13,20 @@ const NAV_HTML = `
     </a>
   </div>
   <nav>
-    <a href="/" class="nav-link">Home</a>
+    <a href="/#calculator-section" class="nav-link">Utility</a>
     <a href="/#pricing-section" class="nav-link">Pricing</a>
     <a href="/#faq-section" class="nav-link">FAQ</a>
     <a href="/#calculator-section" class="nav-link nav-cta">Shield my images</a>
     <div class="nav-lang-strip">
-      <a href="/" class="nav-link nav-lang-link">EN</a>
+      <a href="/" class="nav-link nav-lang-link active-lang">EN</a>
       <a href="/es" class="nav-link nav-lang-link">ES</a>
       <a href="/fr" class="nav-link nav-lang-link">FR</a>
       <a href="/de" class="nav-link nav-lang-link">DE</a>
     </div>
+    <a href="/" class="profile-nav-btn nav-link">
+      <i data-lucide="user" style="width:13px;height:13px;"></i>
+      Profile
+    </a>
   </nav>
 `;
 
@@ -34,7 +38,7 @@ const FOOTER_HTML = `
         VeriMedia<span class="dot">.xyz</span>
       </span>
       <p class="footer-tagline">Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.</p>
-      <p class="footer-copy">&copy; 2026 VeriMedia.xyz</p>
+      <p class="footer-copy">&copy; 2026 VeriMedia.xyz. Processed 100% locally in your browser. No files are ever stored or uploaded.</p>
     </div>
     <div class="footer-col">
       <h4 class="footer-col-title">Tools</h4>
@@ -48,6 +52,7 @@ const FOOTER_HTML = `
       <a href="/ai-opt-out-metadata" class="footer-link">AI Training Shield Guide</a>
       <a href="/remove-exif-from-photos" class="footer-link">EXIF Removal Guide</a>
       <a href="/remove-pdf-metadata" class="footer-link">PDF Privacy Guide</a>
+      <a href="/knowledge" class="footer-link">Knowledge Base</a>
     </div>
     <div class="footer-col">
       <h4 class="footer-col-title">Legal</h4>
@@ -58,7 +63,7 @@ const FOOTER_HTML = `
     </div>
   </div>
   <div class="footer-bottom">
-    <span>All files processed 100% locally — nothing ever leaves your browser.</span>
+    <span><i data-lucide="shield-check" style="width:12px;height:12px;vertical-align:middle;color:var(--emerald);margin-right:5px;"></i>All files processed 100% locally — nothing ever leaves your browser.</span>
   </div>
 `;
 
