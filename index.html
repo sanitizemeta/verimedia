@@ -86,6 +86,7 @@
       <a href="#calculator-section" class="nav-link" data-i18n="header.utility">Utility</a>
       <a href="#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
       <a href="#faq-section" class="nav-link" data-i18n="header.faq">FAQ</a>
+      <a href="#calculator-section" class="nav-link nav-cta">Try free</a>
       
       <!-- Standardized Language Switcher -->
       <div class="lang-switcher-wrap" style="position: relative;">
@@ -112,16 +113,26 @@
     <section id="calculator-section" class="interactive-sandbox tool-hero-section">
       <div class="tool-hero-layout">
         <div class="tool-hero-copy">
-          <h1 class="hero-title" data-i18n="hero.title" style="font-size: clamp(2.3rem, 5.5vw, 3.8rem); line-height: 1.2; letter-spacing: -1.5px; margin: 0 0 1.2rem 0;">Stop AI Scrapers from Stealing Your Work.</h1>
+          <h1 class="hero-title" style="font-size: clamp(2.3rem, 5.5vw, 3.8rem); line-height: 1.2; letter-spacing: -1.5px; margin: 0 0 1.2rem 0;"><span>Clean metadata.</span><span>Protect creator rights.</span></h1>
           <article class="aeo-summary" aria-label="Tool Summary Box">
-            <p data-i18n="hero.summary">VeriMedia embeds AI training opt-out and creator ownership signals directly into your files in under 100ms. Everything runs locally in your browser, so your media never leaves your device.</p>
+            <p data-i18n="hero.summary">Remove GPS, EXIF, device, and PDF data locally. Add AI opt-out and ownership signals. Files stay on-device.</p>
           </article>
+          <div class="hero-action-row">
+            <a href="#dropzone" class="pricing-btn primary-btn hero-primary-link">Try the free sandbox</a>
+            <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link">Compare Plus and Pro</a>
+          </div>
           <div class="hero-trust-strip" aria-label="Privacy and ownership guarantees">
             <span><i data-lucide="hard-drive" aria-hidden="true"></i> Local browser processing</span>
+            <span><i data-lucide="upload-cloud" aria-hidden="true"></i> Zero file uploads</span>
             <span><i data-lucide="bot-off" aria-hidden="true"></i> AI opt-out metadata</span>
             <span><i data-lucide="copyright" aria-hidden="true"></i> Creator ownership tags</span>
           </div>
-          <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link">Compare Plus and Pro</a>
+          <div class="hero-mini-proof" aria-label="Who uses VeriMedia">
+            <span>Built for photographers</span>
+            <span>Designers</span>
+            <span>Studios</span>
+            <span>PDF publishers</span>
+          </div>
         </div>
 
         <div class="unified-tool-panel glass-card" aria-label="VeriMedia cleaner">
@@ -190,9 +201,41 @@
       </div>
     </section>
 
+    <section class="workflow-section" aria-labelledby="workflow-title">
+      <div class="section-heading-row">
+        <div>
+          <h2 id="workflow-title" class="section-title">From risky upload to clean publishable file in three steps</h2>
+          <p class="section-subtitle">The main workflow stays local: choose a file, review what was found, download the cleaned version.</p>
+        </div>
+        <a href="#calculator-section" class="pricing-btn secondary-btn section-link-btn">Start with a sample</a>
+      </div>
+      <div class="workflow-grid">
+        <article class="workflow-card">
+          <span class="workflow-step">01</span>
+          <i data-lucide="file-up"></i>
+          <h3>Drop media locally</h3>
+          <p>Use JPEG, PNG, WebP, HEIC/HEIF, or PDF files up to the current tier limit. Files are parsed in browser memory.</p>
+        </article>
+        <article class="workflow-card">
+          <span class="workflow-step">02</span>
+          <i data-lucide="scan-search"></i>
+          <h3>Audit hidden metadata</h3>
+          <p>VeriMedia checks GPS coordinates, camera and device details, author fields, PDF metadata, and AI training signals.</p>
+        </article>
+        <article class="workflow-card">
+          <span class="workflow-step">03</span>
+          <i data-lucide="download-cloud"></i>
+          <h3>Download protected output</h3>
+          <p>Export a clean file or ZIP with privacy metadata removed and ownership or opt-out metadata added where supported.</p>
+        </article>
+      </div>
+    </section>
+
     <!-- 3. Features & Proof Section (Secondary Focus) -->
     <section class="semantic-kb-section" style="max-width: 1200px; margin: 0 auto 5rem auto; padding: 0 1.5rem;">
-      <h2 class="section-title" data-i18n="kb.title" style="text-align: center; margin-bottom: 3.5rem;">Uncompromising Privacy & Creator Protection</h2>
+      <div class="section-kicker">What gets protected</div>
+      <h2 class="section-title" data-i18n="kb.title" style="text-align: center; margin-bottom: 1rem;">Uncompromising Privacy & Creator Protection</h2>
+      <p class="section-subtitle feature-section-subtitle">Every feature supports the same outcome: remove private traces, add rights signals, and ship cleaner files.</p>
       
       <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;">
         <!-- Feature 1 -->
@@ -292,6 +335,7 @@
 
     <!-- Pricing / Conversion Table Section -->
     <section id="pricing-section" class="pricing-section">
+      <div class="section-kicker">Choose your publish volume</div>
       <h2 class="section-title" data-i18n="pricing.title">Simple Pricing</h2>
       <p class="section-subtitle" data-i18n="pricing.subtitle">Choose the tier that best fits your workflow.</p>
       
@@ -308,7 +352,7 @@
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-emerald); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.free_f3">Add AI training protection</span></li>
             <li><i data-lucide="x" style="width: 14px; height: 14px; color: var(--accent-rose); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.free_f4">1 file at a time</span></li>
           </ul>
-          <button class="pricing-btn secondary-btn" data-i18n="pricing.launch_free">Try Free Sandbox</button>
+          <a href="#calculator-section" class="pricing-btn secondary-btn" data-i18n="pricing.launch_free">Try Free Sandbox</a>
         </div>
 
         <!-- Plus Plan -->
@@ -347,6 +391,7 @@
         </div>
 
       </div>
+      <p class="pricing-aftercopy">Free tier removes private tracking and adds AI opt-out metadata. Upgrade only when batch volume, creator profile metadata, larger files, or whitelabel delivery matters.</p>
     </section>
 
     <!-- FAQ Section -->

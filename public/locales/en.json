@@ -9,8 +9,8 @@
     "logo_alt": "VeriMedia Logo - Secure AI Metadata Stripper"
   },
   "hero": {
-    "title": "Stop AI Scrapers from Stealing Your Work.",
-    "summary": "VeriMedia embeds AI training opt-out and creator ownership signals directly into your files in under 100ms. Everything runs locally in your browser, so your media never leaves your device."
+    "title": "Clean metadata. Protect creator rights.",
+    "summary": "Remove GPS, EXIF, device, and PDF data locally. Add AI opt-out and ownership signals. Files stay on-device."
   },
   "kb": {
     "title": "Uncompromising Privacy & Creator Protection",
@@ -75,8 +75,8 @@
     "stage_img_4": "Processing complete!"
   },
   "pricing": {
-    "title": "Simple Pricing",
-    "subtitle": "Choose the tier that best fits your workflow.",
+    "title": "Simple pricing for safer publishing",
+    "subtitle": "Start free. Upgrade when you need batch processing, creator metadata, larger files, or whitelabel delivery.",
     "free_title": "Standard Tier",
     "free_price": "Free",
     "free_period": "/ forever",
