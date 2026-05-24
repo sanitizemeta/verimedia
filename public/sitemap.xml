@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
   <url>
     <loc>https://verimedia.xyz/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/"/>
@@ -7,8 +10,12 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/fr/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://verimedia.xyz/de/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/"/>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
+
+  <!-- Localised homepages -->
   <url>
     <loc>https://verimedia.xyz/es/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://verimedia.xyz/"/>
@@ -16,7 +23,9 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/fr/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://verimedia.xyz/de/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/"/>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://verimedia.xyz/fr/</loc>
@@ -25,7 +34,9 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/fr/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://verimedia.xyz/de/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/"/>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://verimedia.xyz/de/</loc>
@@ -34,34 +45,45 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://verimedia.xyz/fr/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://verimedia.xyz/de/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/"/>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
+
+  <!-- SEO guide pages — highest priority after homepage -->
   <url>
     <loc>https://verimedia.xyz/ai-opt-out-metadata</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://verimedia.xyz/remove-exif-from-photos</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://verimedia.xyz/remove-pdf-metadata</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://verimedia.xyz/knowledge</loc>
-    <lastmod>2026-05-23</lastmod>
-  </url>
+
+  <!-- Legal & support -->
   <url>
     <loc>https://verimedia.xyz/privacy</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://verimedia.xyz/terms</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
-  <url>
-    <loc>https://verimedia.xyz/refund</loc>
-    <lastmod>2026-05-23</lastmod>
-  </url>
+
+  <!-- 404.html is excluded — noindex is set on that page -->
+
 </urlset>
