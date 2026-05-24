@@ -6,11 +6,11 @@
     "profile": "Perfil",
     "home": "Inicio",
     "lang_label": "Cambiar idioma",
-    "logo_alt": "Logotipo de VeriMedia: eliminador seguro de metadatos de IA"
+    "logo_alt": "VeriMedia — Bloquea la IA de entrenar con tus imágenes"
   },
   "hero": {
-    "title": "Evite que los raspadores de IA roben su trabajo.",
-    "summary": "VeriMedia es una utilidad segura basada 100% en el navegador que elimina los datos de seguimiento ocultos e inyecta etiquetas de exclusión de IA en menos de 100 ms. Sus archivos nunca salen de su dispositivo, lo que garantiza que su privacidad sea absoluta mientras su trabajo permanece acreditado profesionalmente."
+    "title": "La IA entrena con tus fotos sin pedirte permiso.",
+    "summary": "VeriMedia incrusta la señal ai:opt-out=true directamente en tus imágenes y PDFs — localmente, en el navegador. GPTBot, ClaudeBot y Common Crawl leen esta etiqueta y excluyen tu trabajo de los conjuntos de datos de entrenamiento."
   },
   "kb": {
     "title": "Privacidad sin concesiones y protección del creador",
@@ -35,12 +35,11 @@
     "whitelabel_desc": "Elimine todas las referencias a VeriMedia de los metadatos de sus archivos, reemplazando las etiquetas de 'Software' con 'Original Content Engine'."
   },
   "sandbox": {
-    "drop_title": "Arrastra y suelta tu archivo multimedia",
-    "drop_subtitle": "o haga clic para buscar archivos locales (máx. 25 MB)",
+    "drop_title": "Suelta tu imagen o PDF",
+    "drop_subtitle": "o haz clic para explorar (hasta 25 MB)",
     "sample_link_text": "¿No tienes un archivo a mano? <span class='sample-highlight'>Prueba nuestra foto de muestra con metadatos.</span>",
-    "sample_btn_text": "¿No tienes un archivo a mano? Prueba nuestra foto de muestra",
-    "social_proof_text": "<i data-lucide='zap' style='width: 14px; height: 14px; color: var(--accent-emerald); vertical-align: middle; margin-right: 8px;'></i> <span id='liveCount'>{{count}}</span> imágenes saneadas localmente hoy. Cero bytes subidos a la nube.",
-    "audit_title": "Auditoría de privacidad y derechos de autor",
+    "sample_btn_text": "Probar foto de muestra",
+    "audit_title": "Escudo IA y Auditoría de Privacidad",
     "audit_subtitle": "Informe forense detallado de metadatos.",
     "audit_empty": "Sube una foto para eliminar los detalles de seguimiento e insertar etiquetas de derechos de autor y exclusión voluntaria de IA.",
     "try_sample": "Probar archivo de muestra",
@@ -98,7 +97,7 @@
     "buy_now": "Comprar ahora - $19",
     "activate": "Ingrese su clave de licencia",
     "already_bought": "¿Ya lo compraste?",
-    "popular_badge": "OFERTA DE POR VIDA"
+    "popular_badge": "MÁS POPULAR"
   },
   "faq": {
     "title": "Preguntas frecuentes",

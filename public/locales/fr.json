@@ -6,11 +6,11 @@
     "profile": "Profil",
     "home": "Accueil",
     "lang_label": "Changer de langue",
-    "logo_alt": "Logo VeriMedia - Suppresseur sécurisé de métadonnées d'IA"
+    "logo_alt": "VeriMedia — Bloquez l'IA d'utiliser vos images pour l'entraînement"
   },
   "hero": {
-    "title": "Empêchez les robots d'IA de voler votre travail.",
-    "summary": "VeriMedia est un utilitaire sécurisé 100% par navigateur qui supprime les données de suivi cachées et injecte des balises d'opt-out IA en moins de 100ms. Vos fichiers ne quittent jamais votre appareil, garantissant une confidentialité absolue pendant que votre travail reste crédité professionnellement."
+    "title": "L'IA s'entraîne sur vos photos sans vous demander.",
+    "summary": "VeriMedia intègre le signal ai:opt-out=true directement dans vos images et PDFs — localement, dans votre navigateur. GPTBot, ClaudeBot et Common Crawl lisent cette balise et excluent votre travail des jeux de données d'entraînement."
   },
   "kb": {
     "title": "Confidentialité sans compromis et protection des créateurs",
@@ -35,12 +35,11 @@
     "whitelabel_desc": "Supprimez toutes les références à VeriMedia des métadonnées de vos fichiers, en remplaçant les balises 'Logiciel' par 'Original Content Engine'."
   },
   "sandbox": {
-    "drop_title": "Glissez-déposez votre fichier média",
-    "drop_subtitle": "ou cliquez pour parcourir les fichiers locaux (max 25 Mo)",
+    "drop_title": "Déposez votre image ou PDF",
+    "drop_subtitle": "ou cliquez pour parcourir (jusqu'à 25 Mo)",
     "sample_link_text": "Pas de fichier sous la main ? <span class='sample-highlight'>Essayez notre photo d'exemple riche en métadonnées.</span>",
-    "sample_btn_text": "Pas de fichier sous la main ? Essayez notre photo d'exemple",
-    "social_proof_text": "<i data-lucide='zap' style='width: 14px; height: 14px; color: var(--accent-emerald); vertical-align: middle; margin-right: 8px;'></i> <span id='liveCount'>{{count}}</span> images nettoyées localement aujourd'hui. Zéro octet envoyé sur le cloud.",
-    "audit_title": "Audit de Confidentialité et Copyright",
+    "sample_btn_text": "Essayer une photo d'exemple",
+    "audit_title": "Bouclier IA et Audit de Confidentialité",
     "audit_subtitle": "Rapport forensique détaillé des métadonnées.",
     "audit_empty": "Téléchargez une photo pour supprimer les détails de suivi et insérer des tags de copyright et d'opt-out IA.",
     "try_sample": "Essayer un fichier exemple",
@@ -98,7 +97,7 @@
     "buy_now": "Acheter Maintenant - 19 $",
     "activate": "Entrez votre clé de licence",
     "already_bought": "Déjà acheté ?",
-    "popular_badge": "OFFRE À VIE"
+    "popular_badge": "LE PLUS POPULAIRE"
   },
   "faq": {
     "title": "Foire Aux Questions",

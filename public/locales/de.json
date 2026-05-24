@@ -6,11 +6,11 @@
     "profile": "Profil",
     "home": "Startseite",
     "lang_label": "Sprache wechseln",
-    "logo_alt": "VeriMedia Logo - Sicherer KI-Metadaten-Stripper"
+    "logo_alt": "VeriMedia — Blockiere KI vom Training mit deinen Bildern"
   },
   "hero": {
-    "title": "Stoppen Sie KI-Scraper davor, Ihre Arbeit zu stehlen.",
-    "summary": "VeriMedia ist ein sicheres, zu 100 % browserbasiertes Tool, das versteckte Tracking-Daten entfernt und in weniger als 100 ms KI-Opt-out-Tags einfügt. Ihre Dateien verlassen niemals Ihr Gerät, sodass Ihre Privatsphäre absolut gewahrt bleibt, während Ihre Arbeit professionell gekennzeichnet bleibt."
+    "title": "KI trainiert mit deinen Fotos ohne zu fragen.",
+    "summary": "VeriMedia bettet das ai:opt-out=true-Signal direkt in deine Bilder und PDFs ein — lokal, im Browser. GPTBot, ClaudeBot und Common Crawl lesen dieses Tag und schließen deine Arbeit aus KI-Trainingsdatensätzen aus."
   },
   "kb": {
     "title": "Kompromissloser Datenschutz & Urheberschutz",
@@ -35,12 +35,11 @@
     "whitelabel_desc": "Entfernen Sie alle VeriMedia-Referenzen aus Ihren Datei-Metadaten und ersetzen Sie 'Software'-Tags durch 'Original Content Engine'."
   },
   "sandbox": {
-    "drop_title": "Ziehen Sie Ihre Mediendatei hierher",
-    "drop_subtitle": "oder klicken Sie, um lokale Dateien zu durchsuchen (max. 25 MB)",
+    "drop_title": "Bild oder PDF ablegen",
+    "drop_subtitle": "oder zum Durchsuchen klicken (bis zu 25 MB)",
     "sample_link_text": "Keine Datei zur Hand? <span class='sample-highlight'>Probieren Sie unser Metadaten-reiches Beispielfoto.</span>",
-    "sample_btn_text": "Keine Datei bereit? Beispielfoto probieren",
-    "social_proof_text": "<i data-lucide='zap' style='width: 14px; height: 14px; color: var(--accent-emerald); vertical-align: middle; margin-right: 8px;'></i> <span id='liveCount'>{{count}}</span> Bilder heute lokal bereinigt. Null Bytes in die Cloud hochgeladen.",
-    "audit_title": "Datenschutz- & Urheberrechts-Audit",
+    "sample_btn_text": "Beispielfoto testen",
+    "audit_title": "KI-Schutz & Datenschutz-Audit",
     "audit_subtitle": "Detaillierter forensischer Metadaten-Bericht.",
     "audit_empty": "Laden Sie ein Foto hoch, um Tracking-Details zu entfernen und Urheberrechts- sowie KI-Opt-out-Tags einzubetten.",
     "try_sample": "Beispiel-Datei testen",
@@ -98,7 +97,7 @@
     "buy_now": "Jetzt kaufen - 19 $",
     "activate": "Lizenzschlüssel eingeben",
     "already_bought": "Bereits gekauft?",
-    "popular_badge": "LIFETIME-DEAL"
+    "popular_badge": "AM BELIEBTESTEN"
   },
   "faq": {
     "title": "Häufig gestellte Fragen",

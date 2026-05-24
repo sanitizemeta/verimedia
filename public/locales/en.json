@@ -6,11 +6,11 @@
     "profile": "Profile",
     "home": "Home",
     "lang_label": "Switch Language",
-    "logo_alt": "VeriMedia Logo - Secure AI Metadata Stripper"
+    "logo_alt": "VeriMedia — Block AI from training on your images"
   },
   "hero": {
-    "title": "Clean metadata. Protect creator rights.",
-    "summary": "Remove GPS, EXIF, device, and PDF data locally. Add AI opt-out and ownership signals. Files stay on-device."
+    "title": "AI is training on your photos without asking.",
+    "summary": "VeriMedia embeds the ai:opt-out=true signal directly into your images and PDFs — locally, in-browser. GPTBot, ClaudeBot, and Common Crawl read this tag and exclude your work from AI training datasets."
   },
   "kb": {
     "title": "Uncompromising Privacy & Creator Protection",
@@ -35,12 +35,11 @@
     "whitelabel_desc": "Remove all VeriMedia references from your file metadata, replacing 'Software' tags with 'Original Content Engine'."
   },
   "sandbox": {
-    "drop_title": "Drag & Drop your media file",
-    "drop_subtitle": "or click to browse local files (max 25MB)",
-    "sample_link_text": "Don't have a file handy? <span class='sample-highlight'>Try our metadata-heavy sample photo.</span>",
-    "sample_btn_text": "No file ready? Try our sample photo",
-    "social_proof_text": "<i data-lucide='zap' style='width: 14px; height: 14px; color: var(--accent-emerald); vertical-align: middle; margin-right: 8px;'></i> <span id='liveCount'>{{count}}</span> images sanitized locally today. Zero bytes uploaded to the cloud.",
-    "audit_title": "Privacy & Copyright Audit",
+    "drop_title": "Drop your image or PDF",
+    "drop_subtitle": "or click to browse (up to 25 MB)",
+    "sample_link_text": "Don't have a file? <span class='sample-highlight'>Try a sample photo.</span>",
+    "sample_btn_text": "Try a sample photo",
+    "audit_title": "AI Shield & Privacy Audit",
     "audit_subtitle": "Detailed metadata forensic report.",
     "audit_empty": "Upload a photo to strip tracking details and embed copyright and AI opt-out tags.",
     "try_sample": "Try Sample File",
@@ -98,7 +97,7 @@
     "buy_now": "Buy Now - $19",
     "activate": "Enter your license key",
     "already_bought": "Already purchased?",
-    "popular_badge": "LIFETIME DEAL"
+    "popular_badge": "MOST POPULAR"
   },
   "faq": {
     "title": "Frequently Asked Questions",
