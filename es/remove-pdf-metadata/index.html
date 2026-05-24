@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Eliminar metadatos de PDF en línea | VeriMedia.xyz</title>
+  <meta name="description" content="Elimina metadatos ocultos de PDF en tu navegador. Borra el autor, el productor y los identificadores del documento sin subir archivos.">
+  <meta http-equiv="content-language" content="es" />
+  <link rel="canonical" href="https://verimedia.xyz/remove-pdf-metadata" />
+  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/remove-pdf-metadata" />
+  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/remove-pdf-metadata" />
+
+  <meta property="og:title" content="Remove PDF Metadata Online | VeriMedia.xyz">
+  <meta property="og:description" content="Clean hidden PDF metadata locally in your browser. No upload, no cloud processing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://verimedia.xyz/remove-pdf-metadata">
+  <meta property="og:image" content="https://verimedia.xyz/logo.png">
+  <meta name="cf-beacon-token" content="YOUR_CLOUDFLARE_BEACON_TOKEN">
+  <meta name="umami-script-url" content="YOUR_UMAMI_SCRIPT_URL">
+  <meta name="umami-website-id" content="YOUR_UMAMI_WEBSITE_ID">
+
+  <script type="application/ld+json" id="localized-schema">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to remove metadata from PDF files",
+      "description": "A browser-based method to remove hidden PDF metadata before sharing.",
+      "totalTime": "PT1M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Upload your PDF",
+          "text": "Open VeriMedia and upload your PDF file in the tool."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Run metadata scrub",
+          "text": "VeriMedia removes author, producer, and hidden metadata fields from the document."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Download clean PDF",
+          "text": "Download the sanitized PDF locally."
+        }
+      ],
+      "tool": {
+        "@type": "SoftwareApplication",
+        "name": "VeriMedia.xyz",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web Browser",
+        "url": "https://verimedia.xyz/"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What PDF metadata is usually exposed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Common fields include author name, producer software, creation timestamps, and document identifiers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool upload my PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. VeriMedia processes files in your browser and does not upload documents to a server."
+          }
+        }
+      ]
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+  <canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.4;"></canvas>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <header></header>
+
+  <main>
+    <section class="hero-section" style="max-width: 1000px; margin: 2.5rem auto 2rem auto; text-align: left; padding: 0 1.5rem;">
+      <h1 class="hero-title" style="font-size: clamp(2.1rem, 4.8vw, 3.3rem); line-height: 1.2; margin: 0 0 1rem 0;">
+        Eliminar metadatos ocultos de archivos PDF
+      </h1>
+      <p style="font-size: 1.02rem; color: var(--text-secondary); max-width: 820px;">
+        Elimina los detalles del autor, los campos del productor y los metadatos ocultos del documento antes de compartir contratos, portafolios o archivos de clientes.
+      </p>
+      <div style="display:flex; gap:0.8rem; margin-top:1.2rem; flex-wrap: wrap;">
+        <a href="/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
+          Iniciar limpieza de PDF
+        </a>
+        <a href="/privacy" class="pricing-btn secondary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
+          Política de privacidad
+        </a>
+      </div>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Por qué es importante eliminar los metadatos de los PDF</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Los archivos PDF pueden exponer un contexto sensible del documento. La limpieza de metadatos reduce el riesgo de privacidad antes de publicar o enviar archivos externamente.
+      </p>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Un PDF puede contener contenido visible, propiedades del documento, flujos de metadatos incrustados, campos del productor de software,
+        nombres de autor, marcas de tiempo de creación, esquemas, adjuntos y otros datos estructurales. Parte de esta información
+        es inofensiva dentro de un flujo de trabajo privado, pero innecesaria cuando se envía un documento fuera de su organización.
+      </p>
+      <ul style="margin-left: 1rem; color: var(--text-secondary);">
+        <li>Elimina los campos de metadatos de autor y productor.</li>
+        <li>Reduce la trazabilidad de las propiedades ocultas del documento.</li>
+        <li>Mantiene el contenido del PDF intacto mientras sanea los metadatos.</li>
+      </ul>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Buenas prácticas antes de compartir PDFs</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Mantén el documento fuente y una copia de archivo interna intactos. Antes de enviar una copia pública, elimina los metadatos ocultos,
+        confirma que el contenido visible es final y usa un nombre de archivo que no revele información privada del cliente,
+        del borrador o del proyecto. Para documentos sensibles, revisa el PDF manualmente después de limpiarlo.
+      </p>
+      <p style="color: var(--text-secondary);">
+        VeriMedia realiza la limpieza de PDF localmente en el navegador. Esto es importante para archivos legales, comerciales y creativos
+        porque el documento no necesita ser subido a un servidor de conversión de terceros.
+      </p>
+    </section>
+
+    <section class="faq-section" style="max-width:1000px; margin: 0 auto 4rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1.2rem;">Respuestas rápidas</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <h3>¿Puedo usar esto antes de enviar documentos a clientes?</h3>
+          <p>Sí, este es un caso de uso común para reducir la fuga accidental de metadatos.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Esto cambia el texto visible en mi PDF?</h3>
+          <p>No, la limpieza de metadatos se dirige a las propiedades ocultas del documento.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Debo revisar de todos modos el PDF limpio?</h3>
+          <p>Sí. La eliminación de metadatos es una capa de privacidad; el contenido visible sensible aún necesita una revisión de documento normal.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer></footer>
+
+  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/site-chrome.js"></script>
+</body>
+</html>

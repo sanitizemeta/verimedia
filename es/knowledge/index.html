@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base de conocimientos | VeriMedia</title>
+  <meta name="description" content="Referencias técnicas y estándares detrás de los flujos de trabajo de exclusión de IA y protección de metadatos de VeriMedia.">
+  <link rel="canonical" href="https://verimedia.xyz/knowledge">
+  <meta property="og:title" content="Knowledge Base | VeriMedia">
+  <meta property="og:description" content="Technical references for AI opt-out metadata, EXIF privacy, and PDF scrubbing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://verimedia.xyz/knowledge">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <style>
+    .guide-page { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+    .guide-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+    .guide-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.18); border-radius: 999px; padding: 0.2rem 0.65rem; margin-bottom: 1rem; }
+    .guide-title { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 1rem; }
+    .guide-intro { font-size: 1rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+    .guide-body h2 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin: 2rem 0 0.65rem; }
+    .guide-body p { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem; font-size: 0.92rem; }
+    .guide-body ul { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem 1.25rem; font-size: 0.92rem; }
+    .guide-body li { margin-bottom: 0.35rem; }
+    .guide-body a { color: var(--accent); text-decoration: none; }
+    .guide-body a:hover { text-decoration: underline; }
+    .guide-callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px 10px 10px 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .guide-cta-block { background: var(--surface); border: 1px solid rgba(56,189,248,0.18); border-radius: 14px; padding: 2rem; text-align: center; margin: 3rem 0; }
+    .guide-cta-block h3 { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 0.5rem; }
+    .guide-cta-block p { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.25rem; }
+  </style>
+</head>
+<body>
+
+  <header></header>
+
+  <main class="guide-page">
+
+    <div class="guide-header">
+      <div class="guide-tag">Referencia</div>
+      <h1 class="guide-title">Base de conocimientos</h1>
+      <p class="guide-intro">Estándares técnicos y referencias detrás de los flujos de trabajo de exclusión de IA y protección de metadatos de VeriMedia.</p>
+    </div>
+
+    <div class="guide-body">
+
+      <h2>Temas principales</h2>
+      <ul>
+        <li>Señalización de metadatos de exclusión de entrenamiento de IA (estándar XMP <code style="background:rgba(56,189,248,0.08);color:var(--accent);padding:1px 5px;border-radius:4px;font-size:0.88em;">ai:opt-out=true</code>)</li>
+        <li>Metadatos de propiedad y licencia del creador (IPTC, XMP WebStatement)</li>
+        <li>Limpieza de privacidad de metadatos EXIF y PDF</li>
+      </ul>
+
+      <h2>Cómo se usa esto</h2>
+      <p>VeriMedia aplica estas referencias para mantener un comportamiento predecible en los flujos de trabajo de JPEG, PNG, WebP, HEIC y PDF. El objetivo es una protección de la privacidad práctica: eliminar los metadatos relevantes para el seguimiento, conservar la usabilidad del archivo e incrustar el contexto de propiedad del creador donde los usuarios lo soliciten explícitamente.</p>
+      <p>Todo el procesamiento se realiza en el navegador. Estas fuentes se utilizan para la alineación del esquema y la consistencia de la terminología — sin dependencia de API remotas.</p>
+
+      <div class="guide-callout">
+        <p><strong>Garantía de privacidad:</strong> VeriMedia nunca recibe tus archivos. Todas las lecturas y escrituras de metadatos ocurren dentro de la memoria caché local de tu navegador. Nada se sube, almacena o registra.</p>
+      </div>
+
+      <h2>Estándares y referencias</h2>
+      <ul>
+        <li><a href="https://www.cipa.jp/e/std/std-sec.html" target="_blank" rel="noopener">Especificación EXIF (CIPA)</a> — campos de metadatos de la cámara y formato binario</li>
+        <li><a href="https://www.adobe.com/devnet/xmp.html" target="_blank" rel="noopener">Descripción general del estándar XMP (Adobe)</a> — plataforma de metadatos extensibles utilizada para las etiquetas de exclusión de IA</li>
+        <li><a href="https://iptc.org/standards/photo-metadata/" target="_blank" rel="noopener">Estándar de metadatos de fotos IPTC</a> — campos de crédito del creador, derechos de autor y licencias</li>
+        <li><a href="https://developer.adobe.com/document-services/docs/overview/" target="_blank" rel="noopener">Conceptos de metadatos de PDF (Adobe)</a> — diccionario de información del documento y flujos XMP</li>
+        <li><a href="https://openai.com/policies/usage-policies" target="_blank" rel="noopener">Política del rastreador de OpenAI (GPTBot)</a> — confirma el respeto por las señales de exclusión de IA</li>
+        <li><a href="https://commoncrawl.org/ccbot" target="_blank" rel="noopener">Política de Common Crawl / CCBot</a> — documentación del rastreador y cumplimiento de la exclusión</li>
+      </ul>
+
+      <h2>Guías relacionadas</h2>
+      <ul>
+        <li><a href="/ai-opt-out-metadata">Cómo bloquear los rastreadores de IA para que no entrenen con tus imágenes</a></li>
+        <li><a href="/remove-exif-from-photos">Cómo eliminar los datos GPS y EXIF de las fotos</a></li>
+        <li><a href="/remove-pdf-metadata">Cómo eliminar los metadatos de los archivos PDF</a></li>
+      </ul>
+
+      <div class="guide-cta-block">
+        <h3>Protege tus imágenes ahora</h3>
+        <p>Incrusta metadatos de exclusión de IA y borra los datos de seguimiento GPS — gratis, en tu navegador, en segundos.</p>
+        <a href="/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+          <i data-lucide="shield-check" style="width:15px;height:15px;"></i>
+          Probar VeriMedia gratis
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer></footer>
+  <script type="module" src="/src/site-chrome.js"></script>
+</body>
+</html>
