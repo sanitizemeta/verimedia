@@ -363,7 +363,7 @@ main { overflow: visible !important; }
 .hero-section {
   max-width: 860px;
   margin: 0 auto;
-  padding: 5rem 1.5rem 3.5rem;
+  padding: 2.75rem 1.5rem 2rem;
   text-align: center;
 }
 
@@ -371,7 +371,7 @@ main { overflow: visible !important; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.9rem;
 }
 
 .hero-eyebrow {
@@ -436,7 +436,7 @@ main { overflow: visible !important; }
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: var(--surface);
-  padding: 1.75rem 1.5rem;
+  padding: 1rem 1.5rem;
 }
 
 .trust-strip-inner {
@@ -445,7 +445,7 @@ main { overflow: visible !important; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.1rem;
+  gap: 0.65rem;
 }
 
 .trust-strip-label {
@@ -522,7 +522,7 @@ main { overflow: visible !important; }
 .tool-section {
   max-width: 860px;
   margin: 0 auto 4rem auto;
-  padding: 3.5rem 1.5rem 2rem;
+  padding: 2rem 1.5rem 2rem;
 }
 
 .tool-section-header {
