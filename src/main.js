@@ -41,6 +41,30 @@ function bootAnalytics() {
 bootAnalytics();
 
 /* ==========================================================================
+   📌 0b. Sticky CTA Bar (appears after hero scrolls out of view)
+   ========================================================================== */
+function bootStickyCta() {
+  const bar = document.getElementById('stickyCta');
+  const hero = document.getElementById('calculator-section');
+  if (!bar || !hero) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) {
+        bar.classList.add('visible');
+        bar.removeAttribute('aria-hidden');
+      } else {
+        bar.classList.remove('visible');
+        bar.setAttribute('aria-hidden', 'true');
+      }
+    },
+    { threshold: 0.15 }
+  );
+  observer.observe(hero);
+}
+bootStickyCta();
+
+/* ==========================================================================
    🌍 0. Localization & i18n Engine
    ========================================================================== */
 const LANG_KEY = 'vm_lang';
@@ -51,10 +75,10 @@ const pathParts = window.location.pathname.split('/').filter(Boolean);
 const pathLang = supportedLangs.includes(pathParts[0]) ? pathParts[0] : null;
 
 let currentLang = (urlLang && supportedLangs.includes(urlLang))
-  ? urlLang 
+  ? urlLang
   : (pathLang && supportedLangs.includes(pathLang))
     ? pathLang
-  : (localStorage.getItem(LANG_KEY) || 'en');
+    : 'en';
 
 let translations = {};
 
@@ -984,6 +1008,8 @@ const dropzone = document.getElementById('dropzone');
 const fileInput = document.getElementById('fileInput');
 const statusBadge = document.getElementById('statusBadge');
 const reportContent = document.getElementById('reportContent');
+const toolBody = document.getElementById('toolBody');
+const reportBackBtn = document.getElementById('reportBackBtn');
 let processedBlob = null;
 let processedFileName = '';
 const cleanNowBtn = document.getElementById('cleanNowBtn');
@@ -992,6 +1018,24 @@ const sampleFileBtn = document.getElementById('sampleFileBtn');
 const trySampleBtn = document.getElementById('trySampleBtn');
 let isProcessing = false;
 let queuedFiles = [];
+
+/** Show the audit / report panel, hiding the picker */
+function showAuditView() {
+  if (toolBody) toolBody.classList.add('audit-view');
+}
+
+/** Return to the picker panel (called by reset and back-btn) */
+function showPickerView() {
+  if (toolBody) toolBody.classList.remove('audit-view');
+}
+
+if (reportBackBtn) {
+  reportBackBtn.addEventListener('click', () => {
+    if (isProcessing) return;
+    resetCleanerFlow();
+  });
+}
+
 
 const MAX_FREE_FILES = 1;
 const MAX_PLUS_FILES = 100;
@@ -1033,6 +1077,42 @@ function updateQueueUI() {
   }
 }
 
+function renderEmptyAuditState() {
+  if (!reportContent) return;
+  reportContent.innerHTML = `
+    <div class="empty-state">
+      <p>${translations.sandbox?.audit_empty || 'Upload a photo to strip tracking details and embed copyright and AI opt-out tags.'}</p>
+      <button class="link-btn" id="trySampleBtn" data-i18n="sandbox.try_sample">${translations.sandbox?.try_sample || 'Try Sample File'}</button>
+    </div>
+  `;
+
+  const sampleBtn = document.getElementById('trySampleBtn');
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', (e) => {
+      if (isProcessing) return;
+      e.stopPropagation();
+      runInteractiveDemo();
+    });
+  }
+
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function resetCleanerFlow() {
+  queuedFiles = [];
+  processedBlob = null;
+  processedFileName = '';
+  auditStats = [];
+  if (fileInput) fileInput.value = '';
+  if (statusBadge) {
+    statusBadge.innerText = 'Idle';
+    statusBadge.className = 'status-indicator idle';
+  }
+  showPickerView();
+  updateQueueUI();
+  renderEmptyAuditState();
+}
+
 function queueFiles(fileList) {
   if (isProcessing) return;
   queuedFiles = Array.from(fileList || []);
@@ -1049,6 +1129,7 @@ function renderQueuedAuditState() {
   const preview = queuedFiles.slice(0, 4);
   const overflow = queuedFiles.length - preview.length;
 
+  showAuditView();
   reportContent.innerHTML = `
     <div class="queue-ready-panel">
       <h4>Files are queued</h4>
@@ -1125,6 +1206,7 @@ function runLiveTicker() {
 async function runInteractiveDemo() {
   if (!reportContent) return;
   setProcessingState(true);
+  showAuditView();
   
   if(statusBadge) { statusBadge.innerText = 'Scanning...'; statusBadge.className = 'status-indicator scanning'; }
   
@@ -1234,6 +1316,7 @@ async function handleSingleFileUpload(file) {
 
   processedFileName = getNormalizedOutputName(file, category);
   if(statusBadge) { statusBadge.innerText = 'Scanning...'; statusBadge.className = 'status-indicator scanning'; }
+  showAuditView();
 
   reportContent.innerHTML = `
     <div class="empty-state" style="margin:auto;width:100%;">
@@ -1304,7 +1387,8 @@ async function processBulkFiles(files) {
     statusBadge.className = 'status-indicator scanning'; 
   }
 
-  // Set up the batch processing view
+  // Switch to audit view and set up batch processing view
+  showAuditView();
   reportContent.innerHTML = `
     <div class="batch-process-view" style="width:100%; text-align:left;">
       <div class="progress-bar-track" style="margin-bottom:1rem;">
@@ -1459,16 +1543,19 @@ function drawReport(files) {
   const fileCount = files.length;
   
   reportContent.innerHTML = `
-    <div style="text-align:center;">
-      <h3 style="color:var(--accent-emerald); font-size:1.15rem; margin-bottom:0.5rem; font-family:var(--font-headers); font-weight:700;">Ready for secure download</h3>
-      <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.65rem;">${fileCount} cleaned file${fileCount === 1 ? '' : 's'}</p>
-      <button class="link-btn" id="viewAuditDetailsBtn" style="font-size:0.85rem; margin-bottom:1.5rem; text-decoration:underline; opacity:0.8;">${translations.sandbox?.view_details_btn || 'View details'}</button>
-      <br/>
+    <div class="download-ready-panel">
+      <h3>Ready for secure download</h3>
+      <p>${fileCount} cleaned file${fileCount === 1 ? '' : 's'}. Download it now or clean another file.</p>
       <button class="download-sec-btn" id="downloadBtn">${fileCount > 1 ? (translations.sandbox?.download_zip || 'Download ZIP').replace('{{count}}', fileCount) : (translations.sandbox?.download_safe_file || 'Download Safe File')}</button>
+      <button class="pricing-btn secondary-btn clean-more-btn" id="cleanMoreBtn" type="button">Clean More</button>
+      <button class="link-btn" id="viewAuditDetailsBtn">${translations.sandbox?.view_details_btn || 'View details'}</button>
     </div>
   `;
   const dBtn = document.getElementById('downloadBtn');
   if(dBtn) dBtn.addEventListener('click', triggerDownload);
+
+  const cleanMoreBtn = document.getElementById('cleanMoreBtn');
+  if (cleanMoreBtn) cleanMoreBtn.addEventListener('click', resetCleanerFlow);
 
   const viewBtn = document.getElementById('viewAuditDetailsBtn');
   if (viewBtn) {
