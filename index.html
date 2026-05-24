@@ -251,7 +251,7 @@
     </section>
 
     <!-- 4. Features Section -->
-    <section class="semantic-kb-section" style="max-width: 1220px; margin: 0 auto 5rem auto; padding: 0 1.5rem;">
+    <section class="semantic-kb-section">
       <div class="section-kicker" style="display:block; text-align:center; width: fit-content; margin: 0 auto 0.75rem;">Built to block AI scrapers</div>
       <h2 class="section-title" data-i18n="kb.title" style="text-align: center; margin-bottom: 0.75rem;">Every feature protects your creative work</h2>
       <p class="section-subtitle feature-section-subtitle">Remove private traces, embed AI opt-out signals, and add ownership metadata — all in one pass.</p>
@@ -426,32 +426,53 @@
       <p class="section-subtitle" style="text-align:center;">Everything you need to know about blocking AI scrapers and protecting your creative work.</p>
       <div class="faq-accordion">
         <div class="faq-item">
-          <h3 data-i18n="faq.q2">How do I block AI web crawlers from using my images?</h3>
-          <p data-i18n="faq.a2">VeriMedia embeds a standard <code>ai:opt-out=true</code> tag directly into your image file's XMP metadata. This signals to major AI web crawlers — including GPTBot, ClaudeBot, and Common Crawl — that your work is restricted from AI model training datasets.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span data-i18n="faq.q2">How do I block AI web crawlers from using my images?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p data-i18n="faq.a2">VeriMedia embeds a standard <code>ai:opt-out=true</code> tag directly into your image file's XMP metadata. This signals to major AI web crawlers — including GPTBot, ClaudeBot, and Common Crawl — that your work is restricted from AI model training datasets.</p></div>
         </div>
         <div class="faq-item">
-          <h3>Does the AI opt-out tag actually work?</h3>
-          <p>For crawlers that respect it — yes. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring <code>ai:opt-out</code> signals in image metadata. It is the metadata equivalent of <code>robots.txt</code> for AI training. VeriMedia uses the standardised binary XMP format for maximum compatibility.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does the AI opt-out tag actually work?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>For crawlers that respect it — yes. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring <code>ai:opt-out</code> signals in image metadata. It is the metadata equivalent of <code>robots.txt</code> for AI training.</p></div>
         </div>
         <div class="faq-item">
-          <h3 data-i18n="faq.q1">Where do I find my Creator Pro license key?</h3>
-          <p data-i18n="faq.a1">After purchasing, check your email for the Paddle receipt. Your license key is the Transaction ID found in the receipt (it usually starts with <code>txn_</code>). Copy and paste it into the Activation menu — it activates automatically on first use.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span data-i18n="faq.q1">Where do I find my Creator Pro license key?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p data-i18n="faq.a1">After purchasing, check your email for the Paddle receipt. Your license key is the Transaction ID found in the receipt (it usually starts with <code>txn_</code>). Copy and paste it into the Activation menu — it activates automatically on first use.</p></div>
         </div>
         <div class="faq-item">
-          <h3 data-i18n="faq.q4">Why should I strip location metadata before uploading photos?</h3>
-          <p data-i18n="faq.a4">Every raw JPEG from a smartphone or DSLR contains hidden GPS coordinates accurate to within a few metres — your home address, hotel room, or private location. These tags are visible to anyone who downloads the image. VeriMedia removes them entirely before the file leaves your device.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span data-i18n="faq.q4">Why should I strip location metadata before uploading photos?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p data-i18n="faq.a4">Every raw JPEG from a smartphone or DSLR contains hidden GPS coordinates accurate to within a few metres — your home address, hotel room, or private location. These tags are visible to anyone who downloads the image. VeriMedia removes them entirely before the file leaves your device.</p></div>
         </div>
         <div class="faq-item">
-          <h3 data-i18n="faq.q3">How do I get the Google "Licensable" badge on my images?</h3>
-          <p data-i18n="faq.a3">With Creator Pro, you embed a <code>WebStatement</code> XMP tag pointing to your portfolio or licensing page. Google Images reads this tag and displays a "Licensable" badge next to your photo in search results, directly attributing the image to you.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span data-i18n="faq.q3">How do I get the Google "Licensable" badge on my images?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p data-i18n="faq.a3">With Creator Pro, you embed a <code>WebStatement</code> XMP tag pointing to your portfolio or licensing page. Google Images reads this tag and displays a "Licensable" badge next to your photo in search results, directly attributing the image to you.</p></div>
         </div>
         <div class="faq-item">
-          <h3>Does VeriMedia work on iPhone and Android photos?</h3>
-          <p>Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does VeriMedia work on iPhone and Android photos?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically.</p></div>
         </div>
         <div class="faq-item">
-          <h3>What's the difference between Plus and Pro?</h3>
-          <p>Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What's the difference between Plus and Pro?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode.</p></div>
         </div>
       </div>
     </section>
@@ -688,6 +709,11 @@
   <!-- 4. Semantic Content for Search Indexing -->
   <section id="semantic-index-content" class="semantic-index-section">
     <div class="semantic-index-inner">
+      <button class="semantic-toggle" id="semanticToggle" aria-expanded="false">
+        <span>How to Block AI Web Crawlers from Using Your Images</span>
+        <i data-lucide="chevron-down" class="faq-chevron"></i>
+      </button>
+      <div class="semantic-body" id="semanticBody">
       <h2>How to Block AI Web Crawlers from Using Your Images</h2>
       <p>
         VeriMedia is a browser-based <strong>AI training opt-out tool</strong> built for photographers, illustrators, and digital creators who need to protect their work from being scraped into AI model training datasets. Every image you share online is potentially accessible to AI web crawlers — including GPTBot (OpenAI), ClaudeBot (Anthropic), and Common Crawl — unless it contains a machine-readable opt-out signal.
@@ -725,6 +751,7 @@
         <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> PDF — forensic stream overwrite for all metadata fields</li>
         <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> Batch ZIP export — shield an entire shoot and download in one archive</li>
       </ul>
+      </div><!-- /semantic-body -->
     </div>
   </section>
 
@@ -791,6 +818,38 @@
 
       observer.observe(badge, { attributes: true, attributeFilter: ['class'] });
     })();
+  </script>
+
+  <script>
+    // FAQ accordion
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.faq-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const isOpen = btn.getAttribute('aria-expanded') === 'true';
+          // Close all others
+          document.querySelectorAll('.faq-item.open').forEach(el => {
+            el.classList.remove('open');
+            el.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // Semantic section toggle
+      const semanticToggle = document.getElementById('semanticToggle');
+      const semanticBody = document.getElementById('semanticBody');
+      if (semanticToggle && semanticBody) {
+        semanticToggle.addEventListener('click', () => {
+          const isOpen = semanticToggle.getAttribute('aria-expanded') === 'true';
+          semanticToggle.setAttribute('aria-expanded', String(!isOpen));
+          semanticBody.style.display = isOpen ? 'none' : 'block';
+        });
+      }
+    });
   </script>
 
   <script>

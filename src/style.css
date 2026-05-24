@@ -1209,8 +1209,8 @@ main { overflow: visible !important; }
 /* 11. Workflow Section */
 .workflow-section {
   max-width: 1200px;
-  margin: 0 auto 5rem auto;
-  padding: 2.4rem 1.5rem 0;
+  margin: 0 auto 4rem auto;
+  padding: 2rem 1.5rem 0;
 }
 
 .section-heading-row {
@@ -1282,7 +1282,7 @@ main { overflow: visible !important; }
 /* 12. Features Grid */
 .semantic-kb-section {
   max-width: 1220px;
-  margin: 0 auto 5rem auto;
+  margin: 0 auto 4rem auto;
   padding: 0 1.5rem;
 }
 
@@ -1525,7 +1525,7 @@ main { overflow: visible !important; }
 /* 14. Pricing */
 .pricing-section {
   max-width: 1120px;
-  margin: 0 auto 5rem auto;
+  margin: 0 auto 4rem auto;
   text-align: center;
   padding: 0 1.5rem;
 }
@@ -1912,29 +1912,61 @@ main { overflow: visible !important; }
 /* 16. FAQ */
 .faq-section {
   max-width: 860px;
-  margin: 0 auto 5.5rem auto;
+  margin: 0 auto 4rem auto;
   padding: 0 1.5rem;
 }
 
 .faq-accordion {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 2rem;
+  gap: 0;
+  margin-top: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .faq-item {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.3rem 1.35rem;
-  transition: border-color var(--t-normal);
+  border-bottom: 1px solid var(--border);
 }
+.faq-item:last-child { border-bottom: none; }
 
-.faq-item:hover { border-color: rgba(56,189,248,0.15); }
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: none;
+  border: none;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: background var(--t-fast);
+}
+.faq-trigger:hover { background: rgba(255,255,255,0.02); }
+.faq-trigger[aria-expanded="true"] { color: var(--accent); }
 
-.faq-item h3 { font-family: var(--font-display); font-size: 0.98rem; font-weight: 600; margin-bottom: 0.5rem; }
-.faq-item p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.65; }
+.faq-chevron {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.25s var(--ease-out);
+  color: var(--text-secondary);
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+.faq-body {
+  display: none;
+  padding: 0 1.25rem 1rem;
+}
+.faq-item.open .faq-body { display: block; }
+
+.faq-body p { color: var(--text-secondary); font-size: 0.87rem; line-height: 1.65; margin: 0; }
 
 .faq-item code {
   background: rgba(255,255,255,0.05);
@@ -2036,26 +2068,53 @@ main { overflow: visible !important; }
 
 /* 18. Semantic Index */
 .semantic-index-section {
-  max-width: 1000px;
-  margin: 0 auto 5rem auto;
-  padding: 3rem 1.5rem;
-  border-top: 1px solid var(--border);
-  border-radius: 0;
-  opacity: 0.8;
+  max-width: 860px;
+  margin: 0 auto 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.semantic-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1.2rem;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: left;
+  transition: border-color var(--t-fast), color var(--t-fast);
+}
+.semantic-toggle:hover { border-color: rgba(56,189,248,0.2); color: var(--text-primary); }
+.semantic-toggle[aria-expanded="true"] { border-radius: 10px 10px 0 0; border-color: rgba(56,189,248,0.2); color: var(--accent); }
+.semantic-toggle[aria-expanded="true"] .faq-chevron { transform: rotate(180deg); }
+
+.semantic-body {
+  display: none;
+  border: 1px solid rgba(56,189,248,0.15);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.01);
 }
 
 .semantic-index-inner {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 100%;
   line-height: 1.7;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-.semantic-index-inner h2 { font-family: var(--font-display); color: var(--accent); margin-bottom: 1.25rem; font-size: 1.5rem; font-weight: 700; }
-.semantic-index-inner h3 { font-family: var(--font-display); color: var(--text-primary); margin-top: 2rem; margin-bottom: 0.85rem; font-size: 1.15rem; font-weight: 600; }
-.semantic-index-inner p { margin-bottom: 1.1rem; color: var(--text-secondary); }
+.semantic-index-inner h2 { font-family: var(--font-display); color: var(--accent); margin-bottom: 1rem; font-size: 1.2rem; font-weight: 700; }
+.semantic-index-inner h3 { font-family: var(--font-display); color: var(--text-primary); margin-top: 1.5rem; margin-bottom: 0.65rem; font-size: 1rem; font-weight: 600; }
+.semantic-index-inner p { margin-bottom: 0.85rem; color: var(--text-secondary); font-size: 0.87rem; }
 .semantic-index-inner strong { color: var(--text-primary); font-weight: 600; }
-.semantic-index-inner code { background: rgba(255,255,255,0.05); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85rem; color: var(--accent); }
+.semantic-index-inner code { background: rgba(255,255,255,0.05); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.82rem; color: var(--accent); }
 
 .semantic-checklist {
   list-style: none;
