@@ -11,9 +11,9 @@
   "hero": {
     "title": "KI trainiert mit Ihren Fotos, ohne zu fragen.",
     "summary": "VeriMedia bettet das ai:opt-out=true Signal direkt in Ihre Bilder und PDFs ein — lokal, im Browser. GPTBot, ClaudeBot und Common Crawl lesen diesen Tag und schließen Ihre Arbeit aus KI-Trainingsdatensätzen aus.",
-    "cta_primary": "Shield my images — free",
-    "cta_secondary": "See plans",
-    "trust_label": "Crawler opt-out respected by"
+    "cta_primary": "Meine Bilder schützen — kostenlos",
+    "cta_secondary": "Pläne ansehen",
+    "trust_label": "Crawler-Opt-Out respektiert von"
   },
   "kb": {
     "title": "Kompromisslose Privatsphäre & Urheberschutz",
@@ -36,7 +36,7 @@
     "whitelabel_title": "Whitelabel-Engine (Pro)",
     "whitelabel_short": "'VeriMedia' Branding entfernen.",
     "whitelabel_desc": "Entfernen Sie alle VeriMedia Referenzen aus Ihren Datei-Metadaten und ersetzen Sie 'Software'-Tags durch 'Original Content Engine'.",
-    "kicker": "Built to block AI scrapers"
+    "kicker": "Gebaut, um KI-Scraper zu blockieren"
   },
   "sandbox": {
     "drop_title": "Ziehen Sie Ihr Bild oder PDF hierher",
@@ -102,7 +102,7 @@
     "popular_badge": "AM BELIEBTESTEN",
     "activate": "Lizenzschlüssel eingeben",
     "already_bought": "Bereits gekauft?",
-    "kicker": "Simple, one-time pricing"
+    "kicker": "Einfache, einmalige Preise"
   },
   "faq": {
     "title": "Häufig gestellte Fragen",
@@ -114,13 +114,13 @@
     "a3": "Durch das Einbetten von Standard-Urheberrechtslinks direkt in die Bilddateien können Suchmaschinen wie Google Sie als Autor identifizieren und ein \"Lizenzierbar\" Badge neben Ihren Bildern in den Suchergebnissen anzeigen.",
     "q4": "Warum sollte ich Standort-Metadaten vor dem Hochladen von Fotos entfernen?",
     "a4": "Versteckte Metadaten in Rohfotos enthalten Ihre präzisen GPS-Koordinaten, Kameradetails und Daten. Das Entfernen dieser Daten schützt Ihre Standort-Privatsphäre und entfernt Identifikatoren, die Bots scrapen können.",
-    "kicker": "Got questions",
-    "q5": "Does the AI opt-out tag actually work?",
-    "a5": "For crawlers that respect it — yes. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring ai:opt-out signals in image metadata.",
-    "q6": "Does VeriMedia work on iPhone and Android photos?",
-    "a6": "Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically.",
-    "q7": "What's the difference between Plus and Pro?",
-    "a7": "Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode."
+    "kicker": "Haben Sie Fragen?",
+    "q5": "Funktioniert der KI-Opt-Out-Tag tatsächlich?",
+    "a5": "Für Crawler, die ihn respektieren — ja. Große KI-Unternehmen wie OpenAI (GPTBot), Anthropic (ClaudeBot) und Common Crawl verpflichten sich öffentlich dazu, ai:opt-out Signale in Bildmetadaten zu beachten.",
+    "q6": "Funktioniert VeriMedia mit iPhone- und Android-Fotos?",
+    "a6": "Ja. Fotos von iOS und Android sind Standard-JPEG- oder HEIC-Dateien. VeriMedia verarbeitet beides im Browser. HEIC-Dateien (iPhone-Standard) werden automatisch konvertiert und geschützt.",
+    "q7": "Was ist der Unterschied zwischen Plus und Pro?",
+    "a7": "Plus ($9.99) schaltet die Stapelverarbeitung für bis zu 100 Dateien, ein 25 MB Dateilimit und Urheber-Profil-Metadaten frei. Pro ($19) fügt unbegrenzte Stapel, 100 MB Dateien, das Google Lizenzierbar-Badge und den Whitelabel-Modus hinzu."
   },
   "profile": {
     "title": "Urheber-Profil",
@@ -173,20 +173,20 @@
     "privacy": "Privatsphäre",
     "terms": "Bedingungen",
     "refunds": "Erstattungen",
-    "tagline": "Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.",
-    "col_tools": "Tools",
-    "link_shield": "AI Opt-Out Shield",
-    "link_tagger": "AI Opt-Out Tagger",
-    "link_exif": "EXIF & GPS Cleaner",
-    "link_pdf": "PDF Metadata Cleaner",
-    "col_resources": "Resources",
-    "link_ai_guide": "AI Training Shield Guide",
-    "link_exif_guide": "EXIF Removal Guide",
-    "link_pdf_guide": "PDF Privacy Guide",
-    "link_kb": "Knowledge Base",
-    "col_legal": "Legal",
-    "link_pricing": "Pricing",
-    "bottom": "All files processed 100% locally — nothing ever leaves your browser."
+    "tagline": "KI-Scraper blockieren. Schützen Sie Ihre kreative Arbeit.<br>Null Uploads. Null Tracking. Kostenloser Kern, für immer.",
+    "col_tools": "Werkzeuge",
+    "link_shield": "KI-Opt-Out-Schild",
+    "link_tagger": "KI-Opt-Out-Tagger",
+    "link_exif": "EXIF- & GPS-Reiniger",
+    "link_pdf": "PDF-Metadaten-Reiniger",
+    "col_resources": "Ressourcen",
+    "link_ai_guide": "KI-Trainings-Schild Leitfaden",
+    "link_exif_guide": "EXIF-Entfernungs-Leitfaden",
+    "link_pdf_guide": "PDF-Datenschutz-Leitfaden",
+    "link_kb": "Wissensdatenbank",
+    "col_legal": "Rechtliches",
+    "link_pricing": "Preise",
+    "bottom": "Alle Dateien werden zu 100 % lokal verarbeitet — nichts verlässt jemals Ihren Browser."
   },
   "privacy_page": {
     "h1": "Datenschutzerklärung",
@@ -206,7 +206,7 @@
     "li3_1": "Transaktionen: Zahlungen werden sicher über unsere Merchant-of-Record-Partner (z. B. Paddle) verarbeitet. Wir sammeln oder speichern keine Kreditkartendaten oder Bankverbindungsinformationen.",
     "li3_2": "Lizenzschlüssel: Bei der Validierung eines Lizenzschlüssels wird eine sichere Anfrage direkt von Ihrem Browser an den Zahlungsabwickler gesendet. Der Status wird lokal zwischengespeichert.",
     "h2_4": "4. Cookies & Analysen",
-    "p4": "Wir setzen keine Marketing-Tracker oder invasiven Werbe-Cookies ein.",
+    "p4": "Wir setzen keine Marketing-Tracker oder invasiven Wer-Cookies ein.",
     "p4_2": "Wir verwenden den lokalen Speicher nur, um Ihren Pro-Aktivierungsstatus zu speichern.",
     "h2_5": "5. Richtlinienänderungen",
     "p5": "Wir werden niemals Ihre nicht existierenden Daten verkaufen. Alle strukturellen Aktualisierungen bleiben quelloffen und sichtbar.",
@@ -282,13 +282,13 @@
     "p5": "Die Eröffnung eines Streitfalls vor der Kontaktaufnahme mit dem Support führt zur sofortigen Deaktivierung der Lizenz."
   },
   "workflow": {
-    "kicker": "How it works",
-    "title": "Three steps. Entirely in your browser.",
-    "s1_title": "Drop your file",
-    "s1_desc": "JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory — never leaves your device.",
-    "s2_title": "Embed AI opt-out & strip tracking",
-    "s2_desc": "VeriMedia writes the ai:opt-out=true tag and removes GPS, device fingerprints, and forensic metadata.",
-    "s3_title": "Download the shielded file",
-    "s3_desc": "Your file is ready instantly. Same visual quality, zero private data, crawler opt-out embedded."
+    "kicker": "So funktioniert es",
+    "title": "Drei Schritte. Vollständig in Ihrem Browser.",
+    "s1_title": "Datei ablegen",
+    "s1_desc": "JPEG, PNG, WebP, HEIC oder PDF. Vollständig im Browser-Speicher analysiert — verlässt nie Ihr Gerät.",
+    "s2_title": "KI-Opt-Out einbetten & Tracking entfernen",
+    "s2_desc": "VeriMedia schreibt den ai:opt-out=true Tag und entfernt GPS, Geräte-Fingerabdrücke und forensische Metadaten.",
+    "s3_title": "Geschützte Datei herunterladen",
+    "s3_desc": "Ihre Datei ist sofort fertig. Gleiche visuelle Qualität, keine privaten Daten, Crawler-Opt-Out eingebettet."
   }
 }

@@ -11,9 +11,9 @@
   "hero": {
     "title": "L'IA s'entraîne sur vos photos sans vous demander la permission.",
     "summary": "VeriMedia intègre le signal ai:opt-out=true directement dans vos images et PDFs — localement, dans votre navigateur. GPTBot, ClaudeBot et Common Crawl lisent cette balise et excluent votre travail des jeux de données d'entraînement de l'IA.",
-    "cta_primary": "Shield my images — free",
-    "cta_secondary": "See plans",
-    "trust_label": "Crawler opt-out respected by"
+    "cta_primary": "Protéger mes images — gratuit",
+    "cta_secondary": "Voir les plans",
+    "trust_label": "Exclusion des robots respectée par"
   },
   "kb": {
     "title": "Confidentialité sans compromis et protection des créateurs",
@@ -36,7 +36,7 @@
     "whitelabel_title": "Moteur marque blanche (Pro)",
     "whitelabel_short": "Supprimez la marque 'VeriMedia'.",
     "whitelabel_desc": "Supprimez toutes les références à VeriMedia des métadonnées de vos fichiers, en remplaçant les balises 'Software' par 'Original Content Engine'.",
-    "kicker": "Built to block AI scrapers"
+    "kicker": "Conçu pour bloquer les robots d'IA"
   },
   "sandbox": {
     "drop_title": "Déposez votre image ou PDF",
@@ -102,7 +102,7 @@
     "popular_badge": "LE PLUS POPULAIRE",
     "activate": "Entrez votre clé de licence",
     "already_bought": "Déjà acheté ?",
-    "kicker": "Simple, one-time pricing"
+    "kicker": "Tarifs simples, paiement unique"
   },
   "faq": {
     "title": "Foire aux questions",
@@ -114,13 +114,13 @@
     "a3": "En intégrant des liens de droits d'auteur standard directement dans les fichiers image, les moteurs de recherche comme Google peuvent vous identifier comme l'auteur et afficher un badge 'Sous licence' à côté de vos images dans les résultats de recherche.",
     "q4": "Pourquoi devrais-je supprimer les métadonnées de localisation avant de télécharger des photos ?",
     "a4": "Les métadonnées cachées à l'intérieur des photos brutes contiennent vos coordonnées GPS précises, les détails de l'appareil photo et les dates. La suppression de ces données protège la confidentialité de votre localisation et supprime les identifiants que les robots peuvent collecter.",
-    "kicker": "Got questions",
-    "q5": "Does the AI opt-out tag actually work?",
-    "a5": "For crawlers that respect it — yes. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring ai:opt-out signals in image metadata.",
-    "q6": "Does VeriMedia work on iPhone and Android photos?",
-    "a6": "Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically.",
-    "q7": "What's the difference between Plus and Pro?",
-    "a7": "Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode."
+    "kicker": "Des questions ?",
+    "q5": "La balise d'exclusion d'IA fonctionne-t-elle vraiment ?",
+    "a5": "Pour les robots qui la respectent — oui. Les grandes entreprises d'IA, notamment OpenAI (GPTBot), Anthropic (ClaudeBot) et Common Crawl, s'engagent publiquement à respecter les signaux ai:opt-out dans les métadonnées des images.",
+    "q6": "VeriMedia fonctionne-t-il sur les photos iPhone et Android ?",
+    "a6": "Oui. Les photos iOS and Android sont des fichiers JPEG ou HEIC standard. VeriMedia traite les deux dans le navigateur. Les fichiers HEIC (par défaut sur iPhone) sont convertis et protégés automatiquement.",
+    "q7": "Quelle est la différence entre Plus et Pro ?",
+    "a7": "Plus ($9.99) débloque la protection par lots jusqu'à 100 fichiers, la limite de 25 Mo par fichier et les métadonnées de profil de créateur. Pro ($19) ajoute des lots illimités, des fichiers de 100 Mo, le badge 'Sous licence' de Google et le mode marque blanche."
   },
   "profile": {
     "title": "Profil du créateur",
@@ -173,20 +173,20 @@
     "privacy": "Confidentialité",
     "terms": "Conditions",
     "refunds": "Remboursements",
-    "tagline": "Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.",
-    "col_tools": "Tools",
-    "link_shield": "AI Opt-Out Shield",
-    "link_tagger": "AI Opt-Out Tagger",
-    "link_exif": "EXIF & GPS Cleaner",
-    "link_pdf": "PDF Metadata Cleaner",
-    "col_resources": "Resources",
-    "link_ai_guide": "AI Training Shield Guide",
-    "link_exif_guide": "EXIF Removal Guide",
-    "link_pdf_guide": "PDF Privacy Guide",
-    "link_kb": "Knowledge Base",
-    "col_legal": "Legal",
-    "link_pricing": "Pricing",
-    "bottom": "All files processed 100% locally — nothing ever leaves your browser."
+    "tagline": "Bloquez les robots d'IA. Protégez votre travail créatif.<br>Zéro téléchargement. Zéro suivi. Cœur gratuit, pour toujours.",
+    "col_tools": "Outils",
+    "link_shield": "Bouclier d'exclusion d'IA",
+    "link_tagger": "Marqueur d'exclusion d'IA",
+    "link_exif": "Nettoyeur EXIF & GPS",
+    "link_pdf": "Nettoyeur de métadonnées PDF",
+    "col_resources": "Ressources",
+    "link_ai_guide": "Guide du bouclier d'entraînement d'IA",
+    "link_exif_guide": "Guide de suppression EXIF",
+    "link_pdf_guide": "Guide de confidentialité PDF",
+    "link_kb": "Base de connaissances",
+    "col_legal": "Légal",
+    "link_pricing": "Tarifs",
+    "bottom": "Tous les fichiers sont traités à 100 % localement — rien ne quitte jamais votre navigateur."
   },
   "privacy_page": {
     "h1": "Politique de confidentialité",
@@ -204,7 +204,7 @@
     "h2_3": "3. Facturation tierce et activation de licence",
     "p3": "Si vous choisissez d'acheter Creator Pro :",
     "li3_1": "Transactions : Les paiements sont traités en toute sécurité via nos partenaires Merchant of Record (par exemple, Paddle). Nous ne collectons ni ne stockons les détails de carte de crédit ou les informations de routage bancaire.",
-    "li3_2": "Clés de licence : Lors de la validation d'une clé de licence, une requête sécurisée est envoyée directement de votre navigateur vers le processeur de paiement. Le statut est mis en cache localement.",
+    "li3_2": "Claves de licence : Lors de la validation d'une clé de licence, une requête sécurisée est envoyée directement de votre navigateur vers le processeur de paiement. Le statut est mis en cache localement.",
     "h2_4": "4. Cookies et analyses",
     "p4": "Nous ne déployons pas de traqueurs marketing ou de cookies publicitaires intrusifs.",
     "p4_2": "Nous utilisons le stockage local uniquement pour mémoriser votre statut d'activation Pro.",
@@ -282,13 +282,13 @@
     "p5": "L'ouverture d'un litige avant de contacter l'assistance entraînera la désactivation immédiate de la licence."
   },
   "workflow": {
-    "kicker": "How it works",
-    "title": "Three steps. Entirely in your browser.",
-    "s1_title": "Drop your file",
-    "s1_desc": "JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory — never leaves your device.",
-    "s2_title": "Embed AI opt-out & strip tracking",
-    "s2_desc": "VeriMedia writes the ai:opt-out=true tag and removes GPS, device fingerprints, and forensic metadata.",
-    "s3_title": "Download the shielded file",
-    "s3_desc": "Your file is ready instantly. Same visual quality, zero private data, crawler opt-out embedded."
+    "kicker": "Comment ça marche",
+    "title": "Trois étapes. Entièrement dans votre navigateur.",
+    "s1_title": "Déposez votre fichier",
+    "s1_desc": "JPEG, PNG, WebP, HEIC ou PDF. Analysé entièrement dans la mémoire du navigateur — ne quitte jamais votre appareil.",
+    "s2_title": "Intégrer l'exclusion d'IA et supprimer le suivi",
+    "s2_desc": "VeriMedia écrit la balise ai:opt-out=true et supprime le GPS, les empreintes numériques de l'appareil et les métadonnées forensiques.",
+    "s3_title": "Télécharger le fichier protégé",
+    "s3_desc": "Votre fichier est prêt instantanément. Même qualité visuelle, zéro donnée privée, exclusion des robots intégrée."
   }
 }
