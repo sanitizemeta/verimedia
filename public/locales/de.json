@@ -10,7 +10,10 @@
   },
   "hero": {
     "title": "KI trainiert mit Ihren Fotos, ohne zu fragen.",
-    "summary": "VeriMedia bettet das ai:opt-out=true Signal direkt in Ihre Bilder und PDFs ein — lokal, im Browser. GPTBot, ClaudeBot und Common Crawl lesen diesen Tag und schließen Ihre Arbeit aus KI-Trainingsdatensätzen aus."
+    "summary": "VeriMedia bettet das ai:opt-out=true Signal direkt in Ihre Bilder und PDFs ein — lokal, im Browser. GPTBot, ClaudeBot und Common Crawl lesen diesen Tag und schließen Ihre Arbeit aus KI-Trainingsdatensätzen aus.",
+    "cta_primary": "Shield my images — free",
+    "cta_secondary": "See plans",
+    "trust_label": "Crawler opt-out respected by"
   },
   "kb": {
     "title": "Kompromisslose Privatsphäre & Urheberschutz",
@@ -32,7 +35,8 @@
     "identity_desc": "Betten Sie Ihren offiziellen Künstlernamen und Ihre Urheberrechts-URL in jede Datei ein, um sicherzustellen, dass Sie immer für Ihre Originalarbeit genannt werden.",
     "whitelabel_title": "Whitelabel-Engine (Pro)",
     "whitelabel_short": "'VeriMedia' Branding entfernen.",
-    "whitelabel_desc": "Entfernen Sie alle VeriMedia Referenzen aus Ihren Datei-Metadaten und ersetzen Sie 'Software'-Tags durch 'Original Content Engine'."
+    "whitelabel_desc": "Entfernen Sie alle VeriMedia Referenzen aus Ihren Datei-Metadaten und ersetzen Sie 'Software'-Tags durch 'Original Content Engine'.",
+    "kicker": "Built to block AI scrapers"
   },
   "sandbox": {
     "drop_title": "Ziehen Sie Ihr Bild oder PDF hierher",
@@ -97,7 +101,8 @@
     "buy_now": "Jetzt kaufen - 19 $",
     "popular_badge": "AM BELIEBTESTEN",
     "activate": "Lizenzschlüssel eingeben",
-    "already_bought": "Bereits gekauft?"
+    "already_bought": "Bereits gekauft?",
+    "kicker": "Simple, one-time pricing"
   },
   "faq": {
     "title": "Häufig gestellte Fragen",
@@ -108,7 +113,14 @@
     "q3": "Wie füge ich Urheberrechtsinfos und Lizenzierbar-Badges zu meinen Fotos hinzu?",
     "a3": "Durch das Einbetten von Standard-Urheberrechtslinks direkt in die Bilddateien können Suchmaschinen wie Google Sie als Autor identifizieren und ein \"Lizenzierbar\" Badge neben Ihren Bildern in den Suchergebnissen anzeigen.",
     "q4": "Warum sollte ich Standort-Metadaten vor dem Hochladen von Fotos entfernen?",
-    "a4": "Versteckte Metadaten in Rohfotos enthalten Ihre präzisen GPS-Koordinaten, Kameradetails und Daten. Das Entfernen dieser Daten schützt Ihre Standort-Privatsphäre und entfernt Identifikatoren, die Bots scrapen können."
+    "a4": "Versteckte Metadaten in Rohfotos enthalten Ihre präzisen GPS-Koordinaten, Kameradetails und Daten. Das Entfernen dieser Daten schützt Ihre Standort-Privatsphäre und entfernt Identifikatoren, die Bots scrapen können.",
+    "kicker": "Got questions",
+    "q5": "Does the AI opt-out tag actually work?",
+    "a5": "For crawlers that respect it — yes. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring ai:opt-out signals in image metadata.",
+    "q6": "Does VeriMedia work on iPhone and Android photos?",
+    "a6": "Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically.",
+    "q7": "What's the difference between Plus and Pro?",
+    "a7": "Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode."
   },
   "profile": {
     "title": "Urheber-Profil",
@@ -160,7 +172,21 @@
     "copy": "© 2026 VeriMedia.xyz. Verarbeitung erfolgt zu 100 % lokal in Ihrem Browser. Es werden niemals Dateien gespeichert oder hochgeladen.",
     "privacy": "Privatsphäre",
     "terms": "Bedingungen",
-    "refunds": "Erstattungen"
+    "refunds": "Erstattungen",
+    "tagline": "Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.",
+    "col_tools": "Tools",
+    "link_shield": "AI Opt-Out Shield",
+    "link_tagger": "AI Opt-Out Tagger",
+    "link_exif": "EXIF & GPS Cleaner",
+    "link_pdf": "PDF Metadata Cleaner",
+    "col_resources": "Resources",
+    "link_ai_guide": "AI Training Shield Guide",
+    "link_exif_guide": "EXIF Removal Guide",
+    "link_pdf_guide": "PDF Privacy Guide",
+    "link_kb": "Knowledge Base",
+    "col_legal": "Legal",
+    "link_pricing": "Pricing",
+    "bottom": "All files processed 100% locally — nothing ever leaves your browser."
   },
   "privacy_page": {
     "h1": "Datenschutzerklärung",
@@ -254,5 +280,15 @@
     "p4": "Wenden Sie sich bei Aktivierungsproblemen mit Ihrer Order ID an den Support.",
     "h2_5": "5. Rückbuchungen",
     "p5": "Die Eröffnung eines Streitfalls vor der Kontaktaufnahme mit dem Support führt zur sofortigen Deaktivierung der Lizenz."
+  },
+  "workflow": {
+    "kicker": "How it works",
+    "title": "Three steps. Entirely in your browser.",
+    "s1_title": "Drop your file",
+    "s1_desc": "JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory — never leaves your device.",
+    "s2_title": "Embed AI opt-out & strip tracking",
+    "s2_desc": "VeriMedia writes the ai:opt-out=true tag and removes GPS, device fingerprints, and forensic metadata.",
+    "s3_title": "Download the shielded file",
+    "s3_desc": "Your file is ready instantly. Same visual quality, zero private data, crawler opt-out embedded."
   }
 }

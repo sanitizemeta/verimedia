@@ -109,14 +109,14 @@
     <!-- 1. Hero — full-width above the fold -->
     <section class="hero-section">
       <div class="hero-inner">
-        <h1 class="hero-title">
+        <h1 class="hero-title" data-i18n="hero.title">
           <span class="glow-text">AI is training on your photos</span>
           <span>without asking.</span>
         </h1>
-        <p class="hero-subtext">VeriMedia embeds the <strong>ai:opt-out=true</strong> signal directly into your images and PDFs — locally, in-browser. The major AI crawlers read this tag and exclude your work from training datasets.</p>
+        <p class="hero-subtext" data-i18n="hero.summary">VeriMedia embeds the <strong>ai:opt-out=true</strong> signal directly into your images and PDFs — locally, in-browser. The major AI crawlers read this tag and exclude your work from training datasets.</p>
         <div class="hero-cta-row">
-          <a href="#calculator-section" class="pricing-btn primary-btn hero-primary-link">Shield my images — free</a>
-          <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link">See plans</a>
+          <a href="#calculator-section" class="pricing-btn primary-btn hero-primary-link" data-i18n="hero.cta_primary">Shield my images — free</a>
+          <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link" data-i18n="hero.cta_secondary">See plans</a>
         </div>
       </div>
     </section>
@@ -124,7 +124,7 @@
     <!-- 1b. Trust strip — who honours the tag -->
     <section class="trust-strip-section">
       <div class="trust-strip-inner">
-        <span class="trust-strip-label">Crawler opt-out respected by</span>
+        <span class="trust-strip-label" data-i18n="hero.trust_label">Crawler opt-out respected by</span>
         <div class="trust-logos">
           <span class="trust-logo-pill"><i data-lucide="bot" style="width:14px;height:14px;"></i> GPTBot <span class="trust-tag">OpenAI</span></span>
           <span class="trust-logo-pill"><i data-lucide="bot" style="width:14px;height:14px;"></i> ClaudeBot <span class="trust-tag">Anthropic</span></span>
@@ -213,35 +213,35 @@
     <section class="workflow-section" aria-labelledby="workflow-title">
       <div class="section-heading-row">
         <div>
-          <div class="section-kicker">How it works</div>
-          <h2 id="workflow-title" class="section-title">Three steps. Entirely in your browser.</h2>
+          <div class="section-kicker" data-i18n="workflow.kicker">How it works</div>
+          <h2 id="workflow-title" class="section-title" data-i18n="workflow.title">Three steps. Entirely in your browser.</h2>
         </div>
       </div>
       <div class="workflow-grid">
         <article class="workflow-card">
           <span class="workflow-step">01</span>
           <i data-lucide="file-up"></i>
-          <h3>Drop your file</h3>
-          <p>JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory — never leaves your device.</p>
+          <h3 data-i18n="workflow.s1_title">Drop your file</h3>
+          <p data-i18n="workflow.s1_desc">JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory — never leaves your device.</p>
         </article>
         <article class="workflow-card">
           <span class="workflow-step">02</span>
           <i data-lucide="shield-check"></i>
-          <h3>Embed AI opt-out &amp; strip tracking</h3>
-          <p>VeriMedia writes the <code style="background:rgba(56,189,248,0.08);color:var(--accent);padding:1px 4px;border-radius:3px;font-size:0.85em;">ai:opt-out=true</code> tag and removes GPS, device fingerprints, and forensic metadata.</p>
+          <h3 data-i18n="workflow.s2_title">Embed AI opt-out &amp; strip tracking</h3>
+          <p data-i18n="workflow.s2_desc">VeriMedia writes the <code style="background:rgba(56,189,248,0.08);color:var(--accent);padding:1px 4px;border-radius:3px;font-size:0.85em;">ai:opt-out=true</code> tag and removes GPS, device fingerprints, and forensic metadata.</p>
         </article>
         <article class="workflow-card">
           <span class="workflow-step">03</span>
           <i data-lucide="download-cloud"></i>
-          <h3>Download the shielded file</h3>
-          <p>Your file is ready instantly. Same visual quality, zero private data, crawler opt-out embedded.</p>
+          <h3 data-i18n="workflow.s3_title">Download the shielded file</h3>
+          <p data-i18n="workflow.s3_desc">Your file is ready instantly. Same visual quality, zero private data, crawler opt-out embedded.</p>
         </article>
       </div>
     </section>
 
     <!-- 4. Features Section -->
     <section class="semantic-kb-section">
-      <div class="section-kicker" style="display:block; text-align:center; width: fit-content; margin: 0 auto 0.75rem;">Built to block AI scrapers</div>
+      <div class="section-kicker" style="display:block; text-align:center; width: fit-content; margin: 0 auto 0.75rem;" data-i18n="kb.kicker">Built to block AI scrapers</div>
       <h2 class="section-title" data-i18n="kb.title" style="text-align: center; margin-bottom: 1.5rem;">Every feature protects your creative work</h2>
 
       <div class="features-grid">
@@ -347,7 +347,7 @@
 
     <!-- 4. Pricing -->
     <section id="pricing-section" class="pricing-section">
-      <div class="section-kicker">Simple, one-time pricing</div>
+      <div class="section-kicker" data-i18n="pricing.kicker">Simple, one-time pricing</div>
       <h2 class="section-title" data-i18n="pricing.title">Choose your protection level</h2>
       <p class="section-subtitle" data-i18n="pricing.subtitle">Start free. Upgrade for batch shielding, larger files, and creator metadata.</p>
 
@@ -409,7 +409,7 @@
 
     <!-- 6. FAQ -->
     <section id="faq-section" class="faq-section">
-      <div class="section-kicker" style="display:block; text-align:center; width:fit-content; margin: 0 auto 0.75rem;">Got questions</div>
+      <div class="section-kicker" style="display:block; text-align:center; width:fit-content; margin: 0 auto 0.75rem;" data-i18n="faq.kicker">Got questions</div>
       <h2 class="section-title" data-i18n="faq.title" style="text-align: center; margin-bottom: 1.25rem;">Frequently Asked Questions</h2>
       <div class="faq-accordion">
         <div class="faq-item">
@@ -421,10 +421,10 @@
         </div>
         <div class="faq-item">
           <button class="faq-trigger" aria-expanded="false">
-            <span>Does the AI opt-out tag actually work?</span>
+            <span data-i18n="faq.q5">Does the AI opt-out tag actually work?</span>
             <i data-lucide="chevron-down" class="faq-chevron"></i>
           </button>
-          <div class="faq-body"><p>For crawlers that respect it — yes. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring <code>ai:opt-out</code> signals in image metadata. It is the metadata equivalent of <code>robots.txt</code> for AI training.</p></div>
+          <div class="faq-body"><p data-i18n="faq.a5">For crawlers that respect it — yes. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring <code>ai:opt-out</code> signals in image metadata. It is the metadata equivalent of <code>robots.txt</code> for AI training.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-trigger" aria-expanded="false">
@@ -449,17 +449,17 @@
         </div>
         <div class="faq-item">
           <button class="faq-trigger" aria-expanded="false">
-            <span>Does VeriMedia work on iPhone and Android photos?</span>
+            <span data-i18n="faq.q6">Does VeriMedia work on iPhone and Android photos?</span>
             <i data-lucide="chevron-down" class="faq-chevron"></i>
           </button>
-          <div class="faq-body"><p>Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically.</p></div>
+          <div class="faq-body"><p data-i18n="faq.a6">Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-trigger" aria-expanded="false">
-            <span>What's the difference between Plus and Pro?</span>
+            <span data-i18n="faq.q7">What's the difference between Plus and Pro?</span>
             <i data-lucide="chevron-down" class="faq-chevron"></i>
           </button>
-          <div class="faq-body"><p>Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode.</p></div>
+          <div class="faq-body"><p data-i18n="faq.a7">Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode.</p></div>
         </div>
       </div>
     </section>
@@ -750,33 +750,33 @@
           <img src="/icon.svg" alt="VeriMedia" width="20" height="20">
           VeriMedia<span class="dot">.xyz</span>
         </span>
-        <p class="footer-tagline">Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.</p>
+        <p class="footer-tagline" data-i18n="footer.tagline">Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.</p>
         <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz</p>
       </div>
       <div class="footer-col">
-        <h4 class="footer-col-title">Tools</h4>
-        <a href="/#calculator-section" class="footer-link">AI Opt-Out Shield</a>
-        <a href="/ai-opt-out-metadata" class="footer-link">AI Opt-Out Tagger</a>
-        <a href="/remove-exif-from-photos" class="footer-link">EXIF &amp; GPS Cleaner</a>
-        <a href="/remove-pdf-metadata" class="footer-link">PDF Metadata Cleaner</a>
+        <h4 class="footer-col-title" data-i18n="footer.col_tools">Tools</h4>
+        <a href="/#calculator-section" class="footer-link" data-i18n="footer.link_shield">AI Opt-Out Shield</a>
+        <a href="/ai-opt-out-metadata" class="footer-link" data-i18n="footer.link_tagger">AI Opt-Out Tagger</a>
+        <a href="/remove-exif-from-photos" class="footer-link" data-i18n="footer.link_exif">EXIF &amp; GPS Cleaner</a>
+        <a href="/remove-pdf-metadata" class="footer-link" data-i18n="footer.link_pdf">PDF Metadata Cleaner</a>
       </div>
       <div class="footer-col">
-        <h4 class="footer-col-title">Resources</h4>
-        <a href="/ai-opt-out-metadata" class="footer-link">AI Training Shield Guide</a>
-        <a href="/remove-exif-from-photos" class="footer-link">EXIF Removal Guide</a>
-        <a href="/remove-pdf-metadata" class="footer-link">PDF Privacy Guide</a>
-        <a href="/knowledge" class="footer-link">Knowledge Base</a>
+        <h4 class="footer-col-title" data-i18n="footer.col_resources">Resources</h4>
+        <a href="/ai-opt-out-metadata" class="footer-link" data-i18n="footer.link_ai_guide">AI Training Shield Guide</a>
+        <a href="/remove-exif-from-photos" class="footer-link" data-i18n="footer.link_exif_guide">EXIF Removal Guide</a>
+        <a href="/remove-pdf-metadata" class="footer-link" data-i18n="footer.link_pdf_guide">PDF Privacy Guide</a>
+        <a href="/knowledge" class="footer-link" data-i18n="footer.link_kb">Knowledge Base</a>
       </div>
       <div class="footer-col">
-        <h4 class="footer-col-title">Legal</h4>
+        <h4 class="footer-col-title" data-i18n="footer.col_legal">Legal</h4>
         <a href="/privacy" class="footer-link" data-i18n="footer.privacy">Privacy Policy</a>
         <a href="/terms" class="footer-link" data-i18n="footer.terms">Terms of Service</a>
         <a href="/refund" class="footer-link" data-i18n="footer.refunds">Refund Policy</a>
-        <a href="/#pricing-section" class="footer-link">Pricing</a>
+        <a href="/#pricing-section" class="footer-link" data-i18n="footer.link_pricing">Pricing</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span><i data-lucide="shield-check" style="width:12px;height:12px;vertical-align:middle;color:var(--emerald);margin-right:5px;"></i>All files processed 100% locally — nothing ever leaves your browser.</span>
+      <span><i data-lucide="shield-check" style="width:12px;height:12px;vertical-align:middle;color:var(--emerald);margin-right:5px;"></i><span data-i18n="footer.bottom">All files processed 100% locally — nothing ever leaves your browser.</span></span>
     </div>
   </footer>
 

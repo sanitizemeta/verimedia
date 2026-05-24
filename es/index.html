@@ -78,14 +78,14 @@
           <i data-lucide="bot-off" style="width:13px;height:13px;"></i>
           <span>ai:opt-out standard · GPTBot · ClaudeBot · Common Crawl</span>
         </div>
-        <h1 class="hero-title">
+        <h1 class="hero-title" data-i18n="hero.title">
           <span class="glow-text">AI is training on your photos</span>
           <span>without asking.</span>
         </h1>
-        <p class="hero-subtext">VeriMedia embeds the <strong>ai:opt-out=true</strong> signal directly into your images and PDFs — locally, in-browser. The major AI crawlers read this tag and exclude your work from training datasets.</p>
+        <p class="hero-subtext" data-i18n="hero.summary">VeriMedia embeds the <strong>ai:opt-out=true</strong> signal directly into your images and PDFs — locally, in-browser. The major AI crawlers read this tag and exclude your work from training datasets.</p>
         <div class="hero-cta-row">
-          <a href="#calculator-section" class="pricing-btn primary-btn hero-primary-link">Shield my images — free</a>
-          <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link">See plans</a>
+          <a href="#calculator-section" class="pricing-btn primary-btn hero-primary-link" data-i18n="hero.cta_primary">Shield my images — free</a>
+          <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link" data-i18n="hero.cta_secondary">See plans</a>
         </div>
         <div class="hero-pills">
           <span><i data-lucide="hard-drive"></i> 100% browser-side</span>
@@ -99,7 +99,7 @@
     <!-- 1b. Trust strip — who honours the tag -->
     <section class="trust-strip-section">
       <div class="trust-strip-inner">
-        <span class="trust-strip-label">Crawler opt-out respected by</span>
+        <span class="trust-strip-label" data-i18n="hero.trust_label">Crawler opt-out respected by</span>
         <div class="trust-logos">
           <span class="trust-logo-pill"><i data-lucide="bot" style="width:14px;height:14px;"></i> GPTBot <span class="trust-tag">OpenAI</span></span>
           <span class="trust-logo-pill"><i data-lucide="bot" style="width:14px;height:14px;"></i> ClaudeBot <span class="trust-tag">Anthropic</span></span>
@@ -120,8 +120,8 @@
     <section class="workflow-section" aria-labelledby="workflow-title">
       <div class="section-heading-row">
         <div>
-          <div class="section-kicker">How it works</div>
-          <h2 id="workflow-title" class="section-title">Three steps. Entirely in your browser.</h2>
+          <div class="section-kicker" data-i18n="workflow.kicker">How it works</div>
+          <h2 id="workflow-title" class="section-title" data-i18n="workflow.title">Three steps. Entirely in your browser.</h2>
           <p class="section-subtitle">No accounts, no uploads, no cloud. Your files never leave your device.</p>
         </div>
         <a href="#calculator-section" class="pricing-btn primary-btn section-link-btn">Try it now</a>
@@ -130,20 +130,20 @@
         <article class="workflow-card">
           <span class="workflow-step">01</span>
           <i data-lucide="file-up"></i>
-          <h3>Drop your file</h3>
-          <p>JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory — never leaves your device.</p>
+          <h3 data-i18n="workflow.s1_title">Drop your file</h3>
+          <p data-i18n="workflow.s1_desc">JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory — never leaves your device.</p>
         </article>
         <article class="workflow-card">
           <span class="workflow-step">02</span>
           <i data-lucide="shield-check"></i>
-          <h3>Embed AI opt-out &amp; strip tracking</h3>
+          <h3 data-i18n="workflow.s2_title">Embed AI opt-out &amp; strip tracking</h3>
           <p>VeriMedia writes the <code style="background:rgba(56,189,248,0.08);color:var(--accent);padding:1px 4px;border-radius:3px;font-size:0.85em;">ai:opt-out=true</code> tag and removes GPS, device fingerprints, and forensic metadata.</p>
         </article>
         <article class="workflow-card">
           <span class="workflow-step">03</span>
           <i data-lucide="download-cloud"></i>
-          <h3>Download the shielded file</h3>
-          <p>Your file is ready instantly. Same visual quality, zero private data, crawler opt-out embedded.</p>
+          <h3 data-i18n="workflow.s3_title">Download the shielded file</h3>
+          <p data-i18n="workflow.s3_desc">Your file is ready instantly. Same visual quality, zero private data, crawler opt-out embedded.</p>
         </article>
       </div>
     </section>
@@ -216,7 +216,7 @@
 
     <!-- 3. Features Section -->
     <section class="semantic-kb-section" style="max-width: 1220px; margin: 0 auto 5rem auto; padding: 0 1.5rem;">
-      <div class="section-kicker" style="display:block; text-align:center; width: fit-content; margin: 0 auto 0.75rem;">Built to block AI scrapers</div>
+      <div class="section-kicker" style="display:block; text-align:center; width: fit-content; margin: 0 auto 0.75rem;" data-i18n="kb.kicker">Built to block AI scrapers</div>
       <h2 class="section-title" data-i18n="kb.title" style="text-align: center; margin-bottom: 0.75rem;">Every feature protects your creative work</h2>
       <p class="section-subtitle feature-section-subtitle">Remove private traces, embed AI opt-out signals, and add ownership metadata — all in one pass.</p>
 
@@ -323,7 +323,7 @@
 
     <!-- 4. Pricing -->
     <section id="pricing-section" class="pricing-section">
-      <div class="section-kicker">Simple, one-time pricing</div>
+      <div class="section-kicker" data-i18n="pricing.kicker">Simple, one-time pricing</div>
       <h2 class="section-title" data-i18n="pricing.title">Choose your protection level</h2>
       <p class="section-subtitle" data-i18n="pricing.subtitle">Start free. Upgrade only when you need batch shielding, creator profile metadata, larger files, or whitelabel output.</p>
 
@@ -384,7 +384,7 @@
 
     <!-- 6. FAQ -->
     <section id="faq-section" class="faq-section">
-      <div class="section-kicker" style="display:block; text-align:center; width:fit-content; margin: 0 auto 0.75rem;">Got questions</div>
+      <div class="section-kicker" style="display:block; text-align:center; width:fit-content; margin: 0 auto 0.75rem;" data-i18n="faq.kicker">Got questions</div>
       <h2 class="section-title" data-i18n="faq.title" style="text-align: center;">Frequently Asked Questions</h2>
       <p class="section-subtitle" style="text-align:center;">Everything you need to know about blocking AI scrapers and protecting your creative work.</p>
       <div class="faq-accordion">
@@ -699,25 +699,25 @@
           <img src="/icon.svg" alt="VeriMedia" width="20" height="20">
           VeriMedia<span class="dot">.xyz</span>
         </span>
-        <p class="footer-tagline">Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.</p>
+        <p class="footer-tagline" data-i18n="footer.tagline">Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.</p>
         <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz</p>
       </div>
       <div class="footer-col">
-        <h4 class="footer-col-title">Tools</h4>
-        <a href="/#calculator-section" class="footer-link">AI Opt-Out Shield</a>
-        <a href="/ai-opt-out-metadata" class="footer-link">AI Opt-Out Tagger</a>
-        <a href="/remove-exif-from-photos" class="footer-link">EXIF &amp; GPS Cleaner</a>
-        <a href="/remove-pdf-metadata" class="footer-link">PDF Metadata Cleaner</a>
+        <h4 class="footer-col-title" data-i18n="footer.col_tools">Tools</h4>
+        <a href="/#calculator-section" class="footer-link" data-i18n="footer.link_shield">AI Opt-Out Shield</a>
+        <a href="/ai-opt-out-metadata" class="footer-link" data-i18n="footer.link_tagger">AI Opt-Out Tagger</a>
+        <a href="/remove-exif-from-photos" class="footer-link" data-i18n="footer.link_exif">EXIF &amp; GPS Cleaner</a>
+        <a href="/remove-pdf-metadata" class="footer-link" data-i18n="footer.link_pdf">PDF Metadata Cleaner</a>
       </div>
       <div class="footer-col">
-        <h4 class="footer-col-title">Resources</h4>
+        <h4 class="footer-col-title" data-i18n="footer.col_resources">Resources</h4>
         <a href="/ai-opt-out-metadata" class="footer-link">AI Training Shield Guide</a>
         <a href="/remove-exif-from-photos" class="footer-link">EXIF Removal Guide</a>
         <a href="/remove-pdf-metadata" class="footer-link">PDF Privacy Guide</a>
-        <a href="/knowledge" class="footer-link">Knowledge Base</a>
+        <a href="/knowledge" class="footer-link" data-i18n="footer.link_kb">Knowledge Base</a>
       </div>
       <div class="footer-col">
-        <h4 class="footer-col-title">Legal</h4>
+        <h4 class="footer-col-title" data-i18n="footer.col_legal">Legal</h4>
         <a href="/privacy" class="footer-link" data-i18n="footer.privacy">Privacy Policy</a>
         <a href="/terms" class="footer-link" data-i18n="footer.terms">Terms of Service</a>
         <a href="/refund" class="footer-link" data-i18n="footer.refunds">Refund Policy</a>

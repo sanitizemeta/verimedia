@@ -10,9 +10,23 @@
   },
   "hero": {
     "title": "AI is training on your photos without asking.",
-    "summary": "VeriMedia embeds the ai:opt-out=true signal directly into your images and PDFs — locally, in-browser. GPTBot, ClaudeBot, and Common Crawl read this tag and exclude your work from AI training datasets."
+    "summary": "VeriMedia embeds the ai:opt-out=true signal directly into your images and PDFs — locally, in-browser. GPTBot, ClaudeBot, and Common Crawl read this tag and exclude your work from AI training datasets.",
+    "cta_primary": "Shield my images — free",
+    "cta_secondary": "See plans",
+    "trust_label": "Crawler opt-out respected by"
+  },
+  "workflow": {
+    "kicker": "How it works",
+    "title": "Three steps. Entirely in your browser.",
+    "s1_title": "Drop your file",
+    "s1_desc": "JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory — never leaves your device.",
+    "s2_title": "Embed AI opt-out & strip tracking",
+    "s2_desc": "VeriMedia writes the ai:opt-out=true tag and removes GPS, device fingerprints, and forensic metadata.",
+    "s3_title": "Download the shielded file",
+    "s3_desc": "Your file is ready instantly. Same visual quality, zero private data, crawler opt-out embedded."
   },
   "kb": {
+    "kicker": "Built to block AI scrapers",
     "title": "Uncompromising Privacy & Creator Protection",
     "subtitle": "Professional-grade tools for photographers, journalists, and digital artists.",
     "ai_title": "AI Training Opt-Out",
@@ -74,6 +88,7 @@
     "stage_img_4": "Processing complete!"
   },
   "pricing": {
+    "kicker": "Simple, one-time pricing",
     "title": "Simple pricing for safer publishing",
     "subtitle": "Start free. Upgrade when you need batch processing, creator metadata, larger files, or whitelabel delivery.",
     "free_title": "Standard Tier",
@@ -100,7 +115,14 @@
     "popular_badge": "MOST POPULAR"
   },
   "faq": {
+    "kicker": "Got questions",
     "title": "Frequently Asked Questions",
+    "q5": "Does the AI opt-out tag actually work?",
+    "a5": "For crawlers that respect it — yes. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring ai:opt-out signals in image metadata. It is the metadata equivalent of robots.txt for AI training.",
+    "q6": "Does VeriMedia work on iPhone and Android photos?",
+    "a6": "Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically.",
+    "q7": "What's the difference between Plus and Pro?",
+    "a7": "Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode.",
     "q1": "Where do I find my Creator Pro license key?",
     "a1": "After purchasing, check your email for the Paddle receipt. Your license key is the Transaction ID found in the receipt (it usually starts with txn_). Just copy and paste that into the Activation menu if it didn't activate automatically!",
     "q2": "How do I block AI web crawlers from using my images?",
@@ -157,10 +179,24 @@
     "start_pro": "Start Using Pro"
   },
   "footer": {
+    "tagline": "Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.",
     "copy": "© 2026 VeriMedia.xyz. Processed 100% locally in your browser. No files are ever stored or uploaded.",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "refunds": "Refunds"
+    "col_tools": "Tools",
+    "link_shield": "AI Opt-Out Shield",
+    "link_tagger": "AI Opt-Out Tagger",
+    "link_exif": "EXIF & GPS Cleaner",
+    "link_pdf": "PDF Metadata Cleaner",
+    "col_resources": "Resources",
+    "link_ai_guide": "AI Training Shield Guide",
+    "link_exif_guide": "EXIF Removal Guide",
+    "link_pdf_guide": "PDF Privacy Guide",
+    "link_kb": "Knowledge Base",
+    "col_legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "refunds": "Refund Policy",
+    "link_pricing": "Pricing",
+    "bottom": "All files processed 100% locally — nothing ever leaves your browser."
   },
   "privacy_page": {
     "h1": "Privacy Policy",
