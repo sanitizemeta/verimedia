@@ -86,7 +86,7 @@
       <a href="#calculator-section" class="nav-link" data-i18n="header.utility">Utility</a>
       <a href="#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
       <a href="#faq-section" class="nav-link" data-i18n="header.faq">FAQ</a>
-      <a href="#calculator-section" class="nav-link nav-cta">Try free</a>
+      <a href="#calculator-section" class="nav-link nav-cta">Clean a file</a>
       
       <!-- Standardized Language Switcher -->
       <div class="lang-switcher-wrap" style="position: relative;">
@@ -118,8 +118,18 @@
             <p data-i18n="hero.summary">Remove GPS, EXIF, device, and PDF data locally. Add AI opt-out and ownership signals. Files stay on-device.</p>
           </article>
           <div class="hero-action-row">
-            <a href="#dropzone" class="pricing-btn primary-btn hero-primary-link">Try the free sandbox</a>
-            <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link">Compare Plus and Pro</a>
+            <a href="#dropzone" class="pricing-btn primary-btn hero-primary-link">Clean a file for free</a>
+            <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link">Compare plans</a>
+          </div>
+          <div class="hero-outcome-strip" aria-label="Main outcomes">
+            <div>
+              <strong>Before sharing</strong>
+              <span>Remove GPS, camera IDs, PDF author fields, and device fingerprints.</span>
+            </div>
+            <div>
+              <strong>Before publishing</strong>
+              <span>Add AI opt-out, copyright, portfolio URL, and licensing signals.</span>
+            </div>
           </div>
           <div class="hero-trust-strip" aria-label="Privacy and ownership guarantees">
             <span><i data-lucide="hard-drive" aria-hidden="true"></i> Local browser processing</span>
@@ -155,6 +165,7 @@
           <h3 data-i18n="sandbox.drop_title">Drag & Drop your media file</h3>
           <p data-i18n="sandbox.drop_subtitle">or click to browse local files (max 25MB)</p>
           <span class="file-spec-hint">Supports JPEG · PNG · WebP · HEIC/HEIF · PDF</span>
+          <span class="dropzone-conversion-note">No signup. No cloud upload. Download cleaned output instantly.</span>
           
           <div class="upload-actions-slot">
             <!-- Sample Action Component -->
@@ -183,15 +194,15 @@
       <div class="sandbox-proof-row" aria-label="Tier behavior">
         <div>
           <strong>Free</strong>
-          <span>VeriMedia privacy and AI opt-out metadata</span>
+          <span>Best for one photo or PDF before posting online.</span>
         </div>
         <div>
           <strong>Plus</strong>
-          <span>Your creator copyright plus VeriMedia verification</span>
+          <span>Batch clean up to 100 files and add creator copyright.</span>
         </div>
         <div>
           <strong>Pro</strong>
-          <span>Whitelabel metadata for client and studio delivery</span>
+          <span>Unlimited batches, 100MB files, and whitelabel delivery.</span>
         </div>
       </div>
 
@@ -207,7 +218,7 @@
           <h2 id="workflow-title" class="section-title">From risky upload to clean publishable file in three steps</h2>
           <p class="section-subtitle">The main workflow stays local: choose a file, review what was found, download the cleaned version.</p>
         </div>
-        <a href="#calculator-section" class="pricing-btn secondary-btn section-link-btn">Start with a sample</a>
+        <a href="#dropzone" class="pricing-btn primary-btn section-link-btn">Start with a sample</a>
       </div>
       <div class="workflow-grid">
         <article class="workflow-card">
@@ -337,12 +348,13 @@
     <section id="pricing-section" class="pricing-section">
       <div class="section-kicker">Choose your publish volume</div>
       <h2 class="section-title" data-i18n="pricing.title">Simple Pricing</h2>
-      <p class="section-subtitle" data-i18n="pricing.subtitle">Choose the tier that best fits your workflow.</p>
+      <p class="section-subtitle" data-i18n="pricing.subtitle">Start free. Upgrade only when you need batches, creator profile metadata, bigger files, or whitelabel output.</p>
       
       <div class="pricing-grid">
         
         <!-- Free Plan -->
         <div class="card glass-card price-card">
+          <span class="plan-fit">Quick privacy cleanup</span>
           <h3 data-i18n="pricing.free_title">Standard Tier</h3>
           <div class="price"><span data-i18n="pricing.free_price">Free</span> <span class="period" data-i18n="pricing.free_period">/ forever</span></div>
           <p class="price-desc" data-i18n="pricing.free_desc">Perfect for casual sharing and personal privacy.</p>
@@ -352,12 +364,13 @@
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent-emerald); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.free_f3">Add AI training protection</span></li>
             <li><i data-lucide="x" style="width: 14px; height: 14px; color: var(--accent-rose); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.free_f4">1 file at a time</span></li>
           </ul>
-          <a href="#calculator-section" class="pricing-btn secondary-btn" data-i18n="pricing.launch_free">Try Free Sandbox</a>
+          <a href="#dropzone" class="pricing-btn secondary-btn" data-i18n="pricing.launch_free">Try Free Sandbox</a>
         </div>
 
         <!-- Plus Plan -->
         <div class="card glass-card price-card popular-card">
           <div class="popular-badge">MOST CREATOR-FRIENDLY</div>
+          <span class="plan-fit">Best for active creators</span>
           <h3>Creator Plus</h3>
           <div class="price">$9.99 <span class="period">one-time</span></div>
           <p class="price-desc">Best value to protect and publish your work at scale.</p>
@@ -375,6 +388,7 @@
         <!-- Pro Plan -->
         <div class="card glass-card price-card">
           <div class="popular-badge" data-i18n="pricing.popular_badge">LIFETIME DEAL</div>
+          <span class="plan-fit">For studios and client work</span>
           <h3 data-i18n="pricing.pro_title">Creator Pro</h3>
           <div class="price">$19 <span class="period" data-i18n="pricing.pro_period">one-time</span></div>
           <p class="price-desc">For studios and heavy workflows that need no limits.</p>
