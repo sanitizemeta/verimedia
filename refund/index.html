@@ -80,39 +80,7 @@
   <div class="glow-orb orb-2"></div>
 
   <!-- Header Section -->
-  <header>
-    <div class="logo-container">
-      <a href="/" style="text-decoration: none; color: inherit;">
-        <span class="logo-text" style="display: flex; align-items: center; gap: 8px;">
-          <img src="/icon.svg" alt="VeriMedia Logo" data-i18n-alt="header.logo_alt" width="32" height="32" style="filter: drop-shadow(0 0 8px var(--accent-cyan-glow));">
-          VeriMedia<span class="dot">.xyz</span>
-        </span>
-      </a>
-    </div>
-    <nav>
-      <a href="/" class="nav-link" data-i18n="header.home">Home</a>
-      <a href="/#calculator-section" class="nav-link" data-i18n="header.utility">Utility</a>
-      <a href="/#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
-
-      <!-- Standardized Language Switcher -->
-      <div class="lang-switcher-wrap" style="position: relative;">
-        <button id="langToggle" class="nav-link" aria-label="Switch Language" style="background: none; border: none; padding: 0.35rem 0; cursor: pointer; text-transform: uppercase;">
-          <span id="currentLang">EN</span>
-        </button>
-        <div id="langDropdown" class="glass-card lang-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 130px; z-index: 1000; padding: 0.5rem; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-          <button class="lang-opt" data-lang="en">English (EN)</button>
-          <button class="lang-opt" data-lang="es">Español (ES)</button>
-          <button class="lang-opt" data-lang="fr">Français (FR)</button>
-          <button class="lang-opt" data-lang="de">Deutsch (DE)</button>
-        </div>
-      </div>
-
-      <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile — set your name, copyright & URL">
-        <i data-lucide="user" style="width: 16px; height: 16px;"></i>
-        <span data-i18n="header.profile">Profile</span>
-      </button>
-    </nav>
-  </header>
+  <header></header>
 
   <main>
     <section class="policy-section">
@@ -179,16 +147,7 @@
   </main>
 
   <!-- Footer Section -->
-  <footer>
-    <div class="footer-content">
-      <p data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
-      <div class="footer-links">
-        <a href="/" class="footer-link" data-i18n="header.home">Home</a>
-        <a href="/privacy" class="footer-link" data-i18n="footer.privacy">Privacy</a>
-        <a href="/terms" class="footer-link" data-i18n="footer.terms">Terms</a>
-      </div>
-    </div>
-  </footer>
+  <footer></footer>
 
   <!-- Modals (Needed for global functionality) -->
   <div class="modal-overlay" id="paymentModal" role="dialog" aria-modal="true" aria-hidden="true">
@@ -249,5 +208,6 @@
 
   <!-- Scripts -->
   <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/site-chrome.js"></script>
 </body>
 </html>
