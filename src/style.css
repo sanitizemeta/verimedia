@@ -172,23 +172,6 @@ nav {
 
 .nav-cta::after { display: none !important; }
 
-.nav-lang-strip {
-  display: flex;
-  align-items: center;
-  gap: 0.1rem;
-  margin-left: 0.5rem;
-  padding-left: 0.75rem;
-  border-left: 1px solid var(--border);
-}
-
-.nav-lang-link {
-  font-size: 0.7rem !important;
-  opacity: 0.45;
-  padding: 0.2rem 0.3rem;
-  letter-spacing: 0.03em;
-}
-.nav-lang-link:hover { opacity: 1; }
-.nav-lang-link.active-lang { opacity: 1; color: var(--accent); }
 
 .profile-nav-btn {
   background: none;
