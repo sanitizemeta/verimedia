@@ -181,7 +181,6 @@
                   <span data-i18n="sandbox.sample_btn_text">Try a sample photo</span>
                 </button>
                 <div id="queuedFilesMeta" class="queued-files-meta" style="display:none;">0 files loaded</div>
-                <button type="button" id="cleanNowBtn" class="pricing-btn primary-btn" style="display:none; margin-top: 0.75rem;">Shield Now</button>
               </div>
             </div>
 
@@ -197,6 +196,9 @@
                   <button class="link-btn" id="trySampleBtn" data-i18n="sandbox.try_sample">Try Sample File</button>
                 </div>
               </div>
+
+              <!-- Shield Now CTA — shown by JS when files are queued -->
+              <button type="button" id="cleanNowBtn" class="pricing-btn primary-btn" style="display:none; width: 100%; margin-top: 1rem;">Shield Now</button>
 
               <!-- Free-tier upsell — shown after successful shield, hidden for paid users -->
               <div id="freeUpsellBanner" class="free-upsell-banner" style="display:none;" aria-live="polite">
@@ -789,6 +791,27 @@
 
       observer.observe(badge, { attributes: true, attributeFilter: ['class'] });
     })();
+  </script>
+
+  <script>
+    // Wire "Already purchased?" buttons to open the license activation modal
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.already-have-key-link').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const modal = document.getElementById('checkoutModal');
+          const viewActivate = document.getElementById('checkoutViewActivate');
+          const viewBuy = document.getElementById('checkoutViewBuy');
+          const viewSuccess = document.getElementById('checkoutViewSuccess');
+          const licenseError = document.getElementById('licenseError');
+          if (!modal || !viewActivate) return;
+          if (viewBuy) viewBuy.style.display = 'none';
+          if (viewSuccess) viewSuccess.style.display = 'none';
+          if (licenseError) licenseError.style.display = 'none';
+          viewActivate.style.display = 'block';
+          modal.classList.add('active');
+        });
+      });
+    });
   </script>
 </body>
 </html>
