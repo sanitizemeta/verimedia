@@ -75,8 +75,8 @@
     .guide-header { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
     .guide-breadcrumb { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 1rem; display: flex; gap: 0.4rem; align-items: center; }
     .guide-breadcrumb a { color: var(--text-secondary); text-decoration: none; }
-    .guide-breadcrumb a:hover { color: var(--emerald); }
-    .guide-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--emerald); background: var(--emerald-subtle); border: 1px solid rgba(16,185,129,0.18); border-radius: 999px; padding: 0.2rem 0.65rem; margin-bottom: 1rem; }
+    .guide-breadcrumb a:hover { color: var(--accent); }
+    .guide-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.18); border-radius: 999px; padding: 0.2rem 0.65rem; margin-bottom: 1rem; }
     .guide-title { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 1rem; }
     .guide-intro { font-size: 1.08rem; color: var(--text-secondary); line-height: 1.7; margin: 0 0 1.5rem; }
     .guide-meta { font-size: 0.78rem; color: var(--text-secondary); display: flex; gap: 1.25rem; flex-wrap: wrap; }
@@ -85,13 +85,13 @@
     .guide-body p { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem; }
     .guide-body ul, .guide-body ol { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem 1.25rem; }
     .guide-body li { margin-bottom: 0.4rem; }
-    .guide-body code { background: rgba(16,185,129,0.08); color: var(--emerald); padding: 1px 5px; border-radius: 4px; font-size: 0.88em; }
-    .guide-callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--emerald); border-radius: 6px 10px 10px 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .guide-body code { background: rgba(56,189,248,0.08); color: var(--accent); padding: 1px 5px; border-radius: 4px; font-size: 0.88em; }
+    .guide-callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px 10px 10px 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
     .guide-callout p { margin: 0; font-size: 0.93rem; }
     .guide-steps { counter-reset: steps; list-style: none; margin: 0 0 1.5rem; padding: 0; }
     .guide-steps li { counter-increment: steps; display: flex; gap: 1rem; align-items: flex-start; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
     .guide-steps li:last-child { border-bottom: none; }
-    .guide-steps li::before { content: counter(steps); display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; background: var(--emerald-subtle); border: 1px solid rgba(16,185,129,0.2); border-radius: 50%; font-size: 0.78rem; font-weight: 700; color: var(--emerald); font-family: var(--font-display); flex-shrink: 0; margin-top: 2px; }
+    .guide-steps li::before { content: counter(steps); display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.2); border-radius: 50%; font-size: 0.78rem; font-weight: 700; color: var(--accent); font-family: var(--font-display); flex-shrink: 0; margin-top: 2px; }
     .guide-steps li div strong { display: block; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.2rem; }
     .exif-table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.88rem; }
     .exif-table th { text-align: left; padding: 0.5rem 0.75rem; background: var(--surface); color: var(--text-secondary); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); }
@@ -100,7 +100,7 @@
     .exif-table tr:last-child td { border-bottom: none; }
     .risk-high { color: var(--rose); font-size: 0.75rem; font-weight: 600; }
     .risk-med { color: var(--amber); font-size: 0.75rem; font-weight: 600; }
-    .guide-cta-block { background: var(--surface); border: 1px solid rgba(16,185,129,0.18); border-radius: 14px; padding: 2rem; text-align: center; margin: 3rem 0; }
+    .guide-cta-block { background: var(--surface); border: 1px solid rgba(56,189,248,0.18); border-radius: 14px; padding: 2rem; text-align: center; margin: 3rem 0; }
     .guide-cta-block h3 { margin: 0 0 0.5rem; font-size: 1.25rem; }
     .guide-cta-block p { margin: 0 0 1.25rem; font-size: 0.93rem; }
     .guide-related { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1.5rem 0 3rem; }
@@ -127,6 +127,11 @@
       <a href="/#pricing-section" class="nav-link">Pricing</a>
       <a href="/#faq-section" class="nav-link">FAQ</a>
       <a href="/#calculator-section" class="nav-link nav-cta">Shield my images</a>
+      <div class="lang-guide-links">
+        <a href="/es" class="nav-link" style="font-size:0.73rem;opacity:0.55;">ES</a>
+        <a href="/fr" class="nav-link" style="font-size:0.73rem;opacity:0.55;">FR</a>
+        <a href="/de" class="nav-link" style="font-size:0.73rem;opacity:0.55;">DE</a>
+      </div>
     </nav>
   </header>
 
@@ -143,7 +148,7 @@
       <div class="guide-meta">
         <span><i data-lucide="clock" style="width:13px;height:13px;"></i> 5 min read</span>
         <span><i data-lucide="calendar" style="width:13px;height:13px;"></i> Updated May 2026</span>
-        <span><i data-lucide="shield-check" style="width:13px;height:13px;color:var(--emerald);"></i> Free to use</span>
+        <span><i data-lucide="shield-check" style="width:13px;height:13px;color:var(--accent);"></i> Free to use</span>
       </div>
     </div>
 
@@ -183,7 +188,7 @@
 
       <h2>Remove EXIF data in 3 steps</h2>
       <ol class="guide-steps">
-        <li><div><strong>Open VeriMedia</strong> Go to <a href="/" style="color:var(--emerald);">verimedia.xyz</a>. No account, no app. Works in Chrome, Firefox, Safari, and Edge.</div></li>
+        <li><div><strong>Open VeriMedia</strong> Go to <a href="/" style="color:var(--accent);">verimedia.xyz</a>. No account, no app. Works in Chrome, Firefox, Safari, and Edge.</div></li>
         <li><div><strong>Drop your photo</strong> Drag and drop your JPEG, PNG, WebP, or HEIC file. The file is processed entirely in browser memory — never leaves your device.</div></li>
         <li><div><strong>Download the clean file</strong> VeriMedia strips all GPS data, device identifiers, and camera fingerprints. Same resolution, zero tracking data.</div></li>
       </ol>

@@ -75,8 +75,8 @@
     .guide-header { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
     .guide-breadcrumb { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 1rem; display: flex; gap: 0.4rem; align-items: center; }
     .guide-breadcrumb a { color: var(--text-secondary); text-decoration: none; }
-    .guide-breadcrumb a:hover { color: var(--violet); }
-    .guide-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--violet); background: var(--violet-subtle); border: 1px solid rgba(139,92,246,0.18); border-radius: 999px; padding: 0.2rem 0.65rem; margin-bottom: 1rem; }
+    .guide-breadcrumb a:hover { color: var(--accent); }
+    .guide-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.18); border-radius: 999px; padding: 0.2rem 0.65rem; margin-bottom: 1rem; }
     .guide-title { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 1rem; }
     .guide-intro { font-size: 1.08rem; color: var(--text-secondary); line-height: 1.7; margin: 0 0 1.5rem; }
     .guide-meta { font-size: 0.78rem; color: var(--text-secondary); display: flex; gap: 1.25rem; flex-wrap: wrap; }
@@ -85,19 +85,19 @@
     .guide-body p { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem; }
     .guide-body ul, .guide-body ol { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem 1.25rem; }
     .guide-body li { margin-bottom: 0.4rem; }
-    .guide-body code { background: rgba(139,92,246,0.08); color: var(--violet); padding: 1px 5px; border-radius: 4px; font-size: 0.88em; }
-    .guide-callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--violet); border-radius: 6px 10px 10px 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .guide-body code { background: rgba(56,189,248,0.08); color: var(--accent); padding: 1px 5px; border-radius: 4px; font-size: 0.88em; }
+    .guide-callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px 10px 10px 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
     .guide-callout p { margin: 0; font-size: 0.93rem; }
     .guide-steps { counter-reset: steps; list-style: none; margin: 0 0 1.5rem; padding: 0; }
     .guide-steps li { counter-increment: steps; display: flex; gap: 1rem; align-items: flex-start; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
     .guide-steps li:last-child { border-bottom: none; }
-    .guide-steps li::before { content: counter(steps); display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; background: var(--violet-subtle); border: 1px solid rgba(139,92,246,0.2); border-radius: 50%; font-size: 0.78rem; font-weight: 700; color: var(--violet); font-family: var(--font-display); flex-shrink: 0; margin-top: 2px; }
+    .guide-steps li::before { content: counter(steps); display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.2); border-radius: 50%; font-size: 0.78rem; font-weight: 700; color: var(--accent); font-family: var(--font-display); flex-shrink: 0; margin-top: 2px; }
     .guide-steps li div strong { display: block; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.2rem; }
     .pdf-fields { display: grid; gap: 0.5rem; margin: 1rem 0 1.5rem; }
     .pdf-field { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.9rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font-size: 0.86rem; }
-    .pdf-field-key { font-weight: 600; color: var(--violet); min-width: 110px; font-family: var(--font-display); font-size: 0.82rem; }
+    .pdf-field-key { font-weight: 600; color: var(--accent); min-width: 110px; font-family: var(--font-display); font-size: 0.82rem; }
     .pdf-field-val { color: var(--text-secondary); }
-    .guide-cta-block { background: var(--surface); border: 1px solid rgba(139,92,246,0.18); border-radius: 14px; padding: 2rem; text-align: center; margin: 3rem 0; }
+    .guide-cta-block { background: var(--surface); border: 1px solid rgba(56,189,248,0.18); border-radius: 14px; padding: 2rem; text-align: center; margin: 3rem 0; }
     .guide-cta-block h3 { margin: 0 0 0.5rem; font-size: 1.25rem; }
     .guide-cta-block p { margin: 0 0 1.25rem; font-size: 0.93rem; }
     .guide-related { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1.5rem 0 3rem; }
@@ -124,6 +124,11 @@
       <a href="/#pricing-section" class="nav-link">Pricing</a>
       <a href="/#faq-section" class="nav-link">FAQ</a>
       <a href="/#calculator-section" class="nav-link nav-cta">Shield my images</a>
+      <div class="lang-guide-links">
+        <a href="/es" class="nav-link" style="font-size:0.73rem;opacity:0.55;">ES</a>
+        <a href="/fr" class="nav-link" style="font-size:0.73rem;opacity:0.55;">FR</a>
+        <a href="/de" class="nav-link" style="font-size:0.73rem;opacity:0.55;">DE</a>
+      </div>
     </nav>
   </header>
 
@@ -170,7 +175,7 @@
 
       <h2>Remove PDF metadata in 3 steps</h2>
       <ol class="guide-steps">
-        <li><div><strong>Open VeriMedia</strong> Go to <a href="/" style="color:var(--violet);">verimedia.xyz</a>. No account, no Acrobat subscription, no software install.</div></li>
+        <li><div><strong>Open VeriMedia</strong> Go to <a href="/" style="color:var(--accent);">verimedia.xyz</a>. No account, no Acrobat subscription, no software install.</div></li>
         <li><div><strong>Drop your PDF</strong> Drag and drop your PDF onto the tool. The file is parsed entirely in browser memory — it never reaches any server.</div></li>
         <li><div><strong>Download the scrubbed file</strong> VeriMedia overwrites <code>Author</code>, <code>Creator</code>, <code>Producer</code>, <code>CreationDate</code>, and <code>ModDate</code> at the binary level. Download the clean PDF.</div></li>
       </ol>
@@ -223,7 +228,7 @@
       <div class="guide-cta-block">
         <h3>Scrub your PDF metadata now — free</h3>
         <p>Overwrite Author, Creator, Producer, and timestamps at the binary level. Nothing is uploaded.</p>
-        <a href="/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:var(--violet); box-shadow: 0 4px 20px var(--violet-glow);">
+        <a href="/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:var(--accent); box-shadow: 0 4px 20px var(--accent-glow);">
           <i data-lucide="file-digit" style="width:15px;height:15px;"></i>
           Try VeriMedia — free
         </a>
