@@ -127,7 +127,7 @@
     "q6": "Does VeriMedia work on iPhone and Android photos?",
     "a6": "Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically.",
     "q7": "What's the difference between Plus and Pro?",
-    "a7": "Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode.",
+    "a7": "Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19.99.99) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode.",
     "q1": "Where do I find my license key?",
     "a1": "After purchasing, check your email for the Paddle receipt. Your license key is the Transaction ID found in the receipt (it usually starts with txn_). Just copy and paste that into the Activation menu if it didn't activate automatically!",
     "q2": "How do I block AI web crawlers from using my images?",

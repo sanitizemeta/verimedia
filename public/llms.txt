@@ -24,7 +24,7 @@ VeriMedia is fully optimized for international AI discovery with localized metad
     *   100-file batch shielding per session.
     *   Creator profile metadata (name + copyright in every file).
     *   Files up to 25 MB. 1 device license, lifetime access.
-*   **Creator Pro ($19.00 One-Time):**
+*   **Creator Pro ($19.99 One-Time):**
     *   Everything in Plus, unlimited batch shielding.
     *   Google "Licensable" badge support (WebStatement XMP tag).
     *   Files up to 100 MB. Whitelabel metadata mode. Up to 3 devices.

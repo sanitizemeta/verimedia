@@ -313,7 +313,7 @@ function updateStructuredData(lang, trans, pagePath) {
         "featureList": trans.kb?.ai_title + ", " + trans.kb?.identity_title + ", " + trans.pricing?.pro_f2,
         "offers": {
           "@type": "Offer",
-          "price": "19.00",
+          "price": "19.99",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock"
         },
@@ -704,8 +704,8 @@ function getPlanCopy(plan = 'plus') {
         title: 'Creator Pro Lifetime',
         subtitle: 'One-time payment. Unlimited batches, 100MB files, whitelabel mode, and up to 3 devices.',
         item: 'Creator Pro Lifetime',
-        price: '$19.00',
-        buy: 'Buy Pro - $19',
+        price: '$19.99',
+        buy: 'Buy Pro - $19.99',
         successTitle: 'Creator Pro Active',
         start: 'Start Using Pro',
         features: ['Everything in Plus unlocked', 'Unlimited batch processing active', 'Whitelabel metadata mode enabled']

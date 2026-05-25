@@ -125,7 +125,7 @@
     "q6": "VeriMedia fonctionne-t-il sur les photos iPhone et Android ?",
     "a6": "Oui. Les photos iOS and Android sont des fichiers JPEG ou HEIC standard. VeriMedia traite les deux dans le navigateur. Les fichiers HEIC (par défaut sur iPhone) sont convertis et protégés automatiquement.",
     "q7": "Quelle est la différence entre Plus et Pro ?",
-    "a7": "Plus ($9.99) débloque la protection par lots jusqu'à 100 fichiers, la limite de 25 Mo par fichier et les métadonnées de profil de créateur. Pro ($19) ajoute des lots illimités, des fichiers de 100 Mo, le badge 'Sous licence' de Google et le mode marque blanche."
+    "a7": "Plus ($9.99) débloque la protection par lots jusqu'à 100 fichiers, la limite de 25 Mo par fichier et les métadonnées de profil de créateur. Pro ($19.99.99) ajoute des lots illimités, des fichiers de 100 Mo, le badge 'Sous licence' de Google et le mode marque blanche."
   },
   "profile": {
     "title": "Profil du créateur",

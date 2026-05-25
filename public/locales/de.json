@@ -125,7 +125,7 @@
     "q6": "Funktioniert VeriMedia mit iPhone- und Android-Fotos?",
     "a6": "Ja. Fotos von iOS und Android sind Standard-JPEG- oder HEIC-Dateien. VeriMedia verarbeitet beides im Browser. HEIC-Dateien (iPhone-Standard) werden automatisch konvertiert und geschützt.",
     "q7": "Was ist der Unterschied zwischen Plus und Pro?",
-    "a7": "Plus ($9.99) schaltet die Stapelverarbeitung für bis zu 100 Dateien, ein 25 MB Dateilimit und Urheber-Profil-Metadaten frei. Pro ($19) fügt unbegrenzte Stapel, 100 MB Dateien, das Google Lizenzierbar-Badge und den Whitelabel-Modus hinzu."
+    "a7": "Plus ($9.99) schaltet die Stapelverarbeitung für bis zu 100 Dateien, ein 25 MB Dateilimit und Urheber-Profil-Metadaten frei. Pro ($19.99.99) fügt unbegrenzte Stapel, 100 MB Dateien, das Google Lizenzierbar-Badge und den Whitelabel-Modus hinzu."
   },
   "profile": {
     "title": "Urheber-Profil",
