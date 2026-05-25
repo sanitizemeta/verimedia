@@ -844,10 +844,10 @@
     (function() {
       const SUPPORTED = ['en', 'es', 'fr', 'de'];
       const GUIDES = ['ai-opt-out-metadata', 'remove-exif-from-photos', 'remove-pdf-metadata', 'knowledge'];
-      const stored = localStorage.getItem('vm_lang');
       const pathLang = window.location.pathname.split('/').filter(Boolean)[0];
-      const lang = (stored && SUPPORTED.includes(stored)) ? stored
-                 : (SUPPORTED.includes(pathLang)) ? pathLang
+      const stored = localStorage.getItem('vm_lang');
+      const lang = SUPPORTED.includes(pathLang) ? pathLang
+                 : (stored && SUPPORTED.includes(stored)) ? stored
                  : 'en';
       if (lang === 'en') return;
       document.querySelectorAll('a[href]').forEach(a => {
