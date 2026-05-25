@@ -62,7 +62,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -73,46 +73,11 @@
 </head>
 <body>
 
-  <!-- Interactive Space-Dust Particle Background -->
-  <canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.4;"></canvas>
 
-  <div class="glow-orb orb-1"></div>
-  <div class="glow-orb orb-2"></div>
 
   <!-- Header Section -->
-  <header>
-    <div class="logo-container">
-      <a href="/" style="text-decoration: none; color: inherit;">
-        <span class="logo-text" style="display: flex; align-items: center; gap: 8px;">
-          <img src="/icon.svg" alt="VeriMedia Logo" data-i18n-alt="header.logo_alt" width="32" height="32" style="filter: drop-shadow(0 0 8px var(--accent-cyan-glow));">
-          VeriMedia<span class="dot">.xyz</span>
-        </span>
-      </a>
-    </div>
-    <nav>
-      <a href="/" class="nav-link" data-i18n="header.home">Home</a>
-      <a href="/#calculator-section" class="nav-link" data-i18n="header.utility">Utility</a>
-      <a href="/#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
-
-      <!-- Standardized Language Switcher -->
-      <div class="lang-switcher-wrap" style="position: relative;">
-        <button id="langToggle" class="nav-link" aria-label="Switch Language" style="background: none; border: none; padding: 0.35rem 0; cursor: pointer; text-transform: uppercase;">
-          <span id="currentLang">EN</span>
-        </button>
-        <div id="langDropdown" class="glass-card lang-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 130px; z-index: 1000; padding: 0.5rem; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-          <button class="lang-opt" data-lang="en">English (EN)</button>
-          <button class="lang-opt" data-lang="es">Español (ES)</button>
-          <button class="lang-opt" data-lang="fr">Français (FR)</button>
-          <button class="lang-opt" data-lang="de">Deutsch (DE)</button>
-        </div>
-      </div>
-
-      <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile — set your name, copyright & URL">
-        <i data-lucide="user" style="width: 16px; height: 16px;"></i>
-        <span data-i18n="header.profile">Profile</span>
-      </button>
-    </nav>
-  </header>
+  <!-- Header — injected by site-chrome.js -->
+  <header></header>
 
   <main>
     <section class="policy-section">
@@ -121,17 +86,17 @@
         <span class="last-updated" data-i18n="refund_page.last_updated">Last Updated: May 23, 2026</span>
 
         <p data-i18n="refund_page.intro">
-          We stand by the quality of our edge-compiled tools. Because we provide a fully functional, zero-click Standard Tier completely free of charge, all upgrades to <strong>Creator Pro</strong> are final.
+          We stand by the quality of our tools. Because we provide a fully functional Free Tier at no cost, all paid upgrades to <strong>Creator Plus</strong> and <strong>Creator Pro</strong> are final.
         </p>
 
-        <h2 data-i18n="refund_page.h2_1">1. Transparent Testing (Try Before You Buy)</h2>
+        <h2 data-i18n="refund_page.h2_1">1. Try Before You Buy</h2>
         <p data-i18n="refund_page.p1">
-          To ensure VeriMedia meets your metadata stripping and copyright licensing needs, we offer the **Standard Tier 100% free of charge, forever**. 
+          The Free Tier is available permanently at no charge. It includes single-file AI opt-out shielding, GPS stripping, and device metadata removal. You can fully test the core processing engine on your own device before purchasing any paid tier.
         </p>
 
-        <h2 data-i18n="refund_page.h2_2">2. Strictly No Refunds (All Sales Are Final)</h2>
+        <h2 data-i18n="refund_page.h2_2">2. No Refunds (All Sales Are Final)</h2>
         <p data-i18n="refund_page.p2">
-          Since you have the ability to thoroughly test all EXIF stripping, metadata purges, and licensing tags on your own hardware before upgrading, we do not offer refunds, exchanges, or cancellations for <strong>Creator Pro</strong> purchases.
+          Because you can test the processing engine for free before purchasing, we do not offer refunds, exchanges, credits, or cancellations for <strong>Creator Plus</strong> or <strong>Creator Pro</strong> purchases. Both are one-time payments and both are final.
         </p>
 
         <h2 data-i18n="refund_page.h2_3">3. Special Exceptions</h2>
@@ -140,18 +105,18 @@
         </p>
         <ul>
           <li>
-            <i data-lucide="alert-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
+            <i data-lucide="alert-circle" style="width:14px; height:14px; color:var(--accent); flex-shrink:0; margin-top:4px;"></i>
             <span data-i18n="refund_page.li3_1"><strong>Technical System Malfunction:</strong> In the rare event that a purchased license key fails to activate due to database/server-side validation errors, and our technical support desk is unable to resolve the issue or issue a working replacement key within 5 business days of contact.</span>
           </li>
           <li>
-            <i data-lucide="alert-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
+            <i data-lucide="alert-circle" style="width:14px; height:14px; color:var(--accent); flex-shrink:0; margin-top:4px;"></i>
             <span data-i18n="refund_page.li3_2"><strong>Accidental Duplicate Purchases:</strong> If you accidentally purchase the Creator Pro tier multiple times in immediate succession, we will gladly refund the duplicate transactions upon verification of the duplicate license keys (which will then be deactivated).</span>
           </li>
         </ul>
 
         <h2 data-i18n="refund_page.h2_4">4. Contact Support</h2>
         <p>
-          <span data-i18n="refund_page.p4">If you are experiencing any technical issues activating your license key or have questions about duplicate transactions, please reach out to our dedicated support desk at</span> <span>support [at] verimedia.xyz</span> with your **Order ID**.
+          <span data-i18n="refund_page.p4">If you are experiencing any technical issues activating your license key or have questions about duplicate transactions, please reach out to our dedicated support desk at</span> <span>support [at] verimedia.xyz</span> with your <strong>Order ID</strong>.
         </p>
 
         <h2 data-i18n="refund_page.h2_5">5. Chargebacks and Disputes</h2>
@@ -178,76 +143,10 @@
     </section>
   </main>
 
-  <!-- Footer Section -->
-  <footer>
-    <div class="footer-content">
-      <p data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
-      <div class="footer-links">
-        <a href="/" class="footer-link" data-i18n="header.home">Home</a>
-        <a href="/privacy" class="footer-link" data-i18n="footer.privacy">Privacy</a>
-        <a href="/terms" class="footer-link" data-i18n="footer.terms">Terms</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Modals (Needed for global functionality) -->
-  <div class="modal-overlay" id="paymentModal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-card glass-card">
-      <button class="close-modal" id="closeModal" aria-label="Close modal">&times;</button>
-      <div id="modalViewBuy">
-        <div class="modal-icon-wrap">
-          <i data-lucide="shield-check" style="width:32px; height:32px; color:var(--accent-cyan);"></i>
-        </div>
-        <h3 data-i18n="checkout.pro_title">Creator Pro Lifetime</h3>
-        <p class="modal-subtitle" data-i18n="checkout.pro_subtitle">One-time payment. Use on up to 3 devices. No subscription, ever.</p>
-        <button class="pricing-btn primary-btn paddle-checkout-btn">
-          <i data-lucide="lock" style="width: 16px; height: 16px; vertical-align:middle; margin-right:6px;"></i>
-          <span data-i18n="checkout.buy_btn">Buy Now — $19</span>
-        </button>
-        <button class="link-btn modal-switch-link" id="switchToActivate" data-i18n="checkout.already_key">Already have a key? Activate it here</button>
-      </div>
-      <div id="modalViewActivate" style="display:none;">
-        <div class="modal-icon-wrap">
-          <i data-lucide="key" style="width:32px; height:32px; color:var(--accent-cyan);"></i>
-        </div>
-        <h3 data-i18n="checkout.activate_title">Activate Your License</h3>
-        <input type="text" id="licenseKeyInput" class="license-input" placeholder="e.g. txn_01abc123xyz" />
-        <p class="license-error" id="licenseError" style="display:none;"></p>
-        <button class="pricing-btn primary-btn" id="activateLicenseBtn" data-i18n="checkout.activate_btn">Activate License</button>
-        <button class="link-btn modal-switch-link" id="switchToBuy" data-i18n="checkout.need_buy">Need to buy a license?</button>
-      </div>
-      <div id="modalViewSuccess" style="display:none;">
-        <div class="modal-icon-wrap success-icon">
-          <i data-lucide="check-circle-2" style="width:40px; height:40px; color:var(--accent-emerald);"></i>
-        </div>
-        <h3 data-i18n="checkout.success_title">Creator Pro Active</h3>
-        <button class="pricing-btn primary-btn" id="closeSuccessBtn" data-i18n="checkout.start_pro">Start Using Pro</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay profile-panel-overlay" id="profilePanel" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-card glass-card profile-panel-card">
-      <button class="close-modal" id="profileCloseBtn">&times;</button>
-      <div class="modal-icon-wrap">
-        <i data-lucide="user-circle-2" style="width:28px; height:28px; color:var(--accent-cyan);"></i>
-      </div>
-      <h3 data-i18n="profile.title">Creator Profile</h3>
-      <form id="profileForm" autocomplete="off">
-        <div class="profile-field">
-          <label class="profile-label"><span data-i18n="profile.name_label">Creator Name</span></label>
-          <input type="text" id="profileName" class="license-input" placeholder="e.g. Jane Smith" />
-        </div>
-        <div class="profile-field">
-          <label class="profile-label"><span data-i18n="profile.copy_label">Copyright String</span></label>
-          <input type="text" id="profileCopyright" class="license-input" placeholder="e.g. © 2026 Jane Smith" />
-        </div>
-        <button class="pricing-btn primary-btn" id="profileSaveBtn" data-i18n="profile.save">Save Profile</button>
-      </form>
-    </div>
-  </div>
+  <!-- Footer — injected by site-chrome.js -->
+  <footer></footer>
 
   <!-- Scripts -->
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/site-chrome.js"></script>
 </body>
 </html>

@@ -8,8 +8,11 @@
   <meta name="description" content="Remove hidden PDF metadata in your browser. Strip author, producer, and document identifiers without uploading files.">
   <meta http-equiv="content-language" content="en" />
   <link rel="canonical" href="https://verimedia.xyz/remove-pdf-metadata" />
-  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/remove-pdf-metadata" />
-  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/remove-pdf-metadata" />
+  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/remove-pdf-metadata/" />
+  <link rel="alternate" hreflang="es" href="https://verimedia.xyz/es/remove-pdf-metadata/" />
+  <link rel="alternate" hreflang="fr" href="https://verimedia.xyz/fr/remove-pdf-metadata/" />
+  <link rel="alternate" hreflang="de" href="https://verimedia.xyz/de/remove-pdf-metadata/" />
+  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/remove-pdf-metadata/" />
 
   <meta property="og:title" content="Remove PDF Metadata Online | VeriMedia.xyz">
   <meta property="og:description" content="Clean hidden PDF metadata locally in your browser. No upload, no cloud processing.">
@@ -80,7 +83,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/src/style.css">
   <script src="https://unpkg.com/lucide@latest" defer></script>
@@ -90,22 +93,8 @@
   <div class="glow-orb orb-1"></div>
   <div class="glow-orb orb-2"></div>
 
-  <header>
-    <div class="logo-container">
-      <a href="/" style="text-decoration: none; color: inherit;">
-        <span class="logo-text" style="display: flex; align-items: center; gap: 8px;">
-          <img src="/icon.svg" alt="VeriMedia Logo" width="32" height="32" style="filter: drop-shadow(0 0 8px var(--accent-cyan-glow));">
-          VeriMedia<span class="dot">.xyz</span>
-        </span>
-      </a>
-    </div>
-    <nav>
-      <a href="/" class="nav-link">Home</a>
-      <a href="/#calculator-section" class="nav-link">Tool</a>
-      <a href="/#pricing-section" class="nav-link">Pricing</a>
-      <a href="/#faq-section" class="nav-link">FAQ</a>
-    </nav>
-  </header>
+  <!-- Header — injected by site-chrome.js -->
+  <header></header>
 
   <main>
     <section class="hero-section" style="max-width: 1000px; margin: 2.5rem auto 2rem auto; text-align: left; padding: 0 1.5rem;">
@@ -113,78 +102,175 @@
         Remove Hidden Metadata From PDF Files
       </h1>
       <p style="font-size: 1.02rem; color: var(--text-secondary); max-width: 820px;">
-        Strip author details, producer fields, and hidden document metadata before sharing contracts, portfolios, or client files.
+        PDF files contain hidden metadata that can reveal the author's name, the software used to create the document, edit timestamps, and internal file paths. VeriMedia's forensic cleaner physically overwrites these fields in your browser. no file upload, no third-party server.
       </p>
       <div style="display:flex; gap:0.8rem; margin-top:1.2rem; flex-wrap: wrap;">
         <a href="/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
-          Start PDF Cleanup
+          Start PDF Cleanup. Free
         </a>
-        <a href="/privacy" class="pricing-btn secondary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
-          Privacy Policy
+        <a href="/remove-exif-from-photos" class="pricing-btn secondary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
+          Image EXIF Guide
         </a>
       </div>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">What Hidden Metadata Do PDF Files Contain?</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Every PDF file has two layers: the visible content (text, images, and layout) and the metadata layer (hidden properties that describe the document). The metadata layer is written automatically by the software that created or edited the PDF. you never see it in the document, but anyone with a PDF reader or command-line tool can extract it.
+      </p>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        A typical PDF metadata payload includes:
+      </p>
+      <ul style="margin-left: 1rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        <li><strong>Author</strong>. the name configured in the creating application (often your real name or company username)</li>
+        <li><strong>Creator</strong>. the application that originally generated the document (e.g., "Microsoft Word 2024", "Adobe InDesign 19.4")</li>
+        <li><strong>Producer</strong>. the PDF rendering engine (e.g., "macOS Quartz PDFContext", "Adobe PDF Library 17.0")</li>
+        <li><strong>CreationDate</strong>. the exact timestamp when the document was first created, including timezone</li>
+        <li><strong>ModDate</strong>. the timestamp of the most recent edit</li>
+        <li><strong>Title, Subject, Keywords</strong>. optional fields that may contain internal project names or classification labels</li>
+        <li><strong>XMP metadata stream</strong>. an XML block that can contain all of the above plus custom fields, edit history, and document identifiers</li>
+        <li><strong>Info dictionary</strong>. the legacy PDF metadata store, often duplicating XMP fields</li>
+      </ul>
+      <p style="color: var(--text-secondary);">
+        Standard PDF editors like Adobe Acrobat's "Document Properties" panel let you clear the visible fields, but they typically leave the raw XMP and Info streams intact. Forensic tools can still extract the original values from the binary. VeriMedia physically overwrites both streams at the byte level, making recovery impossible.
+      </p>
     </section>
 
     <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
       <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Why PDF Metadata Removal Matters</h2>
       <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-        PDF files can expose sensitive document context. Metadata cleaning reduces privacy risk before publishing or sending files externally.
+        PDF metadata leaks are a well-documented security and privacy concern. Here are real scenarios where hidden metadata causes problems:
       </p>
-      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-        A PDF can contain visible content, document properties, embedded metadata streams, software producer fields,
-        author names, creation timestamps, outlines, attachments, and other structural data. Some of this information
-        is harmless inside a private workflow but unnecessary when sending a document outside your organization.
-      </p>
-      <ul style="margin-left: 1rem; color: var(--text-secondary);">
-        <li>Removes author and producer metadata fields.</li>
-        <li>Reduces traceability from hidden document properties.</li>
-        <li>Keeps PDF content intact while sanitizing metadata.</li>
+      <ul style="margin-left: 1rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        <li><strong>Legal documents</strong>. contracts and NDAs can reveal the law firm's internal naming convention, the attorney's workstation username, and the exact timeline of draft revisions</li>
+        <li><strong>Client deliverables</strong>. a design agency sending a proposal may inadvertently reveal that the document was created using a competitor's template (visible in the Creator field)</li>
+        <li><strong>Whistleblowing and journalism</strong>. leaked PDFs have been traced back to specific employees via the Author field and creation timestamp</li>
+        <li><strong>Government and compliance</strong>. GDPR considers author names and device identifiers as personal data. Sharing unredacted PDFs externally can constitute a data breach</li>
+        <li><strong>Academic submissions</strong>. double-blind peer review is compromised if the PDF metadata contains the author's name</li>
+        <li><strong>Freelance work</strong>. sending invoices or contracts with your personal Adobe/Office license name attached</li>
       </ul>
+      <p style="color: var(--text-secondary);">
+        In 2023, the Australian government accidentally revealed classified document authors through PDF metadata in published reports. Similar incidents have occurred with legal firms, NGOs, and corporations. The fix is simple: strip metadata before sharing.
+      </p>
     </section>
 
     <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
-      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Best Practice Before Sharing PDFs</h2>
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">How VeriMedia's Forensic PDF Cleaner Works</h2>
       <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-        Keep the source document and an internal archive copy untouched. Before sending a public copy, remove hidden
-        metadata, confirm the visible content is final, and use a file name that does not reveal private client,
-        draft, or project information. For sensitive documents, review the PDF manually after cleaning.
+        VeriMedia does not simply clear the visible properties fields. It performs a deep, forensic-grade scrub of the PDF binary:
+      </p>
+      <ol style="margin-left: 1rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        <li><strong>Parse the PDF structure</strong>. identify all Info dictionary objects and XMP metadata streams in the cross-reference table</li>
+        <li><strong>Overwrite the Info dictionary</strong>. replace Author, Creator, Producer, CreationDate, ModDate, Title, Subject, and Keywords with empty values</li>
+        <li><strong>Overwrite the XMP stream</strong>. replace the entire XML metadata block with a minimal, clean XMP packet</li>
+        <li><strong>Rewrite cross-references</strong>. update the PDF's internal pointers so the file remains valid</li>
+        <li><strong>Output the clean file</strong>. the resulting PDF is structurally identical but contains no recoverable metadata</li>
+      </ol>
+      <p style="color: var(--text-secondary);">
+        All of this happens in your browser using JavaScript and the pdf-lib library. The original file never leaves your device. You can verify the result by opening the cleaned PDF in any metadata viewer. all fields will be empty or generic.
+      </p>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Best Practices Before Sharing PDFs</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Metadata removal is one layer of document hygiene. For complete privacy before sharing a PDF externally:
+      </p>
+      <ul style="margin-left: 1rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        <li>Keep the source document and an archive copy untouched in your private storage</li>
+        <li>Run the public version through VeriMedia to strip hidden metadata</li>
+        <li>Review the file name. rename it to something generic (avoid internal project codes or client names)</li>
+        <li>Check for tracked changes or comments if the PDF was exported from Word or Google Docs</li>
+        <li>Verify the visible content is final. metadata removal does not redact visible text</li>
+        <li>For highly sensitive documents, open the cleaned PDF in a separate viewer to confirm nothing was missed</li>
+      </ul>
+      <p style="color: var(--text-secondary);">
+        VeriMedia processes PDFs locally, which is critical for legal, financial, and medical documents that cannot be uploaded to third-party conversion services without violating confidentiality agreements.
+      </p>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">VeriMedia vs. Other PDF Metadata Tools</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Most PDF metadata removal tools fall into one of two categories: desktop applications (ExifTool, QPDF, Adobe Acrobat Pro) that require installation, or online services (iLovePDF, Sejda, SmallPDF) that require uploading your document to a remote server. VeriMedia is neither. it runs entirely in your browser with zero installation and zero upload.
       </p>
       <p style="color: var(--text-secondary);">
-        VeriMedia runs PDF cleanup locally in the browser. This is important for legal, business, and creative files
-        because the document does not need to be uploaded to a third-party conversion server.
+        For users who handle confidential documents, the server-upload model is a non-starter. Your NDA, contract, or financial report passes through a third party's infrastructure. VeriMedia eliminates this concern entirely: the PDF is processed in-memory in your browser tab, and the cleaned version is downloaded directly. No network request is made during processing.
       </p>
     </section>
 
     <section class="faq-section" style="max-width:1000px; margin: 0 auto 4rem auto; padding: 0 1.5rem;">
-      <h2 class="section-title" style="text-align:left; margin-bottom:1.2rem;">Quick Answers</h2>
+      <h2 class="section-title" style="text-align:left; margin-bottom:1.2rem;">Frequently Asked Questions</h2>
       <div class="faq-accordion">
         <div class="faq-item">
-          <h3>Can I use this before sending client documents?</h3>
-          <p>Yes, this is a common use case to reduce accidental metadata leakage.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Can I use this before sending client documents?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>Yes. This is one of the most common use cases. Before emailing a contract, proposal, or invoice to a client, run it through VeriMedia to strip your personal author name, internal software details, and creation timestamps. The document content remains identical. only the hidden metadata is removed.</p></div>
         </div>
         <div class="faq-item">
-          <h3>Does this change the visible text in my PDF?</h3>
-          <p>No, metadata cleanup targets hidden document properties.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does this change the visible text or layout in my PDF?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>No. VeriMedia only modifies the metadata streams (Info dictionary and XMP) inside the PDF binary. The visible content. text, images, fonts, and page layout. is untouched. The cleaned PDF looks identical to the original when opened in any PDF viewer.</p></div>
         </div>
         <div class="faq-item">
-          <h3>Should I still review the cleaned PDF?</h3>
-          <p>Yes. Metadata removal is one privacy layer; sensitive visible content still needs a normal document review.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Can forensic tools recover metadata after VeriMedia cleans it?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>No. Unlike tools that clear the visible properties panel, VeriMedia physically overwrites the raw metadata streams in the PDF binary. The original Author, Creator, Producer, and timestamp values are replaced at the byte level. There is no undo layer or revision history to extract. the data is permanently gone.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Is there a file size limit?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>The free tier supports PDFs up to 5 MB. Creator Plus increases the limit to 25 MB, and Creator Pro supports files up to 100 MB. Since processing happens in your browser, larger files may take slightly longer depending on your device's memory and CPU.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What about scanned PDFs or image-based PDFs?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>VeriMedia cleans the document-level metadata (Author, Creator, Producer, timestamps) regardless of whether the PDF contains text or scanned images. However, if the scanned images themselves contain EXIF data (rare in PDFs but possible), that image-level metadata is embedded inside the PDF content stream and would require separate image-level processing.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Should I still review the cleaned PDF before sharing?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>Yes. Metadata removal is one privacy layer. If the visible content of your PDF contains sensitive information (names in the body text, tracked changes exported from Word, comments, or embedded annotations), those are part of the document content and require a manual review. VeriMedia handles the hidden metadata. you handle the visible content.</p></div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-content">
-      <p>&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
-      <div class="footer-links">
-        <a href="/terms" class="footer-link">Terms</a>
-        <a href="/privacy" class="footer-link">Privacy</a>
-        <a href="/refund" class="footer-link">Refunds</a>
-      </div>
-    </div>
-  </footer>
+  <!-- Footer — injected by site-chrome.js -->
+  <footer></footer>
 
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/site-chrome.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.faq-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const isOpen = btn.getAttribute('aria-expanded') === 'true';
+          document.querySelectorAll('.faq-item.open').forEach(el => {
+            el.classList.remove('open');
+            el.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

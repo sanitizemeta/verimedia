@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Politique de confidentialité | VeriMedia.xyz</title>
-  <meta name="description" content="Politique de collecte de données zéro et de traitement local de VeriMedia.xyz. Votre vie privée est notre valeur fondamentale absolue.">
-  <meta http-equiv="content-language" content="fr" />
+  <title>Privacy Policy | VeriMedia.xyz</title>
+  <meta name="description" content="VeriMedia.xyz Zero-Data Collection and Local Processing Policy. Your privacy is our absolute core value.">
+  <meta http-equiv="content-language" content="en" />
   <link rel="canonical" href="https://verimedia.xyz/privacy" />
   <link rel="alternate" hreflang="en" href="https://verimedia.xyz/privacy" />
   <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/privacy" />
@@ -35,7 +35,7 @@
         "@type": "Thing",
         "name": "Privacy Policy"
       },
-      "inLanguage": "fr"
+      "inLanguage": "en"
     }
   </script>
   <script type="application/ld+json">
@@ -62,7 +62,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -73,173 +73,117 @@
 </head>
 <body>
 
-  <!-- Interactive Space-Dust Particle Background -->
-  <canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.4;"></canvas>
 
-  <div class="glow-orb orb-1"></div>
-  <div class="glow-orb orb-2"></div>
 
   <!-- Header Section -->
+  <!-- Header — injected by site-chrome.js -->
   <header></header>
 
   <main>
     <section class="policy-section">
       <div class="card glass-card policy-card">
-        <h1 data-i18n="privacy_page.h1">Politique de confidentialité</h1>
-        <span class="last-updated" data-i18n="privacy_page.last_updated">Dernière mise à jour : 23 mai 2026</span>
+        <h1 data-i18n="privacy_page.h1">Privacy Policy</h1>
+        <span class="last-updated" data-i18n="privacy_page.last_updated">Last Updated: May 23, 2026</span>
 
         <p data-i18n="privacy_page.intro">
-          Chez <strong>VeriMedia.xyz</strong>, la confidentialité n'est pas seulement une fonctionnalité — c'est notre valeur fondamentale absolue. Parce que cet outil est conçu pour vous aider à supprimer le suivi de localisation intrusif et les numéros de série d'appareils photo, nous appliquons une politique stricte de <strong>collecte de données zéro</strong>.
+          At <strong>VeriMedia.xyz</strong>, privacy is our core value. This tool is designed to strip invasive location tracking and device identifiers from your files. We enforce a strict <strong>Zero-Data Collection Policy</strong>.
         </p>
 
-        <h2 data-i18n="privacy_page.h2_1">1. Traitement local à 100 % dans le navigateur</h2>
+        <h2 data-i18n="privacy_page.h2_1">1. 100% Local Browser Processing</h2>
         <p data-i18n="privacy_page.p1">
-          VeriMedia fonctionne entièrement côté client. Lorsque vous déposez ou téléchargez une image JPEG dans le sandbox, le fichier est analysé et modifié en moins de 50 ms à l'aide des API locales du navigateur. 
+          VeriMedia operates entirely client-side. When you drop or upload a JPEG image into the sandbox, the file is parsed and modified in under 50ms using local browser APIs. 
         </p>
         <ul>
           <li>
-            <i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i>
-            <span data-i18n="privacy_page.li1_1"><strong>Pas de téléchargement :</strong> Vos images ne sont jamais envoyées, téléchargées ou transmises à un serveur externe ou backend.</span>
+            <i data-lucide="check" style="width:14px; height:14px; color:var(--emerald); flex-shrink:0; margin-top:4px;"></i>
+            <span data-i18n="privacy_page.li1_1"><strong>No Uploads:</strong> Your images are never sent, uploaded, or transmitted to any external server or backend.</span>
           </li>
           <li>
-            <i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i>
-            <span data-i18n="privacy_page.li1_2"><strong>Calcul à la périphérie :</strong> La purge EXIF, l'injection de droits d'auteur vérifiés et les insertions de balises d'exclusion d'IA (ai:opt-out=true) se produisent strictement dans le cache de mémoire local du sandbox de votre navigateur.</span>
+            <i data-lucide="check" style="width:14px; height:14px; color:var(--emerald); flex-shrink:0; margin-top:4px;"></i>
+            <span data-i18n="privacy_page.li1_2"><strong>Edge Computation:</strong> The EXIF purging, verified copyright injection, and AI opt-out (ai:opt-out=true) tag insertions happen strictly inside your browser's local sandbox memory cache.</span>
           </li>
         </ul>
 
-        <h2 data-i18n="privacy_page.h2_2">2. Données que nous ne collectons pas</h2>
+        <h2 data-i18n="privacy_page.h2_2">2. Data We Do Not Collect</h2>
         <p data-i18n="privacy_page.p2">
-          Puisque tout le calcul est local, nous maintenons un vide complet de métadonnées personnelles :
+          Because all computation is local, we maintain a complete vacuum of personal metadata:
         </p>
         <ul>
           <li>
-            <i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
-            <span data-i18n="privacy_page.li2_1">Nous ne stockons pas, ne visualisons pas et ne conservons pas vos photos téléchargées ou leurs métadonnées.</span>
+            <i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent); flex-shrink:0; margin-top:4px;"></i>
+            <span data-i18n="privacy_page.li2_1">We do not store, view, or retain your uploaded photos or their metadata.</span>
           </li>
           <li>
-            <i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
-            <span data-i18n="privacy_page.li2_2">Nous n'enregistrons pas les coordonnées, les modèles d'appareils ou les détails d'horodatage.</span>
+            <i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent); flex-shrink:0; margin-top:4px;"></i>
+            <span data-i18n="privacy_page.li2_2">We do not log coordinates, device models, or timestamp details.</span>
           </li>
           <li>
-            <i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
-            <span data-i18n="privacy_page.li2_3">Nous ne maintenons pas de bases de données de profils utilisateurs, ne suivons pas les IP des utilisateurs et n'enregistrons pas de mesures de conversion.</span>
+            <i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent); flex-shrink:0; margin-top:4px;"></i>
+            <span data-i18n="privacy_page.li2_3">We do not maintain user profile databases, track user IPs, or record conversion metrics.</span>
           </li>
         </ul>
 
-        <h2 data-i18n="privacy_page.h2_3">3. Facturation tierce et activation de licence</h2>
+        <h2 data-i18n="privacy_page.h2_3">3. Third-Party Billing & License Activation</h2>
         <p data-i18n="privacy_page.p3">
-          Si vous choisissez d'acheter <strong>Creator Pro</strong> :
+          If you choose to purchase <strong>Creator Plus</strong> or <strong>Creator Pro</strong>:
         </p>
         <ul>
           <li>
-            <i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
-            <span data-i18n="privacy_page.li3_1"><strong>Transactions :</strong> Les paiements sont traités en toute sécurité via nos partenaires Merchant of Record (par exemple, Paddle). Nous ne collectons ni ne stockons les détails de carte de crédit ou les informations de routage bancaire.</span>
+            <i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent); flex-shrink:0; margin-top:4px;"></i>
+            <span data-i18n="privacy_page.li3_1"><strong>Transactions:</strong> Payments are processed securely via our Merchant of Record partners (e.g., Paddle). We do not collect or store credit card details or bank routing information.</span>
           </li>
           <li>
-            <i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i>
-            <span data-i18n="privacy_page.li3_2"><strong>Clés de licence :</strong> Lors de la validation d'une clé de licence, une requête sécurisée est envoyée directement de votre navigateur vers le processeur de paiement. Le statut est mis en cache localement.</span>
+            <i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent); flex-shrink:0; margin-top:4px;"></i>
+            <span data-i18n="privacy_page.li3_2"><strong>License Keys:</strong> When validating a license key, a secure request is dispatched directly from your browser to the payment processor. The status is cached locally.</span>
           </li>
         </ul>
 
-        <h2 data-i18n="privacy_page.h2_4">4. Cookies et analyses</h2>
+        <h2 data-i18n="privacy_page.h2_4">4. Cookies & Analytics</h2>
         <p data-i18n="privacy_page.p4">
-          Nous ne déployons pas de traqueurs marketing ou de cookies publicitaires intrusifs. 
+          We do not deploy marketing trackers or invasive ad cookies. 
         </p>
         <p data-i18n="privacy_page.p4_2">
-          Nous utilisons le stockage local uniquement pour mémoriser votre statut d'activation Pro.
+          We use local storage only to remember your Pro activation status.
         </p>
 
-        <h2 data-i18n="privacy_page.h2_5">5. Modifications de la politique</h2>
-        <p data-i18n="privacy_page.p5">
-          Nous ne vendrons jamais vos données inexistantes. Toute mise à jour structurelle restera open-source et visible.
-        </p>
-
-        <h2 data-i18n="privacy_page.h2_6">6. Contactez-nous</h2>
+        <h2>5. User Responsibility and Misuse</h2>
         <p>
-          <span data-i18n="privacy_page.p6">Pour les audits de confidentialité, contactez-nous à</span> <span>privacy [at] verimedia.xyz</span>.
+          VeriMedia is a file processing tool. You are solely responsible for the files you process and how you use the output. VeriMedia does not verify the ownership, legality, or content of any file you upload. We accept no liability for misuse of the Service, including but not limited to: stripping copyright metadata from content you do not own, removing ownership signals to misrepresent authorship, or processing files in violation of applicable laws. See our <a href="/terms" style="color:var(--accent);">Terms of Service</a> for full details.
         </p>
 
-        <h2>FAQ sur la confidentialité</h2>
+        <h2 data-i18n="privacy_page.h2_5">6. Policy Changes</h2>
+        <p data-i18n="privacy_page.p5">
+          We will never sell your data. If this policy is updated, changes will be reflected on this page with an updated date.
+        </p>
+
+        <h2 data-i18n="privacy_page.h2_6">7. Contact Us</h2>
+        <p>
+          <span data-i18n="privacy_page.p6">For privacy questions, contact us at</span> <span>privacy [at] verimedia.xyz</span>.
+        </p>
+
+        <h2>Privacy FAQ</h2>
         <div class="faq-accordion">
           <div class="faq-item">
-            <h3>Mes fichiers sont-ils téléchargés sur les serveurs de VeriMedia ?</h3>
-            <p>Non. Le désinfecteur s'exécute dans votre navigateur et le fichier média sélectionné reste sur votre appareil.</p>
+            <h3>Are my files uploaded to VeriMedia servers?</h3>
+            <p>No. The sanitizer runs in your browser and the selected media file stays on your device.</p>
           </div>
           <div class="faq-item">
-            <h3>Quelles données sont stockées pour les forfaits payants ?</h3>
-            <p>Le navigateur stocke votre clé de licence et votre profil de créateur localement. Le traitement des paiements est géré par Paddle.</p>
+            <h3>What data is stored for paid plans?</h3>
+            <p>The browser stores your license key and creator profile locally. Payment processing is handled by Paddle.</p>
           </div>
           <div class="faq-item">
-            <h3>Puis-je supprimer les données de mon profil local ?</h3>
-            <p>Oui. Effacez les champs du profil ou effacez le stockage du navigateur de ce site pour supprimer les paramètres enregistrés localement.</p>
+            <h3>Can I remove my local profile data?</h3>
+            <p>Yes. Clear the profile fields or clear this site's browser storage to remove locally saved settings.</p>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer Section -->
+  <!-- Footer — injected by site-chrome.js -->
   <footer></footer>
 
-  <!-- Modals (Needed for global functionality) -->
-  <div class="modal-overlay" id="paymentModal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-card glass-card">
-      <button class="close-modal" id="closeModal" aria-label="Close modal">&times;</button>
-      <div id="modalViewBuy">
-        <div class="modal-icon-wrap">
-          <i data-lucide="shield-check" style="width:32px; height:32px; color:var(--accent-cyan);"></i>
-        </div>
-        <h3 data-i18n="checkout.pro_title">Creator Pro à vie</h3>
-        <p class="modal-subtitle" data-i18n="checkout.pro_subtitle">Paiement unique. Utilisation sur jusqu'à 3 appareils. Aucun abonnement, jamais.</p>
-        <button class="pricing-btn primary-btn paddle-checkout-btn">
-          <i data-lucide="lock" style="width: 16px; height: 16px; vertical-align:middle; margin-right:6px;"></i>
-          <span data-i18n="checkout.buy_btn">Acheter maintenant — 19 $</span>
-        </button>
-        <button class="link-btn modal-switch-link" id="switchToActivate" data-i18n="checkout.already_key">Vous avez déjà une clé ? Activez-la ici</button>
-      </div>
-      <div id="modalViewActivate" style="display:none;">
-        <div class="modal-icon-wrap">
-          <i data-lucide="key" style="width:32px; height:32px; color:var(--accent-cyan);"></i>
-        </div>
-        <h3 data-i18n="checkout.activate_title">Activer votre licence</h3>
-        <input type="text" id="licenseKeyInput" class="license-input" placeholder="ex: txn_01abc123xyz" />
-        <p class="license-error" id="licenseError" style="display:none;"></p>
-        <button class="pricing-btn primary-btn" id="activateLicenseBtn" data-i18n="checkout.activate_btn">Activer la licence</button>
-        <button class="link-btn modal-switch-link" id="switchToBuy" data-i18n="checkout.need_buy">Besoin d'acheter une licence ?</button>
-      </div>
-      <div id="modalViewSuccess" style="display:none;">
-        <div class="modal-icon-wrap success-icon">
-          <i data-lucide="check-circle-2" style="width:40px; height:40px; color:var(--accent-emerald);"></i>
-        </div>
-        <h3 data-i18n="checkout.success_title">Creator Pro actif</h3>
-        <button class="pricing-btn primary-btn" id="closeSuccessBtn" data-i18n="checkout.start_pro">Commencer à utiliser Pro</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay profile-panel-overlay" id="profilePanel" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-card glass-card profile-panel-card">
-      <button class="close-modal" id="profileCloseBtn">&times;</button>
-      <div class="modal-icon-wrap">
-        <i data-lucide="user-circle-2" style="width:28px; height:28px; color:var(--accent-cyan);"></i>
-      </div>
-      <h3 data-i18n="profile.title">Profil du créateur</h3>
-      <form id="profileForm" autocomplete="off">
-        <div class="profile-field">
-          <label class="profile-label"><span data-i18n="profile.name_label">Nom du créateur</span></label>
-          <input type="text" id="profileName" class="license-input" placeholder="ex: Jane Smith" />
-        </div>
-        <div class="profile-field">
-          <label class="profile-label"><span data-i18n="profile.copy_label">Chaîne de droits d'auteur</span></label>
-          <input type="text" id="profileCopyright" class="license-input" placeholder="ex: © 2026 Jane Smith" />
-        </div>
-        <button class="pricing-btn primary-btn" id="profileSaveBtn" data-i18n="profile.save">Enregistrer le profil</button>
-      </form>
-    </div>
-  </div>
-
   <!-- Scripts -->
-  <script type="module" src="/src/main.js"></script>
   <script type="module" src="/src/site-chrome.js"></script>
 </body>
 </html>

@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>How to Remove Metadata from PDF Files | VeriMedia</title>
-  <meta name="description" content="Strip author names, creation timestamps, software signatures, and hidden metadata from PDF files — entirely in your browser. No upload, no account, forensic-grade removal.">
+  <meta name="description" content="Strip author names, creation timestamps, software signatures, and hidden metadata from PDF files. entirely in your browser. No upload, no account, forensic-grade removal.">
   <link rel="canonical" href="https://verimedia.xyz/remove-pdf-metadata" />
   <meta http-equiv="content-language" content="en" />
   <link rel="alternate" hreflang="en" href="https://verimedia.xyz/remove-pdf-metadata" />
   <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/remove-pdf-metadata" />
 
   <meta property="og:title" content="How to Remove Metadata from PDF Files | VeriMedia">
-  <meta property="og:description" content="Forensic PDF metadata scrubbing — strip author names, software signatures, and creation timestamps from PDFs in your browser. Nothing is uploaded.">
+  <meta property="og:description" content="Forensic PDF metadata scrubbing. strip author names, software signatures, and creation timestamps from PDFs in your browser. Nothing is uploaded.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://verimedia.xyz/remove-pdf-metadata">
   <meta property="og:image" content="https://verimedia.xyz/logo.png">
@@ -35,7 +35,7 @@
     "tool": { "@type": "HowToTool", "name": "VeriMedia (free, browser-based)" },
     "step": [
       { "@type": "HowToStep", "position": 1, "name": "Open VeriMedia", "text": "Go to verimedia.xyz. No account or software needed. Works in any modern browser." },
-      { "@type": "HowToStep", "position": 2, "name": "Drop your PDF", "text": "Drag and drop your PDF file onto the tool. It is processed entirely in browser memory — never uploaded to any server." },
+      { "@type": "HowToStep", "position": 2, "name": "Drop your PDF", "text": "Drag and drop your PDF file onto the tool. It is processed entirely in browser memory. never uploaded to any server." },
       { "@type": "HowToStep", "position": 3, "name": "Download the clean PDF", "text": "VeriMedia overwrites internal metadata streams including Author, Creator, Producer, and CreationDate. Download the clean file." }
     ]
   }
@@ -121,7 +121,7 @@
       </div>
       <div class="guide-tag">Documents</div>
       <h1 class="guide-title">How to Remove Metadata from PDF Files</h1>
-      <p class="guide-intro">Every PDF carries hidden metadata — the author's real name, the software used to create it, creation timestamps, and sometimes company information. This data is readable by anyone who opens the file. This guide explains what's inside your PDFs, why it matters, and how to scrub it completely before you share.</p>
+      <p class="guide-intro">Every PDF carries hidden metadata. the author's real name, the software used to create it, creation timestamps, and sometimes company information. This data is readable by anyone who opens the file. This guide explains what's inside your PDFs, why it matters, and how to scrub it completely before you share.</p>
       <div class="guide-meta">
         <span><i data-lucide="clock" style="width:13px;height:13px;"></i> 5 min read</span>
         <span><i data-lucide="calendar" style="width:13px;height:13px;"></i> Updated May 2026</span>
@@ -132,7 +132,7 @@
     <div class="guide-body">
 
       <h2>What metadata is hidden inside a PDF?</h2>
-      <p>PDF files store metadata in a document information dictionary embedded in the file's binary structure. This is separate from the visible content — text, images, and layout — and is readable by any PDF viewer via File → Properties.</p>
+      <p>PDF files store metadata in a document information dictionary embedded in the file's binary structure. This is separate from the visible content. text, images, and layout. and is readable by any PDF viewer via File → Properties.</p>
 
       <div class="pdf-fields">
         <div class="pdf-field"><span class="pdf-field-key">Author</span><span class="pdf-field-val">Jane Smith (your real name, auto-filled by Word/Acrobat)</span></div>
@@ -143,42 +143,42 @@
         <div class="pdf-field"><span class="pdf-field-key">Company</span><span class="pdf-field-val">Acme Legal LLP (from Word company settings)</span></div>
       </div>
 
-      <p>The <code>Author</code> field alone can identify you even when you intended to submit a document anonymously. The <code>Creator</code> field reveals which software you used — useful intelligence for anyone probing the document's provenance. The <code>CreationDate</code> can contradict claims about when a document was written.</p>
+      <p>The <code>Author</code> field alone can identify you even when you intended to submit a document anonymously. The <code>Creator</code> field reveals which software you used. useful intelligence for anyone probing the document's provenance. The <code>CreationDate</code> can contradict claims about when a document was written.</p>
 
       <div class="guide-callout">
         <p><strong>Common scenario:</strong> A journalist submits an anonymous tip as a PDF. The <code>Author</code> field contains their registered name from Microsoft Office. The recipient opens File → Properties and identifies the source in under 10 seconds.</p>
       </div>
 
       <h2>Why "clearing" metadata is not enough</h2>
-      <p>Most PDF editors — including Adobe Acrobat and Preview on Mac — let you clear metadata fields through the Document Properties dialog. This removes the visible values, but the underlying binary data may remain in the file's stream. Forensic tools can often recover cleared metadata from the raw bytes.</p>
-      <p>VeriMedia physically overwrites the metadata byte sequences inside the document binary — not just clears the display values. The original data is replaced at the byte level, making recovery by forensic tools impossible.</p>
+      <p>Most PDF editors. including Adobe Acrobat and Preview on Mac. let you clear metadata fields through the Document Properties dialog. This removes the visible values, but the underlying binary data may remain in the file's stream. Forensic tools can often recover cleared metadata from the raw bytes.</p>
+      <p>VeriMedia physically overwrites the metadata byte sequences inside the document binary. not just clears the display values. The original data is replaced at the byte level, making recovery by forensic tools impossible.</p>
 
       <h2>Remove PDF metadata in 3 steps</h2>
       <ol class="guide-steps">
         <li><div><strong>Open VeriMedia</strong> Go to <a href="/" style="color:var(--accent);">verimedia.xyz</a>. No account, no Acrobat subscription, no software install.</div></li>
-        <li><div><strong>Drop your PDF</strong> Drag and drop your PDF onto the tool. The file is parsed entirely in browser memory — it never reaches any server.</div></li>
+        <li><div><strong>Drop your PDF</strong> Drag and drop your PDF onto the tool. The file is parsed entirely in browser memory. it never reaches any server.</div></li>
         <li><div><strong>Download the scrubbed file</strong> VeriMedia overwrites <code>Author</code>, <code>Creator</code>, <code>Producer</code>, <code>CreationDate</code>, and <code>ModDate</code> at the binary level. Download the clean PDF.</div></li>
       </ol>
 
       <h2>What gets overwritten</h2>
       <ul>
-        <li><strong>Author</strong> — the registered user name from Office, Acrobat, or LibreOffice</li>
-        <li><strong>Creator</strong> — the application that created the document (Word, InDesign, Pages)</li>
-        <li><strong>Producer</strong> — the PDF engine that generated the file (Acrobat Distiller, macOS Quartz, etc.)</li>
-        <li><strong>CreationDate</strong> — when the file was first created</li>
-        <li><strong>ModDate</strong> — when it was last modified</li>
-        <li><strong>Company / Organisation</strong> — pulled from application preferences</li>
-        <li><strong>XMP metadata streams</strong> — secondary metadata block embedded alongside the info dictionary</li>
+        <li><strong>Author</strong>. the registered user name from Office, Acrobat, or LibreOffice</li>
+        <li><strong>Creator</strong>. the application that created the document (Word, InDesign, Pages)</li>
+        <li><strong>Producer</strong>. the PDF engine that generated the file (Acrobat Distiller, macOS Quartz, etc.)</li>
+        <li><strong>CreationDate</strong>. when the file was first created</li>
+        <li><strong>ModDate</strong>. when it was last modified</li>
+        <li><strong>Company / Organisation</strong>. pulled from application preferences</li>
+        <li><strong>XMP metadata streams</strong>. secondary metadata block embedded alongside the info dictionary</li>
       </ul>
 
       <h2>Who needs this</h2>
       <p>PDF metadata scrubbing is used by:</p>
       <ul>
-        <li><strong>Journalists and whistleblowers</strong> — removing author identity before sharing sensitive documents</li>
-        <li><strong>Lawyers and legal teams</strong> — stripping firm name and drafter identity from documents sent externally</li>
-        <li><strong>Freelancers and agencies</strong> — removing internal tool signatures before client delivery</li>
-        <li><strong>Researchers</strong> — anonymising documents submitted for blind peer review</li>
-        <li><strong>Anyone with a privacy concern</strong> — PDFs created on personal machines carry personal account names by default</li>
+        <li><strong>Journalists and whistleblowers</strong>. removing author identity before sharing sensitive documents</li>
+        <li><strong>Lawyers and legal teams</strong>. stripping firm name and drafter identity from documents sent externally</li>
+        <li><strong>Freelancers and agencies</strong>. removing internal tool signatures before client delivery</li>
+        <li><strong>Researchers</strong>. anonymising documents submitted for blind peer review</li>
+        <li><strong>Anyone with a privacy concern</strong>. PDFs created on personal machines carry personal account names by default</li>
       </ul>
 
       <div class="guide-callout">
@@ -193,7 +193,7 @@
         </div>
         <div class="faq-item">
           <h3>Can I remove PDF metadata without Adobe Acrobat?</h3>
-          <p>Yes. VeriMedia runs entirely in your browser — no Acrobat or desktop software required. It handles PDF scrubbing directly in-browser.</p>
+          <p>Yes. VeriMedia runs entirely in your browser. no Acrobat or desktop software required. It handles PDF scrubbing directly in-browser.</p>
         </div>
         <div class="faq-item">
           <h3>What is the difference between clearing and forensically overwriting metadata?</h3>
@@ -201,16 +201,16 @@
         </div>
         <div class="faq-item">
           <h3>Does this work on password-protected PDFs?</h3>
-          <p>No — VeriMedia cannot process encrypted or password-protected PDFs. Decrypt the file first, then run it through VeriMedia.</p>
+          <p>No. VeriMedia cannot process encrypted or password-protected PDFs. Decrypt the file first, then run it through VeriMedia.</p>
         </div>
       </div>
 
       <div class="guide-cta-block">
-        <h3>Scrub your PDF metadata now — free</h3>
+        <h3>Scrub your PDF metadata now. free</h3>
         <p>Overwrite Author, Creator, Producer, and timestamps at the binary level. Nothing is uploaded.</p>
         <a href="/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:var(--accent); box-shadow: 0 4px 20px var(--accent-glow);">
           <i data-lucide="file-digit" style="width:15px;height:15px;"></i>
-          Try VeriMedia — free
+          Try VeriMedia. free
         </a>
       </div>
 

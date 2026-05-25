@@ -6,14 +6,16 @@
     "profile": "Profil",
     "home": "Startseite",
     "lang_label": "Sprache wechseln",
-    "logo_alt": "VeriMedia — KI-Training auf Ihren Bildern blockieren"
+    "logo_alt": "VeriMedia. KI-Training auf Ihren Bildern blockieren",
+    "nav_cta": "Meine Bilder schützen"
   },
   "hero": {
     "title": "<span class=\"glow-text\">KI trainiert mit Ihren Fotos</span><span>ohne zu fragen.</span>",
-    "summary": "VeriMedia bettet das <strong>ai:opt-out=true</strong>-Signal direkt in Ihre Bilder und PDFs ein — lokal, im Browser. Die wichtigsten KI-Crawler lesen dieses Tag und schließen Ihre Arbeit aus Trainingsdatensätzen aus.",
-    "cta_primary": "Meine Bilder schützen — kostenlos",
+    "summary": "VeriMedia bettet das <strong>ai:opt-out=true</strong>-Signal direkt in Ihre Bilder und PDFs ein. lokal, im Browser. Die wichtigsten KI-Crawler lesen dieses Tag und schließen Ihre Arbeit aus Trainingsdatensätzen aus.",
+    "cta_primary": "Meine Bilder schützen. kostenlos",
     "cta_secondary": "Pläne ansehen",
-    "trust_label": "Crawler-Opt-Out respektiert von"
+    "trust_label": "Crawler-Opt-Out respektiert von",
+    "stat_shielded": "Dateien geschützt"
   },
   "kb": {
     "title": "Kompromisslose Privatsphäre & Urheberschutz",
@@ -75,7 +77,9 @@
     "stage_img_1": "GPS-Standort-Tags werden entfernt...",
     "stage_img_2": "Kamera- & Gerätedetails werden gelöscht...",
     "stage_img_3": "Ihre Urheberrechts- & KI-Tags werden hinzugefügt...",
-    "stage_img_4": "Verarbeitung abgeschlossen!"
+    "stage_img_4": "Verarbeitung abgeschlossen!",
+    "shield_another": "Weitere Datei schützen",
+    "shield_now": "Jetzt schützen"
   },
   "pricing": {
     "title": "Einfache Preise für sichereres Veröffentlichen",
@@ -102,11 +106,12 @@
     "popular_badge": "AM BELIEBTESTEN",
     "activate": "Lizenzschlüssel eingeben",
     "already_bought": "Bereits gekauft?",
-    "kicker": "Einfache, einmalige Preise"
+    "kicker": "Einfache, einmalige Preise",
+    "unlock_divider": "Mit Plus oder Pro freischalten"
   },
   "faq": {
     "title": "Häufig gestellte Fragen",
-    "q1": "Wo finde ich meinen Creator Pro Lizenzschlüssel?",
+    "q1": "Wo finde ich meinen Lizenzschlussel?",
     "a1": "Prüfen Sie nach dem Kauf Ihre E-Mails auf den Paddle-Beleg. Ihr Lizenzschlüssel ist die im Beleg angegebene Transaktions-ID (sie beginnt normalerweise mit txn_). Kopieren Sie diese einfach und fügen Sie sie in das Aktivierungsmenü ein, falls sie nicht automatisch aktiviert wurde!",
     "q2": "Wie blockiere ich KI-Webcrawler davor, meine Bilder zu verwenden?",
     "a2": "VeriMedia bettet einen Standard \"KI-Opt-Out\" Tag (ai:opt-out = true) direkt in Ihre Bilddatei ein. Dies signalisiert den großen KI-Webcrawlern (wie GPTBot und ClaudeBot), dass Ihre Arbeit für das KI-Modelltraining gesperrt ist.",
@@ -116,7 +121,7 @@
     "a4": "Versteckte Metadaten in Rohfotos enthalten Ihre präzisen GPS-Koordinaten, Kameradetails und Daten. Das Entfernen dieser Daten schützt Ihre Standort-Privatsphäre und entfernt Identifikatoren, die Bots scrapen können.",
     "kicker": "Haben Sie Fragen?",
     "q5": "Funktioniert der KI-Opt-Out-Tag tatsächlich?",
-    "a5": "Für Crawler, die ihn respektieren — ja. Große KI-Unternehmen wie OpenAI (GPTBot), Anthropic (ClaudeBot) und Common Crawl verpflichten sich öffentlich dazu, ai:opt-out Signale in Bildmetadaten zu beachten.",
+    "a5": "Für Crawler, die ihn respektieren. ja. Große KI-Unternehmen wie OpenAI (GPTBot), Anthropic (ClaudeBot) und Common Crawl verpflichten sich öffentlich dazu, ai:opt-out Signale in Bildmetadaten zu beachten.",
     "q6": "Funktioniert VeriMedia mit iPhone- und Android-Fotos?",
     "a6": "Ja. Fotos von iOS und Android sind Standard-JPEG- oder HEIC-Dateien. VeriMedia verarbeitet beides im Browser. HEIC-Dateien (iPhone-Standard) werden automatisch konvertiert und geschützt.",
     "q7": "Was ist der Unterschied zwischen Plus und Pro?",
@@ -125,9 +130,9 @@
   "profile": {
     "title": "Urheber-Profil",
     "subtitle": "Ihre Identität wird in die Metadaten jeder verarbeiteten Datei eingebettet. Einmal einstellen, ewig nutzen.",
-    "pro_badge": "Creator Pro Funktion",
-    "pro_unlock": "Upgrade, um Ihre Identität einzubetten und Google Lizenzierbar-Badges zu aktivieren.",
-    "upgrade_btn": "Auf Pro upgraden",
+    "pro_badge": "Kostenpflichtige Funktion",
+    "pro_unlock": "Auf Plus oder Pro upgraden, um Ihre Urheberidentitat in jede Datei einzubetten.",
+    "upgrade_btn": "Plane ansehen",
     "name_label": "Urhebername",
     "copy_label": "Urheberrechts-String",
     "url_label": "Lizenz- / Portfolio-URL",
@@ -140,12 +145,12 @@
     "save_success": "Gespeichert!",
     "copy_done": "Kopiert!",
     "import_done": "Fertig!",
-    "active_key": "Aktiver Creator Pro Schlüssel",
+    "active_key": "Aktiver Lizenzschlussel",
     "footnote": "Das Profil wird im lokalen Speicher Ihres Browsers gespeichert. Niemals hochgeladen.",
     "copy": "Kopieren",
     "tooltip_artist": "Dies wird das Artist-Feld, das in Ihre Bilder eingebettet wird. Pro-Nutzer erhalten ein \"VeriMedia Verified Creator\" Präfix.",
     "tooltip_copyright": "Wird als Copyright EXIF/XMP Feld injiziert. Wird von Getty, Shutterstock und Nachrichtenverlagen verwendet, um das Bildeigentum zurückzuverfolgen.",
-    "tooltip_webstatement": "Ihre Website oder Lizenzierungsseite. Eingebettet als WebStatement XMP-Tag — dies aktiviert das \"Lizenzierbar\" Badge von Google Bilder auf Ihren Fotos.",
+    "tooltip_webstatement": "Ihre Website oder Lizenzierungsseite. Eingebettet als WebStatement XMP-Tag. dies aktiviert das \"Lizenzierbar\" Badge von Google Bilder auf Ihren Fotos.",
     "tooltip_ai": "Standardisiertes Metadatensignal (\"ai:opt-out=true\") teilt KI-Crawlern mit, dass Ihre Medien von Trainingsdatensätzen ausgeschlossen sind.",
     "tooltip_whitelabel": "Entfernen Sie alle \"VeriMedia\" Referenzen aus den eingebetteten Metadaten für einen 100 % sauberen, professionellen Fußabdruck."
   },
@@ -154,7 +159,7 @@
     "pro_subtitle": "Einmalige Zahlung. Nutzung auf bis zu 3 Geräten. Niemals ein Abonnement.",
     "item": "Creator Pro auf Lebenszeit",
     "total": "Gesamt",
-    "buy_btn": "Jetzt kaufen — 19 $",
+    "buy_btn": "Jetzt kaufen. 19 $",
     "buy_footnote": "Nach der Zahlung sendet Paddle Ihnen einen Lizenzschlüssel per E-Mail.",
     "already_key": "Haben Sie bereits einen Schlüssel? Hier aktivieren",
     "activate_title": "Lizenz aktivieren",
@@ -186,12 +191,12 @@
     "link_kb": "Wissensdatenbank",
     "col_legal": "Rechtliches",
     "link_pricing": "Preise",
-    "bottom": "Alle Dateien werden zu 100 % lokal verarbeitet — nichts verlässt jemals Ihren Browser."
+    "bottom": "Alle Dateien werden zu 100 % lokal verarbeitet. nichts verlässt jemals Ihren Browser."
   },
   "privacy_page": {
     "h1": "Datenschutzerklärung",
     "last_updated": "Zuletzt aktualisiert: 20. Mai 2026",
-    "intro": "Bei VeriMedia.xyz ist Privatsphäre nicht nur eine Funktion — sie ist unser absoluter Kernwert. Da dieses Tool entwickelt wurde, um Ihnen beim Entfernen von invasivem Standort-Tracking und Kamera-Seriennummern zu helfen, setzen wir eine strikte Null-Daten-Erfassungs-Richtlinie durch.",
+    "intro": "Bei VeriMedia.xyz ist Privatsphäre nicht nur eine Funktion. sie ist unser absoluter Kernwert. Da dieses Tool entwickelt wurde, um Ihnen beim Entfernen von invasivem Standort-Tracking und Kamera-Seriennummern zu helfen, setzen wir eine strikte Null-Daten-Erfassungs-Richtlinie durch.",
     "h2_1": "1. 100 % lokale Browser-Verarbeitung",
     "p1": "VeriMedia arbeitet vollständig clientseitig. Wenn Sie ein JPEG-Bild in die Sandbox ziehen oder hochladen, wird die Datei in weniger als 50 ms mithilfe lokaler Browser-APIs analysiert und geändert.",
     "li1_1": "Keine Uploads: Ihre Bilder werden niemals an einen externen Server oder ein Backend gesendet, hochgeladen oder übertragen.",
@@ -264,7 +269,7 @@
     "footer_link_terms": "Nutzungsbedingungen",
     "footer_link_refund": "Erstattungsrichtlinie",
     "footer_link_pricing": "Preise",
-    "footer_bottom": "Alle Dateien werden zu 100 % lokal verarbeitet — nichts verlässt jemals Ihren Browser."
+    "footer_bottom": "Alle Dateien werden zu 100 % lokal verarbeitet. nichts verlässt jemals Ihren Browser."
   },
   "refund_page": {
     "h1": "Erstattungsrichtlinie",
@@ -285,7 +290,7 @@
     "kicker": "So funktioniert es",
     "title": "Drei Schritte. Vollständig in Ihrem Browser.",
     "s1_title": "Datei ablegen",
-    "s1_desc": "JPEG, PNG, WebP, HEIC oder PDF. Vollständig im Browser-Speicher analysiert — verlässt nie Ihr Gerät.",
+    "s1_desc": "JPEG, PNG, WebP, HEIC oder PDF. Vollständig im Browser-Speicher analysiert. verlässt nie Ihr Gerät.",
     "s2_title": "KI-Opt-Out einbetten & Tracking entfernen",
     "s2_desc": "VeriMedia schreibt den ai:opt-out=true Tag und entfernt GPS, Geräte-Fingerabdrücke und forensische Metadaten.",
     "s3_title": "Geschützte Datei herunterladen",

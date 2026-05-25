@@ -6,14 +6,16 @@
     "profile": "Perfil",
     "home": "Inicio",
     "lang_label": "Cambiar idioma",
-    "logo_alt": "VeriMedia — Bloquea el entrenamiento de IA en tus imágenes"
+    "logo_alt": "VeriMedia. Bloquea el entrenamiento de IA en tus imágenes",
+    "nav_cta": "Proteger mis imágenes"
   },
   "hero": {
     "title": "<span class=\"glow-text\">La IA está entrenando con tus fotos</span><span>sin pedirte permiso.</span>",
-    "summary": "VeriMedia incrusta la señal <strong>ai:opt-out=true</strong> directamente en tus imágenes y PDFs — de forma local, en el navegador. Los principales rastreadores de IA leen esta etiqueta y excluyen tu trabajo de los conjuntos de entrenamiento.",
-    "cta_primary": "Proteger mis imágenes — gratis",
+    "summary": "VeriMedia incrusta la señal <strong>ai:opt-out=true</strong> directamente en tus imágenes y PDFs. de forma local, en el navegador. Los principales rastreadores de IA leen esta etiqueta y excluyen tu trabajo de los conjuntos de entrenamiento.",
+    "cta_primary": "Proteger mis imágenes. gratis",
     "cta_secondary": "Ver planes",
-    "trust_label": "Exclusión de rastreadores respetada por"
+    "trust_label": "Exclusión de rastreadores respetada por",
+    "stat_shielded": "archivos protegidos"
   },
   "kb": {
     "title": "Privacidad sin concesiones y protección para creadores",
@@ -75,7 +77,9 @@
     "stage_img_1": "Eliminando etiquetas de ubicación GPS...",
     "stage_img_2": "Limpiando detalles de cámara y dispositivo...",
     "stage_img_3": "Añadiendo tus etiquetas de derechos de autor e IA...",
-    "stage_img_4": "¡Procesamiento completado!"
+    "stage_img_4": "¡Procesamiento completado!",
+    "shield_another": "Proteger otro archivo",
+    "shield_now": "Proteger ahora"
   },
   "pricing": {
     "title": "Precios sencillos para una publicación más segura",
@@ -102,11 +106,12 @@
     "popular_badge": "MÁS POPULAR",
     "activate": "Introduce tu clave de licencia",
     "already_bought": "¿Ya lo has comprado?",
-    "kicker": "Precios sencillos, pago único"
+    "kicker": "Precios sencillos, pago único",
+    "unlock_divider": "Desbloquear con Plus o Pro"
   },
   "faq": {
     "title": "Preguntas frecuentes",
-    "q1": "¿Dónde encuentro mi clave de licencia de Creator Pro?",
+    "q1": "Donde encuentro mi clave de licencia?",
     "a1": "Tras la compra, revisa tu correo electrónico para ver el recibo de Paddle. Tu clave de licencia es el ID de transacción que aparece en el recibo (normalmente empieza por txn_). ¡Solo tienes que copiarlo y pegarlo en el menú de Activación si no se activó automáticamente!",
     "q2": "¿Cómo bloqueo los rastreadores web de IA para que no usen mis imágenes?",
     "a2": "VeriMedia incrusta una etiqueta estándar de \"Exclusión de IA\" (ai:opt-out = true) directamente en tu archivo de imagen. Esto indica a los principales rastreadores web de IA (como GPTBot y ClaudeBot) que tu trabajo no está disponible para el entrenamiento de modelos de IA.",
@@ -125,9 +130,9 @@
   "profile": {
     "title": "Perfil del creador",
     "subtitle": "Tu identidad se incrusta en los metadatos de cada archivo procesado. Configúralo una vez, úsalo para siempre.",
-    "pro_badge": "Función de Creator Pro",
-    "pro_unlock": "Actualiza para incrustar tu identidad y activar las insignias licenciables de Google.",
-    "upgrade_btn": "Actualizar a Pro",
+    "pro_badge": "Funcion de pago",
+    "pro_unlock": "Actualiza a Plus o Pro para incrustar tu identidad de creador en cada archivo.",
+    "upgrade_btn": "Ver planes",
     "name_label": "Nombre del creador",
     "copy_label": "Cadena de derechos de autor",
     "url_label": "URL de licencia / portafolio",
@@ -140,12 +145,12 @@
     "save_success": "¡Guardado!",
     "copy_done": "¡Copiado!",
     "import_done": "¡Hecho!",
-    "active_key": "Clave activa de Creator Pro",
+    "active_key": "Clave de licencia activa",
     "footnote": "El perfil se guarda en el almacenamiento local de tu navegador. Nunca se sube.",
     "copy": "Copiar",
     "tooltip_artist": "Esto se convierte en el campo de artista incrustado en tus imágenes. Los usuarios Pro obtienen el prefijo \"VeriMedia Verified Creator\".",
     "tooltip_copyright": "Se inyecta como el campo EXIF/XMP de derechos de autor. Utilizado por Getty, Shutterstock y editores de noticias para rastrear la propiedad de la imagen.",
-    "tooltip_webstatement": "Tu sitio web o página de licencias. Incrustado como la etiqueta XMP WebStatement — esto activa la insignia \"Licenciable\" de Google Imágenes en tus fotos.",
+    "tooltip_webstatement": "Tu sitio web o página de licencias. Incrustado como la etiqueta XMP WebStatement. esto activa la insignia \"Licenciable\" de Google Imágenes en tus fotos.",
     "tooltip_ai": "La señal de metadatos estandarizada (\"ai:opt-out=true\") indica a los rastreadores de IA que tu contenido está restringido para conjuntos de datos de entrenamiento.",
     "tooltip_whitelabel": "Elimina todas las referencias a \"VeriMedia\" de los metadatos incrustados para una huella 100% limpia y profesional."
   },
@@ -154,7 +159,7 @@
     "pro_subtitle": "Pago único. Úsalo en hasta 3 dispositivos. Sin suscripciones, nunca.",
     "item": "Creator Pro de por vida",
     "total": "Total",
-    "buy_btn": "Comprar ahora — $19",
+    "buy_btn": "Comprar ahora. $19",
     "buy_footnote": "Tras el pago, Paddle te enviará por correo electrónico una clave de licencia.",
     "already_key": "¿Ya tienes una clave? Actívala aquí",
     "activate_title": "Activa tu licencia",
@@ -186,7 +191,7 @@
     "link_kb": "Base de conocimientos",
     "col_legal": "Legal",
     "link_pricing": "Precios",
-    "bottom": "Todos los archivos procesados 100% localmente — nada sale nunca de tu navegador."
+    "bottom": "Todos los archivos procesados 100% localmente. nada sale nunca de tu navegador."
   },
   "privacy_page": {
     "h1": "Política de privacidad",
@@ -264,7 +269,7 @@
     "footer_link_terms": "Términos de servicio",
     "footer_link_refund": "Política de reembolsos",
     "footer_link_pricing": "Precios",
-    "footer_bottom": "Todos los archivos se procesan al 100% localmente — nada sale nunca de tu navegador."
+    "footer_bottom": "Todos los archivos se procesan al 100% localmente. nada sale nunca de tu navegador."
   },
   "refund_page": {
     "h1": "Política de reembolsos",
@@ -285,7 +290,7 @@
     "kicker": "Cómo funciona",
     "title": "Tres pasos. Completamente en tu navegador.",
     "s1_title": "Suelta tu archivo",
-    "s1_desc": "JPEG, PNG, WebP, HEIC o PDF. Analizado íntegramente en la memoria del navegador — nunca sale de tu dispositivo.",
+    "s1_desc": "JPEG, PNG, WebP, HEIC o PDF. Analizado íntegramente en la memoria del navegador. nunca sale de tu dispositivo.",
     "s2_title": "Incrustar exclusión de IA y eliminar seguimiento",
     "s2_desc": "VeriMedia escribe la etiqueta ai:opt-out=true y elimina el GPS, las huellas digitales del dispositivo y los metadatos forenses.",
     "s3_title": "Descargar el archivo protegido",

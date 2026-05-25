@@ -8,8 +8,11 @@
   <meta name="description" content="Remove EXIF metadata from photos in your browser. Strip GPS, camera model, and device identifiers instantly with no upload required.">
   <meta http-equiv="content-language" content="en" />
   <link rel="canonical" href="https://verimedia.xyz/remove-exif-from-photos" />
-  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/remove-exif-from-photos" />
-  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/remove-exif-from-photos" />
+  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/remove-exif-from-photos/" />
+  <link rel="alternate" hreflang="es" href="https://verimedia.xyz/es/remove-exif-from-photos/" />
+  <link rel="alternate" hreflang="fr" href="https://verimedia.xyz/fr/remove-exif-from-photos/" />
+  <link rel="alternate" hreflang="de" href="https://verimedia.xyz/de/remove-exif-from-photos/" />
+  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/remove-exif-from-photos/" />
 
   <meta property="og:title" content="Remove EXIF From Photos Online | VeriMedia.xyz">
   <meta property="og:description" content="Strip photo EXIF metadata locally in your browser. No uploads, no tracking, instant download.">
@@ -80,7 +83,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/src/style.css">
   <script src="https://unpkg.com/lucide@latest" defer></script>
@@ -90,22 +93,8 @@
   <div class="glow-orb orb-1"></div>
   <div class="glow-orb orb-2"></div>
 
-  <header>
-    <div class="logo-container">
-      <a href="/" style="text-decoration: none; color: inherit;">
-        <span class="logo-text" style="display: flex; align-items: center; gap: 8px;">
-          <img src="/icon.svg" alt="VeriMedia Logo" width="32" height="32" style="filter: drop-shadow(0 0 8px var(--accent-cyan-glow));">
-          VeriMedia<span class="dot">.xyz</span>
-        </span>
-      </a>
-    </div>
-    <nav>
-      <a href="/" class="nav-link">Home</a>
-      <a href="/#calculator-section" class="nav-link">Tool</a>
-      <a href="/#pricing-section" class="nav-link">Pricing</a>
-      <a href="/#faq-section" class="nav-link">FAQ</a>
-    </nav>
-  </header>
+  <!-- Header — injected by site-chrome.js -->
+  <header></header>
 
   <main>
     <section class="hero-section" style="max-width: 1000px; margin: 2.5rem auto 2rem auto; text-align: left; padding: 0 1.5rem;">
@@ -113,80 +102,164 @@
         Remove EXIF Metadata From Photos Online
       </h1>
       <p style="font-size: 1.02rem; color: var(--text-secondary); max-width: 820px;">
-        VeriMedia removes EXIF metadata directly in your browser so you can share photos without exposing GPS location,
-        camera/device details, or hidden tracking fields.
+        EXIF metadata is hidden data embedded in every photo by your phone or camera. It can reveal your exact GPS location, device serial number, and the time and date the image was taken. VeriMedia strips this data entirely in your browser. nothing is uploaded to any server.
       </p>
       <div style="display:flex; gap:0.8rem; margin-top:1.2rem; flex-wrap: wrap;">
         <a href="/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
-          Start EXIF Cleanup
+          Start EXIF Cleanup. Free
         </a>
-        <a href="/privacy" class="pricing-btn secondary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
-          Privacy Policy
+        <a href="/ai-opt-out-metadata" class="pricing-btn secondary-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
+          AI Opt-Out Guide
         </a>
       </div>
     </section>
 
     <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
-      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">What EXIF Removal Does</h2>
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">What Is EXIF Data and Why Is It a Privacy Risk?</h2>
       <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-        EXIF cleanup removes metadata embedded by phones and cameras, including geolocation and device fingerprints.
-        This helps protect personal privacy before posting to social platforms, marketplaces, or client portals.
+        EXIF stands for Exchangeable Image File Format. It is a standard that defines how metadata is stored inside image files. Every time you take a photo with a smartphone, DSLR, or mirrorless camera, the device automatically writes dozens of hidden fields into the file. These fields include GPS coordinates (often accurate to within 3 metres), the camera make and model, a unique lens serial number, the exact timestamp of capture, orientation, ISO, aperture, shutter speed, and sometimes the software used to edit the image.
       </p>
       <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-        Photos often contain more than visible pixels. A phone camera can store latitude, longitude, capture time,
-        device model, lens information, software history, and sometimes unique identifiers. These fields are useful
-        inside a private photo library, but they can become risky when the image is published publicly.
+        This data is useful inside a private photo library for sorting and organizing. However, when you upload a photo to social media, a marketplace listing, a blog post, or an email, the EXIF data travels with the image. Anyone who downloads the file can read every field. A photo taken at home can reveal your street address. A photo of a product can reveal the device you own. A series of photos can be cross-referenced by serial number to identify you as the photographer across platforms.
       </p>
-      <ul style="margin-left: 1rem; color: var(--text-secondary);">
-        <li>Removes GPS location coordinates and place hints.</li>
-        <li>Removes camera model, lens, and device identifier tags.</li>
-        <li>Preserves visual quality while stripping metadata payloads.</li>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Some platforms like Instagram and Facebook strip EXIF data on upload, but many do not. WordPress, Flickr (optional), forums, messaging apps that send originals, and direct file sharing all preserve the original metadata. If you send a photo by email or upload it to a cloud link, the full EXIF payload is intact.
+      </p>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">What Metadata Does VeriMedia Remove?</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        VeriMedia performs a deep metadata scrub across all supported image formats. Here is exactly what gets removed:
+      </p>
+      <ul style="margin-left: 1rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        <li><strong>GPS coordinates</strong>. latitude, longitude, altitude, and location area descriptions</li>
+        <li><strong>Device identity</strong>. camera make, model, body serial number, lens model, and lens serial number</li>
+        <li><strong>Capture details</strong>. date/time original, date/time digitized, subsecond timestamps</li>
+        <li><strong>Software fingerprints</strong>. editing software name and version, processing history</li>
+        <li><strong>Thumbnail images</strong>. embedded preview images that may contain older, unedited versions of the photo</li>
+        <li><strong>IPTC fields</strong>. caption, keywords, category, credit, and source fields (unless you choose to keep creator identity)</li>
+        <li><strong>XMP packets</strong>. Adobe XMP metadata blocks including editing history, sidecar data, and custom fields</li>
+        <li><strong>MakerNote blocks</strong>. proprietary manufacturer data from Canon, Nikon, Sony, Fujifilm, and others</li>
+      </ul>
+      <p style="color: var(--text-secondary);">
+        After processing, the file contains only pixel data and essential format headers. The visual quality is identical. VeriMedia operates on the metadata segment without re-encoding the image.
+      </p>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Supported File Formats</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        VeriMedia handles the five most common image formats used by phones and cameras:
+      </p>
+      <ul style="margin-left: 1rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        <li><strong>JPEG / JPG</strong>. full EXIF, IPTC, and XMP stripping with optional AI opt-out injection. No re-compression.</li>
+        <li><strong>PNG</strong>. tEXt and zTXt chunk removal plus XMP opt-out injection.</li>
+        <li><strong>WebP</strong>. extended XMP metadata removal for modern web images.</li>
+        <li><strong>HEIC / HEIF</strong>. iPhone default format. VeriMedia converts and strips in one pass.</li>
+        <li><strong>PDF</strong>. separate forensic cleaner for document metadata (see <a href="/remove-pdf-metadata" style="color:var(--accent);">PDF Metadata Guide</a>).</li>
       </ul>
     </section>
 
     <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
-      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">When To Strip EXIF Data</h2>
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">When Should You Strip EXIF Data?</h2>
       <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-        Strip EXIF before publishing home photos, location-sensitive reporting, marketplace listings, creator previews,
-        portfolio samples, or any image sent to a public channel. For professional photography, keep an untouched
-        archive copy privately, then publish a sanitized version online.
+        Strip EXIF metadata before any of these scenarios:
+      </p>
+      <ul style="margin-left: 1rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        <li><strong>Posting photos of your home or children</strong>. GPS coordinates in the file reveal exactly where you live.</li>
+        <li><strong>Selling on marketplaces</strong>. product photos from your phone contain your location and device identity.</li>
+        <li><strong>Freelance and client work</strong>. preview images shared with clients should not leak your personal device or location data.</li>
+        <li><strong>Journalism and reporting</strong>. photos from sensitive locations can endanger sources if metadata is not removed.</li>
+        <li><strong>Portfolio and social media</strong>. serial number cross-referencing can link your anonymous accounts to your real identity.</li>
+        <li><strong>Legal and compliance</strong>. GDPR and similar regulations consider GPS-tagged images as personal data.</li>
+      </ul>
+      <p style="color: var(--text-secondary);">
+        Best practice: keep an untouched archive copy in your private photo library, then run the public version through VeriMedia before uploading anywhere. With Creator Plus or Pro, you can also inject your copyright and AI opt-out metadata in the same pass.
+      </p>
+    </section>
+
+    <section class="semantic-kb-section" style="max-width: 1000px; margin: 0 auto 3rem auto; padding: 0 1.5rem;">
+      <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">How VeriMedia Compares to Other EXIF Removers</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        Most online EXIF removal tools require you to upload your photo to a remote server. The server processes the file, strips the metadata, and sends it back. This means a third party has a copy of your original image. including the GPS data you are trying to remove. VeriMedia never sees your file. Processing happens entirely in your browser using the Web Cryptography API and in-memory file buffers. No bytes leave your device.
       </p>
       <p style="color: var(--text-secondary);">
-        VeriMedia combines privacy cleanup with optional AI opt-out and copyright metadata. That means the published
-        copy can remove private data while still carrying a clear ownership and usage signal.
+        VeriMedia also goes beyond simple stripping. In addition to removing private data, you can embed standardised AI opt-out signals (<code style="background:var(--accent-subtle);color:var(--accent);padding:1px 5px;font-size:0.85em;">ai:opt-out=true</code>) and creator copyright metadata in the same operation. No other free EXIF tool offers this combination.
       </p>
     </section>
 
     <section class="faq-section" style="max-width:1000px; margin: 0 auto 4rem auto; padding: 0 1.5rem;">
-      <h2 class="section-title" style="text-align:left; margin-bottom:1.2rem;">Quick Answers</h2>
+      <h2 class="section-title" style="text-align:left; margin-bottom:1.2rem;">Frequently Asked Questions</h2>
       <div class="faq-accordion">
         <div class="faq-item">
-          <h3>Is this EXIF remover free?</h3>
-          <p>Yes, standard EXIF cleanup is available in the free tier.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Is this EXIF remover free?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>Yes. Standard EXIF cleanup for single files is completely free with no account required. You can strip GPS coordinates, device identifiers, timestamps, and all other metadata fields at no cost. Creator Plus ($9.99) adds batch processing for up to 100 files at once, and Creator Pro ($19) adds unlimited batches with Google Licensable badge support.</p></div>
         </div>
         <div class="faq-item">
-          <h3>Can I remove metadata from multiple photos?</h3>
-          <p>Bulk processing is available in Creator Pro, while single-file cleanup works in the free tier.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Can I remove metadata from multiple photos at once?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>Yes. Creator Plus supports up to 100 files per batch, and Creator Pro supports unlimited batch processing. Select all your files at once, click Shield Now, and download a ZIP archive of all cleaned files. The free tier processes one file at a time.</p></div>
         </div>
         <div class="faq-item">
-          <h3>Does removing EXIF reduce image quality?</h3>
-          <p>For supported formats, VeriMedia uses byte-level metadata cleanup where possible so the image content is preserved.</p>
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does removing EXIF data reduce image quality?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>No. VeriMedia operates on the metadata segment of the file without re-encoding the image pixels. For JPEG files, this means the visual content is byte-for-byte identical. only the hidden metadata fields are removed. The file size typically decreases slightly because the metadata payload is gone.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Does Instagram strip EXIF data automatically?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>Instagram and Facebook strip EXIF data when you upload to their platforms, but many other services do not. WordPress, Flickr (depending on settings), email attachments, cloud sharing links (Google Drive, Dropbox), messaging apps that send originals (Telegram, Signal with original quality), and direct file transfers all preserve the full EXIF payload. If you share photos anywhere outside Instagram/Facebook, you should strip metadata yourself.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>Can someone find my home address from a photo?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>Yes. If your phone has location services enabled for the camera app, every photo stores GPS coordinates accurate to within a few metres. A photo taken in your living room contains your home address in the metadata. Anyone who downloads the original file can read these coordinates and map them. VeriMedia removes GPS data entirely before you share the file.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What is the difference between EXIF, IPTC, and XMP?</span>
+            <i data-lucide="chevron-down" class="faq-chevron"></i>
+          </button>
+          <div class="faq-body"><p>EXIF stores camera and capture data (GPS, device model, settings). IPTC stores editorial data (caption, keywords, credit, copyright). XMP is Adobe's extensible metadata format that can contain both plus custom fields like AI opt-out signals and licensing URLs. VeriMedia strips all three unless you explicitly choose to inject creator identity or AI opt-out tags.</p></div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-content">
-      <p>&copy; 2026 VeriMedia.xyz. Processed locally at the edge. No files are stored or uploaded.</p>
-      <div class="footer-links">
-        <a href="/terms" class="footer-link">Terms</a>
-        <a href="/privacy" class="footer-link">Privacy</a>
-        <a href="/refund" class="footer-link">Refunds</a>
-      </div>
-    </div>
-  </footer>
+  <!-- Footer — injected by site-chrome.js -->
+  <footer></footer>
 
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/site-chrome.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.faq-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const isOpen = btn.getAttribute('aria-expanded') === 'true';
+          document.querySelectorAll('.faq-item.open').forEach(el => {
+            el.classList.remove('open');
+            el.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

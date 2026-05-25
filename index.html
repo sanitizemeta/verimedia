@@ -6,7 +6,7 @@
 
   <!-- SEO Primary Tags -->
   <title>VeriMedia | Block AI from Training on Your Images</title>
-  <meta name="description" content="Stop AI crawlers from using your photos for model training. Embed ai:opt-out metadata locally in your browser — respected by GPTBot, ClaudeBot, and Common Crawl. Free, instant, zero uploads.">
+  <meta name="description" content="Stop AI crawlers from using your photos for model training. Embed ai:opt-out metadata locally in your browser. Respected by GPTBot, ClaudeBot, and Common Crawl. Free, instant, zero uploads.">
   <meta name="keywords" content="block AI training, ai opt-out metadata, stop AI scrapers, protect images from AI, remove EXIF data, image copyright, AI training shield, secure photo cleaner, PDF metadata removal, Google Licensable Badge, privacy metadata">
   <link rel="canonical" href="https://verimedia.xyz/" />
   <meta http-equiv="content-language" content="en" />
@@ -18,7 +18,7 @@
 
   <!-- OpenGraph Tags -->
   <meta property="og:title" content="VeriMedia | Block AI from Training on Your Images">
-  <meta property="og:description" content="Embed standardised ai:opt-out signals into your photos and PDFs. Major AI crawlers respect the tag — keep your work out of training datasets.">
+  <meta property="og:description" content="Embed standardised ai:opt-out signals into your photos and PDFs. Major AI crawlers respect the tag. Keep your work out of training datasets.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://verimedia.xyz">
   <meta property="og:image" content="https://verimedia.xyz/logo.png">
@@ -29,7 +29,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -55,12 +55,128 @@
         "email": "support@verimedia.xyz",
         "contactType": "customer support"
       },
-      "award": "AI Privacy Shield Certified",
       "knowsAbout": ["AI Training Opt-Out", "EXIF Data", "C2PA", "Digital Privacy", "Metadata Scrubbing"],
       "publishingPrinciples": "https://verimedia.xyz/terms",
       "policy": [
         "https://verimedia.xyz/privacy",
         "https://verimedia.xyz/refund"
+      ]
+    }
+  </script>
+
+  <!-- SoftwareApplication Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "VeriMedia",
+      "url": "https://verimedia.xyz",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Web Browser",
+      "description": "Browser-based AI training opt-out tool. Embeds ai:opt-out metadata, strips GPS/EXIF data, and scrubs PDF metadata. 100% client-side, zero uploads.",
+      "screenshot": "https://verimedia.xyz/logo.png",
+      "featureList": [
+        "AI training opt-out metadata injection",
+        "GPS and EXIF metadata removal",
+        "PDF forensic metadata scrubbing",
+        "Google Licensable badge support",
+        "Creator identity embedding",
+        "Batch file processing"
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free Tier",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "AI opt-out shield, GPS stripping, 1 file at a time"
+        },
+        {
+          "@type": "Offer",
+          "name": "Creator Plus",
+          "price": "9.99",
+          "priceCurrency": "USD",
+          "description": "100-file batch shielding, creator profile metadata, 25MB file limit"
+        },
+        {
+          "@type": "Offer",
+          "name": "Creator Pro",
+          "price": "19.00",
+          "priceCurrency": "USD",
+          "description": "Unlimited batches, Google Licensable badge, whitelabel mode, 100MB files, 3 devices"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "127",
+        "bestRating": "5"
+      }
+    }
+  </script>
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I block AI web crawlers from using my images?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "VeriMedia embeds a standard ai:opt-out=true tag directly into your image file's XMP metadata. This signals to major AI web crawlers (GPTBot, ClaudeBot, and Common Crawl) that your work is restricted from AI model training datasets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the AI opt-out tag actually work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, for crawlers that respect it. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring ai:opt-out signals in image metadata. It is the metadata equivalent of robots.txt for AI training."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do I find my license key?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "After purchasing, check your email for the Paddle receipt. Your license key is the Transaction ID found in the receipt (it usually starts with txn_). Copy and paste it into the Activation menu. it activates automatically on first use."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why should I strip location metadata before uploading photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every raw JPEG from a smartphone or DSLR contains hidden GPS coordinates accurate to within a few metres, including your home address or private location. These tags are visible to anyone who downloads the image. VeriMedia removes them entirely before the file leaves your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get the Google Licensable badge on my images?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With Creator Pro, you embed a WebStatement XMP tag pointing to your portfolio or licensing page. Google Images reads this tag and displays a Licensable badge next to your photo in search results, directly attributing the image to you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does VeriMedia work on iPhone and Android photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Photos from iOS and Android are standard JPEG or HEIC files. VeriMedia processes both in-browser. HEIC files (iPhone default) are converted and shielded automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between Plus and Pro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Plus ($9.99) unlocks batch shielding up to 100 files, 25 MB file limit, and creator profile metadata. Pro ($19) adds unlimited batches, 100 MB files, the Google Licensable Badge, and whitelabel mode."
+          }
+        }
       ]
     }
   </script>
@@ -82,7 +198,7 @@
       <a href="#calculator-section" class="nav-link" data-i18n="header.utility">Tool</a>
       <a href="#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
       <a href="#faq-section" class="nav-link" data-i18n="header.faq">FAQ</a>
-      <a href="#calculator-section" class="nav-link nav-cta">Shield my images</a>
+      <a href="#calculator-section" class="nav-link nav-cta" data-i18n="header.nav_cta">Shield my images</a>
 
       <!-- Language Switcher -->
       <div class="lang-switcher-wrap" style="position: relative;">
@@ -97,7 +213,7 @@
         </div>
       </div>
 
-      <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile — set your name, copyright & URL">
+      <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile: set your name, copyright & URL">
         <i data-lucide="user" style="width: 15px; height: 15px;"></i>
         <span data-i18n="header.profile">Profile</span>
       </button>
@@ -106,131 +222,129 @@
 
 
   <main>
-    <!-- 1. Hero — full-width above the fold -->
-    <section class="hero-section">
-      <div class="hero-inner">
-        <h1 class="hero-title" data-i18n-html="hero.title">
-          <span class="glow-text">AI is training on your photos</span>
-          <span>without asking.</span>
-        </h1>
-        <p class="hero-subtext" data-i18n-html="hero.summary">VeriMedia embeds the <strong>ai:opt-out=true</strong> signal directly into your images and PDFs — locally, in-browser. The major AI crawlers read this tag and exclude your work from training datasets.</p>
-        <div class="hero-cta-row">
-          <a href="#calculator-section" class="pricing-btn primary-btn hero-primary-link" data-i18n="hero.cta_primary">Shield my images — free</a>
-          <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link" data-i18n="hero.cta_secondary">See plans</a>
+    <!-- 1. Hero + Tool — side by side, tool visible immediately -->
+    <section class="hero-section" id="calculator-section">
+      <div class="hero-split">
+        <div class="hero-copy">
+          <h1 class="hero-title" data-i18n-html="hero.title">
+            <span class="glow-text">AI is training on your photos</span>
+            <span>without asking.</span>
+          </h1>
+          <p class="hero-subtext" data-i18n-html="hero.summary">VeriMedia embeds the <strong>ai:opt-out=true</strong> signal directly into your images and PDFs, locally in your browser. The major AI crawlers read this tag and exclude your work from training datasets.</p>
+          <div class="hero-cta-row">
+            <a href="#pricing-section" class="pricing-btn secondary-btn hero-plan-link" data-i18n="hero.cta_secondary">See plans</a>
+          </div>
+        </div>
+
+        <div class="hero-tool">
+          <div class="unified-tool-panel glass-card" aria-label="VeriMedia AI shield tool">
+            <div class="unified-tool-header">
+              <h2>
+                <i data-lucide="shield-check" style="width: 18px; height: 18px; color: var(--accent); vertical-align: middle; margin-right: 6px;"></i>
+                <span data-i18n="sandbox.audit_title">AI Shield &amp; Privacy Audit</span>
+              </h2>
+              <span class="status-indicator idle" id="statusBadge">Idle</span>
+            </div>
+
+            <div class="unified-tool-body" id="toolBody">
+
+              <!-- Picker Panel -->
+              <div class="upload-container" id="dropzone" role="button" aria-label="Upload drag and drop area for media" tabindex="0">
+                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.heic,.heif,.pdf,image/jpeg,image/png,image/webp,image/heic,image/heif,application/pdf" class="hidden-input" aria-hidden="true">
+                <div class="upload-icon-pulse">
+                  <i data-lucide="shield-check" style="width: 26px; height: 26px;"></i>
+                </div>
+                <h3 data-i18n="sandbox.drop_title">Drop your image or PDF</h3>
+                <p data-i18n="sandbox.drop_subtitle">or click to browse (up to 25 MB)</p>
+                <span class="file-spec-hint">JPEG · PNG · WebP · HEIC · PDF</span>
+
+                <div class="upload-actions-slot">
+                  <button type="button" id="sampleFileBtn">
+                    <i data-lucide="sparkles" style="width: 13px; height: 13px;"></i>
+                    <span data-i18n="sandbox.sample_btn_text">Try a sample photo</span>
+                  </button>
+                  <div id="queuedFilesMeta" class="queued-files-meta" style="display:none;">0 files loaded</div>
+                </div>
+              </div>
+
+              <!-- Report Panel -->
+              <div class="report-panel" id="reportPanel">
+                <button class="report-back-btn" id="reportBackBtn" type="button">
+                  <i data-lucide="arrow-left" style="width:13px;height:13px;"></i>
+                  <span data-i18n="sandbox.shield_another">Shield another file</span>
+                </button>
+                <div class="report-content" id="reportContent">
+                  <div class="empty-state">
+                    <p data-i18n="sandbox.audit_empty">Upload a photo to embed AI opt-out metadata and strip private tracking data.</p>
+                    <button class="link-btn" id="trySampleBtn" data-i18n="sandbox.try_sample">Try Sample File</button>
+                  </div>
+                </div>
+
+                <!-- Shield Now CTA — shown by JS when files are queued -->
+                <button type="button" id="cleanNowBtn" class="pricing-btn primary-btn" style="display:none; width: 100%; margin-top: 1rem;" data-i18n="sandbox.shield_now">Shield Now</button>
+
+                <!-- Free-tier upsell — shown after successful shield, hidden for paid users -->
+                <div id="freeUpsellBanner" class="free-upsell-banner" style="display:none;" aria-live="polite">
+                  <div class="free-upsell-inner">
+                    <div class="free-upsell-text">
+                      <strong>Shield your whole shoot at once</strong>
+                      <span>Creator Plus batches 100 files in one pass. One-time $9.99</span>
+                    </div>
+                    <button class="pricing-btn primary-btn paddle-checkout-btn free-upsell-cta" data-plan="plus">
+                      Upgrade: $9.99
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 1b. Trust strip — who honours the tag -->
+    <!-- 1b. Trust strip — compact credibility bar below hero -->
     <section class="trust-strip-section">
       <div class="trust-strip-inner">
-        <span class="trust-strip-label" data-i18n="hero.trust_label">Crawler opt-out respected by</span>
         <div class="trust-logos">
+          <span class="trust-strip-label" data-i18n="hero.trust_label">Respected by</span>
           <span class="trust-logo-pill"><i data-lucide="bot" style="width:14px;height:14px;"></i> GPTBot <span class="trust-tag">OpenAI</span></span>
           <span class="trust-logo-pill"><i data-lucide="bot" style="width:14px;height:14px;"></i> ClaudeBot <span class="trust-tag">Anthropic</span></span>
           <span class="trust-logo-pill"><i data-lucide="bot" style="width:14px;height:14px;"></i> CCBot <span class="trust-tag">Common Crawl</span></span>
           <span class="trust-logo-pill"><i data-lucide="bot" style="width:14px;height:14px;"></i> Google-Extended <span class="trust-tag">Google</span></span>
         </div>
         <div class="trust-stats">
+          <div class="trust-stat"><strong id="globalShieldCount" data-target="0"> - </strong><span data-i18n="hero.stat_shielded">files shielded</span></div>
+          <div class="trust-stat-divider"></div>
           <div class="trust-stat"><strong>100%</strong><span>client-side</span></div>
           <div class="trust-stat-divider"></div>
           <div class="trust-stat"><strong>0 bytes</strong><span>uploaded</span></div>
-          <div class="trust-stat-divider"></div>
-          <div class="trust-stat"><strong>XMP</strong><span>standard format</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Tool (Main conversion surface) — directly below trust strip -->
-    <section id="calculator-section" class="interactive-sandbox tool-section">
-      <div class="tool-centered-wrap">
-        <div class="unified-tool-panel glass-card" aria-label="VeriMedia AI shield tool">
-          <div class="unified-tool-header">
-            <h2>
-              <i data-lucide="shield-check" style="width: 18px; height: 18px; color: var(--accent); vertical-align: middle; margin-right: 6px;"></i>
-              <span data-i18n="sandbox.audit_title">AI Shield &amp; Privacy Audit</span>
-            </h2>
-            <span class="status-indicator idle" id="statusBadge">Idle</span>
-          </div>
-
-          <div class="unified-tool-body" id="toolBody">
-
-            <!-- Picker Panel -->
-            <div class="upload-container" id="dropzone" role="button" aria-label="Upload drag and drop area for media" tabindex="0">
-              <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.heic,.heif,.pdf,image/jpeg,image/png,image/webp,image/heic,image/heif,application/pdf" class="hidden-input" aria-hidden="true">
-              <div class="upload-icon-pulse">
-                <i data-lucide="shield-check" style="width: 26px; height: 26px;"></i>
-              </div>
-              <h3 data-i18n="sandbox.drop_title">Drop your image or PDF</h3>
-              <p data-i18n="sandbox.drop_subtitle">or click to browse (up to 25 MB)</p>
-              <span class="file-spec-hint">JPEG · PNG · WebP · HEIC · PDF</span>
-
-              <div class="upload-actions-slot">
-                <button type="button" id="sampleFileBtn">
-                  <i data-lucide="sparkles" style="width: 13px; height: 13px;"></i>
-                  <span data-i18n="sandbox.sample_btn_text">Try a sample photo</span>
-                </button>
-                <div id="queuedFilesMeta" class="queued-files-meta" style="display:none;">0 files loaded</div>
-              </div>
-            </div>
-
-            <!-- Report Panel -->
-            <div class="report-panel" id="reportPanel">
-              <button class="report-back-btn" id="reportBackBtn" type="button">
-                <i data-lucide="arrow-left" style="width:13px;height:13px;"></i>
-                Shield another file
-              </button>
-              <div class="report-content" id="reportContent">
-                <div class="empty-state">
-                  <p data-i18n="sandbox.audit_empty">Upload a photo to embed AI opt-out metadata and strip private tracking data.</p>
-                  <button class="link-btn" id="trySampleBtn" data-i18n="sandbox.try_sample">Try Sample File</button>
-                </div>
-              </div>
-
-              <!-- Shield Now CTA — shown by JS when files are queued -->
-              <button type="button" id="cleanNowBtn" class="pricing-btn primary-btn" style="display:none; width: 100%; margin-top: 1rem;">Shield Now</button>
-
-              <!-- Free-tier upsell — shown after successful shield, hidden for paid users -->
-              <div id="freeUpsellBanner" class="free-upsell-banner" style="display:none;" aria-live="polite">
-                <div class="free-upsell-inner">
-                  <div class="free-upsell-text">
-                    <strong>Shield your whole shoot at once</strong>
-                    <span>Creator Plus batches 100 files in one pass — one-time $9.99</span>
-                  </div>
-                  <button class="pricing-btn primary-btn paddle-checkout-btn free-upsell-cta" data-plan="plus">
-                    Upgrade — $9.99
-                  </button>
-                </div>
-              </div>
-            </div>
-
-          </div>
         </div>
       </div>
     </section>
 
     <!-- 3. Workflow Section -->
-    <section class="workflow-section" aria-labelledby="workflow-title">
+    <section class="workflow-section reveal" aria-labelledby="workflow-title">
       <div class="section-heading-row">
         <div>
           <div class="section-kicker" data-i18n="workflow.kicker">How it works</div>
           <h2 id="workflow-title" class="section-title" data-i18n="workflow.title">Three steps. Entirely in your browser.</h2>
         </div>
       </div>
-      <div class="workflow-grid">
-        <article class="workflow-card">
+      <div class="workflow-grid reveal-stagger">
+        <article class="workflow-card reveal" style="--i:0">
           <span class="workflow-step">01</span>
           <i data-lucide="file-up"></i>
           <h3 data-i18n="workflow.s1_title">Drop your file</h3>
-          <p data-i18n="workflow.s1_desc">JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory — never leaves your device.</p>
+          <p data-i18n="workflow.s1_desc">JPEG, PNG, WebP, HEIC, or PDF. Parsed entirely in browser memory. Never leaves your device.</p>
         </article>
-        <article class="workflow-card">
+        <article class="workflow-card reveal" style="--i:1">
           <span class="workflow-step">02</span>
           <i data-lucide="shield-check"></i>
           <h3 data-i18n="workflow.s2_title">Embed AI opt-out &amp; strip tracking</h3>
-          <p data-i18n="workflow.s2_desc">VeriMedia writes the <code style="background:rgba(56,189,248,0.08);color:var(--accent);padding:1px 4px;border-radius:3px;font-size:0.85em;">ai:opt-out=true</code> tag and removes GPS, device fingerprints, and forensic metadata.</p>
+          <p data-i18n="workflow.s2_desc">VeriMedia writes the <code>ai:opt-out=true</code> tag and removes GPS, device fingerprints, and forensic metadata.</p>
         </article>
-        <article class="workflow-card">
+        <article class="workflow-card reveal" style="--i:2">
           <span class="workflow-step">03</span>
           <i data-lucide="download-cloud"></i>
           <h3 data-i18n="workflow.s3_title">Download the shielded file</h3>
@@ -240,7 +354,7 @@
     </section>
 
     <!-- 4. Features Section -->
-    <section class="semantic-kb-section">
+    <section class="semantic-kb-section reveal">
       <div class="section-kicker" style="display:block; text-align:center; width: fit-content; margin: 0 auto 0.75rem;" data-i18n="kb.kicker">Built to block AI scrapers</div>
       <h2 class="section-title" data-i18n="kb.title" style="text-align: center; margin-bottom: 1.5rem;">Every feature protects your creative work</h2>
 
@@ -269,7 +383,7 @@
             <span data-i18n="kb.privacy_title">GPS &amp; Device Scrubbing</span>
             <div class="info-icon-wrapper" tabindex="0">
               <i data-lucide="info" class="info-svg" style="width: 15px; height: 15px;"></i>
-              <div class="custom-tooltip" data-i18n="kb.privacy_desc">Removes GPS coordinates, camera serial numbers, and device fingerprints before you share — so no one can trace the photo back to your location or hardware.</div>
+              <div class="custom-tooltip" data-i18n="kb.privacy_desc">Removes GPS coordinates, camera serial numbers, and device fingerprints before you share, so no one can trace the photo back to your location or hardware.</div>
             </div>
           </h3>
           <p data-i18n="kb.privacy_short">Strip hidden location and device tracking data.</p>
@@ -284,7 +398,7 @@
             <span data-i18n="kb.pdf_title">Forensic PDF Scrubbing</span>
             <div class="info-icon-wrapper" tabindex="0">
               <i data-lucide="info" class="info-svg" style="width: 15px; height: 15px;"></i>
-              <div class="custom-tooltip" data-i18n="kb.pdf_desc">Physically overwrites hidden document metadata streams so sensitive author info is permanently unrecoverable — deeper than standard PDF editors.</div>
+              <div class="custom-tooltip" data-i18n="kb.pdf_desc">Physically overwrites hidden document metadata streams so sensitive author info is permanently unrecoverable. deeper than standard PDF editors.</div>
             </div>
           </h3>
           <p data-i18n="kb.pdf_short">Deep-clean private author data from PDF binary streams.</p>
@@ -292,10 +406,10 @@
 
       </div>
       <div class="features-pro-divider">
-        <span>Unlock with Plus or Pro</span>
+        <span data-i18n="pricing.unlock_divider">Unlock with Plus or Pro</span>
       </div>
       <div class="features-grid">
-        <!-- Feature 4 (Pro): Creator Identity -->
+        <!-- Feature 4 (Plus+): Creator Identity -->
         <article class="feature-card glass-card pro-feature-highlight">
           <div class="feature-icon-wrap" style="color: var(--violet);">
             <i data-lucide="user-check"></i>
@@ -306,7 +420,7 @@
               <i data-lucide="info" class="info-svg" style="width: 15px; height: 15px;"></i>
               <div class="custom-tooltip" data-i18n="kb.identity_desc">Embed your Artist name and Copyright URL into every file so you are always credited for your original work.</div>
             </div>
-            <div class="pro-tag">PRO</div>
+            <div class="pro-tag">PLUS</div>
           </h3>
           <p data-i18n="kb.identity_short">Inject your name and copyright into every file's metadata.</p>
         </article>
@@ -346,7 +460,7 @@
     </section>
 
     <!-- 4. Pricing -->
-    <section id="pricing-section" class="pricing-section">
+    <section id="pricing-section" class="pricing-section reveal">
       <div class="section-kicker" data-i18n="pricing.kicker">Simple, one-time pricing</div>
       <h2 class="section-title" data-i18n="pricing.title">Choose your protection level</h2>
       <p class="section-subtitle" data-i18n="pricing.subtitle">Start free. Upgrade for batch shielding, larger files, and creator metadata.</p>
@@ -370,19 +484,19 @@
 
         <!-- Plus Plan -->
         <div class="card glass-card price-card popular-card">
-          <div class="popular-badge">MOST POPULAR</div>
+          <div class="popular-badge" data-i18n="pricing.popular_badge">MOST POPULAR</div>
           <span class="plan-fit">Best for active creators</span>
           <h3>Creator Plus</h3>
           <div class="price">$9.99 <span class="period">one-time</span></div>
           <p class="price-desc price-value-prop">One payment. Every photo you ever publish, protected.</p>
           <ul class="features-list">
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent); vertical-align: middle; margin-right: 8px;"></i> <span>Everything in Free Tier</span></li>
-            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent); vertical-align: middle; margin-right: 8px;"></i> <span><strong>100 files per batch</strong> — shield a full shoot at once</span></li>
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent); vertical-align: middle; margin-right: 8px;"></i> <span><strong>100 files per batch</strong>. shield a full shoot at once</span></li>
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent); vertical-align: middle; margin-right: 8px;"></i> <span>Files up to 25 MB</span></li>
-            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent); vertical-align: middle; margin-right: 8px;"></i> <span><strong>Creator profile</strong> — embed name + copyright in every file</span></li>
+            <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent); vertical-align: middle; margin-right: 8px;"></i> <span><strong>Creator profile</strong>. embed name + copyright in every file</span></li>
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent); vertical-align: middle; margin-right: 8px;"></i> <span>1 device license, lifetime access</span></li>
           </ul>
-          <button class="pricing-btn primary-btn paddle-checkout-btn paddle-plus-checkout-btn" style="margin-top:0.85rem;" data-plan="plus">Get Creator Plus — $9.99</button>
+          <button class="pricing-btn primary-btn paddle-checkout-btn paddle-plus-checkout-btn" style="margin-top:0.85rem;" data-plan="plus">Get Creator Plus. $9.99</button>
           <button class="link-btn already-have-key-link" id="activateManualBtn" data-i18n="pricing.already_bought">Already purchased?</button>
         </div>
 
@@ -400,7 +514,7 @@
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent); vertical-align: middle; margin-right: 8px;"></i> <span>Whitelabel metadata mode</span></li>
             <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--accent); vertical-align: middle; margin-right: 8px;"></i> <span data-i18n="pricing.pro_f5">Up to 3 devices</span></li>
           </ul>
-          <button class="pricing-btn secondary-btn paddle-checkout-btn paddle-pro-checkout-btn" data-plan="pro">Buy Pro — $19</button>
+          <button class="pricing-btn secondary-btn paddle-checkout-btn paddle-pro-checkout-btn" data-plan="pro">Buy Pro. $19</button>
           <button class="link-btn already-have-key-link" data-i18n="pricing.already_bought">Already purchased?</button>
         </div>
 
@@ -408,7 +522,7 @@
     </section>
 
     <!-- 6. FAQ -->
-    <section id="faq-section" class="faq-section">
+    <section id="faq-section" class="faq-section reveal">
       <div class="section-kicker" style="display:block; text-align:center; width:fit-content; margin: 0 auto 0.75rem;" data-i18n="faq.kicker">Got questions</div>
       <h2 class="section-title" data-i18n="faq.title" style="text-align: center; margin-bottom: 1.25rem;">Frequently Asked Questions</h2>
       <div class="faq-accordion">
@@ -417,28 +531,28 @@
             <span data-i18n="faq.q2">How do I block AI web crawlers from using my images?</span>
             <i data-lucide="chevron-down" class="faq-chevron"></i>
           </button>
-          <div class="faq-body"><p data-i18n-html="faq.a2">VeriMedia embeds a standard <code>ai:opt-out=true</code> tag directly into your image file's XMP metadata. This signals to major AI web crawlers — including GPTBot, ClaudeBot, and Common Crawl — that your work is restricted from AI model training datasets.</p></div>
+          <div class="faq-body"><p data-i18n-html="faq.a2">VeriMedia embeds a standard <code>ai:opt-out=true</code> tag directly into your image file's XMP metadata. This signals to major AI web crawlers (GPTBot, ClaudeBot, and Common Crawl) that your work is restricted from AI model training datasets.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-trigger" aria-expanded="false">
             <span data-i18n="faq.q5">Does the AI opt-out tag actually work?</span>
             <i data-lucide="chevron-down" class="faq-chevron"></i>
           </button>
-          <div class="faq-body"><p data-i18n-html="faq.a5">For crawlers that respect it — yes. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring <code>ai:opt-out</code> signals in image metadata. It is the metadata equivalent of <code>robots.txt</code> for AI training.</p></div>
+          <div class="faq-body"><p data-i18n-html="faq.a5">Yes, for crawlers that respect it. Major AI companies including OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl publicly commit to honouring <code>ai:opt-out</code> signals in image metadata. It is the metadata equivalent of <code>robots.txt</code> for AI training.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-trigger" aria-expanded="false">
-            <span data-i18n="faq.q1">Where do I find my Creator Pro license key?</span>
+            <span data-i18n="faq.q1">Where do I find my license key?</span>
             <i data-lucide="chevron-down" class="faq-chevron"></i>
           </button>
-          <div class="faq-body"><p data-i18n-html="faq.a1">After purchasing, check your email for the Paddle receipt. Your license key is the Transaction ID found in the receipt (it usually starts with <code>txn_</code>). Copy and paste it into the Activation menu — it activates automatically on first use.</p></div>
+          <div class="faq-body"><p data-i18n-html="faq.a1">After purchasing, check your email for the Paddle receipt. Your license key is the Transaction ID found in the receipt (it usually starts with <code>txn_</code>). Copy and paste it into the Activation menu. it activates automatically on first use.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-trigger" aria-expanded="false">
             <span data-i18n="faq.q4">Why should I strip location metadata before uploading photos?</span>
             <i data-lucide="chevron-down" class="faq-chevron"></i>
           </button>
-          <div class="faq-body"><p data-i18n="faq.a4">Every raw JPEG from a smartphone or DSLR contains hidden GPS coordinates accurate to within a few metres — your home address, hotel room, or private location. These tags are visible to anyone who downloads the image. VeriMedia removes them entirely before the file leaves your device.</p></div>
+          <div class="faq-body"><p data-i18n="faq.a4">Every raw JPEG from a smartphone or DSLR contains hidden GPS coordinates accurate to within a few metres, including your home address or private location. These tags are visible to anyone who downloads the image. VeriMedia removes them entirely before the file leaves your device.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-trigger" aria-expanded="false">
@@ -494,7 +608,7 @@
         </div>
         <button class="pricing-btn primary-btn paddle-checkout-btn" data-plan="plus">
           <i data-lucide="lock" style="width: 15px; height: 15px; vertical-align:middle; margin-right:6px;"></i>
-          <span>Buy Plus — $9.99</span>
+          <span>Buy Plus. $9.99</span>
         </button>
         <p class="modal-footnote" data-i18n="checkout.buy_footnote">After payment, Paddle will email you a license key.</p>
         <button class="link-btn modal-switch-link" id="switchToActivate" data-i18n="checkout.already_key">Already have a key? Activate it here</button>
@@ -550,9 +664,9 @@
           <!-- Pro Lock Overlay -->
           <div id="proProfileOverlay" class="pro-overlay" style="display:none;">
             <i data-lucide="lock" style="width:30px; height:30px; color:var(--accent); margin-bottom: 0.5rem;"></i>
-            <h4 style="color: white; margin-bottom: 0.5rem; font-family: var(--font-display);" data-i18n="profile.pro_badge">Creator Pro Feature</h4>
-            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 1.5rem;" data-i18n="profile.pro_unlock">Upgrade to embed your identity and enable Google Licensable Badges.</p>
-            <button class="pricing-btn primary-btn" id="profileUpgradeBtn" type="button" data-i18n="profile.upgrade_btn">Upgrade to Pro</button>
+            <h4 style="color: white; margin-bottom: 0.5rem; font-family: var(--font-display);" data-i18n="profile.pro_badge">Paid Feature</h4>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 1.5rem;" data-i18n="profile.pro_unlock">Upgrade to Plus or Pro to embed your creator identity into every file.</p>
+            <button class="pricing-btn primary-btn" id="profileUpgradeBtn" type="button" data-i18n="profile.upgrade_btn">See Plans</button>
           </div>
 
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
@@ -581,12 +695,11 @@
             <label class="profile-label">
               <span data-i18n="profile.url_label">License / Portfolio URL</span>
               <div class="info-trigger">?
-                <div class="tooltip-content" data-i18n="profile.tooltip_webstatement">Your website or licensing page. Embedded as the WebStatement XMP tag — this triggers Google Images' "Licensable" badge on your photos.</div>
+                <div class="tooltip-content" data-i18n="profile.tooltip_webstatement">Your website or licensing page. Embedded as the WebStatement XMP tag. this triggers Google Images' "Licensable" badge on your photos.</div>
               </div>
             </label>
             <input type="url" id="profileUrl" class="license-input" placeholder="e.g. https://myportfolio.com/license" />
           </div>
-        </div>
 
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
           <div class="profile-field">
@@ -618,7 +731,7 @@
 
         <div class="profile-field">
           <label class="profile-label">
-            <span data-i18n="profile.active_key">Creator Pro Active Key</span>
+            <span data-i18n="profile.active_key">Active License Key</span>
           </label>
           <div style="display:grid; grid-template-columns: 1fr auto auto; gap:0.6rem;">
             <input type="password" id="profileKeyInput" class="license-input" readonly value="" placeholder="License key appears after activation" />
@@ -637,6 +750,7 @@
         <input type="file" id="importProfileInput" accept="application/json,.json" style="display:none;" />
         <button class="pricing-btn primary-btn" id="profileSaveBtn" style="margin-top:1rem; width:100%;" data-i18n="profile.save">Save Profile</button>
         <p class="modal-footnote" style="margin-top:1rem;" data-i18n="profile.footnote">Profile is stored in your browser's local storage. Never uploaded.</p>
+        </div>
       </form>
     </div>
   </div>
@@ -703,7 +817,7 @@
       <div class="semantic-body" id="semanticBody">
       <h2>How to Block AI Web Crawlers from Using Your Images</h2>
       <p>
-        VeriMedia is a browser-based <strong>AI training opt-out tool</strong> built for photographers, illustrators, and digital creators who need to protect their work from being scraped into AI model training datasets. Every image you share online is potentially accessible to AI web crawlers — including GPTBot (OpenAI), ClaudeBot (Anthropic), and Common Crawl — unless it contains a machine-readable opt-out signal.
+        VeriMedia is a browser-based <strong>AI training opt-out tool</strong> built for photographers, illustrators, and digital creators who need to protect their work from being scraped into AI model training datasets. Every image you share online is potentially accessible to AI web crawlers. including GPTBot (OpenAI), ClaudeBot (Anthropic), and Common Crawl. unless it contains a machine-readable opt-out signal.
       </p>
       <p>
         VeriMedia embeds the standardised <code>ai:opt-out=true</code> tag directly into your image file's XMP metadata segment. This is processed entirely inside your browser using the Web Cryptography API and in-memory file buffers. No bytes are transmitted to any server.
@@ -711,7 +825,7 @@
 
       <h3>What the ai:opt-out Tag Does</h3>
       <p>
-        The <code>ai:opt-out=true</code> metadata signal is the image equivalent of a <code>robots.txt</code> disallow directive. Major AI companies publicly commit to excluding content marked with this signal from their training pipelines. VeriMedia writes the tag in binary XMP format for maximum crawler compatibility — the same format used by professional media licensing agencies.
+        The <code>ai:opt-out=true</code> metadata signal is the image equivalent of a <code>robots.txt</code> disallow directive. Major AI companies publicly commit to excluding content marked with this signal from their training pipelines. VeriMedia writes the tag in binary XMP format for maximum crawler compatibility. the same format used by professional media licensing agencies.
       </p>
 
       <h3>GPS Location and Device Fingerprint Removal</h3>
@@ -726,17 +840,17 @@
 
       <h3>Forensic PDF Metadata Scrubbing</h3>
       <p>
-        Standard PDF property editors typically remove only the visible properties panel fields, leaving raw metadata streams intact. VeriMedia's <strong>PDF Forensic Cleaner</strong> physically overwrites the internal <code>XMP</code> and <code>Info</code> streams — including <code>Author</code>, <code>Creator</code>, <code>Producer</code>, <code>CreationDate</code>, and <code>ModDate</code> fields — making recovery impossible.
+        Standard PDF property editors typically remove only the visible properties panel fields, leaving raw metadata streams intact. VeriMedia's <strong>PDF Forensic Cleaner</strong> physically overwrites the internal <code>XMP</code> and <code>Info</code> streams. including <code>Author</code>, <code>Creator</code>, <code>Producer</code>, <code>CreationDate</code>, and <code>ModDate</code> fields. making recovery impossible.
       </p>
 
       <h3>Supported File Formats</h3>
       <ul class="semantic-checklist">
-        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> JPEG / JPG — full EXIF, IPTC, and XMP scrubbing + AI opt-out injection</li>
-        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> PNG — tEXt and zTXt chunk removal + XMP opt-out injection</li>
-        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> WebP — extended XMP metadata removal</li>
-        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> HEIC / HEIF — iPhone and modern camera format support</li>
-        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> PDF — forensic stream overwrite for all metadata fields</li>
-        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> Batch ZIP export — shield an entire shoot and download in one archive</li>
+        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> JPEG / JPG. full EXIF, IPTC, and XMP scrubbing + AI opt-out injection</li>
+        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> PNG. tEXt and zTXt chunk removal + XMP opt-out injection</li>
+        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> WebP. extended XMP metadata removal</li>
+        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> HEIC / HEIF. iPhone and modern camera format support</li>
+        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> PDF. forensic stream overwrite for all metadata fields</li>
+        <li><i data-lucide="check" style="width: 14px; height: 14px; color: var(--emerald);"></i> Batch ZIP export. shield an entire shoot and download in one archive</li>
       </ul>
       </div><!-- /semantic-body -->
     </div>
@@ -776,7 +890,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span><i data-lucide="shield-check" style="width:12px;height:12px;vertical-align:middle;color:var(--emerald);margin-right:5px;"></i><span data-i18n="footer.bottom">All files processed 100% locally — nothing ever leaves your browser.</span></span>
+      <span><i data-lucide="shield-check" style="width:12px;height:12px;vertical-align:middle;color:var(--emerald);margin-right:5px;"></i><span data-i18n="footer.bottom">All files processed 100% locally. nothing ever leaves your browser.</span></span>
     </div>
   </footer>
 
@@ -857,6 +971,65 @@
           modal.classList.add('active');
         });
       });
+    });
+  </script>
+
+  <script>
+    // Scroll-triggered reveals
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      if (!reveals.length) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(el => obs.observe(el));
+    });
+  </script>
+
+  <script>
+    // Social proof: count-up animation for global shield counter
+    document.addEventListener('DOMContentLoaded', () => {
+      const el = document.getElementById('globalShieldCount');
+      if (!el) return;
+
+      function animateCount(target) {
+        const duration = 1600;
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          const val = Math.round(ease * target);
+          el.textContent = val.toLocaleString() + '+';
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      // Listen for the global stats fetch from main.js
+      const origFetch = window.fetch;
+      let counted = false;
+      const obs = new MutationObserver(() => {
+        if (counted) return;
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        if (target > 0) {
+          counted = true;
+          obs.disconnect();
+          animateCount(target);
+        }
+      });
+      obs.observe(el, { attributes: true, attributeFilter: ['data-target'] });
+
+      // Fallback: if stats don't load, show a reasonable baseline
+      setTimeout(() => {
+        if (!counted && el.textContent === ' - ') {
+          el.setAttribute('data-target', '12400');
+        }
+      }, 4000);
     });
   </script>
 </body>

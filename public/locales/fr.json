@@ -6,14 +6,16 @@
     "profile": "Profil",
     "home": "Accueil",
     "lang_label": "Changer de langue",
-    "logo_alt": "VeriMedia — Empêchez l'IA de s'entraîner sur vos images"
+    "logo_alt": "VeriMedia. Empêchez l'IA de s'entraîner sur vos images",
+    "nav_cta": "Protéger mes images"
   },
   "hero": {
     "title": "<span class=\"glow-text\">L'IA s'entraîne sur vos photos</span><span>sans vous demander.</span>",
-    "summary": "VeriMedia intègre le signal <strong>ai:opt-out=true</strong> directement dans vos images et PDFs — localement, dans le navigateur. Les grands robots d'indexation IA lisent cette balise et excluent votre travail des ensembles d'entraînement.",
-    "cta_primary": "Protéger mes images — gratuit",
+    "summary": "VeriMedia intègre le signal <strong>ai:opt-out=true</strong> directement dans vos images et PDFs. localement, dans le navigateur. Les grands robots d'indexation IA lisent cette balise et excluent votre travail des ensembles d'entraînement.",
+    "cta_primary": "Protéger mes images. gratuit",
     "cta_secondary": "Voir les plans",
-    "trust_label": "Exclusion des robots respectée par"
+    "trust_label": "Exclusion des robots respectée par",
+    "stat_shielded": "fichiers protégés"
   },
   "kb": {
     "title": "Confidentialité sans compromis et protection des créateurs",
@@ -75,7 +77,9 @@
     "stage_img_1": "Suppression des balises de localisation GPS...",
     "stage_img_2": "Effacement des détails de l'appareil et de la caméra...",
     "stage_img_3": "Ajout de vos droits d'auteur et balises d'IA...",
-    "stage_img_4": "Traitement terminé !"
+    "stage_img_4": "Traitement terminé !",
+    "shield_another": "Protéger un autre fichier",
+    "shield_now": "Protéger maintenant"
   },
   "pricing": {
     "title": "Des tarifs simples pour une publication plus sûre",
@@ -102,11 +106,12 @@
     "popular_badge": "LE PLUS POPULAIRE",
     "activate": "Entrez votre clé de licence",
     "already_bought": "Déjà acheté ?",
-    "kicker": "Tarifs simples, paiement unique"
+    "kicker": "Tarifs simples, paiement unique",
+    "unlock_divider": "Débloquer avec Plus ou Pro"
   },
   "faq": {
     "title": "Foire aux questions",
-    "q1": "Où puis-je trouver ma clé de licence Creator Pro ?",
+    "q1": "Ou trouver ma cle de licence?",
     "a1": "Après l'achat, vérifiez vos e-mails pour le reçu Paddle. Votre clé de licence est l'ID de transaction figurant sur le reçu (elle commence généralement par txn_). Il vous suffit de la copier et de la coller dans le menu d'activation si elle ne s'est pas activée automatiquement !",
     "q2": "Comment bloquer les robots d'indexation d'IA pour qu'ils n'utilisent pas mis images ?",
     "a2": "VeriMedia intègre une balise standard d'exclusion de l'IA (ai:opt-out = true) directement dans votre fichier image. Cela signale aux principaux robots d'indexation (comme GPTBot et ClaudeBot) que votre travail ne doit pas être utilisé pour l'entraînement de modèles d'IA.",
@@ -116,7 +121,7 @@
     "a4": "Les métadonnées cachées à l'intérieur des photos brutes contiennent vos coordonnées GPS précises, les détails de l'appareil photo et les dates. La suppression de ces données protège la confidentialité de votre localisation et supprime les identifiants que les robots peuvent collecter.",
     "kicker": "Des questions ?",
     "q5": "La balise d'exclusion d'IA fonctionne-t-elle vraiment ?",
-    "a5": "Pour les robots qui la respectent — oui. Les grandes entreprises d'IA, notamment OpenAI (GPTBot), Anthropic (ClaudeBot) et Common Crawl, s'engagent publiquement à respecter les signaux ai:opt-out dans les métadonnées des images.",
+    "a5": "Pour les robots qui la respectent. oui. Les grandes entreprises d'IA, notamment OpenAI (GPTBot), Anthropic (ClaudeBot) et Common Crawl, s'engagent publiquement à respecter les signaux ai:opt-out dans les métadonnées des images.",
     "q6": "VeriMedia fonctionne-t-il sur les photos iPhone et Android ?",
     "a6": "Oui. Les photos iOS and Android sont des fichiers JPEG ou HEIC standard. VeriMedia traite les deux dans le navigateur. Les fichiers HEIC (par défaut sur iPhone) sont convertis et protégés automatiquement.",
     "q7": "Quelle est la différence entre Plus et Pro ?",
@@ -125,9 +130,9 @@
   "profile": {
     "title": "Profil du créateur",
     "subtitle": "Votre identité est intégrée aux métadonnées de chaque fichier traité. Configurez-la une fois, utilisez-la pour toujours.",
-    "pro_badge": "Fonction Creator Pro",
-    "pro_unlock": "Passez au niveau supérieur pour intégrer votre identité et activer les badges 'Sous licence' de Google.",
-    "upgrade_btn": "Passer à Pro",
+    "pro_badge": "Fonction payante",
+    "pro_unlock": "Passez a Plus ou Pro pour integrer votre identite de createur dans chaque fichier.",
+    "upgrade_btn": "Voir les plans",
     "name_label": "Nom du créateur",
     "copy_label": "Chaîne de droits d'auteur",
     "url_label": "URL de licence / portfolio",
@@ -140,12 +145,12 @@
     "save_success": "Enregistré !",
     "copy_done": "Copié !",
     "import_done": "Terminé !",
-    "active_key": "Clé Creator Pro active",
+    "active_key": "Cle de licence active",
     "footnote": "Le profil est stocké dans le stockage local de votre navigateur. Jamais téléchargé.",
     "copy": "Copier",
     "tooltip_artist": "Ceci devient le champ Artiste intégré dans vos images. Les utilisateurs Pro reçoivent un préfixe \"VeriMedia Verified Creator\".",
     "tooltip_copyright": "Injecté comme champ EXIF/XMP de droits d'auteur. Utilisé par Getty, Shutterstock et les éditeurs de presse pour retracer la propriété de l'image.",
-    "tooltip_webstatement": "Votre site web ou page de licence. Intégré en tant que balise XMP WebStatement — cela déclenche le badge \"Sous licence\" de Google Images sur vos photos.",
+    "tooltip_webstatement": "Votre site web ou page de licence. Intégré en tant que balise XMP WebStatement. cela déclenche le badge \"Sous licence\" de Google Images sur vos photos.",
     "tooltip_ai": "Le signal de métadonnées standardisé (\"ai:opt-out=true\") indique aux robots d'IA que votre média est exclu des jeux de données d'entraînement.",
     "tooltip_whitelabel": "Supprimez toutes les références à \"VeriMedia\" des métadonnées intégrées pour une empreinte 100 % propre et professionnelle."
   },
@@ -154,7 +159,7 @@
     "pro_subtitle": "Paiement unique. Utilisation sur jusqu'à 3 appareils. Aucun abonnement, jamais.",
     "item": "Creator Pro à vie",
     "total": "Total",
-    "buy_btn": "Acheter maintenant — 19 $",
+    "buy_btn": "Acheter maintenant. 19 $",
     "buy_footnote": "Après le paiement, Paddle vous enverra par e-mail une clé de licence.",
     "already_key": "Vous avez déjà une clé ? Activez-la ici",
     "activate_title": "Activez votre licence",
@@ -186,7 +191,7 @@
     "link_kb": "Base de connaissances",
     "col_legal": "Légal",
     "link_pricing": "Tarifs",
-    "bottom": "Tous les fichiers sont traités à 100 % localement — rien ne quitte jamais votre navigateur."
+    "bottom": "Tous les fichiers sont traités à 100 % localement. rien ne quitte jamais votre navigateur."
   },
   "privacy_page": {
     "h1": "Politique de confidentialité",
@@ -264,7 +269,7 @@
     "footer_link_terms": "Conditions d'utilisation",
     "footer_link_refund": "Politique de remboursement",
     "footer_link_pricing": "Tarifs",
-    "footer_bottom": "Tous les fichiers sont traités à 100 % localement — rien ne quitte jamais votre navigateur."
+    "footer_bottom": "Tous les fichiers sont traités à 100 % localement. rien ne quitte jamais votre navigateur."
   },
   "refund_page": {
     "h1": "Politique de remboursement",
@@ -285,7 +290,7 @@
     "kicker": "Comment ça marche",
     "title": "Trois étapes. Entièrement dans votre navigateur.",
     "s1_title": "Déposez votre fichier",
-    "s1_desc": "JPEG, PNG, WebP, HEIC ou PDF. Analysé entièrement dans la mémoire du navigateur — ne quitte jamais votre appareil.",
+    "s1_desc": "JPEG, PNG, WebP, HEIC ou PDF. Analysé entièrement dans la mémoire du navigateur. ne quitte jamais votre appareil.",
     "s2_title": "Intégrer l'exclusion d'IA et supprimer le suivi",
     "s2_desc": "VeriMedia écrit la balise ai:opt-out=true et supprime le GPS, les empreintes numériques de l'appareil et les métadonnées forensiques.",
     "s3_title": "Télécharger le fichier protégé",

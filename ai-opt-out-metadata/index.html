@@ -44,13 +44,13 @@
         "@type": "HowToStep",
         "position": 2,
         "name": "Drop your image or PDF",
-        "text": "Drag and drop your JPEG, PNG, WebP, HEIC, or PDF file onto the tool. The file is processed entirely in your browser — nothing is uploaded."
+        "text": "Drag and drop your JPEG, PNG, WebP, HEIC, or PDF file onto the tool. The file is processed entirely in your browser. nothing is uploaded."
       },
       {
         "@type": "HowToStep",
         "position": 3,
         "name": "Download the shielded file",
-        "text": "VeriMedia embeds the ai:opt-out=true XMP tag and strips private metadata. Download the file — it now carries the opt-out signal wherever it travels."
+        "text": "VeriMedia embeds the ai:opt-out=true XMP tag and strips private metadata. Download the file. it now carries the opt-out signal wherever it travels."
       }
     ]
   }
@@ -66,7 +66,7 @@
         "name": "Does the ai:opt-out tag actually stop AI companies from using my images?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For companies that publicly commit to honouring it — yes. OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl all state they respect the ai:opt-out signal in image XMP metadata. It is the metadata equivalent of robots.txt for AI training crawlers."
+          "text": "For companies that publicly commit to honouring it. yes. OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl all state they respect the ai:opt-out signal in image XMP metadata. It is the metadata equivalent of robots.txt for AI training crawlers."
         }
       },
       {
@@ -154,7 +154,7 @@
       </div>
       <div class="guide-tag">AI Training Protection</div>
       <h1 class="guide-title">How to Block AI from Training on Your Images</h1>
-      <p class="guide-intro">AI companies scrape billions of images from the web to train their models — without asking permission. The <code>ai:opt-out=true</code> metadata standard gives you a way to signal that your work is off-limits. This guide explains how it works and how to embed it into your files in under a minute.</p>
+      <p class="guide-intro">AI companies scrape billions of images from the web to train their models. without asking permission. The <code>ai:opt-out=true</code> metadata standard gives you a way to signal that your work is off-limits. This guide explains how it works and how to embed it into your files in under a minute.</p>
       <div class="guide-meta">
         <span><i data-lucide="clock" style="width:13px;height:13px;"></i> 5 min read</span>
         <span><i data-lucide="calendar" style="width:13px;height:13px;"></i> Updated May 2026</span>
@@ -165,12 +165,12 @@
     <div class="guide-body">
 
       <h2>Why AI crawlers are scraping your photos</h2>
-      <p>Every time you publish a photo online — on your portfolio, Instagram, a stock site, or even a client delivery — it becomes visible to web crawlers. AI companies run large-scale crawling operations to collect training data for image generation and recognition models.</p>
-      <p>Unlike traditional search engine crawlers, AI training crawlers don't index your page for search results — they download your images to use as raw training material. The result: your original photography, illustration, or artwork ends up inside a model that can reproduce your style without attribution or payment.</p>
+      <p>Every time you publish a photo online. on your portfolio, Instagram, a stock site, or even a client delivery. it becomes visible to web crawlers. AI companies run large-scale crawling operations to collect training data for image generation and recognition models.</p>
+      <p>Unlike traditional search engine crawlers, AI training crawlers don't index your page for search results. they download your images to use as raw training material. The result: your original photography, illustration, or artwork ends up inside a model that can reproduce your style without attribution or payment.</p>
       <p>The <code>robots.txt</code> file on your website can block specific crawlers from your domain. But that only works if the image stays on your domain. Once a file is downloaded, emailed, re-uploaded, or shared, the website-level block no longer applies. Metadata embedded inside the file travels with it.</p>
 
       <div class="guide-callout">
-        <p><strong>The key insight:</strong> <code>robots.txt</code> protects your website. <code>ai:opt-out</code> metadata protects the file itself — wherever it ends up.</p>
+        <p><strong>The key insight:</strong> <code>robots.txt</code> protects your website. <code>ai:opt-out</code> metadata protects the file itself. wherever it ends up.</p>
       </div>
 
       <h2>What is the ai:opt-out XMP tag?</h2>
@@ -206,7 +206,7 @@
         </div>
       </div>
 
-      <p>This does not mean every AI company in existence will honour it. Smaller or less scrupulous scrapers may ignore metadata entirely. But the largest, most commercially significant AI training operations — the ones whose models people actually use — do respect the signal.</p>
+      <p>This does not mean every AI company in existence will honour it. Smaller or less scrupulous scrapers may ignore metadata entirely. But the largest, most commercially significant AI training operations. the ones whose models people actually use. do respect the signal.</p>
 
       <h2>How to embed the ai:opt-out tag in 3 steps</h2>
       <p>VeriMedia embeds the tag directly in your browser. No uploads, no accounts, no software to install.</p>
@@ -215,13 +215,13 @@
         <li>
           <div>
             <strong>Open VeriMedia</strong>
-            Go to <a href="/" style="color:var(--accent);">verimedia.xyz</a>. The tool runs entirely in your browser — Chrome, Firefox, Safari, or Edge all work.
+            Go to <a href="/" style="color:var(--accent);">verimedia.xyz</a>. The tool runs entirely in your browser. Chrome, Firefox, Safari, or Edge all work.
           </div>
         </li>
         <li>
           <div>
             <strong>Drop your file onto the tool</strong>
-            Drag and drop your JPEG, PNG, WebP, HEIC, or PDF onto the upload area, or click to browse. Files up to 25 MB are supported on the free tier. Your file is read into browser memory — it never leaves your device.
+            Drag and drop your JPEG, PNG, WebP, HEIC, or PDF onto the upload area, or click to browse. Files up to 25 MB are supported on the free tier. Your file is read into browser memory. it never leaves your device.
           </div>
         </li>
         <li>
@@ -233,17 +233,17 @@
       </ol>
 
       <div class="guide-callout">
-        <p><strong>Tip for photographers:</strong> Run your files through VeriMedia as the last step before any upload — before posting to your portfolio, sending to clients, or publishing on social media. This ensures every file that leaves your machine carries the opt-out signal.</p>
+        <p><strong>Tip for photographers:</strong> Run your files through VeriMedia as the last step before any upload. before posting to your portfolio, sending to clients, or publishing on social media. This ensures every file that leaves your machine carries the opt-out signal.</p>
       </div>
 
       <h2>What else gets embedded or removed?</h2>
       <p>VeriMedia does more than the opt-out tag in a single pass:</p>
       <ul>
-        <li><strong>GPS coordinates removed</strong> — your precise location at the time of shooting is stripped from the file</li>
-        <li><strong>Device fingerprints removed</strong> — camera make, model, serial number, and lens data are cleared</li>
-        <li><strong>AI opt-out embedded</strong> — <code>ai:opt-out=true</code> written to the binary XMP packet</li>
-        <li><strong>Creator metadata added (Plus/Pro)</strong> — your name, copyright statement, and portfolio URL embedded in standard XMP fields</li>
-        <li><strong>Google Licensable Badge (Pro)</strong> — the <code>WebStatement</code> XMP tag that triggers a "Licensable" badge in Google Images</li>
+        <li><strong>GPS coordinates removed</strong>. your precise location at the time of shooting is stripped from the file</li>
+        <li><strong>Device fingerprints removed</strong>. camera make, model, serial number, and lens data are cleared</li>
+        <li><strong>AI opt-out embedded</strong>. <code>ai:opt-out=true</code> written to the binary XMP packet</li>
+        <li><strong>Creator metadata added (Plus/Pro)</strong>. your name, copyright statement, and portfolio URL embedded in standard XMP fields</li>
+        <li><strong>Google Licensable Badge (Pro)</strong>. the <code>WebStatement</code> XMP tag that triggers a "Licensable" badge in Google Images</li>
       </ul>
 
       <h2>Does it affect image quality?</h2>
@@ -254,7 +254,7 @@
         <div class="faq-accordion">
           <div class="faq-item">
             <h3>Can I use this on already-published photos?</h3>
-            <p>Yes — you can process and re-upload them. However, copies already downloaded by crawlers before you embedded the tag may have been processed. The tag is most effective when embedded before first publication.</p>
+            <p>Yes. you can process and re-upload them. However, copies already downloaded by crawlers before you embedded the tag may have been processed. The tag is most effective when embedded before first publication.</p>
           </div>
           <div class="faq-item">
             <h3>Does this work on iPhone photos (HEIC)?</h3>
@@ -266,21 +266,21 @@
           </div>
           <div class="faq-item">
             <h3>What's the difference between ai:opt-out and robots.txt?</h3>
-            <p><code>robots.txt</code> tells crawlers not to visit specific URLs on your website. It only works while the image lives on your domain. <code>ai:opt-out</code> is embedded in the file itself and travels with it — so it still signals opt-out even after the image is downloaded, shared, or re-hosted.</p>
+            <p><code>robots.txt</code> tells crawlers not to visit specific URLs on your website. It only works while the image lives on your domain. <code>ai:opt-out</code> is embedded in the file itself and travels with it. so it still signals opt-out even after the image is downloaded, shared, or re-hosted.</p>
           </div>
           <div class="faq-item">
             <h3>Does VeriMedia upload my files?</h3>
-            <p>No. Every step — reading the file, embedding metadata, stripping GPS — happens inside your browser using JavaScript. No bytes are sent to any server at any point.</p>
+            <p>No. Every step. reading the file, embedding metadata, stripping GPS. happens inside your browser using JavaScript. No bytes are sent to any server at any point.</p>
           </div>
         </div>
       </div>
 
       <div class="guide-cta-block">
-        <h3>Shield your images now — free</h3>
+        <h3>Shield your images now. free</h3>
         <p>Embed <code>ai:opt-out=true</code> and strip private metadata in under 5 seconds. No account needed.</p>
         <a href="/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
           <i data-lucide="shield-check" style="width:15px;height:15px;"></i>
-          Try VeriMedia — free
+          Try VeriMedia. free
         </a>
       </div>
 

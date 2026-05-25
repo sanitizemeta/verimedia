@@ -1,62 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-  <defs>
-    <!-- Cyber Gradients -->
-    <linearGradient id="cyber-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00F0FF" />
-      <stop offset="100%" stop-color="#0072FF" />
-    </linearGradient>
-    <linearGradient id="cyber-emerald" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00F0FF" />
-      <stop offset="100%" stop-color="#10B981" />
-    </linearGradient>
-    <linearGradient id="shield-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0B1528" />
-      <stop offset="100%" stop-color="#040810" />
-    </linearGradient>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Shield -->
+  <path d="M50 10 L84 23 V54 C84 73 69 86 50 92 C31 86 16 73 16 54 V23Z"
+        fill="#1a2e1a" stroke="#7EC47E" stroke-width="2.5" stroke-linejoin="round"/>
 
-    <!-- Glowing Filters -->
-    <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-    <filter id="subtle-glow" x="-10%" y="-10%" width="120%" height="120%">
-      <feGaussianBlur stdDeviation="1.5" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-  </defs>
-
-  <!-- Outer Cyber Shield -->
-  <path d="M 50 18 L 80 27 V 52 C 80 69 67 81 50 86 C 33 81 20 69 20 52 V 27 Z" 
-        fill="url(#shield-grad)" 
-        stroke="url(#cyber-emerald)" 
-        stroke-width="3.5" 
-        stroke-linejoin="round"
-        filter="url(#subtle-glow)" />
-
-  <!-- Inner Tech Plate -->
-  <path d="M 50 25 L 73 32 V 51 C 73 64 63 74 50 78 C 37 74 27 64 27 51 V 32 Z" 
-        fill="#040810" 
-        stroke="#102A45" 
-        stroke-width="1.5" 
-        stroke-linejoin="round" />
-
-  <!-- Cybernetic Accents/Dots -->
-  <circle cx="50" cy="30" r="1.5" fill="#00F0FF" filter="url(#subtle-glow)" />
-  <path d="M 24 33 L 30 35" stroke="#00F0FF" stroke-width="1.5" stroke-linecap="round" opacity="0.8" />
-  <path d="M 76 33 L 70 35" stroke="#00F0FF" stroke-width="1.5" stroke-linecap="round" opacity="0.8" />
-
-  <!-- Neon Glowing Checkmark -->
-  <path d="M 38 52 L 47 61 L 63 42" 
-        fill="none" 
-        stroke="#00F0FF" 
-        stroke-width="6.5" 
-        stroke-linecap="round" 
-        stroke-linejoin="round" 
-        filter="url(#neon-glow)" />
+  <!-- Checkmark as filled shape -->
+  <polygon points="35,55 40,50 46,56 60,39 65,44 46,66"
+           fill="#7EC47E"/>
 </svg>

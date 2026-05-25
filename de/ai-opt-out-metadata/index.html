@@ -44,13 +44,13 @@
         "@type": "HowToStep",
         "position": 2,
         "name": "Drop your image or PDF",
-        "text": "Drag and drop your JPEG, PNG, WebP, HEIC, or PDF file onto the tool. The file is processed entirely in your browser — nothing is uploaded."
+        "text": "Drag and drop your JPEG, PNG, WebP, HEIC, or PDF file onto the tool. The file is processed entirely in your browser. nothing is uploaded."
       },
       {
         "@type": "HowToStep",
         "position": 3,
         "name": "Download the shielded file",
-        "text": "VeriMedia embeds the ai:opt-out=true XMP tag and strips private metadata. Download the file — it now carries the opt-out signal wherever it travels."
+        "text": "VeriMedia embeds the ai:opt-out=true XMP tag and strips private metadata. Download the file. it now carries the opt-out signal wherever it travels."
       }
     ]
   }
@@ -66,7 +66,7 @@
         "name": "Does the ai:opt-out tag actually stop AI companies from using my images?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For companies that publicly commit to honouring it — yes. OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl all state they respect the ai:opt-out signal in image XMP metadata. It is the metadata equivalent of robots.txt for AI training crawlers."
+          "text": "For companies that publicly commit to honouring it. yes. OpenAI (GPTBot), Anthropic (ClaudeBot), and Common Crawl all state they respect the ai:opt-out signal in image XMP metadata. It is the metadata equivalent of robots.txt for AI training crawlers."
         }
       },
       {
@@ -154,7 +154,7 @@
       </div>
       <div class="guide-tag">KI-Trainingsschutz</div>
       <h1 class="guide-title">So blockieren Sie KI-Training auf Ihren Bildern</h1>
-      <p class="guide-intro">KI-Unternehmen scrapen Milliarden von Bildern aus dem Internet, um ihre Modelle zu trainieren — ohne um Erlaubnis zu fragen. Der Metadaten-Standard <code>ai:opt-out=true</code> bietet Ihnen eine Möglichkeit zu signalisieren, dass Ihre Arbeit gesperrt ist. Dieser Leitfaden erklärt, wie es funktioniert und wie Sie es in weniger als einer Minute in Ihre Dateien einbetten.</p>
+      <p class="guide-intro">KI-Unternehmen scrapen Milliarden von Bildern aus dem Internet, um ihre Modelle zu trainieren. ohne um Erlaubnis zu fragen. Der Metadaten-Standard <code>ai:opt-out=true</code> bietet Ihnen eine Möglichkeit zu signalisieren, dass Ihre Arbeit gesperrt ist. Dieser Leitfaden erklärt, wie es funktioniert und wie Sie es in weniger als einer Minute in Ihre Dateien einbetten.</p>
       <div class="guide-meta">
         <span><i data-lucide="clock" style="width:13px;height:13px;"></i> 5 Min. Lesezeit</span>
         <span><i data-lucide="calendar" style="width:13px;height:13px;"></i> Aktualisiert im Mai 2026</span>
@@ -165,12 +165,12 @@
     <div class="guide-body">
 
       <h2>Warum KI-Crawler Ihre Fotos scrapen</h2>
-      <p>Jedes Mal, wenn Sie ein Foto online veröffentlichen — in Ihrem Portfolio, auf Instagram, einer Stock-Seite oder sogar bei einer Kundenlieferung — wird es für Webcrawler sichtbar. KI-Unternehmen betreiben großflächige Crawling-Operationen, um Trainingsdaten für Bildgenerierungs- und Erkennungsmodelle zu sammeln.</p>
-      <p>Im Gegensatz zu herkömmlichen Suchmaschinen-Crawlern indexieren KI-Trainingscrawler Ihre Seite nicht für Suchergebnisse — sie laden Ihre Bilder herunter, um sie als rohes Trainingsmaterial zu verwenden. Das Ergebnis: Ihre Originalfotografie, Illustration oder Ihr Kunstwerk landet in einem Modell, das Ihren Stil ohne Nennung oder Bezahlung reproduzieren kann.</p>
+      <p>Jedes Mal, wenn Sie ein Foto online veröffentlichen. in Ihrem Portfolio, auf Instagram, einer Stock-Seite oder sogar bei einer Kundenlieferung. wird es für Webcrawler sichtbar. KI-Unternehmen betreiben großflächige Crawling-Operationen, um Trainingsdaten für Bildgenerierungs- und Erkennungsmodelle zu sammeln.</p>
+      <p>Im Gegensatz zu herkömmlichen Suchmaschinen-Crawlern indexieren KI-Trainingscrawler Ihre Seite nicht für Suchergebnisse. sie laden Ihre Bilder herunter, um sie als rohes Trainingsmaterial zu verwenden. Das Ergebnis: Ihre Originalfotografie, Illustration oder Ihr Kunstwerk landet in einem Modell, das Ihren Stil ohne Nennung oder Bezahlung reproduzieren kann.</p>
       <p>Die <code>robots.txt</code> Datei auf Ihrer Website kann spezifische Crawler von Ihrer Domain blockieren. Das funktioniert aber nur, solange das Bild auf Ihrer Domain bleibt. Sobald eine Datei heruntergeladen, per E-Mail verschickt, erneut hochgeladen oder geteilt wird, gilt die Blockierung auf Website-Ebene nicht mehr. Metadaten, die in die Datei eingebettet sind, reisen mit ihr.</p>
 
       <div class="guide-callout">
-        <p><strong>Die zentrale Erkenntnis:</strong> <code>robots.txt</code> schützt Ihre Website. <code>ai:opt-out</code> Metadaten schützen die Datei selbst — egal wo sie landet.</p>
+        <p><strong>Die zentrale Erkenntnis:</strong> <code>robots.txt</code> schützt Ihre Website. <code>ai:opt-out</code> Metadaten schützen die Datei selbst. egal wo sie landet.</p>
       </div>
 
       <h2>Was ist der ai:opt-out XMP-Tag?</h2>
@@ -206,7 +206,7 @@
         </div>
       </div>
 
-      <p>Dies bedeutet nicht, dass jedes existierende KI-Unternehmen dies respektieren wird. Kleinere oder weniger gewissenhafte Scraper ignorieren Metadaten möglicherweise vollständig. Aber die größten und kommerziell bedeutendsten KI-Trainingsoperationen — diejenigen, deren Modelle tatsächlich genutzt werden — respektieren das Signal.</p>
+      <p>Dies bedeutet nicht, dass jedes existierende KI-Unternehmen dies respektieren wird. Kleinere oder weniger gewissenhafte Scraper ignorieren Metadaten möglicherweise vollständig. Aber die größten und kommerziell bedeutendsten KI-Trainingsoperationen. diejenigen, deren Modelle tatsächlich genutzt werden. respektieren das Signal.</p>
 
       <h2>So betten Sie den ai:opt-out Tag in 3 Schritten ein</h2>
       <p>VeriMedia bettet den Tag direkt in Ihrem Browser ein. Keine Uploads, keine Konten, keine Softwareinstallation.</p>
@@ -215,13 +215,13 @@
         <li>
           <div>
             <strong>VeriMedia öffnen</strong>
-            Gehen Sie auf <a href="/de/" style="color:var(--accent);">verimedia.xyz</a>. Das Tool läuft vollständig in Ihrem Browser — Chrome, Firefox, Safari oder Edge funktionieren alle.
+            Gehen Sie auf <a href="/de/" style="color:var(--accent);">verimedia.xyz</a>. Das Tool läuft vollständig in Ihrem Browser. Chrome, Firefox, Safari oder Edge funktionieren alle.
           </div>
         </li>
         <li>
           <div>
             <strong>Datei auf das Tool ziehen</strong>
-            Ziehen Sie Ihr JPEG, PNG, WebP, HEIC oder PDF per Drag-and-Drop auf den Upload-Bereich oder klicken Sie zum Durchsuchen. Dateien bis zu 25 MB werden in der kostenlosen Version unterstützt. Ihre Datei wird in den Speicher des Browsers geladen — sie verlässt Ihr Gerät nie.
+            Ziehen Sie Ihr JPEG, PNG, WebP, HEIC oder PDF per Drag-and-Drop auf den Upload-Bereich oder klicken Sie zum Durchsuchen. Dateien bis zu 25 MB werden in der kostenlosen Version unterstützt. Ihre Datei wird in den Speicher des Browsers geladen. sie verlässt Ihr Gerät nie.
           </div>
         </li>
         <li>
@@ -233,17 +233,17 @@
       </ol>
 
       <div class="guide-callout">
-        <p><strong>Tipp für Fotografen:</strong> Lassen Sie Ihre Dateien als letzten Schritt vor jedem Upload durch VeriMedia laufen — bevor Sie sie in Ihr Portfolio stellen, an Kunden senden oder auf Social Media veröffentlichen. Dies stellt sicher, dass jede Datei, die Ihren Rechner verlässt, das Opt-Out-Signal trägt.</p>
+        <p><strong>Tipp für Fotografen:</strong> Lassen Sie Ihre Dateien als letzten Schritt vor jedem Upload durch VeriMedia laufen. bevor Sie sie in Ihr Portfolio stellen, an Kunden senden oder auf Social Media veröffentlichen. Dies stellt sicher, dass jede Datei, die Ihren Rechner verlässt, das Opt-Out-Signal trägt.</p>
       </div>
 
       <h2>Was wird sonst noch eingebettet oder entfernt?</h2>
       <p>VeriMedia erledigt in einem Durchgang mehr als nur den Opt-Out-Tag:</p>
       <ul>
-        <li><strong>GPS-Koordinaten entfernt</strong> — Ihr präziser Standort zum Zeitpunkt der Aufnahme wird aus der Datei gelöscht</li>
-        <li><strong>Geräte-Fingerabdrücke entfernt</strong> — Kameramarke, Modell, Seriennummer und Objektivdaten werden gelöscht</li>
-        <li><strong>KI-Opt-Out eingebettet</strong> — <code>ai:opt-out=true</code> wird in das binäre XMP-Paket geschrieben</li>
-        <li><strong>Urheber-Metadaten hinzugefügt (Plus/Pro)</strong> — Ihr Name, Urheberrechtshinweis und Portfolio-URL werden in Standard-XMP-Felder eingebettet</li>
-        <li><strong>Google Lizenzierbar-Badge (Pro)</strong> — der <code>WebStatement</code> XMP-Tag, der ein \"Lizenzierbar\"-Badge in Google Bilder aktiviert</li>
+        <li><strong>GPS-Koordinaten entfernt</strong>. Ihr präziser Standort zum Zeitpunkt der Aufnahme wird aus der Datei gelöscht</li>
+        <li><strong>Geräte-Fingerabdrücke entfernt</strong>. Kameramarke, Modell, Seriennummer und Objektivdaten werden gelöscht</li>
+        <li><strong>KI-Opt-Out eingebettet</strong>. <code>ai:opt-out=true</code> wird in das binäre XMP-Paket geschrieben</li>
+        <li><strong>Urheber-Metadaten hinzugefügt (Plus/Pro)</strong>. Ihr Name, Urheberrechtshinweis und Portfolio-URL werden in Standard-XMP-Felder eingebettet</li>
+        <li><strong>Google Lizenzierbar-Badge (Pro)</strong>. der <code>WebStatement</code> XMP-Tag, der ein \"Lizenzierbar\"-Badge in Google Bilder aktiviert</li>
       </ul>
 
       <h2>Beeinflusst es die Bildqualität?</h2>
@@ -254,7 +254,7 @@
         <div class="faq-accordion">
           <div class="faq-item">
             <h3>Kann ich dies für bereits veröffentlichte Fotos verwenden?</h3>
-            <p>Ja — Sie können sie verarbeiten und erneut hochladen. Kopien, die bereits vor dem Einbetten des Tags von Crawlern heruntergeladen wurden, könnten jedoch bereits verarbeitet worden sein. Der Tag ist am effektivsten, wenn er vor der Erstveröffentlichung eingebettet wird.</p>
+            <p>Ja. Sie können sie verarbeiten und erneut hochladen. Kopien, die bereits vor dem Einbetten des Tags von Crawlern heruntergeladen wurden, könnten jedoch bereits verarbeitet worden sein. Der Tag ist am effektivsten, wenn er vor der Erstveröffentlichung eingebettet wird.</p>
           </div>
           <div class="faq-item">
             <h3>Funktioniert dies bei iPhone-Fotos (HEIC)?</h3>
@@ -266,21 +266,21 @@
           </div>
           <div class="faq-item">
             <h3>Was ist der Unterschied zwischen ai:opt-out und robots.txt?</h3>
-            <p><code>robots.txt</code> teilt Crawlern mit, bestimmte URLs auf Ihrer Website nicht zu besuchen. Dies funktioniert nur, solange das Bild auf Ihrer Domain liegt. <code>ai:opt-out</code> ist in die Datei selbst eingebettet und reist mit ihr — es signalisiert also das Opt-Out auch dann noch, wenn das Bild heruntergeladen, geteilt oder auf anderen Servern gehostet wird.</p>
+            <p><code>robots.txt</code> teilt Crawlern mit, bestimmte URLs auf Ihrer Website nicht zu besuchen. Dies funktioniert nur, solange das Bild auf Ihrer Domain liegt. <code>ai:opt-out</code> ist in die Datei selbst eingebettet und reist mit ihr. es signalisiert also das Opt-Out auch dann noch, wenn das Bild heruntergeladen, geteilt oder auf anderen Servern gehostet wird.</p>
           </div>
           <div class="faq-item">
             <h3>Lädt VeriMedia meine Dateien hoch?</h3>
-            <p>Nein. Jeder Schritt — das Lesen der Datei, das Einbetten der Metadaten, das Entfernen der GPS-Daten — erfolgt mit JavaScript in Ihrem Browser. Zu keinem Zeitpunkt werden Bytes an einen Server gesendet.</p>
+            <p>Nein. Jeder Schritt. das Lesen der Datei, das Einbetten der Metadaten, das Entfernen der GPS-Daten. erfolgt mit JavaScript in Ihrem Browser. Zu keinem Zeitpunkt werden Bytes an einen Server gesendet.</p>
           </div>
         </div>
       </div>
 
       <div class="guide-cta-block">
-        <h3>Schützen Sie Ihre Bilder jetzt — kostenlos</h3>
+        <h3>Schützen Sie Ihre Bilder jetzt. kostenlos</h3>
         <p>Betten Sie <code>ai:opt-out=true</code> ein und entfernen Sie private Metadaten in weniger als 5 Sekunden. Kein Konto erforderlich.</p>
         <a href="/de/#calculator-section" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
           <i data-lucide="shield-check" style="width:15px;height:15px;"></i>
-          VeriMedia testen — kostenlos
+          VeriMedia testen. kostenlos
         </a>
       </div>
 

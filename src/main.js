@@ -84,9 +84,9 @@ let translations = {};
 
 // Lucide-style SVG Constants for Performance
 const ICON_SCRUBBING = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="audit-icon pulse"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`;
-const ICON_CLEANED   = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="audit-icon" style="color:var(--accent-emerald);"><polyline points="20 6 9 17 4 12"/></svg>`;
-const ICON_ERROR     = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="audit-icon" style="color:var(--accent-rose);"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
-const ICON_SKIP      = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="audit-icon" style="color:var(--accent-rose);"><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+const ICON_CLEANED   = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="audit-icon" style="color:var(--emerald);"><polyline points="20 6 9 17 4 12"/></svg>`;
+const ICON_ERROR     = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="audit-icon" style="color:var(--rose);"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+const ICON_SKIP      = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="audit-icon" style="color:var(--rose);"><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
 
 async function loadTranslations(lang) {
   try {
@@ -153,7 +153,7 @@ async function incrementGlobalStats(amount = 1) {
     el.style.color = '#fff';
     el.style.transform = 'scale(1.1)';
     setTimeout(() => { 
-      el.style.color = 'var(--accent-emerald)'; 
+      el.style.color = 'var(--emerald)'; 
       el.style.transform = 'scale(1)';
     }, 400);
   }
@@ -380,8 +380,8 @@ if (langToggle && langDropdown) {
   langOpts.forEach(opt => {
     opt.addEventListener('click', () => {
       const lang = opt.getAttribute('data-lang');
-      currentLang = lang;
-      loadTranslations(lang);
+      const dest = lang === 'en' ? '/' : `/${lang}/`;
+      window.location.href = dest;
     });
   });
 }
@@ -561,7 +561,7 @@ if (profileSave) {
     const originalText = profileSave.innerHTML;
     const successMsg = translations.profile?.save_success || 'Saved!';
     profileSave.innerHTML = `<i data-lucide="check" style="width:14px; height:14px; vertical-align:middle; margin-right:4px;"></i> ${successMsg}`;
-    profileSave.style.background = 'var(--accent-emerald)';
+    profileSave.style.background = 'var(--emerald)';
     if (window.lucide) window.lucide.createIcons();
     
     setTimeout(() => {
@@ -790,8 +790,8 @@ const profileUpgradeBtn = document.getElementById('profileUpgradeBtn');
 if (profileUpgradeBtn) {
   profileUpgradeBtn.addEventListener('click', () => {
     closeProfilePanel();
-    updateCheckoutModal('plus');
-    openModal(viewBuy);
+    const pricing = document.getElementById('pricing-section');
+    if (pricing) pricing.scrollIntoView({ behavior: 'smooth' });
   });
 }
 
@@ -809,7 +809,7 @@ function setProActiveUI() {
   document.querySelectorAll('#paddleCheckoutBtn, .paddle-checkout-btn').forEach(btn => {
     const isProBtn = btn.classList.contains('paddle-pro-checkout-btn');
     btn.textContent = isProBtn ? 'Creator Pro Active' : 'Included in Pro';
-    btn.style.background = isProBtn ? 'var(--accent-emerald)' : '';
+    btn.style.background = isProBtn ? 'var(--emerald)' : '';
     btn.style.opacity = isProBtn ? '' : '0.65';
     btn.disabled = true;
   });
@@ -839,7 +839,7 @@ function setPlusActiveUI() {
   document.querySelectorAll('.paddle-checkout-btn').forEach(btn => {
     const isPlusBtn = btn.classList.contains('paddle-plus-checkout-btn');
     btn.textContent = isPlusBtn ? 'Creator Plus Active' : 'Upgrade to Pro';
-    btn.style.background = isPlusBtn ? 'var(--accent-emerald)' : '';
+    btn.style.background = isPlusBtn ? 'var(--emerald)' : '';
     btn.style.opacity = isPlusBtn ? '' : '0.9';
     btn.disabled = isPlusBtn;
   });
@@ -1201,6 +1201,10 @@ function runLiveTicker() {
   if (el) {
     el.innerText = liveStrippedCount.toLocaleString();
   }
+  const heroCounter = document.getElementById('globalShieldCount');
+  if (heroCounter) {
+    heroCounter.setAttribute('data-target', String(liveStrippedCount));
+  }
 }
 
 async function runInteractiveDemo() {
@@ -1227,7 +1231,7 @@ async function runInteractiveDemo() {
       </div>
     </div>
     <div class="progress-bar-track" style="margin-top:1.5rem;"><div class="progress-bar-fill" id="progressBarFill" style="width:0%;"></div></div>
-    <p id="progressLabel" style="font-size:0.8rem; color:var(--accent-cyan); margin-top:0.5rem;">Forensic Scrubbing Active...</p>
+    <p id="progressLabel" style="font-size:0.8rem; color:var(--accent); margin-top:0.5rem;">Forensic Scrubbing Active...</p>
   `;
 
   const progressBarFill = document.getElementById('progressBarFill');
@@ -1265,7 +1269,7 @@ async function runInteractiveDemo() {
   const dBtn = document.getElementById('downloadBtn');
   if (dBtn) {
     dBtn.innerText = 'Now Try Your Own File';
-    dBtn.style.background = 'var(--accent-cyan)';
+    dBtn.style.background = 'var(--accent)';
     dBtn.removeEventListener('click', triggerDownload);
     dBtn.addEventListener('click', () => { if (!isProcessing) fileInput.click(); });
   }
@@ -1320,7 +1324,7 @@ async function handleSingleFileUpload(file) {
 
   reportContent.innerHTML = `
     <div class="empty-state" style="margin:auto;width:100%;">
-      <p id="progressLabel" style="font-family:var(--font-headers);font-weight:600;color:var(--accent-cyan);font-size:1.1rem;margin-bottom:0.5rem;letter-spacing:0.5px;">${translations.sandbox?.processing || 'Preparing...'}</p>
+      <p id="progressLabel" style="font-family:var(--font-display);font-weight:600;color:var(--accent);font-size:1.1rem;margin-bottom:0.5rem;letter-spacing:0.5px;">${translations.sandbox?.processing || 'Preparing...'}</p>
       <div class="progress-bar-track"><div class="progress-bar-fill" id="progressBarFill" style="width:0%;"></div></div>
     </div>
   `;
@@ -1458,9 +1462,9 @@ async function processBulkFiles(files) {
         
         successCount++;
         // Update item to "Cleaned"
-        fileItem.innerHTML = `<span class="audit-icon">${ICON_CLEANED}</span> <span class="batch-file-name" title="${safeFileName}">${safeFileName}</span> <span class="compact-tag" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">CLEANED</span>`;
+        fileItem.innerHTML = `<span class="audit-icon">${ICON_CLEANED}</span> <span class="batch-file-name" title="${safeFileName}">${safeFileName}</span> <span class="compact-tag" style="color:var(--emerald); border-color:var(--emerald);">CLEANED</span>`;
       } catch (e) {
-        fileItem.innerHTML = `<span class="audit-icon">${ICON_ERROR}</span> <span class="batch-file-name" title="${safeFileName}">${safeFileName}</span> <span class="compact-tag" style="color:var(--accent-rose); border-color:var(--accent-rose);">ERROR</span>`;
+        fileItem.innerHTML = `<span class="audit-icon">${ICON_ERROR}</span> <span class="batch-file-name" title="${safeFileName}">${safeFileName}</span> <span class="compact-tag" style="color:var(--rose); border-color:var(--rose);">ERROR</span>`;
       }
     } else {
       fileItem.innerHTML = `<span class="audit-icon">${ICON_SKIP}</span> <span class="batch-file-name" title="${safeFileName}">${safeFileName}</span> <span class="compact-tag">SKIP</span>`;

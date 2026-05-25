@@ -19,12 +19,15 @@ VeriMedia is fully optimized for international AI discovery with localized metad
 *   **Zero-Server Overhead:** Built using HTML5 Canvas and client-side binary segment rewriting. Files are never uploaded to a server, providing perfect data security and 100% privacy.
 
 ## Pricing Structures
-*   **Free Utility Tier:** Supports single file operations, standard metadata cleaning, and default AI opt-out headers. No registration required.
-*   **Creator Pro ($19.00 One-Time Lifetime Deal):**
-    *   Bulk Batch Processor (up to 100 files at once).
-    *   Custom Creator Identity & Copyright injection.
-    *   Whitelabel Metadata (remove VeriMedia branding).
-    *   Portfolio/License URL embedding (Google Licensable Badge).
+*   **Free Tier:** Single file operations, AI opt-out shield, GPS/EXIF stripping. No registration required.
+*   **Creator Plus ($9.99 One-Time):**
+    *   100-file batch shielding per session.
+    *   Creator profile metadata (name + copyright in every file).
+    *   Files up to 25 MB. 1 device license, lifetime access.
+*   **Creator Pro ($19.00 One-Time):**
+    *   Everything in Plus, unlimited batch shielding.
+    *   Google "Licensable" badge support (WebStatement XMP tag).
+    *   Files up to 100 MB. Whitelabel metadata mode. Up to 3 devices.
 
 ## Technical Specifications
 *   **Stack:** HTML5, Vanilla CSS, ESNext JavaScript, Vite.

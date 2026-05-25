@@ -43,15 +43,50 @@ function buildLangUrl(lang) {
 
 const currentLang = detectLang();
 
+let fullTranslations = {};
+
 async function loadChromeStrings(lang) {
   try {
     const res = await fetch(`/locales/${lang}.json`);
     if (!res.ok) throw new Error('locale not found');
     const data = await res.json();
+    fullTranslations = data;
     return data.chrome || {};
   } catch {
     return {};
   }
+}
+
+function applyPageTranslations() {
+  document.querySelectorAll('[data-i18n], [data-i18n-alt], [data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const altKey = el.getAttribute('data-i18n-alt');
+    const htmlKey = el.getAttribute('data-i18n-html');
+
+    if (key) {
+      let value = fullTranslations;
+      for (const k of key.split('.')) { value = value ? value[k] : null; }
+      if (value) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = value;
+        } else {
+          el.textContent = value;
+        }
+      }
+    }
+
+    if (altKey) {
+      let value = fullTranslations;
+      for (const k of altKey.split('.')) { value = value ? value[k] : null; }
+      if (value) el.setAttribute('alt', value);
+    }
+
+    if (htmlKey) {
+      let value = fullTranslations;
+      for (const k of htmlKey.split('.')) { value = value ? value[k] : null; }
+      if (value) el.innerHTML = value;
+    }
+  });
 }
 
 function homeUrl() {
@@ -145,6 +180,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const footer = document.querySelector('footer');
   if (footer) footer.innerHTML = buildFooter(t);
+
+  document.documentElement.setAttribute('lang', currentLang);
+  applyPageTranslations();
 
   if (window.lucide) window.lucide.createIcons();
 
