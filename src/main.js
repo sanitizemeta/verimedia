@@ -240,7 +240,9 @@ function applyTranslations() {
   const pagePath = window.location.pathname.replace('.html', '').split('/').pop() || 'index';
   let titleVal = '';
   if (pagePath === 'index' || pagePath === '') {
-    titleVal = translations.hero?.title ? `${translations.hero.title} | VeriMedia` : 'VeriMedia | Browser-Based AI Shield';
+    const rawTitle = translations.hero?.title || '';
+    const plainTitle = rawTitle.replace(/<[^>]*>/g, '');
+    titleVal = plainTitle ? `${plainTitle} | VeriMedia` : 'VeriMedia | Block AI from Training on Your Images';
   } else if (translations[`${pagePath}_page`]?.h1) {
     titleVal = `${translations[`${pagePath}_page`].h1} | VeriMedia.xyz`;
   }
