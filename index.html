@@ -840,6 +840,27 @@
   </script>
 
   <script>
+    // Rewrite guide page links to be language-prefixed based on detected lang
+    (function() {
+      const SUPPORTED = ['en', 'es', 'fr', 'de'];
+      const GUIDES = ['ai-opt-out-metadata', 'remove-exif-from-photos', 'remove-pdf-metadata', 'knowledge'];
+      const stored = localStorage.getItem('vm_lang');
+      const pathLang = window.location.pathname.split('/').filter(Boolean)[0];
+      const lang = (stored && SUPPORTED.includes(stored)) ? stored
+                 : (SUPPORTED.includes(pathLang)) ? pathLang
+                 : 'en';
+      if (lang === 'en') return;
+      document.querySelectorAll('a[href]').forEach(a => {
+        GUIDES.forEach(slug => {
+          if (a.getAttribute('href') === '/' + slug || a.getAttribute('href') === '/' + slug + '/') {
+            a.href = '/' + lang + '/' + slug + '/';
+          }
+        });
+      });
+    })();
+  </script>
+
+  <script>
     // Wire "Already purchased?" buttons to open the license activation modal
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.already-have-key-link').forEach(btn => {
