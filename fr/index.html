@@ -724,24 +724,24 @@
       </div>
       <div class="footer-col">
         <h4 class="footer-col-title" data-i18n="footer.col_tools">Tools</h4>
-        <a href="/#calculator-section" class="footer-link" data-i18n="footer.link_shield">AI Opt-Out Shield</a>
-        <a href="/ai-opt-out-metadata" class="footer-link" data-i18n="footer.link_tagger">AI Opt-Out Tagger</a>
-        <a href="/remove-exif-from-photos" class="footer-link" data-i18n="footer.link_exif">EXIF &amp; GPS Cleaner</a>
-        <a href="/remove-pdf-metadata" class="footer-link" data-i18n="footer.link_pdf">PDF Metadata Cleaner</a>
+        <a href="/fr/#calculator-section" class="footer-link" data-i18n="footer.link_shield">AI Opt-Out Shield</a>
+        <a href="/fr/ai-opt-out-metadata/" class="footer-link" data-i18n="footer.link_tagger">AI Opt-Out Tagger</a>
+        <a href="/fr/remove-exif-from-photos/" class="footer-link" data-i18n="footer.link_exif">EXIF &amp; GPS Cleaner</a>
+        <a href="/fr/remove-pdf-metadata/" class="footer-link" data-i18n="footer.link_pdf">PDF Metadata Cleaner</a>
       </div>
       <div class="footer-col">
         <h4 class="footer-col-title" data-i18n="footer.col_resources">Resources</h4>
-        <a href="/ai-opt-out-metadata" class="footer-link">AI Training Shield Guide</a>
-        <a href="/remove-exif-from-photos" class="footer-link">EXIF Removal Guide</a>
-        <a href="/remove-pdf-metadata" class="footer-link">PDF Privacy Guide</a>
-        <a href="/knowledge" class="footer-link" data-i18n="footer.link_kb">Knowledge Base</a>
+        <a href="/fr/ai-opt-out-metadata/" class="footer-link" data-i18n="footer.link_ai_guide">AI Training Shield Guide</a>
+        <a href="/fr/remove-exif-from-photos/" class="footer-link" data-i18n="footer.link_exif_guide">EXIF Removal Guide</a>
+        <a href="/fr/remove-pdf-metadata/" class="footer-link" data-i18n="footer.link_pdf_guide">PDF Privacy Guide</a>
+        <a href="/fr/knowledge/" class="footer-link" data-i18n="footer.link_kb">Knowledge Base</a>
       </div>
       <div class="footer-col">
         <h4 class="footer-col-title" data-i18n="footer.col_legal">Legal</h4>
         <a href="/privacy" class="footer-link" data-i18n="footer.privacy">Privacy Policy</a>
         <a href="/terms" class="footer-link" data-i18n="footer.terms">Terms of Service</a>
         <a href="/refund" class="footer-link" data-i18n="footer.refunds">Refund Policy</a>
-        <a href="/#pricing-section" class="footer-link">Pricing</a>
+        <a href="/fr/#pricing-section" class="footer-link" data-i18n="footer.link_pricing">Pricing</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -773,26 +773,6 @@
       });
 
       observer.observe(badge, { attributes: true, attributeFilter: ['class'] });
-    })();
-  </script>
-  <script>
-    // Rewrite guide page links to be language-prefixed based on detected lang
-    (function() {
-      const SUPPORTED = ['en', 'es', 'fr', 'de'];
-      const GUIDES = ['ai-opt-out-metadata', 'remove-exif-from-photos', 'remove-pdf-metadata', 'knowledge'];
-      const pathLang = window.location.pathname.split('/').filter(Boolean)[0];
-      const stored = localStorage.getItem('vm_lang');
-      const lang = SUPPORTED.includes(pathLang) ? pathLang
-                 : (stored && SUPPORTED.includes(stored)) ? stored
-                 : 'en';
-      if (lang === 'en') return;
-      document.querySelectorAll('a[href]').forEach(a => {
-        GUIDES.forEach(slug => {
-          if (a.getAttribute('href') === '/' + slug || a.getAttribute('href') === '/' + slug + '/') {
-            a.href = '/' + lang + '/' + slug + '/';
-          }
-        });
-      });
     })();
   </script>
 
