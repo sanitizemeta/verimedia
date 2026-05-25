@@ -8,11 +8,8 @@ const LANG_LABELS = { en: 'English (EN)', es: 'Español (ES)', fr: 'Français (F
 const LANG_KEY = 'vm_lang';
 
 function detectLang() {
-  // Path is always correct — user is on that page. localStorage is only a fallback.
   const pathLang = window.location.pathname.split('/').filter(Boolean)[0];
   if (SUPPORTED_LANGS.includes(pathLang)) return pathLang;
-  const stored = localStorage.getItem(LANG_KEY);
-  if (stored && SUPPORTED_LANGS.includes(stored)) return stored;
   return 'en';
 }
 
