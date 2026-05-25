@@ -9,8 +9,8 @@
     "logo_alt": "VeriMedia — Block AI from training on your images"
   },
   "hero": {
-    "title": "AI is training on your photos without asking.",
-    "summary": "VeriMedia embeds the ai:opt-out=true signal directly into your images and PDFs — locally, in-browser. GPTBot, ClaudeBot, and Common Crawl read this tag and exclude your work from AI training datasets.",
+    "title": "<span class=\"glow-text\">AI is training on your photos</span><span>without asking.</span>",
+    "summary": "VeriMedia embeds the <strong>ai:opt-out=true</strong> signal directly into your images and PDFs — locally, in-browser. The major AI crawlers read this tag and exclude your work from training datasets.",
     "cta_primary": "Shield my images — free",
     "cta_secondary": "See plans",
     "trust_label": "Crawler opt-out respected by"

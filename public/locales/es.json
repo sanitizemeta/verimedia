@@ -9,8 +9,8 @@
     "logo_alt": "VeriMedia — Bloquea el entrenamiento de IA en tus imágenes"
   },
   "hero": {
-    "title": "La IA se está entrenando con tus fotos sin pedir permiso.",
-    "summary": "VeriMedia incrusta la señal ai:opt-out=true directamente en tus imágenes y PDFs — localmente, en el navegador. GPTBot, ClaudeBot y Common Crawl leen esta etiqueta y excluyen tu trabajo de los conjuntos de datos de entrenamiento de IA.",
+    "title": "<span class=\"glow-text\">La IA está entrenando con tus fotos</span><span>sin pedirte permiso.</span>",
+    "summary": "VeriMedia incrusta la señal <strong>ai:opt-out=true</strong> directamente en tus imágenes y PDFs — de forma local, en el navegador. Los principales rastreadores de IA leen esta etiqueta y excluyen tu trabajo de los conjuntos de entrenamiento.",
     "cta_primary": "Proteger mis imágenes — gratis",
     "cta_secondary": "Ver planes",
     "trust_label": "Exclusión de rastreadores respetada por"

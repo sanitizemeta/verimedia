@@ -53,10 +53,19 @@ async function loadChromeStrings(lang) {
   }
 }
 
+function homeUrl() {
+  return currentLang === 'en' ? '/' : `/${currentLang}/`;
+}
+
+function guideUrl(slug) {
+  return currentLang === 'en' ? `/${slug}/` : `/${currentLang}/${slug}/`;
+}
+
 function buildNav(t) {
+  const home = homeUrl();
   return `
   <div class="logo-container">
-    <a href="/">
+    <a href="${home}">
       <span class="logo-text">
         <img src="/icon.svg" alt="VeriMedia" width="24" height="24">
         VeriMedia<span class="dot">.xyz</span>
@@ -64,10 +73,10 @@ function buildNav(t) {
     </a>
   </div>
   <nav>
-    <a href="/#calculator-section" class="nav-link">${t.nav_utility || 'Utility'}</a>
-    <a href="/#pricing-section" class="nav-link">${t.nav_pricing || 'Pricing'}</a>
-    <a href="/#faq-section" class="nav-link">${t.nav_faq || 'FAQ'}</a>
-    <a href="/#calculator-section" class="nav-link nav-cta">${t.nav_cta || 'Shield my images'}</a>
+    <a href="${home}#calculator-section" class="nav-link">${t.nav_utility || 'Utility'}</a>
+    <a href="${home}#pricing-section" class="nav-link">${t.nav_pricing || 'Pricing'}</a>
+    <a href="${home}#faq-section" class="nav-link">${t.nav_faq || 'FAQ'}</a>
+    <a href="${home}#calculator-section" class="nav-link nav-cta">${t.nav_cta || 'Shield my images'}</a>
     <div class="lang-switcher-wrap" style="position:relative;">
       <button id="sc-lang-toggle" class="nav-link" style="background:none;border:none;padding:0.35rem 0;cursor:pointer;text-transform:uppercase;" aria-label="Switch Language">
         <span id="sc-lang-current">${currentLang.toUpperCase()}</span>
@@ -79,7 +88,7 @@ function buildNav(t) {
           </button>`).join('')}
       </div>
     </div>
-    <a href="/" class="profile-nav-btn nav-link">
+    <a href="${homeUrl()}" class="profile-nav-btn nav-link">
       <i data-lucide="user" style="width:13px;height:13px;"></i>
       ${t.nav_profile || 'Profile'}
     </a>
@@ -88,6 +97,7 @@ function buildNav(t) {
 }
 
 function buildFooter(t) {
+  const home = homeUrl();
   return `
   <div class="footer-grid">
     <div class="footer-brand">
@@ -100,24 +110,24 @@ function buildFooter(t) {
     </div>
     <div class="footer-col">
       <h4 class="footer-col-title">${t.footer_col_tools || 'Tools'}</h4>
-      <a href="/#calculator-section" class="footer-link">${t.footer_link_shield || 'AI Opt-Out Shield'}</a>
-      <a href="/ai-opt-out-metadata" class="footer-link">${t.footer_link_tagger || 'AI Opt-Out Tagger'}</a>
-      <a href="/remove-exif-from-photos" class="footer-link">${t.footer_link_exif || 'EXIF &amp; GPS Cleaner'}</a>
-      <a href="/remove-pdf-metadata" class="footer-link">${t.footer_link_pdf || 'PDF Metadata Cleaner'}</a>
+      <a href="${home}#calculator-section" class="footer-link">${t.footer_link_shield || 'AI Opt-Out Shield'}</a>
+      <a href="${guideUrl('ai-opt-out-metadata')}" class="footer-link">${t.footer_link_tagger || 'AI Opt-Out Tagger'}</a>
+      <a href="${guideUrl('remove-exif-from-photos')}" class="footer-link">${t.footer_link_exif || 'EXIF &amp; GPS Cleaner'}</a>
+      <a href="${guideUrl('remove-pdf-metadata')}" class="footer-link">${t.footer_link_pdf || 'PDF Metadata Cleaner'}</a>
     </div>
     <div class="footer-col">
       <h4 class="footer-col-title">${t.footer_col_resources || 'Resources'}</h4>
-      <a href="/ai-opt-out-metadata" class="footer-link">${t.footer_link_ai_guide || 'AI Training Shield Guide'}</a>
-      <a href="/remove-exif-from-photos" class="footer-link">${t.footer_link_exif_guide || 'EXIF Removal Guide'}</a>
-      <a href="/remove-pdf-metadata" class="footer-link">${t.footer_link_pdf_guide || 'PDF Privacy Guide'}</a>
-      <a href="/knowledge" class="footer-link">${t.footer_link_kb || 'Knowledge Base'}</a>
+      <a href="${guideUrl('ai-opt-out-metadata')}" class="footer-link">${t.footer_link_ai_guide || 'AI Training Shield Guide'}</a>
+      <a href="${guideUrl('remove-exif-from-photos')}" class="footer-link">${t.footer_link_exif_guide || 'EXIF Removal Guide'}</a>
+      <a href="${guideUrl('remove-pdf-metadata')}" class="footer-link">${t.footer_link_pdf_guide || 'PDF Privacy Guide'}</a>
+      <a href="${guideUrl('knowledge')}" class="footer-link">${t.footer_link_kb || 'Knowledge Base'}</a>
     </div>
     <div class="footer-col">
       <h4 class="footer-col-title">${t.footer_col_legal || 'Legal'}</h4>
       <a href="/privacy" class="footer-link">${t.footer_link_privacy || 'Privacy Policy'}</a>
       <a href="/terms" class="footer-link">${t.footer_link_terms || 'Terms of Service'}</a>
       <a href="/refund" class="footer-link">${t.footer_link_refund || 'Refund Policy'}</a>
-      <a href="/#pricing-section" class="footer-link">${t.footer_link_pricing || 'Pricing'}</a>
+      <a href="${home}#pricing-section" class="footer-link">${t.footer_link_pricing || 'Pricing'}</a>
     </div>
   </div>
   <div class="footer-bottom">

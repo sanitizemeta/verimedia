@@ -9,8 +9,8 @@
     "logo_alt": "VeriMedia — KI-Training auf Ihren Bildern blockieren"
   },
   "hero": {
-    "title": "KI trainiert mit Ihren Fotos, ohne zu fragen.",
-    "summary": "VeriMedia bettet das ai:opt-out=true Signal direkt in Ihre Bilder und PDFs ein — lokal, im Browser. GPTBot, ClaudeBot und Common Crawl lesen diesen Tag und schließen Ihre Arbeit aus KI-Trainingsdatensätzen aus.",
+    "title": "<span class=\"glow-text\">KI trainiert mit Ihren Fotos</span><span>ohne zu fragen.</span>",
+    "summary": "VeriMedia bettet das <strong>ai:opt-out=true</strong>-Signal direkt in Ihre Bilder und PDFs ein — lokal, im Browser. Die wichtigsten KI-Crawler lesen dieses Tag und schließen Ihre Arbeit aus Trainingsdatensätzen aus.",
     "cta_primary": "Meine Bilder schützen — kostenlos",
     "cta_secondary": "Pläne ansehen",
     "trust_label": "Crawler-Opt-Out respektiert von"
