@@ -22,6 +22,9 @@ const TRANSLATABLE_GUIDES = [
   'remove-exif-from-photos',
   'remove-pdf-metadata',
   'knowledge',
+  'privacy',
+  'terms',
+  'refund',
 ];
 
 function buildLangUrl(lang) {
@@ -125,9 +128,9 @@ function buildFooter(t) {
     </div>
     <div class="footer-col">
       <h4 class="footer-col-title">${t.footer_col_legal || 'Legal'}</h4>
-      <a href="/privacy" class="footer-link">${t.footer_link_privacy || 'Privacy Policy'}</a>
-      <a href="/terms" class="footer-link">${t.footer_link_terms || 'Terms of Service'}</a>
-      <a href="/refund" class="footer-link">${t.footer_link_refund || 'Refund Policy'}</a>
+      <a href="${currentLang === 'en' ? '/privacy/' : `/${currentLang}/privacy/`}" class="footer-link">${t.footer_link_privacy || 'Privacy Policy'}</a>
+      <a href="${currentLang === 'en' ? '/terms/' : `/${currentLang}/terms/`}" class="footer-link">${t.footer_link_terms || 'Terms of Service'}</a>
+      <a href="${currentLang === 'en' ? '/refund/' : `/${currentLang}/refund/`}" class="footer-link">${t.footer_link_refund || 'Refund Policy'}</a>
       <a href="${home}#pricing-section" class="footer-link">${t.footer_link_pricing || 'Pricing'}</a>
     </div>
   </div>

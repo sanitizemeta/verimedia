@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Seite nicht gefunden | VeriMedia</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <style>
+    .not-found-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      gap: 1.5rem;
+    }
+
+    .not-found-code {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 18vw, 10rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--surface-raised);
+      position: relative;
+      user-select: none;
+    }
+
+    .not-found-code::after {
+      content: '404';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0.18;
+    }
+
+    .not-found-icon {
+      color: var(--accent);
+      opacity: 0.7;
+    }
+
+    .not-found-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin: 0;
+    }
+
+    .not-found-sub {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 420px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .not-found-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .not-found-actions a {
+      text-decoration: none;
+    }
+
+    .not-found-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .not-found-links a {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--t-fast);
+    }
+
+    .not-found-links a:hover {
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <header></header>
+
+  <div class="not-found-page">
+    <div class="not-found-icon">
+      <i data-lucide="shield-off" style="width:40px;height:40px;"></i>
+    </div>
+
+    <div class="not-found-code">404</div>
+
+    <h1 class="not-found-title">Diese Seite existiert nicht</h1>
+    <p class="not-found-sub">Die aufgerufene URL ist möglicherweise fehlerhaft oder die Seite wurde verschoben. Ihre Bilder sind weiterhin sicher — gehen Sie und schützen Sie sie.</p>
+
+    <div class="not-found-actions">
+      <a href="/de/" class="pricing-btn primary-btn">
+        <i data-lucide="home" style="width:15px;height:15px;vertical-align:middle;margin-right:6px;"></i>
+        Zurück zu VeriMedia
+      </a>
+      <a href="/de/#calculator-section" class="pricing-btn secondary-btn">Ein Bild schützen</a>
+    </div>
+
+    <div class="not-found-links">
+      <a href="/de/#pricing-section">Preise</a>
+      <a href="/de/#faq-section">FAQ</a>
+      <a href="/de/privacy/">Privatsphäre</a>
+      <a href="/de/terms/">Bedingungen</a>
+    </div>
+  </div>
+
+  <footer></footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    });
+  </script>
+  <script type="module" src="/src/site-chrome.js"></script>
+</body>
+</html>
