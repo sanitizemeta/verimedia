@@ -20,6 +20,8 @@ export default defineConfig({
         refund: resolve(__dirname, 'refund/index.html'),
         notFound: resolve(__dirname, '404.html'),
         knowledge: resolve(__dirname, 'knowledge/index.html'),
+        imageConverter: resolve(__dirname, 'image-converter/index.html'),
+        imageConverterSuccess: resolve(__dirname, 'image-converter/success/index.html'),
         // Spanish
         esAiOptOut: resolve(__dirname, 'es/ai-opt-out-metadata/index.html'),
         esRemoveExif: resolve(__dirname, 'es/remove-exif-from-photos/index.html'),

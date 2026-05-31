@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unlock Pro — Image Converter &amp; Compressor</title>
+  <meta name="description" content="Unlock Pro for the Image Converter & Compressor Chrome extension: unlimited batch, ZIP export, exact resize, crop and more. One-time $7." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!--
+    STANDALONE sandbox purchase page. Deliberately does NOT import src/main.js so
+    it can't collide with the site's live Paddle init. Paddle here is SANDBOX.
+    Go-live = switch Paddle.Environment to 'production', swap the token + price id.
+  -->
+  <style>
+    :root {
+      --bg:#060606; --surface:#0c0c0c; --surface-raised:#141414;
+      --accent:#7EC47E; --accent-hover:#9AD49A; --accent-dim:#4A7A4A; --accent-glow:rgba(126,196,126,0.15);
+      --text-primary:#e8e4de; --text-secondary:#7a756d; --text-muted:#3a3632;
+      --border:rgba(255,255,255,0.05); --border-active:rgba(126,196,126,0.25);
+      --font-body:'IBM Plex Mono','Courier New',monospace;
+      --font-display:'Bricolage Grotesque','Georgia',sans-serif;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:var(--font-body); color:var(--text-primary); background:var(--bg);
+      -webkit-font-smoothing:antialiased; }
+    .wrap { max-width:560px; margin:0 auto; padding:64px 20px; }
+    .card { background:var(--surface-raised); border:1px solid var(--border); border-radius:2px;
+      padding:32px; box-shadow:0 8px 40px rgba(0,0,0,0.4); }
+    .kicker { font-size:.7rem; text-transform:uppercase; letter-spacing:.15em; color:var(--accent); margin:0 0 12px; }
+    h1 { font-family:var(--font-display); font-size:1.7rem; letter-spacing:-0.02em; margin:0 0 6px; line-height:1.15; }
+    .once { color:var(--text-secondary); font-size:.8rem; margin:0 0 18px; }
+    .price { font-family:var(--font-display); font-size:3rem; font-weight:800; margin:18px 0 2px; letter-spacing:-0.02em; }
+    .price small { font-size:.95rem; font-weight:500; color:var(--text-secondary); }
+    ul.features { list-style:none; padding:0; margin:18px 0 26px; }
+    ul.features li { padding:8px 0 8px 26px; position:relative; font-size:.85rem; color:var(--text-primary); border-bottom:1px solid var(--border); }
+    ul.features li::before { content:"+"; position:absolute; left:2px; color:var(--accent); font-weight:700; }
+    .buy { width:100%; padding:.95rem 1.5rem; border:none; border-radius:0; background:var(--accent); color:var(--bg);
+      font-family:var(--font-body); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em;
+      cursor:pointer; transition:all .15s; }
+    .buy:hover:not(:disabled) { background:var(--accent-hover); transform:translateY(-1px); box-shadow:0 4px 20px var(--accent-glow); }
+    .buy:disabled { opacity:.5; cursor:default; }
+    .note { color:var(--text-secondary); font-size:.72rem; margin-top:16px; text-align:center; line-height:1.6; }
+    .sandbox { margin-top:10px; text-align:center; font-size:.68rem; color:var(--accent-dim); text-transform:uppercase; letter-spacing:.06em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <p class="kicker">VeriMedia · Pro Unlock</p>
+      <h1>Image Converter &amp; Compressor</h1>
+      <p class="once">One-time purchase · no subscription</p>
+      <div class="price">$7 <small>once</small></div>
+      <ul class="features">
+        <li>Unlimited batch size</li>
+        <li>Download all as a single ZIP</li>
+        <li>Exact-pixel resize &amp; crop (1:1, 4:3, 16:9, 9:16)</li>
+        <li>Bulk rename on export</li>
+        <li>Remember your default settings</li>
+        <li>Max-quality / lossless export</li>
+      </ul>
+      <button id="buyBtn" class="buy" disabled>Loading checkout…</button>
+      <p class="note">Pay securely via Paddle. After payment you'll get a license key to paste into the extension.</p>
+      <p class="sandbox" id="sandboxNote">Sandbox mode — test card 4242 4242 4242 4242</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script>
+    // --- Config (SANDBOX) ---
+    const PADDLE_TOKEN = 'test_25af621137bd050392d74053a70';
+    const PRICE_ID = 'pri_01ksz12zxksygbbmmx6z9ef84g';
+    const DEFAULT_EXT_ID = 'nlcecbndoafikhnhchldfahojkelokam';
+
+    const params = new URLSearchParams(location.search);
+    const extId = params.get('ext') || DEFAULT_EXT_ID;
+    const successUrl = `${location.origin}/image-converter/success/?ext=${encodeURIComponent(extId)}`;
+
+    const buyBtn = document.getElementById('buyBtn');
+
+    function initPaddle() {
+      Paddle.Environment.set('sandbox');
+      Paddle.Initialize({
+        token: PADDLE_TOKEN,
+        eventCallback: (e) => {
+          if (e.name === 'checkout.completed') {
+            const txn = e.data && (e.data.transaction_id || e.data.id);
+            location.href = `${successUrl}&txn=${encodeURIComponent(txn || '')}`;
+          }
+        },
+      });
+      buyBtn.disabled = false;
+      buyBtn.textContent = 'Unlock Pro — $7';
+    }
+
+    buyBtn.addEventListener('click', () => {
+      Paddle.Checkout.open({
+        items: [{ priceId: PRICE_ID, quantity: 1 }],
+        settings: { successUrl, displayMode: 'overlay', theme: 'dark' },
+      });
+    });
+
+    if (window.Paddle) initPaddle();
+    else window.addEventListener('load', () => window.Paddle && initPaddle());
+  </script>
+</body>
+</html>
