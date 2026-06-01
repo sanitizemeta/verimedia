@@ -136,7 +136,6 @@ header::before {
   display: flex;
   align-items: center;
   gap: 8px;
-  text-transform: uppercase;
 }
 
 .logo-text img { width: 22px; height: 22px; }
@@ -151,10 +150,9 @@ nav {
 .nav-link {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.01em;
   transition: color var(--t-fast);
   background: none;
   border: none;
