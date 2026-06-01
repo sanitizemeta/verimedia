@@ -3,68 +3,335 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unlock Pro — Image Converter &amp; Compressor</title>
-  <meta name="description" content="Unlock Pro for the Image Converter & Compressor Chrome extension: unlimited batch, ZIP export, exact resize, crop and more. One-time $7." />
+  <title>Image Converter &amp; Compressor — HEIC, WebP, AVIF, JPG, PNG · 100% offline</title>
+  <meta name="description" content="Convert and compress HEIC, WebP, AVIF, JPG and PNG images right in your browser. 100% offline, no uploads, no data collection. Free, with a one-time $7 Pro unlock." />
+  <link rel="canonical" href="https://verimedia.xyz/image-converter/" />
+  <meta property="og:title" content="Image Converter & Compressor — 100% offline" />
+  <meta property="og:description" content="Convert & compress HEIC, WebP, AVIF, JPG, PNG in your browser. No uploads, no tracking. One-time $7 Pro." />
+  <meta property="og:image" content="https://verimedia.xyz/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!--
-    STANDALONE sandbox purchase page. Deliberately does NOT import src/main.js so
-    it can't collide with the site's live Paddle init. Paddle here is SANDBOX.
-    Go-live = switch Paddle.Environment to 'production', swap the token + price id.
-  -->
+
+  <!-- Standalone page. Does NOT import src/main.js (keeps the live Paddle setup isolated). Paddle here is SANDBOX. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Converter & Compressor",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Chrome",
+    "description": "Convert and compress HEIC, WebP, AVIF, JPG and PNG images 100% offline in the browser. No uploads, no data collection.",
+    "offers": [
+      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
+      { "@type": "Offer", "price": "7", "priceCurrency": "USD", "name": "Pro (one-time)" }
+    ]
+  }
+  </script>
+
   <style>
     :root {
-      --bg:#060606; --surface:#0c0c0c; --surface-raised:#141414;
+      --bg:#060606; --surface:#0c0c0c; --surface-2:#141414;
       --accent:#7EC47E; --accent-hover:#9AD49A; --accent-dim:#4A7A4A; --accent-glow:rgba(126,196,126,0.15);
-      --text-primary:#e8e4de; --text-secondary:#7a756d; --text-muted:#3a3632;
-      --border:rgba(255,255,255,0.05); --border-active:rgba(126,196,126,0.25);
-      --font-body:'IBM Plex Mono','Courier New',monospace;
-      --font-display:'Bricolage Grotesque','Georgia',sans-serif;
+      --text:#e8e4de; --text-2:#7a756d; --text-3:#3a3632;
+      --border:rgba(255,255,255,0.06); --border-2:rgba(126,196,126,0.22);
+      --mono:'IBM Plex Mono','Courier New',monospace;
+      --display:'Bricolage Grotesque','Georgia',sans-serif;
+      --maxw:1080px;
     }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:var(--font-body); color:var(--text-primary); background:var(--bg);
-      -webkit-font-smoothing:antialiased; }
-    .wrap { max-width:560px; margin:0 auto; padding:64px 20px; }
-    .card { background:var(--surface-raised); border:1px solid var(--border); border-radius:2px;
-      padding:32px; box-shadow:0 8px 40px rgba(0,0,0,0.4); }
-    .kicker { font-size:.7rem; text-transform:uppercase; letter-spacing:.15em; color:var(--accent); margin:0 0 12px; }
-    h1 { font-family:var(--font-display); font-size:1.7rem; letter-spacing:-0.02em; margin:0 0 6px; line-height:1.15; }
-    .once { color:var(--text-secondary); font-size:.8rem; margin:0 0 18px; }
-    .price { font-family:var(--font-display); font-size:3rem; font-weight:800; margin:18px 0 2px; letter-spacing:-0.02em; }
-    .price small { font-size:.95rem; font-weight:500; color:var(--text-secondary); }
-    ul.features { list-style:none; padding:0; margin:18px 0 26px; }
-    ul.features li { padding:8px 0 8px 26px; position:relative; font-size:.85rem; color:var(--text-primary); border-bottom:1px solid var(--border); }
-    ul.features li::before { content:"+"; position:absolute; left:2px; color:var(--accent); font-weight:700; }
-    .buy { width:100%; padding:.95rem 1.5rem; border:none; border-radius:0; background:var(--accent); color:var(--bg);
-      font-family:var(--font-body); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em;
-      cursor:pointer; transition:all .15s; }
-    .buy:hover:not(:disabled) { background:var(--accent-hover); transform:translateY(-1px); box-shadow:0 4px 20px var(--accent-glow); }
-    .buy:disabled { opacity:.5; cursor:default; }
-    .note { color:var(--text-secondary); font-size:.72rem; margin-top:16px; text-align:center; line-height:1.6; }
-    .sandbox { margin-top:10px; text-align:center; font-size:.68rem; color:var(--accent-dim); text-transform:uppercase; letter-spacing:.06em; }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:var(--mono); background:var(--bg); color:var(--text);
+      font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+      /* atmosphere: faint phosphor grid + vignette */
+      background-image:
+        linear-gradient(rgba(126,196,126,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126,196,126,0.022) 1px, transparent 1px),
+        radial-gradient(1200px 600px at 50% -10%, rgba(126,196,126,0.06), transparent 70%);
+      background-size:44px 44px, 44px 44px, 100% 100%;
+    }
+    a{color:inherit;text-decoration:none;}
+    ::selection{background:var(--accent);color:var(--bg);}
+
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+    .mono-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+    .mono-label::before{content:"▸ ";}
+
+    /* buttons */
+    .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:600;
+      font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding:13px 22px;border:1px solid transparent;
+      cursor:pointer;transition:all .16s ease;border-radius:0;}
+    .btn-primary{background:var(--accent);color:var(--bg);}
+    .btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 6px 28px var(--accent-glow);}
+    .btn-ghost{background:transparent;color:var(--text);border-color:var(--border-2);}
+    .btn-ghost:hover{background:var(--accent-glow);border-color:var(--accent);color:var(--accent);}
+
+    /* header */
+    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+      background:rgba(6,6,6,0.7);border-bottom:1px solid var(--border);}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:60px;}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em;}
+    .brand .glyph{width:26px;height:26px;border:1px solid var(--accent);color:var(--accent);
+      display:grid;place-items:center;font-size:14px;}
+    .nav-links{display:flex;align-items:center;gap:26px;font-size:12px;}
+    .nav-links a{color:var(--text-2);transition:color .15s;}
+    .nav-links a:hover{color:var(--accent);}
+    @media(max-width:720px){.nav-links .hide-sm{display:none;}}
+
+    /* hero */
+    .hero{padding:88px 0 64px;position:relative;}
+    .hero h1{font-family:var(--display);font-weight:700;letter-spacing:-0.03em;line-height:1.02;
+      font-size:clamp(40px,7vw,76px);margin:18px 0 0;max-width:14ch;}
+    .hero h1 .glow{color:var(--accent);text-shadow:0 0 40px var(--accent-glow);}
+    .hero .sub{margin-top:22px;max-width:54ch;color:var(--text-2);font-size:15px;}
+    .hero .sub b{color:var(--text);font-weight:500;}
+    .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+    .hero .micro{margin-top:18px;font-size:12px;color:var(--text-3);}
+    .hero .micro span{color:var(--accent-dim);}
+
+    /* decorative format ticker in hero corner */
+    .terminal{margin-top:48px;border:1px solid var(--border);background:rgba(12,12,12,0.6);
+      max-width:640px;}
+    .terminal .bar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);}
+    .terminal .bar i{width:9px;height:9px;border-radius:50%;background:var(--text-3);display:inline-block;}
+    .terminal .bar i:first-child{background:var(--accent-dim);}
+    .terminal .body{padding:16px 18px;font-size:13px;line-height:1.9;}
+    .terminal .body .l{color:var(--text-2);}
+    .terminal .body .ok{color:var(--accent);}
+    .terminal .body .p{color:var(--text-3);}
+
+    /* trust strip */
+    .trust{border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+      background:rgba(12,12,12,0.4);}
+    .trust .row{display:flex;flex-wrap:wrap;gap:8px 40px;padding:18px 0;font-size:12px;
+      text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);}
+    .trust .row b{color:var(--text);font-weight:500;}
+    .trust .row .dot{color:var(--accent);}
+
+    /* sections */
+    section{padding:72px 0;}
+    .section-head{max-width:60ch;margin-bottom:40px;}
+    .section-head h2{font-family:var(--display);font-weight:600;letter-spacing:-0.02em;
+      font-size:clamp(26px,4vw,40px);margin-top:12px;}
+    .section-head p{color:var(--text-2);margin-top:12px;}
+
+    /* formats grid */
+    .formats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+      background:var(--border);border:1px solid var(--border);}
+    .fmt{background:var(--bg);padding:26px 22px;transition:background .18s;}
+    .fmt:hover{background:var(--surface-2);}
+    .fmt .name{font-family:var(--display);font-size:24px;font-weight:700;}
+    .fmt .meta{font-size:11px;color:var(--text-2);margin-top:6px;text-transform:uppercase;letter-spacing:.08em;}
+    .fmt.heic .name{color:var(--accent);}
+    .any{margin-top:24px;font-size:13px;color:var(--text-2);}
+    .any b{color:var(--accent);}
+
+    /* steps */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    @media(max-width:760px){.steps{grid-template-columns:1fr;}}
+    .step{border:1px solid var(--border);padding:26px;position:relative;background:var(--surface);}
+    .step .num{font-family:var(--display);font-size:13px;color:var(--accent);letter-spacing:.1em;}
+    .step h3{font-family:var(--display);font-weight:600;font-size:19px;margin:14px 0 8px;}
+    .step p{font-size:13px;color:var(--text-2);}
+
+    /* compare */
+    .compare{border:1px solid var(--border);}
+    .crow{display:grid;grid-template-columns:1.6fr 1fr 1fr;border-bottom:1px solid var(--border);}
+    .crow:last-child{border-bottom:none;}
+    .crow > div{padding:15px 18px;font-size:13px;display:flex;align-items:center;gap:8px;}
+    .crow .feat{color:var(--text);}
+    .crow .col{justify-content:center;border-left:1px solid var(--border);color:var(--text-2);}
+    .crow.head > div{background:var(--surface-2);text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:600;}
+    .crow.head .pro{color:var(--accent);}
+    .yes{color:var(--accent);} .no{color:var(--text-3);}
+    .pricetag{font-family:var(--display);font-size:15px;}
+
+    /* pro cta */
+    .procta{border:1px solid var(--border-2);background:
+      radial-gradient(600px 300px at 80% -40%, var(--accent-glow), transparent 70%), var(--surface);
+      padding:48px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between;}
+    .procta .big{font-family:var(--display);font-size:clamp(30px,5vw,52px);font-weight:700;letter-spacing:-0.02em;}
+    .procta .big small{font-size:16px;color:var(--text-2);font-weight:500;}
+    .procta ul{list-style:none;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--text-2);}
+    .procta ul li::before{content:"+ ";color:var(--accent);}
+    .procta .sandbox{margin-top:14px;font-size:11px;color:var(--accent-dim);text-transform:uppercase;letter-spacing:.08em;}
+
+    /* faq */
+    .faq details{border:1px solid var(--border);border-bottom:none;}
+    .faq details:last-child{border-bottom:1px solid var(--border);}
+    .faq summary{padding:18px 20px;cursor:pointer;font-weight:500;list-style:none;display:flex;
+      justify-content:space-between;align-items:center;gap:14px;transition:background .15s;}
+    .faq summary:hover{background:var(--surface);}
+    .faq summary::-webkit-details-marker{display:none;}
+    .faq summary::after{content:"+";color:var(--accent);font-size:18px;}
+    .faq details[open] summary::after{content:"–";}
+    .faq .ans{padding:0 20px 20px;color:var(--text-2);font-size:13px;max-width:70ch;}
+
+    /* footer */
+    footer{border-top:1px solid var(--border);padding:48px 0 60px;margin-top:40px;}
+    .foot{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between;}
+    .foot .cols{display:flex;flex-wrap:wrap;gap:40px;}
+    .foot h4{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--text-3);margin-bottom:12px;}
+    .foot a{display:block;color:var(--text-2);font-size:12px;padding:3px 0;transition:color .15s;}
+    .foot a:hover{color:var(--accent);}
+    .foot .legal{font-size:11px;color:var(--text-3);margin-top:24px;}
+
+    /* load reveal */
+    .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+    @keyframes rise{to{opacity:1;transform:none;}}
+    .d1{animation-delay:.05s}.d2{animation-delay:.13s}.d3{animation-delay:.21s}.d4{animation-delay:.29s}.d5{animation-delay:.37s}
+    @media(prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none;}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <p class="kicker">VeriMedia · Pro Unlock</p>
-      <h1>Image Converter &amp; Compressor</h1>
-      <p class="once">One-time purchase · no subscription</p>
-      <div class="price">$7 <small>once</small></div>
-      <ul class="features">
-        <li>Unlimited batch size</li>
-        <li>Download all as a single ZIP</li>
-        <li>Exact-pixel resize &amp; crop (1:1, 4:3, 16:9, 9:16)</li>
-        <li>Bulk rename on export</li>
-        <li>Remember your default settings</li>
-        <li>Max-quality / lossless export</li>
-      </ul>
-      <button id="buyBtn" class="buy" disabled>Loading checkout…</button>
-      <p class="note">Pay securely via Paddle. After payment you'll get a license key to paste into the extension.</p>
-      <p class="sandbox" id="sandboxNote">Sandbox mode — test card 4242 4242 4242 4242</p>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="https://verimedia.xyz/"><span class="glyph">▤</span> VeriMedia</a>
+      <nav class="nav-links">
+        <a class="hide-sm" href="#formats">Formats</a>
+        <a class="hide-sm" href="#how">How it works</a>
+        <a class="hide-sm" href="#pricing">Pricing</a>
+        <a href="#pricing" data-buy>Get Pro</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="wrap hero">
+    <p class="mono-label reveal d1">Chrome Extension · Free &amp; Pro</p>
+    <h1 class="reveal d2">Image Converter &amp; <span class="glow">Compressor</span></h1>
+    <p class="sub reveal d3">Convert and compress <b>HEIC, WebP, AVIF, JPG and PNG</b> right in your browser.
+      <b>100% offline</b> — your images never leave your machine. No uploads, no accounts, no tracking.</p>
+    <div class="cta reveal d4">
+      <a class="btn btn-primary" id="installBtn" href="#" data-install>＋ Add to Chrome — Free</a>
+      <a class="btn btn-ghost" href="#pricing" data-buy>Unlock Pro · $7</a>
+    </div>
+    <p class="micro reveal d4">One-time purchase · <span>no subscription</span> · works fully offline</p>
+
+    <div class="terminal reveal d5" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body">
+        <div class="l">$ convert IMG_4821.heic --to jpg --quality 85</div>
+        <div class="ok">✓ decoded HEIC · 4.2 MB → 1.1 MB &nbsp;<span class="p">(−74%)</span></div>
+        <div class="l">$ batch ./photos/*.png --to webp --resize 50%</div>
+        <div class="ok">✓ 80 files · all local · 0 bytes uploaded</div>
+      </div>
     </div>
   </div>
+
+  <!-- TRUST -->
+  <div class="trust"><div class="wrap"><div class="row">
+    <span><span class="dot">●</span> <b>100%</b> offline</span>
+    <span><span class="dot">●</span> <b>No</b> uploads</span>
+    <span><span class="dot">●</span> <b>No</b> data collected</span>
+    <span><span class="dot">●</span> Runs in <b>your</b> browser</span>
+    <span><span class="dot">●</span> <b>storage</b> permission only</span>
+  </div></div></div>
+
+  <!-- FORMATS -->
+  <section id="formats"><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">Formats</p>
+      <h2>Any format in. Any format out.</h2>
+      <p>HEIC is the one format Chrome can't open on its own — we decode it locally with WebAssembly so your iPhone photos just work.</p>
+    </div>
+    <div class="formats">
+      <div class="fmt heic"><div class="name">HEIC</div><div class="meta">iPhone photos · decode</div></div>
+      <div class="fmt"><div class="name">WebP</div><div class="meta">in · out</div></div>
+      <div class="fmt"><div class="name">AVIF</div><div class="meta">decode in</div></div>
+      <div class="fmt"><div class="name">JPG</div><div class="meta">in · out</div></div>
+      <div class="fmt"><div class="name">PNG</div><div class="meta">in · out</div></div>
+    </div>
+    <p class="any">Convert <b>any → any</b>, compress with a live quality slider, resize by percentage, and see exact before/after file sizes. Correct EXIF orientation, so rotated photos never come out sideways.</p>
+  </div></section>
+
+  <!-- HOW -->
+  <section id="how" style="padding-top:0;"><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">How it works</p>
+      <h2>Three steps. Zero uploads.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01 / DROP</div><h3>Drop your images</h3><p>Drag files onto the popup or pick them. Up to 5 at once on Free, unlimited on Pro.</p></div>
+      <div class="step"><div class="num">02 / CONVERT</div><h3>Pick format &amp; quality</h3><p>Choose the target format, set quality, resize or crop. Everything is processed locally in a Web Worker.</p></div>
+      <div class="step"><div class="num">03 / DOWNLOAD</div><h3>Save instantly</h3><p>Download each file, or grab them all as a ZIP with Pro. Nothing ever touches a server.</p></div>
+    </div>
+  </div></section>
+
+  <!-- COMPARE -->
+  <section id="pricing"><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">Free vs Pro</p>
+      <h2>Generous free tier. $7 unlocks the rest.</h2>
+      <p>Pro is a one-time purchase — not a subscription. Pay once, keep it forever, works offline.</p>
+    </div>
+    <div class="compare">
+      <div class="crow head"><div class="feat">Feature</div><div class="col">Free</div><div class="col pro">Pro · $7</div></div>
+      <div class="crow"><div class="feat">Convert HEIC / WebP / AVIF / JPG / PNG</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Compress with quality slider</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Percentage resize &amp; EXIF orientation</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Batch size</div><div class="col">5 files</div><div class="col yes">Unlimited</div></div>
+      <div class="crow"><div class="feat">Download all as ZIP</div><div class="col no">—</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Exact-pixel resize &amp; crop</div><div class="col no">—</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Bulk rename on export</div><div class="col no">—</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Max-quality / lossless export</div><div class="col no">—</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Remember my settings</div><div class="col no">—</div><div class="col yes">✓</div></div>
+    </div>
+
+    <div class="procta reveal" style="margin-top:32px;">
+      <div>
+        <div class="big">$7 <small>once · forever</small></div>
+        <ul>
+          <li>Unlimited batch</li><li>ZIP export</li><li>Exact resize &amp; crop</li>
+          <li>Bulk rename</li><li>Lossless export</li><li>Saved settings</li>
+        </ul>
+        <p class="sandbox" id="sandboxNote">Sandbox mode — test card 4242 4242 4242 4242</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:220px;">
+        <button class="btn btn-primary" id="buyBtn" disabled style="justify-content:center;">Loading checkout…</button>
+        <a class="btn btn-ghost" href="#" data-install style="justify-content:center;">Install the extension first</a>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- FAQ -->
+  <section style="padding-top:0;"><div class="wrap">
+    <div class="section-head"><p class="mono-label">FAQ</p><h2>Questions, answered.</h2></div>
+    <div class="faq">
+      <details open><summary>Are my images uploaded anywhere?</summary><div class="ans">Never. All decoding, conversion and compression happen locally in your browser using the Canvas API and WebAssembly. The extension requests only the <code>storage</code> permission and makes no network calls during processing.</div></details>
+      <details><summary>How do I convert iPhone HEIC photos?</summary><div class="ans">Just drop them in. HEIC is the one format Chrome can't decode natively, so we run a local WebAssembly decoder (libheif) — your photos are converted to JPG, PNG or WebP entirely on your device, with correct orientation.</div></details>
+      <details><summary>Is Pro a subscription?</summary><div class="ans">No. Pro is a single $7 payment that unlocks everything forever — unlimited batches, ZIP export, exact resize &amp; crop, bulk rename, lossless export and saved settings. It keeps working offline after you activate.</div></details>
+      <details><summary>How does activation work?</summary><div class="ans">After purchase you get a license key (shown on screen and emailed as backup). Paste it into the extension once. It then works offline — we never re-check on every launch, and you're never locked out if you're offline.</div></details>
+      <details><summary>Can I get a refund?</summary><div class="ans">Yes — payments are handled by Paddle, our Merchant of Record. See our <a href="/refund/" style="color:var(--accent)">refund policy</a>.</div></details>
+    </div>
+  </div></section>
+
+  <!-- FOOTER -->
+  <footer><div class="wrap foot">
+    <div>
+      <a class="brand" href="https://verimedia.xyz/"><span class="glyph">▤</span> VeriMedia</a>
+      <p style="color:var(--text-3);font-size:12px;margin-top:12px;max-width:30ch;">Private, client-side media tools. Your files never leave your device.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h4>Tools</h4>
+        <a href="/image-converter/">Image Converter</a>
+        <a href="/remove-exif-from-photos/">EXIF &amp; GPS Cleaner</a>
+        <a href="/remove-pdf-metadata/">PDF Metadata Cleaner</a>
+        <a href="/ai-opt-out-metadata/">AI Opt-Out Tagger</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="/knowledge/">Knowledge Base</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+        <a href="/refund/">Refund Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><p class="legal">© VeriMedia · Image Converter &amp; Compressor · 100% client-side, no data collection.</p></div>
+  </footer>
 
   <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
   <script>
@@ -72,12 +339,35 @@
     const PADDLE_TOKEN = 'test_25af621137bd050392d74053a70';
     const PRICE_ID = 'pri_01ksz12zxksygbbmmx6z9ef84g';
     const DEFAULT_EXT_ID = 'nlcecbndoafikhnhchldfahojkelokam';
+    // TODO: set to the Chrome Web Store listing URL once the extension is published.
+    const CHROME_STORE_URL = '';
 
     const params = new URLSearchParams(location.search);
     const extId = params.get('ext') || DEFAULT_EXT_ID;
     const successUrl = `${location.origin}/image-converter/success/?ext=${encodeURIComponent(extId)}`;
 
+    // Install buttons → Web Store when published, else a gentle "coming soon".
+    document.querySelectorAll('[data-install]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        if (CHROME_STORE_URL) { el.setAttribute('href', CHROME_STORE_URL); el.setAttribute('target', '_blank'); return; }
+        e.preventDefault();
+        el.textContent = 'Launching on the Chrome Web Store soon ✦';
+      });
+    });
+
+    // Buy buttons open the Paddle overlay.
     const buyBtn = document.getElementById('buyBtn');
+    function openCheckout() {
+      if (!window.Paddle || buyBtn.disabled) return;
+      Paddle.Checkout.open({
+        items: [{ priceId: PRICE_ID, quantity: 1 }],
+        settings: { successUrl, displayMode: 'overlay', theme: 'dark' },
+      });
+    }
+    buyBtn.addEventListener('click', openCheckout);
+    document.querySelectorAll('[data-buy]').forEach((el) => el.addEventListener('click', (e) => {
+      // let the in-page anchor scroll to #pricing; the visible buy button does checkout
+    }));
 
     function initPaddle() {
       Paddle.Environment.set('sandbox');
@@ -93,14 +383,6 @@
       buyBtn.disabled = false;
       buyBtn.textContent = 'Unlock Pro — $7';
     }
-
-    buyBtn.addEventListener('click', () => {
-      Paddle.Checkout.open({
-        items: [{ priceId: PRICE_ID, quantity: 1 }],
-        settings: { successUrl, displayMode: 'overlay', theme: 'dark' },
-      });
-    });
-
     if (window.Paddle) initPaddle();
     else window.addEventListener('load', () => window.Paddle && initPaddle());
   </script>
