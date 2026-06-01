@@ -72,10 +72,10 @@
 
   <script>
     const WORKER_URL = 'https://image-converter-licensing.sanitizemeta.workers.dev';
-    const DEFAULT_EXT_ID = 'nlcecbndoafikhnhchldfahojkelokam';
+    const DEFAULT_EXT_ID = 'ginldpeohafdjojkghpoeflaloemlimh';
 
     const params = new URLSearchParams(location.search);
-    const txn = params.get('txn') || params.get('_ptxn') || '';
+    const txn = params.get('txn') || params.get('_ptxn') || sessionStorage.getItem('paddle_txn') || '';
     const extId = params.get('ext') || DEFAULT_EXT_ID;
 
     const statusEl = document.getElementById('status');
@@ -91,9 +91,12 @@
       statusEl.style.display = 'none';
       keyInput.value = key;
       keybox.classList.add('show');
+      const activateUrl = `chrome-extension://${extId}/activate.html?key=${encodeURIComponent(key)}`;
       const link = document.getElementById('activateLink');
-      link.href = `chrome-extension://${extId}/activate.html?key=${encodeURIComponent(key)}`;
+      link.href = activateUrl;
       link.style.display = 'inline-block';
+      // Auto-redirect to extension activate page — Pro unlocks without any manual paste.
+      window.location.href = activateUrl;
     }
 
     function showError(msg, withRetry) {
@@ -111,7 +114,14 @@
     // we give it ~2 minutes, then offer a manual re-check (the txn stays in the
     // URL, so refreshing works too).
     async function poll() {
-      if (!txn) { showError("Missing transaction reference. Check your Paddle receipt email for your key, or contact support."); return; }
+      if (!txn) {
+        // No txn in URL — show friendly guidance. Key is always emailed.
+        statusEl.innerHTML = `<span style="color:var(--accent);font-size:1.1rem;">&#10003;</span>&nbsp;<span>Purchase confirmed!</span>`;
+        setTimeout(() => {
+          showError("Your license key has been emailed to you — check your inbox. Open the extension, scroll to \"Have a license key?\", paste it, and click Activate.");
+        }, 1000);
+        return;
+      }
       const deadline = Date.now() + 120000;
       let delay = 1500;
       while (Date.now() < deadline) {
