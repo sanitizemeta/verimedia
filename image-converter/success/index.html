@@ -96,11 +96,23 @@
       link.style.display = 'inline-block';
     }
 
-    function showError(msg) { statusEl.innerHTML = `<span class="err">${msg}</span>`; }
+    function showError(msg, withRetry) {
+      statusEl.innerHTML = `<span class="err">${msg}</span>`;
+      if (withRetry) {
+        const btn = document.createElement('button');
+        btn.textContent = 'Check again';
+        btn.style.cssText = 'margin-left:10px;padding:6px 12px;border:1px solid var(--border-active);background:transparent;color:var(--accent);font-family:var(--font-body);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;border-radius:0;';
+        btn.onclick = () => { statusEl.innerHTML = '<span class="spinner"></span><span>Checking…</span>'; poll(); };
+        statusEl.appendChild(btn);
+      }
+    }
 
+    // Poll until the verified webhook mints the key. Sandbox webhooks can lag, so
+    // we give it ~2 minutes, then offer a manual re-check (the txn stays in the
+    // URL, so refreshing works too).
     async function poll() {
       if (!txn) { showError("Missing transaction reference. Check your Paddle receipt email for your key, or contact support."); return; }
-      const deadline = Date.now() + 40000;
+      const deadline = Date.now() + 120000;
       let delay = 1500;
       while (Date.now() < deadline) {
         try {
@@ -111,7 +123,7 @@
         await new Promise((r) => setTimeout(r, delay));
         delay = Math.min(delay + 500, 4000);
       }
-      showError("Your key is taking longer than usual. It's on your Paddle receipt email — or refresh this page in a minute.");
+      showError("Your key is taking a little longer to confirm. It's also on your Paddle receipt email.", true);
     }
 
     statusText.textContent = 'Confirming your payment…';
