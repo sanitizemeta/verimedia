@@ -205,7 +205,7 @@
   },
   "privacy_page": {
     "h1": "Privacy Policy",
-    "last_updated": "Last Updated: May 20, 2026",
+    "last_updated": "Last Updated: June 1, 2026",
     "intro": "At VeriMedia.xyz, privacy is not just a feature - it is our absolute core value. Because this tool is engineered to help you strip invasive location tracking and camera serial numbers, we enforce a strict Zero-Data Collection Policy.",
     "h2_1": "1. 100% Local Browser Processing",
     "p1": "VeriMedia operates entirely client-side. When you drop or upload a JPEG image into the sandbox, the file is parsed and modified in under 50ms using local browser APIs.",
@@ -230,7 +230,7 @@
   },
   "terms_page": {
     "h1": "Terms of Service",
-    "last_updated": "Last Updated: May 20, 2026",
+    "last_updated": "Last Updated: June 1, 2026",
     "intro": "Welcome to VeriMedia.xyz. By accessing or using our browser-based utility, you agree to comply with the following Terms of Service.",
     "h2_1": "1. Agreement to Terms",
     "p1": "By using our website or purchasing a license, you agree to these terms. If you do not agree, cease usage immediately.",
@@ -283,7 +283,7 @@
   },
   "refund_page": {
     "h1": "Refund Policy",
-    "last_updated": "Last Updated: May 20, 2026",
+    "last_updated": "Last Updated: June 1, 2026",
     "intro": "We stand by our tools. Because we provide a fully functional free tier, all upgrades to Creator Pro are final.",
     "h2_1": "1. Transparent Testing",
     "p1": "We offer the Standard Tier 100% free forever so you can test before you buy.",

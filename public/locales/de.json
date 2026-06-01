@@ -195,7 +195,7 @@
   },
   "privacy_page": {
     "h1": "Datenschutzerklärung",
-    "last_updated": "Zuletzt aktualisiert: 20. Mai 2026",
+    "last_updated": "Zuletzt aktualisiert: 1. Juni 2026",
     "intro": "Bei VeriMedia.xyz ist Privatsphäre nicht nur eine Funktion. sie ist unser absoluter Kernwert. Da dieses Tool entwickelt wurde, um Ihnen beim Entfernen von invasivem Standort-Tracking und Kamera-Seriennummern zu helfen, setzen wir eine strikte Null-Daten-Erfassungs-Richtlinie durch.",
     "h2_1": "1. 100 % lokale Browser-Verarbeitung",
     "p1": "VeriMedia arbeitet vollständig clientseitig. Wenn Sie ein JPEG-Bild in die Sandbox ziehen oder hochladen, wird die Datei in weniger als 50 ms mithilfe lokaler Browser-APIs analysiert und geändert.",
@@ -220,7 +220,7 @@
   },
   "terms_page": {
     "h1": "Nutzungsbedingungen",
-    "last_updated": "Zuletzt aktualisiert: 20. Mai 2026",
+    "last_updated": "Zuletzt aktualisiert: 1. Juni 2026",
     "intro": "Willkommen bei VeriMedia.xyz. Durch den Zugriff auf oder die Nutzung unseres browserbasierten Dienstprogramms erklären Sie sich mit den folgenden Nutzungsbedingungen einverstanden.",
     "h2_1": "1. Zustimmung zu den Bedingungen",
     "p1": "Durch die Nutzung unserer Website oder den Kauf einer Lizenz stimmen Sie diesen Bedingungen zu. Wenn Sie nicht einverstanden sind, stellen Sie die Nutzung sofort ein.",
@@ -273,7 +273,7 @@
   },
   "refund_page": {
     "h1": "Erstattungsrichtlinie",
-    "last_updated": "Zuletzt aktualisiert: 20. Mai 2026",
+    "last_updated": "Zuletzt aktualisiert: 1. Juni 2026",
     "intro": "Wir stehen hinter unseren Werkzeugen. Da wir ein voll funktionsfähiges kostenloses Tier anbieten, sind alle Upgrades auf Creator Pro endgültig.",
     "h2_1": "1. Transparentes Testen",
     "p1": "Wir bieten das Standard Tier 100 % kostenlos für immer an, damit Sie vor dem Kauf testen können.",
