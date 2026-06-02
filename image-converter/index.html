@@ -214,10 +214,10 @@
 
   <!-- HERO -->
   <div class="wrap hero">
-    <p class="mono-label reveal d1">Chrome Extension · Free &amp; Pro</p>
+    <p class="mono-label reveal d1">Chrome &amp; Firefox Extension · Free &amp; Pro</p>
     <h1 class="reveal d2">Image Converter &amp; <span class="glow">Compressor</span></h1>
-    <p class="sub reveal d3">Convert and compress <b>HEIC, WebP, AVIF, JPG and PNG</b> right in your browser.
-      <b>100% offline</b> - your images never leave your machine. No uploads, no accounts, no tracking.</p>
+    <p class="sub reveal d3">Convert and compress <b>HEIC, WebP, AVIF, JPG, PNG and PDF</b> right in your browser.
+      <b>100% offline</b> - your files never leave your machine. No uploads, no accounts, no tracking.</p>
     <div class="cta reveal d4">
       <a class="btn btn-primary" id="installBtn" href="#" data-install>＋ Add to Chrome - Free</a>
       <a class="btn btn-ghost" href="#pricing" data-buy>Unlock Pro · $7</a>
@@ -227,10 +227,10 @@
     <div class="terminal reveal d5" aria-hidden="true">
       <div class="bar"><i></i><i></i><i></i></div>
       <div class="body">
-        <div class="l">$ convert IMG_4821.heic --to jpg --quality 85</div>
-        <div class="ok">✓ decoded HEIC · 4.2 MB → 1.1 MB &nbsp;<span class="p">(−74%)</span></div>
-        <div class="l">$ batch ./photos/*.png --to webp --resize 50%</div>
-        <div class="ok">✓ 80 files · all local · 0 bytes uploaded</div>
+        <div class="l">$ convert IMG_4821.heic --to avif --quality 80</div>
+        <div class="ok">✓ decoded HEIC · 4.2 MB → 380 KB &nbsp;<span class="p">(−91%)</span></div>
+        <div class="l">$ convert report.pdf --to jpg --pages all</div>
+        <div class="ok">✓ 7 pages rendered · all local · 0 bytes uploaded</div>
       </div>
     </div>
   </div>
@@ -249,16 +249,17 @@
     <div class="section-head">
       <p class="mono-label">Formats</p>
       <h2>Any format in. Any format out.</h2>
-      <p>HEIC is the one format Chrome can't open on its own, we decode it locally with WebAssembly so your iPhone photos just work.</p>
+      <p>HEIC, AVIF output, and PDF — all decoded and converted locally using WebAssembly and the Canvas API. Nothing leaves your device.</p>
     </div>
     <div class="formats">
       <div class="fmt heic"><div class="name">HEIC</div><div class="meta">iPhone photos · decode</div></div>
       <div class="fmt"><div class="name">WebP</div><div class="meta">in · out</div></div>
-      <div class="fmt"><div class="name">AVIF</div><div class="meta">decode in</div></div>
+      <div class="fmt"><div class="name">AVIF</div><div class="meta">in · out</div></div>
       <div class="fmt"><div class="name">JPG</div><div class="meta">in · out</div></div>
       <div class="fmt"><div class="name">PNG</div><div class="meta">in · out</div></div>
+      <div class="fmt"><div class="name">PDF</div><div class="meta">pages → images · images → PDF</div></div>
     </div>
-    <p class="any">Convert <b>any → any</b>, compress with a live quality slider, resize by percentage, and see exact before/after file sizes. Correct EXIF orientation, so rotated photos never come out sideways.</p>
+    <p class="any">Convert <b>any → any</b>, compress with a live quality slider, resize by percentage, and see exact before/after file sizes. Correct EXIF orientation so rotated photos never come out sideways. Export to next-gen <b>AVIF</b> for the smallest file sizes.</p>
   </div></section>
 
   <!-- HOW -->
@@ -284,13 +285,15 @@
     <div class="compare">
       <div class="crow head"><div class="feat">Feature</div><div class="col">Free</div><div class="col pro">Pro · $7</div></div>
       <div class="crow"><div class="feat">Convert HEIC / WebP / AVIF / JPG / PNG</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Export to AVIF (next-gen, smallest files)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">PDF pages → images</div><div class="col">5 pages</div><div class="col yes">Unlimited</div></div>
+      <div class="crow"><div class="feat">Images → PDF</div><div class="col">5 images</div><div class="col yes">Unlimited</div></div>
       <div class="crow"><div class="feat">Compress with quality slider</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat">Percentage resize &amp; EXIF orientation</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat">Batch size</div><div class="col">5 files</div><div class="col yes">Unlimited</div></div>
       <div class="crow"><div class="feat">Download all as ZIP</div><div class="col no">—</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat">Exact-pixel resize &amp; crop</div><div class="col no">—</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat">Bulk rename on export</div><div class="col no">—</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Max-quality / lossless export</div><div class="col no">—</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat">Remember my settings</div><div class="col no">—</div><div class="col yes">✓</div></div>
     </div>
 
@@ -299,7 +302,7 @@
         <div class="big">$7 <small>once · forever</small></div>
         <ul>
           <li>Unlimited batch</li><li>ZIP export</li><li>Exact resize &amp; crop</li>
-          <li>Bulk rename</li><li>Lossless export</li><li>Saved settings</li>
+          <li>Bulk rename</li><li>Unlimited PDF pages</li><li>Saved settings</li>
         </ul>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;min-width:220px;">
@@ -314,8 +317,10 @@
     <div class="section-head"><p class="mono-label">FAQ</p><h2>Questions, answered.</h2></div>
     <div class="faq">
       <details open><summary>Are my images uploaded anywhere?</summary><div class="ans">Never. All decoding, conversion and compression happen locally in your browser using the Canvas API and WebAssembly. The extension requests only the <code>storage</code> permission and makes no network calls during processing.</div></details>
-      <details><summary>How do I convert iPhone HEIC photos?</summary><div class="ans">Just drop them in. HEIC is the one format Chrome can't decode natively, so we run a local WebAssembly decoder (libheif). Your photos are converted to JPG, PNG or WebP entirely on your device, with correct orientation.</div></details>
-      <details><summary>Is Pro a subscription?</summary><div class="ans">No. Pro is a single $7 payment that unlocks everything forever: unlimited batches, ZIP export, exact resize &amp; crop, bulk rename, lossless export and saved settings. It keeps working offline after you activate.</div></details>
+      <details><summary>How do I convert iPhone HEIC photos?</summary><div class="ans">Just drop them in. HEIC is the one format Chrome can't decode natively, so we run a local WebAssembly decoder (libheif). Your photos are converted to JPG, PNG, WebP or AVIF entirely on your device, with correct orientation.</div></details>
+      <details><summary>Can I convert PDF pages to images?</summary><div class="ans">Yes. Drop a PDF and select JPG, PNG, WebP or AVIF as the output. Each page becomes a separate image file. Free users get the first 5 pages. Pro unlocks all pages with no limit.</div></details>
+      <details><summary>Can I combine images into a PDF?</summary><div class="ans">Yes. Select PDF as the output format, drop your images, and the extension creates a single PDF with one image per page. Works with any input format including HEIC and AVIF.</div></details>
+      <details><summary>Is Pro a subscription?</summary><div class="ans">No. Pro is a single $7 payment that unlocks everything forever: unlimited batches, ZIP export, exact resize &amp; crop, bulk rename, unlimited PDF pages and saved settings. It keeps working offline after you activate.</div></details>
       <details><summary>How does activation work?</summary><div class="ans">After purchase you get a license key (shown on screen and emailed as backup). Paste it into the extension once. It then works offline. We never re-check on every launch, and you'll never be locked out if you're offline.</div></details>
       <details><summary>Can I get a refund?</summary><div class="ans">Yes, payments are handled by Paddle, our Merchant of Record. See our <a href="/refund/" style="color:var(--accent)">refund policy</a>.</div></details>
     </div>
