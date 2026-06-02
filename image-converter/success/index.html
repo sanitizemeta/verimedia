@@ -91,7 +91,10 @@
       statusEl.style.display = 'none';
       keyInput.value = key;
       keybox.classList.add('show');
-      const activateUrl = `chrome-extension://${extId}/activate.html?key=${encodeURIComponent(key)}`;
+      // activateBase is passed by the extension and includes the correct scheme
+      // (chrome-extension:// for Chrome, moz-extension:// for Firefox).
+      const activateBase = params.get('activateBase') || `chrome-extension://${extId}/activate.html`;
+      const activateUrl = `${activateBase}?key=${encodeURIComponent(key)}`;
       const link = document.getElementById('activateLink');
       link.href = activateUrl;
       link.style.display = 'inline-block';
