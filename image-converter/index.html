@@ -4,11 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Image &amp; PDF Converter and Compressor · 100% offline</title>
-  <meta name="description" content="Convert and compress images and PDFs right in your browser. No uploads, no servers. Merge PDFs, split pages, remove EXIF, target a max file size. Free, with a one-time $7 Pro unlock." />
+  <meta name="description" content="Convert and compress images and PDFs offline. Remove EXIF, merge or split PDFs, and unlock Pro once for $7." />
   <link rel="canonical" href="https://verimedia.xyz/image-converter/" />
   <meta property="og:title" content="Image &amp; PDF Converter and Compressor" />
   <meta property="og:description" content="Convert images and PDFs offline. Compress, merge, split, remove EXIF. No uploads, no tracking. One-time $7 Pro." />
   <meta property="og:image" content="https://verimedia.xyz/logo.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -142,16 +148,43 @@
   <!-- FAQ -->
   <section style="padding-top:0;"><div class="wrap">
     <div class="section-head"><p class="mono-label" data-i18n="image_converter.faq_kicker">FAQ</p><h2 data-i18n="image_converter.faq_title">Questions, answered.</h2></div>
-    <div class="faq">
-      <details open><summary data-i18n="image_converter.faq_upload_q">Are my files uploaded anywhere?</summary><div class="ans" data-i18n-html="image_converter.faq_upload_a">Never. All decoding, conversion, and compression happen locally in your browser using the Canvas API and WebAssembly. The extension requests only the <code>storage</code> permission and makes no network calls during processing.</div></details>
-      <details><summary data-i18n="image_converter.faq_heic_q">How do I convert iPhone HEIC photos?</summary><div class="ans" data-i18n="image_converter.faq_heic_a">Just drop them in. HEIC is the one format Chrome can't decode natively, so we run a local WebAssembly decoder (libheif). Your photos are converted to JPG, PNG, WebP or AVIF entirely on your device, with correct orientation.</div></details>
-      <details><summary data-i18n="image_converter.faq_pdf_q">What can I do with PDFs?</summary><div class="ans" data-i18n="image_converter.faq_pdf_a">Quite a lot. You can convert PDF pages to images (JPG, PNG, WebP, AVIF), combine images into a single PDF, compress a PDF by rasterizing its pages at a chosen DPI and quality level, merge multiple PDFs into one document, or split a multi-page PDF into individual page files. All of this is free.</div></details>
-      <details><summary data-i18n="image_converter.faq_pdf_size_q">Will PDF compression always reduce the file size?</summary><div class="ans" data-i18n="image_converter.faq_pdf_size_a">Not always. PDFs that contain mostly text and vector graphics are already very compact. Rasterizing them to images can make them larger. Compression works best on PDFs that already contain embedded photos or scanned images. The extension shows you the before and after size so you always know the result.</div></details>
-      <details><summary data-i18n="image_converter.faq_exif_q">What does "Remove EXIF" do?</summary><div class="ans" data-i18n="image_converter.faq_exif_a">EXIF metadata is information embedded in JPEG photos: GPS coordinates, camera model, date taken, and more. Checking "Remove EXIF" strips this before saving the output, which protects your location privacy when sharing images. It only applies when converting to JPG, since other formats do not carry EXIF in the same way.</div></details>
-      <details><summary data-i18n="image_converter.faq_target_q">What is the max file size target?</summary><div class="ans" data-i18n="image_converter.faq_target_a">A Pro feature that automatically finds the highest quality that fits under a size you set (for example, 500 KB). The extension runs a binary search over quality levels so you do not have to guess. Works for JPG, WebP, and AVIF. Not available for PNG since PNG is lossless.</div></details>
-      <details><summary data-i18n="image_converter.faq_sub_q">Is Pro a subscription?</summary><div class="ans" data-i18n="image_converter.faq_sub_a">No. Pro is a single $7 payment that unlocks everything forever: unlimited batches, ZIP export, exact resize and crop, bulk rename, and the max file size target. It keeps working offline after you activate.</div></details>
-      <details><summary data-i18n="image_converter.faq_activation_q">How does activation work?</summary><div class="ans" data-i18n="image_converter.faq_activation_a">After purchase you get a license key shown on screen and emailed as backup. Paste it into the extension once. It then works offline. We never re-check on every launch, and you will never be locked out if you are offline.</div></details>
-      <details><summary data-i18n="image_converter.faq_refund_q">Can I get a refund?</summary><div class="ans" data-i18n-html="image_converter.faq_refund_a">Yes, payments are handled by Paddle, our Merchant of Record. See our <a href="/refund/" style="color:var(--accent)">refund policy</a>.</div></details>
+    <div class="faq-accordion image-converter-faq">
+      <div class="faq-item open">
+        <button class="faq-trigger" aria-expanded="true"><span data-i18n="image_converter.faq_upload_q">Are my files uploaded anywhere?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p data-i18n-html="image_converter.faq_upload_a">Never. All decoding, conversion, and compression happen locally in your browser using the Canvas API and WebAssembly. The extension requests only the <code>storage</code> permission and makes no network calls during processing.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_heic_q">How do I convert iPhone HEIC photos?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p data-i18n="image_converter.faq_heic_a">Just drop them in. HEIC is the one format Chrome can't decode natively, so we run a local WebAssembly decoder (libheif). Your photos are converted to JPG, PNG, WebP or AVIF entirely on your device, with correct orientation.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_pdf_q">What can I do with PDFs?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p data-i18n="image_converter.faq_pdf_a">Quite a lot. You can convert PDF pages to images (JPG, PNG, WebP, AVIF), combine images into a single PDF, compress a PDF by rasterizing its pages at a chosen DPI and quality level, merge multiple PDFs into one document, or split a multi-page PDF into individual page files. All of this is free.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_pdf_size_q">Will PDF compression always reduce the file size?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p data-i18n="image_converter.faq_pdf_size_a">Not always. PDFs that contain mostly text and vector graphics are already very compact. Rasterizing them to images can make them larger. Compression works best on PDFs that already contain embedded photos or scanned images. The extension shows you the before and after size so you always know the result.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_exif_q">What does "Remove EXIF" do?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p data-i18n="image_converter.faq_exif_a">EXIF metadata is information embedded in JPEG photos: GPS coordinates, camera model, date taken, and more. Checking "Remove EXIF" strips this before saving the output, which protects your location privacy when sharing images. It only applies when converting to JPG, since other formats do not carry EXIF in the same way.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_target_q">What is the max file size target?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p data-i18n="image_converter.faq_target_a">A Pro feature that automatically finds the highest quality that fits under a size you set (for example, 500 KB). The extension runs a binary search over quality levels so you do not have to guess. Works for JPG, WebP, and AVIF. Not available for PNG since PNG is lossless.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_sub_q">Is Pro a subscription?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p data-i18n="image_converter.faq_sub_a">No. Pro is a single $7 payment that unlocks everything forever: unlimited batches, ZIP export, exact resize and crop, bulk rename, and the max file size target. It keeps working offline after you activate.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_activation_q">How does activation work?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p data-i18n="image_converter.faq_activation_a">After purchase you get a license key shown on screen and emailed as backup. Paste it into the extension once. It then works offline. We never re-check on every launch, and you will never be locked out if you are offline.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_refund_q">Can I get a refund?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p data-i18n-html="image_converter.faq_refund_a">Yes, payments are handled by Paddle, our Merchant of Record. See our <a href="/refund/" style="color:var(--accent)">refund policy</a>.</p></div>
+      </div>
     </div>
   </div></section>
 

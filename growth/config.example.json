@@ -4,6 +4,10 @@
     "apiKey": "YOUR_BING_API_KEY",
     "siteUrl": "https://verimedia.xyz"
   },
+  "indexnow": {
+    "key": "5f68c5d4b4484f299e1f43d962f6c32e",
+    "keyLocation": "https://verimedia.xyz/5f68c5d4b4484f299e1f43d962f6c32e.txt"
+  },
   "analytics": {
     "cloudflareBeaconToken": "YOUR_CLOUDFLARE_BEACON_TOKEN",
     "umamiScriptUrl": "https://umami.example.com/script.js",

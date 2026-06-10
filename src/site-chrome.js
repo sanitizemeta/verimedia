@@ -221,9 +221,33 @@ function wireLanguageDropdown() {
   }
 }
 
+function bootFaqAccordions() {
+  document.querySelectorAll('.faq-trigger').forEach((btn) => {
+    if (btn.dataset.faqBound === 'true') return;
+    btn.dataset.faqBound = 'true';
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      if (!item) return;
+      const accordion = item.closest('.faq-accordion') || document;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      accordion.querySelectorAll('.faq-item.open').forEach((el) => {
+        el.classList.remove('open');
+        el.querySelector('.faq-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   renderChrome();
   wireLanguageDropdown();
+  bootFaqAccordions();
 
   const t = await loadChromeStrings(currentLang);
   window.VM_TRANSLATIONS = fullTranslations;
@@ -233,4 +257,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.documentElement.setAttribute('lang', currentLang);
   applyPageTranslations();
+  bootFaqAccordions();
 });
