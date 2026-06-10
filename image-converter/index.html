@@ -13,6 +13,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="/src/style.css">
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,182 +30,21 @@
   }
   </script>
 
-  <style>
-    :root {
-      --bg:#060606; --surface:#0c0c0c; --surface-2:#141414;
-      --accent:#7EC47E; --accent-hover:#9AD49A; --accent-dim:#4A7A4A; --accent-glow:rgba(126,196,126,0.15);
-      --text:#e8e4de; --text-2:#7a756d; --text-3:#3a3632;
-      --border:rgba(255,255,255,0.06); --border-2:rgba(126,196,126,0.22);
-      --mono:'IBM Plex Mono','Courier New',monospace;
-      --display:'Bricolage Grotesque','Georgia',sans-serif;
-      --maxw:1080px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{
-      font-family:var(--mono); background:var(--bg); color:var(--text);
-      font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
-      background-image:
-        linear-gradient(rgba(126,196,126,0.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(126,196,126,0.022) 1px, transparent 1px),
-        radial-gradient(1200px 600px at 50% -10%, rgba(126,196,126,0.06), transparent 70%);
-      background-size:44px 44px, 44px 44px, 100% 100%;
-    }
-    a{color:inherit;text-decoration:none;}
-    ::selection{background:var(--accent);color:var(--bg);}
-
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
-    .mono-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
-    .mono-label::before{content:"▸ ";}
-
-    .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:600;
-      font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding:13px 22px;border:1px solid transparent;
-      cursor:pointer;transition:all .16s ease;border-radius:0;}
-    .btn-primary{background:var(--accent);color:var(--bg);}
-    .btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 6px 28px var(--accent-glow);}
-    .btn-ghost{background:transparent;color:var(--text);border-color:var(--border-2);}
-    .btn-ghost:hover{background:var(--accent-glow);border-color:var(--accent);color:var(--accent);}
-
-    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-      background:linear-gradient(180deg,rgba(6,6,6,0.96),rgba(6,6,6,0.82));border-bottom:1px solid var(--border);}
-    .nav-inner{max-width:var(--maxw);margin:0 auto;padding:1.05rem 24px;display:flex;align-items:center;justify-content:space-between;}
-    .logo-container a{color:inherit;text-decoration:none;}
-    .logo-text{font-family:var(--mono);font-weight:700;font-size:1.1rem;letter-spacing:-0.02em;display:flex;align-items:center;gap:8px;}
-    .logo-text img{width:22px;height:22px;}
-    .logo-text .dot{color:var(--accent);}
-    nav{display:flex;align-items:center;gap:1.5rem;}
-    .nav-link{color:var(--text-2);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:0.01em;transition:color .16s;}
-    .nav-link:hover{color:var(--accent);}
-    .nav-cta{color:var(--bg)!important;background:var(--accent);padding:0.5rem 1.1rem;font-weight:700;font-size:0.74rem;
-      letter-spacing:0.05em;text-transform:uppercase;transition:background .16s,transform .16s;}
-    .nav-cta:hover{background:var(--accent-hover)!important;transform:translateY(-1px);}
-    @media(max-width:720px){nav .hide-sm{display:none;}}
-
-    .hero{padding:88px 0 64px;position:relative;}
-    .hero h1{font-family:var(--display);font-weight:700;letter-spacing:-0.03em;line-height:1.02;
-      font-size:clamp(40px,7vw,76px);margin:18px 0 0;max-width:14ch;}
-    .hero h1 .glow{color:var(--accent);text-shadow:0 0 40px var(--accent-glow);}
-    .hero .sub{margin-top:22px;max-width:54ch;color:var(--text-2);font-size:15px;}
-    .hero .sub b{color:var(--text);font-weight:500;}
-    .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
-    .hero .micro{margin-top:18px;font-size:12px;color:var(--text-3);}
-    .hero .micro span{color:var(--accent-dim);}
-
-    .terminal{margin-top:48px;border:1px solid var(--border);background:rgba(12,12,12,0.6);max-width:640px;}
-    .terminal .bar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);}
-    .terminal .bar i{width:9px;height:9px;border-radius:50%;background:var(--text-3);display:inline-block;}
-    .terminal .bar i:first-child{background:var(--accent-dim);}
-    .terminal .body{padding:16px 18px;font-size:13px;line-height:1.9;}
-    .terminal .body .l{color:var(--text-2);}
-    .terminal .body .ok{color:var(--accent);}
-    .terminal .body .p{color:var(--text-3);}
-
-    .trust{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(12,12,12,0.4);}
-    .trust .row{display:flex;flex-wrap:wrap;gap:8px 40px;padding:18px 0;font-size:12px;
-      text-transform:uppercase;letter-spacing:.1em;color:var(--text-2);}
-    .trust .row b{color:var(--text);font-weight:500;}
-    .trust .row .dot{color:var(--accent);}
-
-    section{padding:72px 0;}
-    .section-head{max-width:60ch;margin-bottom:40px;}
-    .section-head h2{font-family:var(--display);font-weight:600;letter-spacing:-0.02em;
-      font-size:clamp(26px,4vw,40px);margin-top:12px;}
-    .section-head p{color:var(--text-2);margin-top:12px;}
-
-    .formats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
-      background:var(--border);border:1px solid var(--border);}
-    .fmt{background:var(--bg);padding:26px 22px;transition:background .18s;}
-    .fmt:hover{background:var(--surface-2);}
-    .fmt .name{font-family:var(--display);font-size:24px;font-weight:700;}
-    .fmt .meta{font-size:11px;color:var(--text-2);margin-top:6px;text-transform:uppercase;letter-spacing:.08em;}
-    .fmt.heic .name{color:var(--accent);}
-    .any{margin-top:24px;font-size:13px;color:var(--text-2);}
-    .any b{color:var(--accent);}
-
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-    @media(max-width:760px){.steps{grid-template-columns:1fr;}}
-    .step{border:1px solid var(--border);padding:26px;position:relative;background:var(--surface);}
-    .step .num{font-family:var(--display);font-size:13px;color:var(--accent);letter-spacing:.1em;}
-    .step h3{font-family:var(--display);font-weight:600;font-size:19px;margin:14px 0 8px;}
-    .step p{font-size:13px;color:var(--text-2);}
-
-    .compare{border:1px solid var(--border);}
-    .crow{display:grid;grid-template-columns:1.6fr 1fr 1fr;border-bottom:1px solid var(--border);}
-    .crow:last-child{border-bottom:none;}
-    .crow > div{padding:15px 18px;font-size:13px;display:flex;align-items:center;gap:8px;}
-    .crow .feat{color:var(--text);}
-    .crow .col{justify-content:center;border-left:1px solid var(--border);color:var(--text-2);}
-    .crow.head > div{background:var(--surface-2);text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:600;}
-    .crow.head .pro{color:var(--accent);}
-    .yes{color:var(--accent);} .no{color:var(--text-3);}
-    .pricetag{font-family:var(--display);font-size:15px;}
-
-    .procta{border:1px solid var(--border-2);background:
-      radial-gradient(600px 300px at 80% -40%, var(--accent-glow), transparent 70%), var(--surface);
-      padding:48px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between;}
-    .procta .big{font-family:var(--display);font-size:clamp(30px,5vw,52px);font-weight:700;letter-spacing:-0.02em;}
-    .procta .big small{font-size:16px;color:var(--text-2);font-weight:500;}
-    .procta ul{list-style:none;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--text-2);}
-    .procta ul li::before{content:"+ ";color:var(--accent);}
-    .procta .sandbox{margin-top:14px;font-size:11px;color:var(--accent-dim);text-transform:uppercase;letter-spacing:.08em;}
-
-    .faq details{border:1px solid var(--border);border-bottom:none;}
-    .faq details:last-child{border-bottom:1px solid var(--border);}
-    .faq summary{padding:18px 20px;cursor:pointer;font-weight:500;list-style:none;display:flex;
-      justify-content:space-between;align-items:center;gap:14px;transition:background .15s;}
-    .faq summary:hover{background:var(--surface);}
-    .faq summary::-webkit-details-marker{display:none;}
-    .faq summary::after{content:"+";color:var(--accent);font-size:18px;}
-    .faq details[open] summary::after{content:"-";}
-    .faq .ans{padding:0 20px 20px;color:var(--text-2);font-size:13px;max-width:70ch;}
-
-    footer{border-top:1px solid var(--border);padding:4rem 0 2rem;margin-top:40px;}
-    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
-    .footer-brand .logo-text{font-size:1rem;margin-bottom:1rem;}
-    .footer-tagline{font-size:0.75rem;color:var(--text-2);line-height:1.7;margin-bottom:1rem;}
-    .footer-copy{font-size:0.65rem;color:var(--text-3);text-transform:uppercase;letter-spacing:0.1em;}
-    .footer-col-title{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-3);margin-bottom:1rem;}
-    .footer-link{display:block;font-size:0.75rem;color:var(--text-2);text-decoration:none;padding:0.35rem 0;transition:color .16s;}
-    .footer-link:hover{color:var(--accent);}
-    .footer-bottom{padding-top:2rem;border-top:1px solid var(--border);font-size:0.7rem;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;}
-    @media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}}
-    @media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
-
-    .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
-    @keyframes rise{to{opacity:1;transform:none;}}
-    .d1{animation-delay:.05s}.d2{animation-delay:.13s}.d3{animation-delay:.21s}.d4{animation-delay:.29s}.d5{animation-delay:.37s}
-    @media(prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none;}}
-  </style>
 </head>
-<body>
-  <header>
-    <div class="nav-inner">
-      <div class="logo-container">
-        <a href="https://verimedia.xyz/"><span class="logo-text">
-          <img src="/icon.svg" alt="VeriMedia Logo" width="22" height="22"> VeriMedia<span class="dot">.xyz</span>
-        </span></a>
-      </div>
-      <nav>
-        <a href="https://verimedia.xyz/" class="nav-link hide-sm">Home</a>
-        <a href="#formats" class="nav-link hide-sm">Formats</a>
-        <a href="#how" class="nav-link hide-sm">How it works</a>
-        <a href="#pricing" class="nav-link">Pricing</a>
-        <a href="#pricing" class="nav-link nav-cta" data-buy>Get Pro</a>
-      </nav>
-    </div>
-  </header>
+<body class="image-converter-page" data-chrome-profile="false">
+  <header></header>
 
   <!-- HERO -->
   <div class="wrap hero">
-    <p class="mono-label reveal d1">Chrome &amp; Firefox Extension · Free &amp; Pro</p>
-    <h1 class="reveal d2">Image &amp; PDF <span class="glow">Converter</span></h1>
-    <p class="sub reveal d3">Convert, compress, merge, and split images and PDFs <b>directly in your browser.</b>
+    <p class="mono-label reveal d1" data-i18n="image_converter.kicker">Chrome &amp; Firefox Extension · Free &amp; Pro</p>
+    <h1 class="reveal d2" data-i18n-html="image_converter.hero_title">Image &amp; PDF <span class="glow">Converter</span></h1>
+    <p class="sub reveal d3" data-i18n-html="image_converter.hero_summary">Convert, compress, merge, and split images and PDFs <b>directly in your browser.</b>
       Remove EXIF metadata, target a max file size, choose output quality. <b>100% offline</b> - nothing ever leaves your machine.</p>
     <div class="cta reveal d4">
-      <a class="btn btn-primary" id="installBtn" href="#" data-install>+ Add to Chrome - Free</a>
-      <a class="btn btn-ghost" href="#pricing" data-buy>Unlock Pro · $7</a>
+      <a class="btn btn-primary" id="installBtn" href="#" data-install data-i18n="image_converter.install_cta">+ Add to Chrome - Free</a>
+      <a class="btn btn-ghost" href="#pricing" data-buy data-i18n="image_converter.pro_cta">Unlock Pro · $7</a>
     </div>
-    <p class="micro reveal d4">One-time purchase · <span>no subscription</span> · works fully offline</p>
+    <p class="micro reveal d4" data-i18n-html="image_converter.micro">One-time purchase · <span>no subscription</span> · works fully offline</p>
 
     <div class="terminal reveal d5" aria-hidden="true">
       <div class="bar"><i></i><i></i><i></i></div>
@@ -220,19 +61,19 @@
 
   <!-- TRUST -->
   <div class="trust"><div class="wrap"><div class="row">
-    <span><span class="dot">●</span> <b>100%</b> offline</span>
-    <span><span class="dot">●</span> <b>No</b> uploads</span>
-    <span><span class="dot">●</span> <b>No</b> data collected</span>
-    <span><span class="dot">●</span> Runs in <b>your</b> browser</span>
-    <span><span class="dot">●</span> <b>storage</b> permission only</span>
+    <span data-i18n-html="image_converter.trust_offline"><span class="dot">●</span> <b>100%</b> offline</span>
+    <span data-i18n-html="image_converter.trust_uploads"><span class="dot">●</span> <b>No</b> uploads</span>
+    <span data-i18n-html="image_converter.trust_data"><span class="dot">●</span> <b>No</b> data collected</span>
+    <span data-i18n-html="image_converter.trust_browser"><span class="dot">●</span> Runs in <b>your</b> browser</span>
+    <span data-i18n-html="image_converter.trust_permission"><span class="dot">●</span> <b>storage</b> permission only</span>
   </div></div></div>
 
   <!-- FORMATS -->
   <section id="formats"><div class="wrap">
     <div class="section-head">
-      <p class="mono-label">Formats</p>
-      <h2>Any format in. Any format out.</h2>
-      <p>Images, PDFs, and HEIC photos from iPhone. Everything decoded and converted locally using WebAssembly and the Canvas API. Nothing leaves your device.</p>
+      <p class="mono-label" data-i18n="image_converter.formats_kicker">Formats</p>
+      <h2 data-i18n="image_converter.formats_title">Any format in. Any format out.</h2>
+      <p data-i18n="image_converter.formats_summary">Images, PDFs, and HEIC photos from iPhone. Everything decoded and converted locally using WebAssembly and the Canvas API. Nothing leaves your device.</p>
     </div>
     <div class="formats">
       <div class="fmt heic"><div class="name">HEIC</div><div class="meta">iPhone photos · decode</div></div>
@@ -242,111 +83,81 @@
       <div class="fmt"><div class="name">PNG</div><div class="meta">in · out</div></div>
       <div class="fmt"><div class="name">PDF</div><div class="meta">compress · merge · split · convert</div></div>
     </div>
-    <p class="any">Convert between any format, compress with an adjustable quality slider, resize by percentage, and see exact before/after sizes. <b>Remove EXIF metadata</b> (location, camera info) from JPG output. For PDFs: compress pages by rasterizing at your chosen DPI, <b>merge multiple PDFs</b> into one, or <b>split a multi-page PDF</b> into individual page files. Export to <b>AVIF</b> for next-gen compression (up to 90% smaller than JPG).</p>
+    <p class="any" data-i18n-html="image_converter.formats_body">Convert between any format, compress with an adjustable quality slider, resize by percentage, and see exact before/after sizes. <b>Remove EXIF metadata</b> (location, camera info) from JPG output. For PDFs: compress pages by rasterizing at your chosen DPI, <b>merge multiple PDFs</b> into one, or <b>split a multi-page PDF</b> into individual page files. Export to <b>AVIF</b> for next-gen compression (up to 90% smaller than JPG).</p>
   </div></section>
 
   <!-- HOW -->
   <section id="how" style="padding-top:0;"><div class="wrap">
     <div class="section-head">
-      <p class="mono-label">How it works</p>
-      <h2>Three steps. Zero uploads.</h2>
+      <p class="mono-label" data-i18n="image_converter.how_kicker">How it works</p>
+      <h2 data-i18n="image_converter.how_title">Three steps. Zero uploads.</h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="num">01 / DROP</div><h3>Drop your files</h3><p>Drag images or PDFs onto the popup or pick them from your device. Up to 5 at once on Free, unlimited on Pro.</p></div>
-      <div class="step"><div class="num">02 / CONVERT</div><h3>Choose what to do</h3><p>Pick a format, set quality or a target file size, resize, remove EXIF. For PDFs: compress, merge, or split pages. Everything runs locally.</p></div>
-      <div class="step"><div class="num">03 / DOWNLOAD</div><h3>Save instantly</h3><p>Download each file individually, or grab them all as a ZIP with Pro. Nothing ever touches a server.</p></div>
+      <div class="step"><div class="num" data-i18n="image_converter.step1_num">01 / DROP</div><h3 data-i18n="image_converter.step1_title">Drop your files</h3><p data-i18n="image_converter.step1_body">Drag images or PDFs onto the popup or pick them from your device. Up to 5 at once on Free, unlimited on Pro.</p></div>
+      <div class="step"><div class="num" data-i18n="image_converter.step2_num">02 / CONVERT</div><h3 data-i18n="image_converter.step2_title">Choose what to do</h3><p data-i18n="image_converter.step2_body">Pick a format, set quality or a target file size, resize, remove EXIF. For PDFs: compress, merge, or split pages. Everything runs locally.</p></div>
+      <div class="step"><div class="num" data-i18n="image_converter.step3_num">03 / DOWNLOAD</div><h3 data-i18n="image_converter.step3_title">Save instantly</h3><p data-i18n="image_converter.step3_body">Download each file individually, or grab them all as a ZIP with Pro. Nothing ever touches a server.</p></div>
     </div>
   </div></section>
 
   <!-- COMPARE -->
   <section id="pricing"><div class="wrap">
     <div class="section-head">
-      <p class="mono-label">Free vs Pro</p>
-      <h2>Generous free tier. $7 unlocks the rest.</h2>
-      <p>Pro is a one-time purchase, not a subscription. Pay once, keep it forever, works offline.</p>
+      <p class="mono-label" data-i18n="image_converter.pricing_kicker">Free vs Pro</p>
+      <h2 data-i18n="image_converter.pricing_title">Generous free tier. $7 unlocks the rest.</h2>
+      <p data-i18n="image_converter.pricing_summary">Pro is a one-time purchase, not a subscription. Pay once, keep it forever, works offline.</p>
     </div>
     <div class="compare">
-      <div class="crow head"><div class="feat">Feature</div><div class="col">Free</div><div class="col pro">Pro · $7</div></div>
-      <div class="crow"><div class="feat">Convert images (HEIC, WebP, AVIF, JPG, PNG)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Export to AVIF (next-gen, smallest files)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Compress with quality slider</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Resize by percentage</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Remove EXIF metadata (location, camera info)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Remember settings</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">PDF to images / images to PDF</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Compress PDF (choose quality and DPI)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Merge PDFs / split PDF pages</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Batch size</div><div class="col">5 files</div><div class="col yes">Unlimited</div></div>
-      <div class="crow"><div class="feat">Download all as ZIP</div><div class="col no">-</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Exact-pixel resize &amp; crop</div><div class="col no">-</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Target a maximum file size</div><div class="col no">-</div><div class="col yes">✓</div></div>
-      <div class="crow"><div class="feat">Bulk rename on export</div><div class="col no">-</div><div class="col yes">✓</div></div>
+      <div class="crow head"><div class="feat" data-i18n="image_converter.feature_head">Feature</div><div class="col" data-i18n="image_converter.free_head">Free</div><div class="col pro" data-i18n="image_converter.pro_head">Pro · $7</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_convert">Convert images (HEIC, WebP, AVIF, JPG, PNG)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_avif">Export to AVIF (next-gen, smallest files)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_compress">Compress with quality slider</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_resize">Resize by percentage</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_exif">Remove EXIF metadata (location, camera info)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_settings">Remember settings</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_pdf_images">PDF to images / images to PDF</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_pdf_compress">Compress PDF (choose quality and DPI)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_pdf_merge">Merge PDFs / split PDF pages</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_batch">Batch size</div><div class="col" data-i18n="image_converter.five_files">5 files</div><div class="col yes" data-i18n="image_converter.unlimited">Unlimited</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_zip">Download all as ZIP</div><div class="col no">-</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_crop">Exact-pixel resize &amp; crop</div><div class="col no">-</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_target_size">Target a maximum file size</div><div class="col no">-</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_rename">Bulk rename on export</div><div class="col no">-</div><div class="col yes">✓</div></div>
     </div>
 
     <div class="procta reveal" style="margin-top:32px;">
       <div>
-        <div class="big">$7 <small>once · forever</small></div>
+        <div class="big" data-i18n-html="image_converter.price_big">$7 <small>once · forever</small></div>
         <ul>
-          <li>Unlimited batch</li><li>ZIP export</li><li>Exact resize &amp; crop</li>
-          <li>Bulk rename</li><li>Target a max file size</li><li>Lifetime license</li>
+          <li data-i18n="image_converter.bullet_batch">Unlimited batch</li><li data-i18n="image_converter.bullet_zip">ZIP export</li><li data-i18n="image_converter.bullet_crop">Exact resize &amp; crop</li>
+          <li data-i18n="image_converter.bullet_rename">Bulk rename</li><li data-i18n="image_converter.bullet_target">Target a max file size</li><li data-i18n="image_converter.bullet_license">Lifetime license</li>
         </ul>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;min-width:220px;">
-        <button class="btn btn-primary" id="buyBtn" disabled style="justify-content:center;">Loading checkout…</button>
-        <a class="btn btn-ghost" href="#" data-install style="justify-content:center;">Install the extension first</a>
+        <button class="btn btn-primary" id="buyBtn" disabled style="justify-content:center;" data-i18n="image_converter.loading_checkout">Loading checkout…</button>
+        <a class="btn btn-ghost" href="#" data-install style="justify-content:center;" data-i18n="image_converter.install_first">Install the extension first</a>
       </div>
     </div>
   </div></section>
 
   <!-- FAQ -->
   <section style="padding-top:0;"><div class="wrap">
-    <div class="section-head"><p class="mono-label">FAQ</p><h2>Questions, answered.</h2></div>
+    <div class="section-head"><p class="mono-label" data-i18n="image_converter.faq_kicker">FAQ</p><h2 data-i18n="image_converter.faq_title">Questions, answered.</h2></div>
     <div class="faq">
-      <details open><summary>Are my files uploaded anywhere?</summary><div class="ans">Never. All decoding, conversion, and compression happen locally in your browser using the Canvas API and WebAssembly. The extension requests only the <code>storage</code> permission and makes no network calls during processing.</div></details>
-      <details><summary>How do I convert iPhone HEIC photos?</summary><div class="ans">Just drop them in. HEIC is the one format Chrome can't decode natively, so we run a local WebAssembly decoder (libheif). Your photos are converted to JPG, PNG, WebP or AVIF entirely on your device, with correct orientation.</div></details>
-      <details><summary>What can I do with PDFs?</summary><div class="ans">Quite a lot. You can convert PDF pages to images (JPG, PNG, WebP, AVIF), combine images into a single PDF, compress a PDF by rasterizing its pages at a chosen DPI and quality level, merge multiple PDFs into one document, or split a multi-page PDF into individual page files. All of this is free.</div></details>
-      <details><summary>Will PDF compression always reduce the file size?</summary><div class="ans">Not always. PDFs that contain mostly text and vector graphics are already very compact. Rasterizing them to images can make them larger. Compression works best on PDFs that already contain embedded photos or scanned images. The extension shows you the before and after size so you always know the result.</div></details>
-      <details><summary>What does "Remove EXIF" do?</summary><div class="ans">EXIF metadata is information embedded in JPEG photos: GPS coordinates, camera model, date taken, and more. Checking "Remove EXIF" strips this before saving the output, which protects your location privacy when sharing images. It only applies when converting to JPG, since other formats do not carry EXIF in the same way.</div></details>
-      <details><summary>What is the max file size target?</summary><div class="ans">A Pro feature that automatically finds the highest quality that fits under a size you set (for example, 500 KB). The extension runs a binary search over quality levels so you do not have to guess. Works for JPG, WebP, and AVIF. Not available for PNG since PNG is lossless.</div></details>
-      <details><summary>Is Pro a subscription?</summary><div class="ans">No. Pro is a single $7 payment that unlocks everything forever: unlimited batches, ZIP export, exact resize and crop, bulk rename, and the max file size target. It keeps working offline after you activate.</div></details>
-      <details><summary>How does activation work?</summary><div class="ans">After purchase you get a license key shown on screen and emailed as backup. Paste it into the extension once. It then works offline. We never re-check on every launch, and you will never be locked out if you are offline.</div></details>
-      <details><summary>Can I get a refund?</summary><div class="ans">Yes, payments are handled by Paddle, our Merchant of Record. See our <a href="/refund/" style="color:var(--accent)">refund policy</a>.</div></details>
+      <details open><summary data-i18n="image_converter.faq_upload_q">Are my files uploaded anywhere?</summary><div class="ans" data-i18n-html="image_converter.faq_upload_a">Never. All decoding, conversion, and compression happen locally in your browser using the Canvas API and WebAssembly. The extension requests only the <code>storage</code> permission and makes no network calls during processing.</div></details>
+      <details><summary data-i18n="image_converter.faq_heic_q">How do I convert iPhone HEIC photos?</summary><div class="ans" data-i18n="image_converter.faq_heic_a">Just drop them in. HEIC is the one format Chrome can't decode natively, so we run a local WebAssembly decoder (libheif). Your photos are converted to JPG, PNG, WebP or AVIF entirely on your device, with correct orientation.</div></details>
+      <details><summary data-i18n="image_converter.faq_pdf_q">What can I do with PDFs?</summary><div class="ans" data-i18n="image_converter.faq_pdf_a">Quite a lot. You can convert PDF pages to images (JPG, PNG, WebP, AVIF), combine images into a single PDF, compress a PDF by rasterizing its pages at a chosen DPI and quality level, merge multiple PDFs into one document, or split a multi-page PDF into individual page files. All of this is free.</div></details>
+      <details><summary data-i18n="image_converter.faq_pdf_size_q">Will PDF compression always reduce the file size?</summary><div class="ans" data-i18n="image_converter.faq_pdf_size_a">Not always. PDFs that contain mostly text and vector graphics are already very compact. Rasterizing them to images can make them larger. Compression works best on PDFs that already contain embedded photos or scanned images. The extension shows you the before and after size so you always know the result.</div></details>
+      <details><summary data-i18n="image_converter.faq_exif_q">What does "Remove EXIF" do?</summary><div class="ans" data-i18n="image_converter.faq_exif_a">EXIF metadata is information embedded in JPEG photos: GPS coordinates, camera model, date taken, and more. Checking "Remove EXIF" strips this before saving the output, which protects your location privacy when sharing images. It only applies when converting to JPG, since other formats do not carry EXIF in the same way.</div></details>
+      <details><summary data-i18n="image_converter.faq_target_q">What is the max file size target?</summary><div class="ans" data-i18n="image_converter.faq_target_a">A Pro feature that automatically finds the highest quality that fits under a size you set (for example, 500 KB). The extension runs a binary search over quality levels so you do not have to guess. Works for JPG, WebP, and AVIF. Not available for PNG since PNG is lossless.</div></details>
+      <details><summary data-i18n="image_converter.faq_sub_q">Is Pro a subscription?</summary><div class="ans" data-i18n="image_converter.faq_sub_a">No. Pro is a single $7 payment that unlocks everything forever: unlimited batches, ZIP export, exact resize and crop, bulk rename, and the max file size target. It keeps working offline after you activate.</div></details>
+      <details><summary data-i18n="image_converter.faq_activation_q">How does activation work?</summary><div class="ans" data-i18n="image_converter.faq_activation_a">After purchase you get a license key shown on screen and emailed as backup. Paste it into the extension once. It then works offline. We never re-check on every launch, and you will never be locked out if you are offline.</div></details>
+      <details><summary data-i18n="image_converter.faq_refund_q">Can I get a refund?</summary><div class="ans" data-i18n-html="image_converter.faq_refund_a">Yes, payments are handled by Paddle, our Merchant of Record. See our <a href="/refund/" style="color:var(--accent)">refund policy</a>.</div></details>
     </div>
   </div></section>
 
-  <!-- FOOTER -->
-  <footer><div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="logo-text">
-          <img src="/icon.svg" alt="VeriMedia" width="20" height="20"> VeriMedia<span class="dot">.xyz</span>
-        </span>
-        <p class="footer-tagline">Private, client-side media tools.<br>Your files never leave your device.</p>
-        <p class="footer-copy">© 2026 VeriMedia.xyz</p>
-      </div>
-      <div class="footer-col">
-        <h4 class="footer-col-title">Tools</h4>
-        <a href="/image-converter/" class="footer-link">Image &amp; PDF Converter</a>
-        <a href="/ai-opt-out-metadata/" class="footer-link">AI Opt-Out Tagger</a>
-        <a href="/remove-exif-from-photos/" class="footer-link">EXIF &amp; GPS Cleaner</a>
-        <a href="/remove-pdf-metadata/" class="footer-link">PDF Metadata Cleaner</a>
-      </div>
-      <div class="footer-col">
-        <h4 class="footer-col-title">Resources</h4>
-        <a href="/knowledge/" class="footer-link">Knowledge Base</a>
-        <a href="/remove-exif-from-photos/" class="footer-link">EXIF Removal Guide</a>
-        <a href="/remove-pdf-metadata/" class="footer-link">PDF Privacy Guide</a>
-      </div>
-      <div class="footer-col">
-        <h4 class="footer-col-title">Legal</h4>
-        <a href="/privacy/" class="footer-link">Privacy Policy</a>
-        <a href="/terms/" class="footer-link">Terms of Service</a>
-        <a href="/refund/" class="footer-link">Refund Policy</a>
-      </div>
-    </div>
-    <div class="footer-bottom">All files processed 100% locally. Nothing ever leaves your browser.</div>
-  </div></footer>
+  <footer></footer>
 
+  <script type="module" src="/src/site-chrome.js"></script>
   <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
   <script>
     const PADDLE_TOKEN = 'live_2f19b88294a235307e74e44f820';
@@ -357,12 +168,13 @@
     const params = new URLSearchParams(location.search);
     const extId = params.get('ext') || DEFAULT_EXT_ID;
     const successUrl = `${location.origin}/image-converter/success/?ext=${encodeURIComponent(extId)}`;
+    const i18n = (key, fallback) => window.VM_TRANSLATIONS?.image_converter?.[key] || fallback;
 
     document.querySelectorAll('[data-install]').forEach((el) => {
       el.addEventListener('click', (e) => {
         if (CHROME_STORE_URL) { el.setAttribute('href', CHROME_STORE_URL); el.setAttribute('target', '_blank'); return; }
         e.preventDefault();
-        el.textContent = 'Launching on the Chrome Web Store soon ✦';
+        el.textContent = i18n('launch_soon', 'Launching on the Chrome Web Store soon ✦');
       });
     });
 
@@ -388,7 +200,7 @@
         },
       });
       buyBtn.disabled = false;
-      buyBtn.textContent = 'Unlock Pro - $7';
+      buyBtn.textContent = i18n('checkout_ready', 'Unlock Pro - $7');
       maybeAutoCheckout();
     }
     if (window.Paddle) initPaddle();

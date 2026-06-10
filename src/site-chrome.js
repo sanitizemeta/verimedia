@@ -8,6 +8,8 @@ const LANG_LABELS = { en: 'English (EN)', es: 'Español (ES)', fr: 'Français (F
 const LANG_KEY = 'vm_lang';
 
 function detectLang() {
+  const urlLang = new URLSearchParams(window.location.search).get('lang');
+  if (SUPPORTED_LANGS.includes(urlLang)) return urlLang;
   const pathLang = window.location.pathname.split('/').filter(Boolean)[0];
   if (SUPPORTED_LANGS.includes(pathLang)) return pathLang;
   return 'en';
@@ -30,6 +32,10 @@ function buildLangUrl(lang) {
   // Remove lang prefix if present
   const pageParts = SUPPORTED_LANGS.includes(parts[0]) ? parts.slice(1) : parts;
   const slug = pageParts[0];
+
+  if (slug === 'image-converter') {
+    return `/image-converter/?lang=${lang}`;
+  }
 
   if (TRANSLATABLE_GUIDES.includes(slug)) {
     if (lang === 'en') return `/${slug}/`;
@@ -99,6 +105,8 @@ function guideUrl(slug) {
 
 function buildNav(t) {
   const home = homeUrl();
+  const showLanguage = document.body.dataset.chromeLanguage !== 'false';
+  const showProfile = document.body.dataset.chromeProfile !== 'false';
   return `
   <div class="logo-container">
     <a href="${home}">
@@ -109,10 +117,12 @@ function buildNav(t) {
     </a>
   </div>
   <nav>
-    <a href="${home}#calculator-section" class="nav-link">${t.nav_utility || 'Utility'}</a>
+    <a href="${home}#calculator-section" class="nav-link">${t.nav_utility || 'Tool'}</a>
+    <a href="/image-converter/" class="nav-link">${t.nav_image_converter || 'Image Converter'}</a>
     <a href="${home}#pricing-section" class="nav-link">${t.nav_pricing || 'Pricing'}</a>
     <a href="${home}#faq-section" class="nav-link">${t.nav_faq || 'FAQ'}</a>
     <a href="${home}#calculator-section" class="nav-link nav-cta">${t.nav_cta || 'Shield my images'}</a>
+    ${showLanguage ? `
     <div class="lang-switcher-wrap" style="position:relative;">
       <button id="sc-lang-toggle" class="nav-link" style="background:none;border:none;padding:0.35rem 0;cursor:pointer;text-transform:uppercase;" aria-label="Switch Language">
         <span id="sc-lang-current">${currentLang.toUpperCase()}</span>
@@ -124,10 +134,13 @@ function buildNav(t) {
           </button>`).join('')}
       </div>
     </div>
+    ` : ''}
+    ${showProfile ? `
     <a href="${homeUrl()}" class="profile-nav-btn nav-link">
       <i data-lucide="user" style="width:13px;height:13px;"></i>
       ${t.nav_profile || 'Profile'}
     </a>
+    ` : ''}
   </nav>
 `;
 }
@@ -146,6 +159,7 @@ function buildFooter(t) {
     </div>
     <div class="footer-col">
       <h4 class="footer-col-title">${t.footer_col_tools || 'Tools'}</h4>
+      <a href="/image-converter/" class="footer-link">${t.footer_link_image_converter || 'Image Converter'}</a>
       <a href="${home}#calculator-section" class="footer-link">${t.footer_link_shield || 'AI Opt-Out Shield'}</a>
       <a href="${guideUrl('ai-opt-out-metadata')}" class="footer-link">${t.footer_link_tagger || 'AI Opt-Out Tagger'}</a>
       <a href="${guideUrl('remove-exif-from-photos')}" class="footer-link">${t.footer_link_exif || 'EXIF &amp; GPS Cleaner'}</a>
@@ -172,21 +186,17 @@ function buildFooter(t) {
 `;
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const t = await loadChromeStrings(currentLang);
-
+function renderChrome(t = {}) {
   const header = document.querySelector('header');
   if (header) header.innerHTML = buildNav(t);
 
   const footer = document.querySelector('footer');
   if (footer) footer.innerHTML = buildFooter(t);
 
-  document.documentElement.setAttribute('lang', currentLang);
-  applyPageTranslations();
-
   if (window.lucide) window.lucide.createIcons();
+}
 
-  // Wire language dropdown
+function wireLanguageDropdown() {
   const toggle = document.getElementById('sc-lang-toggle');
   const dropdown = document.getElementById('sc-lang-dropdown');
 
@@ -209,4 +219,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     });
   }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  renderChrome();
+  wireLanguageDropdown();
+
+  const t = await loadChromeStrings(currentLang);
+  window.VM_TRANSLATIONS = fullTranslations;
+
+  renderChrome(t);
+  wireLanguageDropdown();
+
+  document.documentElement.setAttribute('lang', currentLang);
+  applyPageTranslations();
 });
