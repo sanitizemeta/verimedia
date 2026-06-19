@@ -191,7 +191,7 @@
   <footer></footer>
 
   <script type="module" src="/src/site-chrome.js"></script>
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js" id="paddleSdk"></script>
   <script>
     const PADDLE_TOKEN = 'live_2f19b88294a235307e74e44f820';
     const PRICE_ID = 'pri_01ksyzt6bxskdfk8yvggr303fz';
@@ -212,8 +212,20 @@
     });
 
     const buyBtn = document.getElementById('buyBtn');
+    let paddleReady = false;
+
+    function showCheckoutUnavailable() {
+      if (paddleReady) return;
+      buyBtn.disabled = false;
+      buyBtn.textContent = 'Checkout unavailable - retry';
+    }
+
     function openCheckout() {
-      if (!window.Paddle || buyBtn.disabled) return;
+      if (!window.Paddle) {
+        showCheckoutUnavailable();
+        return;
+      }
+      if (buyBtn.disabled) return;
       Paddle.Checkout.open({
         items: [{ priceId: PRICE_ID, quantity: 1 }],
         settings: { successUrl, displayMode: 'overlay', theme: 'dark' },
@@ -222,6 +234,8 @@
     buyBtn.addEventListener('click', openCheckout);
 
     function initPaddle() {
+      if (paddleReady || !window.Paddle) return;
+      paddleReady = true;
       Paddle.Initialize({
         token: PADDLE_TOKEN,
         eventCallback: (e) => {
@@ -238,6 +252,8 @@
     }
     if (window.Paddle) initPaddle();
     else window.addEventListener('load', () => window.Paddle && initPaddle());
+    document.getElementById('paddleSdk')?.addEventListener('error', showCheckoutUnavailable);
+    setTimeout(showCheckoutUnavailable, 6000);
 
     function maybeAutoCheckout() {
       if (params.get('ext')) openCheckout();
