@@ -257,8 +257,10 @@
     "p8": "These Terms are governed by local statutes. Contact us for inquiries."
   },
   "chrome": {
-    "nav_utility": "Tool",
+    "nav_utility": "AI-Opt Out Tool",
     "nav_image_converter": "Image Converter",
+    "nav_extensions": "Extensions",
+    "nav_quietbrowsing": "QuietBrowsing",
     "nav_pricing": "Pricing",
     "nav_faq": "FAQ",
     "nav_cta": "Shield my images",

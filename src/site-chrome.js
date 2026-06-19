@@ -117,8 +117,22 @@ function buildNav(t) {
     </a>
   </div>
   <nav>
-    <a href="${home}#calculator-section" class="nav-link">${t.nav_utility || 'Tool'}</a>
-    <a href="/image-converter/" class="nav-link">${t.nav_image_converter || 'Image Converter'}</a>
+    <a href="${home}#calculator-section" class="nav-link">${t.nav_utility || 'AI-Opt Out Tool'}</a>
+    <div class="nav-dropdown-wrap">
+      <button id="sc-ext-toggle" class="nav-link nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="sc-ext-dropdown">
+        ${t.nav_extensions || 'Extensions'}
+      </button>
+      <div id="sc-ext-dropdown" class="glass-card nav-dropdown" hidden>
+        <a href="/image-converter/" class="nav-dropdown-item">
+          <span>${t.nav_image_converter || 'Image Converter'}</span>
+          <small>Image &amp; PDF tools</small>
+        </a>
+        <a href="/quietbrowsing/" class="nav-dropdown-item">
+          <span>${t.nav_quietbrowsing || 'QuietBrowsing'}</span>
+          <small>Clean tracking links</small>
+        </a>
+      </div>
+    </div>
     <a href="${home}#pricing-section" class="nav-link">${t.nav_pricing || 'Pricing'}</a>
     <a href="${home}#faq-section" class="nav-link">${t.nav_faq || 'FAQ'}</a>
     <a href="${home}#calculator-section" class="nav-link nav-cta">${t.nav_cta || 'Shield my images'}</a>
@@ -221,6 +235,29 @@ function wireLanguageDropdown() {
   }
 }
 
+function wireExtensionsDropdown() {
+  const toggle = document.getElementById('sc-ext-toggle');
+  const dropdown = document.getElementById('sc-ext-dropdown');
+
+  if (!toggle || !dropdown) return;
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = !dropdown.hidden;
+    dropdown.hidden = open;
+    toggle.setAttribute('aria-expanded', String(!open));
+  });
+
+  dropdown.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  document.addEventListener('click', () => {
+    dropdown.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+  });
+}
+
 function bootFaqAccordions() {
   document.querySelectorAll('.faq-trigger').forEach((btn) => {
     if (btn.dataset.faqBound === 'true') return;
@@ -246,6 +283,7 @@ function bootFaqAccordions() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   renderChrome();
+  wireExtensionsDropdown();
   wireLanguageDropdown();
   bootFaqAccordions();
 
@@ -253,6 +291,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   window.VM_TRANSLATIONS = fullTranslations;
 
   renderChrome(t);
+  wireExtensionsDropdown();
   wireLanguageDropdown();
 
   document.documentElement.setAttribute('lang', currentLang);

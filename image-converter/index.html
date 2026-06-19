@@ -139,7 +139,7 @@
         </ul>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;min-width:220px;">
-        <button class="btn btn-primary" id="buyBtn" disabled style="justify-content:center;" data-i18n="image_converter.loading_checkout">Loading checkout…</button>
+        <button class="btn btn-primary" id="buyBtn" disabled style="justify-content:center;" data-i18n="image_converter.checkout_ready">Unlock Pro - $7</button>
         <a class="btn btn-ghost" href="#" data-install style="justify-content:center;" data-i18n="image_converter.install_first">Install the extension first</a>
       </div>
     </div>
@@ -217,6 +217,7 @@
     function showCheckoutUnavailable() {
       if (paddleReady) return;
       buyBtn.disabled = false;
+      buyBtn.removeAttribute('data-i18n');
       buyBtn.textContent = 'Checkout unavailable - retry';
     }
 
@@ -247,6 +248,7 @@
         },
       });
       buyBtn.disabled = false;
+      buyBtn.setAttribute('data-i18n', 'image_converter.checkout_ready');
       buyBtn.textContent = i18n('checkout_ready', 'Unlock Pro - $7');
       maybeAutoCheckout();
     }

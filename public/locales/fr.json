@@ -247,7 +247,7 @@
     "p8": "Ces conditions sont régies par les statuts locaux. Contactez-nous pour toute question."
   },
   "chrome": {
-    "nav_utility": "Outil",
+    "nav_utility": "Outil AI Opt-Out",
     "nav_pricing": "Tarifs",
     "nav_faq": "FAQ",
     "nav_cta": "Protéger mes images",
@@ -271,6 +271,8 @@
     "footer_link_pricing": "Tarifs",
     "footer_bottom": "Tous les fichiers sont traités à 100 % localement. rien ne quitte jamais votre navigateur.",
     "nav_image_converter": "Convertisseur d’images",
+    "nav_extensions": "Extensions",
+    "nav_quietbrowsing": "QuietBrowsing",
     "footer_link_image_converter": "Convertisseur d’images"
   },
   "refund_page": {
