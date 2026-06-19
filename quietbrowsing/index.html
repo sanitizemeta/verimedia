@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuietBrowsing · Clean tracking parameters from links</title>
+  <meta name="description" content="QuietBrowsing removes tracking parameters from URLs in Chrome. Clean UTM, click IDs, affiliate-style noise, and AI referral tags with a private browser extension." />
+  <link rel="canonical" href="https://verimedia.xyz/quietbrowsing/" />
+  <meta property="og:title" content="QuietBrowsing" />
+  <meta property="og:description" content="A Chrome extension that quietly cleans tracking parameters from links. Free cleaning, Pro controls, no subscription." />
+  <meta property="og:image" content="https://verimedia.xyz/logo.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    .quietbrowsing-page .hero { padding: 3.6rem 0 3rem; }
+    .quietbrowsing-page .hero h1 { font-size: clamp(2.7rem, 7vw, 5.2rem); }
+    .quietbrowsing-page .terminal { margin-top: 2.2rem; }
+    .quietbrowsing-page .trust { margin-top: 0; }
+    @media (max-width: 720px) {
+      .quietbrowsing-page .hero { padding: 2.8rem 0 2.5rem; }
+      .quietbrowsing-page .terminal { margin-top: 1.6rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "QuietBrowsing",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Chrome",
+    "description": "Chrome extension that removes tracking parameters from URLs, including UTM tags, ad click IDs, AI referral tags, and noisy campaign parameters.",
+    "offers": [
+      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
+      { "@type": "Offer", "price": "1.99", "priceCurrency": "USD", "name": "Pro (one-time)" }
+    ]
+  }
+  </script>
+</head>
+<body class="image-converter-page quietbrowsing-page" data-chrome-profile="false">
+  <header></header>
+
+  <div class="wrap hero">
+    <p class="mono-label reveal d1">Chrome Extension · Free &amp; Pro</p>
+    <h1 class="reveal d2">Quiet<span class="glow">Browsing</span></h1>
+    <p class="sub reveal d3">Clean tracking parameters from links as you browse. Strip UTM tags, ad click IDs, AI source tags, and campaign noise while keeping the real page URL intact.</p>
+    <div class="cta reveal d4">
+      <a class="btn btn-primary" id="installBtn" href="#" data-install>+ Add to Chrome - Free</a>
+      <a class="btn btn-ghost" href="#pricing" data-buy>Unlock Pro · $1.99</a>
+    </div>
+    <p class="micro reveal d4">One-time purchase · <span>no subscription</span> · privacy-first link cleaning</p>
+
+    <div class="terminal reveal d5" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body">
+        <div class="l">$ open https://store.com/item?sku=42&amp;utm_source=chatgpt.com&amp;fbclid=abc</div>
+        <div class="ok">✓ removed utm_source · fbclid · kept sku=42</div>
+        <div class="l">$ copy-clean https://news.site/story?utm_campaign=launch&amp;id=781</div>
+        <div class="ok">✓ copied https://news.site/story?id=781</div>
+        <div class="l">$ mode strict --custom "source, campaign_id, spm"</div>
+        <div class="ok">✓ Pro controls active · paused sites respected</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust"><div class="wrap"><div class="row">
+    <span><span class="dot">●</span> Cleans <b>UTM</b> tags</span>
+    <span><span class="dot">●</span> Removes <b>ad click IDs</b></span>
+    <span><span class="dot">●</span> Handles <b>AI source tags</b></span>
+    <span><span class="dot">●</span> <b>Pause</b> any site</span>
+    <span><span class="dot">●</span> <b>No</b> subscription</span>
+  </div></div></div>
+
+  <section><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">Free Cleaning</p>
+      <h2>Common tracking parameters vanish quietly.</h2>
+      <p>QuietBrowsing removes high-confidence tracking parameters automatically on normal web pages, and gives you manual copy/open tools for pages Chrome does not allow extensions to rewrite.</p>
+    </div>
+    <div class="formats">
+      <div class="fmt heic"><div class="name">utm_*</div><div class="meta">source · medium · campaign · content</div></div>
+      <div class="fmt"><div class="name">fbclid</div><div class="meta">Meta click tracking</div></div>
+      <div class="fmt"><div class="name">gclid</div><div class="meta">Google ad click IDs</div></div>
+      <div class="fmt"><div class="name">msclkid</div><div class="meta">Microsoft ad click IDs</div></div>
+      <div class="fmt"><div class="name">utm_source=chatgpt</div><div class="meta">AI source noise</div></div>
+      <div class="fmt"><div class="name">srsltid</div><div class="meta">Search result tracking</div></div>
+    </div>
+    <p class="any">Free mode focuses on parameters that are very likely to be tracking-only. It keeps product IDs, page IDs, search queries, and other meaningful URL parts intact.</p>
+  </div></section>
+
+  <section style="padding-top:0;"><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">How it works</p>
+      <h2>Clean links without changing how you browse.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01 / DETECT</div><h3>Find noisy parameters</h3><p>The popup shows the removable parameters on the current tab, with an info panel listing what Free removes.</p></div>
+      <div class="step"><div class="num">02 / CLEAN</div><h3>Auto, copy, or open</h3><p>Normal pages are cleaned automatically. Protected browser pages can still be cleaned with Copy Clean Tab Link or Open Clean URL.</p></div>
+      <div class="step"><div class="num">03 / CONTROL</div><h3>Pause when needed</h3><p>Turn the extension off globally, pause one site, or unlock Pro for strict mode, custom parameters, whitelist, and import/export.</p></div>
+    </div>
+  </div></section>
+
+  <section id="pricing"><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">Free vs Pro</p>
+      <h2>Free handles the common mess. Pro gives you control.</h2>
+      <p>Pro is a one-time unlock for people who want stricter cleaning, custom rules, and portable settings.</p>
+    </div>
+    <div class="compare">
+      <div class="crow head"><div class="feat">Feature</div><div class="col">Free</div><div class="col pro">Pro · $1.99</div></div>
+      <div class="crow"><div class="feat">Automatic cleaning for common trackers</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Copy Clean Tab Link</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Open Clean URL</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Pause this site</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Clean Clipboard</div><div class="col no">-</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Strict mode for generic ref/source/campaign noise</div><div class="col no">-</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Custom parameters</div><div class="col no">-</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Site whitelist</div><div class="col no">-</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Recent clean history</div><div class="col no">-</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat">Export and import settings</div><div class="col no">-</div><div class="col yes">✓</div></div>
+    </div>
+
+    <div class="procta reveal" style="margin-top:32px;">
+      <div>
+        <div class="big">$1.99 <small>once · forever</small></div>
+        <ul>
+          <li>Strict mode</li><li>Custom parameters</li><li>Clipboard cleaning</li>
+          <li>Whitelist</li><li>Recent clean history</li><li>Settings import/export</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:220px;">
+        <button class="btn btn-primary" id="buyBtn" disabled style="justify-content:center;">Checkout not wired yet</button>
+        <a class="btn btn-ghost" href="#" data-install style="justify-content:center;">Install the extension first</a>
+      </div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:0;"><div class="wrap">
+    <div class="section-head"><p class="mono-label">FAQ</p><h2>Questions, answered.</h2></div>
+    <div class="faq-accordion image-converter-faq">
+      <div class="faq-item open">
+        <button class="faq-trigger" aria-expanded="true"><span>Why did a Chrome Web Store URL not clean automatically?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>Chrome blocks extensions from rewriting browser-owned pages such as Chrome Web Store and chrome:// URLs. QuietBrowsing still shows the parameters and can create a clean URL manually with Copy Clean Tab Link or Open Clean URL.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>Does the counter include automatic cleaning?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>No. Chrome's packaged extension APIs do not expose production match counts for silent declarative redirects. The counter tracks manual clean actions that the extension can count accurately.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>Will strict mode break links?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>Strict mode removes broader names like ref, source, campaign, and spm. That is why it is a Pro control: useful for power users, but better kept deliberate.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>Is Pro a subscription?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>No. Pro is planned as a one-time $1.99 unlock with lifetime access on the activated browser profile.</p></div>
+      </div>
+    </div>
+  </div></section>
+
+  <footer></footer>
+
+  <script type="module" src="/src/site-chrome.js"></script>
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script>
+    const PADDLE_TOKEN = 'live_2f19b88294a235307e74e44f820';
+    const PRICE_ID = '';
+    const DEFAULT_EXT_ID = '';
+    const CHROME_STORE_URL = '';
+
+    const params = new URLSearchParams(location.search);
+    const extId = params.get('ext') || DEFAULT_EXT_ID;
+    const successUrl = `${location.origin}/quietbrowsing/success/${extId ? `?ext=${encodeURIComponent(extId)}` : ''}`;
+
+    document.querySelectorAll('[data-install]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        if (CHROME_STORE_URL) { el.setAttribute('href', CHROME_STORE_URL); el.setAttribute('target', '_blank'); return; }
+        e.preventDefault();
+        el.textContent = 'Launching on the Chrome Web Store soon';
+      });
+    });
+
+    const buyBtn = document.getElementById('buyBtn');
+    function openCheckout() {
+      if (!window.Paddle || buyBtn.disabled || !PRICE_ID) return;
+      Paddle.Checkout.open({
+        items: [{ priceId: PRICE_ID, quantity: 1 }],
+        settings: { successUrl, displayMode: 'overlay', theme: 'dark' },
+      });
+    }
+    buyBtn.addEventListener('click', openCheckout);
+
+    function initPaddle() {
+      if (!PRICE_ID) return;
+      Paddle.Initialize({
+        token: PADDLE_TOKEN,
+        eventCallback: (e) => {
+          if (e.name === 'checkout.completed') {
+            const txn = e.data?.transaction_id || e.data?.id || '';
+            if (txn) sessionStorage.setItem('paddle_txn', txn);
+            location.href = txn ? `${successUrl}${successUrl.includes('?') ? '&' : '?'}txn=${encodeURIComponent(txn)}` : successUrl;
+          }
+        },
+      });
+      buyBtn.disabled = false;
+      buyBtn.textContent = 'Unlock Pro - $1.99';
+      if (params.get('checkout') === '1' || params.get('ext')) openCheckout();
+    }
+    if (window.Paddle) initPaddle();
+    else window.addEventListener('load', () => window.Paddle && initPaddle());
+  </script>
+</body>
+</html>
