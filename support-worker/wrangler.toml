@@ -1,0 +1,12 @@
+name = "verimedia-support"
+main = "src/index.mjs"
+compatibility_date = "2024-11-01"
+
+[vars]
+SUPPORT_FROM = "VeriMedia Support <support@verimedia.xyz>"
+# Origins allowed to POST the form (comma-separated).
+ALLOWED_ORIGIN = "https://verimedia.xyz,https://verimedia.pages.dev,http://localhost:5173,http://localhost:3000"
+
+# Secrets (set with `wrangler secret put`, never in this file):
+#   RESEND_API_KEY  — from resend.com (same key as the licensing worker)
+#   SUPPORT_TO      — inbox that should receive support messages

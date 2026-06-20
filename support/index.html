@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support | VeriMedia</title>
+  <meta name="description" content="Get help with VeriMedia's extensions: VanishAI, QuietBrowsing, and the Image Converter. Send us a message and we'll get back to you.">
+  <link rel="canonical" href="https://verimedia.xyz/support/" />
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.min.js" defer></script>
+
+  <style>
+    .support-page { max-width: 640px; margin: 0 auto; padding: 3.5rem 1.5rem 4rem; }
+    .support-page h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); letter-spacing: -0.03em; margin: 0 0 0.75rem; }
+    .support-page .lead { color: var(--text-secondary); line-height: 1.7; margin: 0 0 2rem; }
+    .sform { display: grid; gap: 1.1rem; }
+    .sfield { display: grid; gap: 0.4rem; }
+    .sfield label { font-size: 0.8rem; font-weight: 600; color: var(--text-primary); }
+    .sfield input, .sfield select, .sfield textarea {
+      width: 100%; padding: 0.7rem 0.85rem; background: var(--surface); color: var(--text-primary);
+      border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.92rem;
+    }
+    .sfield textarea { min-height: 150px; resize: vertical; }
+    .sfield input:focus, .sfield select:focus, .sfield textarea:focus { outline: none; border-color: var(--accent); }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .sbtn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0.8rem 1.4rem;
+      background: var(--accent); color: var(--bg, #060606); border: none; border-radius: 8px; font-weight: 700;
+      font-size: 0.92rem; cursor: pointer; }
+    .sbtn:disabled { opacity: 0.6; cursor: default; }
+    .smsg { font-size: 0.9rem; padding: 0.85rem 1rem; border-radius: 8px; display: none; }
+    .smsg.ok { display: block; color: var(--accent); background: rgba(126,196,126,0.08); border: 1px solid rgba(126,196,126,0.25); }
+    .smsg.err { display: block; color: #e0707a; background: rgba(224,112,122,0.08); border: 1px solid rgba(224,112,122,0.25); }
+    .support-alt { color: var(--text-secondary); font-size: 0.85rem; margin-top: 1.5rem; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+  <header></header>
+
+  <main class="support-page">
+    <h1>Support</h1>
+    <p class="lead">Questions, bug reports, or license help for VanishAI, QuietBrowsing, or the Image Converter? Send a message below and we'll get back to you by email.</p>
+
+    <form class="sform" id="supportForm" novalidate>
+      <div class="sfield">
+        <label for="sf-name">Name <span style="color:var(--text-secondary);font-weight:400">(optional)</span></label>
+        <input type="text" id="sf-name" name="name" autocomplete="name" maxlength="120" />
+      </div>
+      <div class="sfield">
+        <label for="sf-email">Email</label>
+        <input type="email" id="sf-email" name="email" autocomplete="email" maxlength="200" required />
+      </div>
+      <div class="sfield">
+        <label for="sf-topic">Topic</label>
+        <select id="sf-topic" name="topic">
+          <option>General question</option>
+          <option>Bug report</option>
+          <option>License / Pro key help</option>
+          <option>VanishAI</option>
+          <option>QuietBrowsing</option>
+          <option>Image Converter</option>
+          <option>Refund</option>
+        </select>
+      </div>
+      <div class="sfield">
+        <label for="sf-message">Message</label>
+        <textarea id="sf-message" name="message" maxlength="5000" required></textarea>
+      </div>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <div>
+        <button class="sbtn" type="submit" id="sf-submit"><i data-lucide="send" style="width:15px;height:15px;"></i> Send message</button>
+      </div>
+      <p class="smsg" id="sf-msg" role="status"></p>
+    </form>
+
+    <p class="support-alt">Buying Pro and need your key resent, or want a refund? Mention your order email in the message and we'll sort it out. For billing, payments are handled by our Merchant of Record, Paddle. See our <a href="/refund/" style="color:var(--accent)">refund policy</a>.</p>
+  </main>
+
+  <footer></footer>
+
+  <script type="module" src="/src/site-chrome.js"></script>
+  <script>
+    const WORKER = 'https://verimedia-support.sanitizemeta.workers.dev/submit';
+    const form = document.getElementById('supportForm');
+    const btn = document.getElementById('sf-submit');
+    const msg = document.getElementById('sf-msg');
+
+    function show(kind, text) { msg.className = 'smsg ' + kind; msg.textContent = text; }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        topic: form.topic.value,
+        message: form.message.value.trim(),
+        website: form.website.value, // honeypot
+      };
+      if (!payload.email || !payload.message) { show('err', 'Please add your email and a message.'); return; }
+      btn.disabled = true; show('', ''); msg.className = 'smsg';
+      const original = btn.innerHTML; btn.textContent = 'Sending...';
+      try {
+        const res = await fetch(WORKER, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          form.reset();
+          show('ok', 'Thanks! Your message was sent. We\'ll reply to your email soon.');
+        } else if (data.error === 'invalid_email') {
+          show('err', 'That email address looks invalid. Please check it.');
+        } else {
+          show('err', 'Something went wrong sending your message. Please try again in a moment.');
+        }
+      } catch (_) {
+        show('err', 'Could not reach the server. Check your connection and try again.');
+      } finally {
+        btn.disabled = false; btn.innerHTML = original;
+      }
+    });
+  </script>
+</body>
+</html>
