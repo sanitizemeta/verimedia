@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VanishAI · Remove Google AI Overviews</title>
+  <meta name="description" content="VanishAI skips Google's AI Overviews and drops you straight on clean web results. Zero config, 100% local, free. For Chrome and Firefox." />
+  <link rel="canonical" href="https://verimedia.xyz/vanishai/" />
+  <meta property="og:title" content="VanishAI" />
+  <meta property="og:description" content="A free Chrome and Firefox extension that skips Google AI Overviews and gives you clean web results. Zero config, 100% local." />
+  <meta property="og:image" content="https://verimedia.xyz/logo.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    .vanishai-page .hero { padding: 3.6rem 0 3rem; }
+    .vanishai-page .hero h1 { font-size: clamp(2.7rem, 7vw, 5.2rem); }
+    .vanishai-page .terminal { margin-top: 2.2rem; }
+    .vanishai-page .trust { margin-top: 0; }
+    @media (max-width: 720px) {
+      .vanishai-page .hero { padding: 2.8rem 0 2.5rem; }
+      .vanishai-page .terminal { margin-top: 1.6rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "VanishAI",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome, Firefox",
+    "description": "Free Chrome and Firefox extension that skips Google AI Overviews and shows clean web results, using Google's own Web results filter. Zero config, 100% local.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" }
+  }
+  </script>
+</head>
+<body class="image-converter-page vanishai-page" data-chrome-profile="false">
+  <header></header>
+
+  <div class="wrap hero">
+    <p class="mono-label reveal d1">Chrome &amp; Firefox Extension · Free</p>
+    <h1 class="reveal d2">Vanish<span class="glow">AI</span></h1>
+    <p class="sub reveal d3">Skip Google's AI Overviews and land straight on real web links. No generative summary box, no wasted scrolling. Zero setup, nothing uploaded.</p>
+    <div class="cta reveal d4">
+      <a class="btn btn-primary" id="installBtn" href="#" data-install>+ Add to Chrome - Free</a>
+      <a class="btn btn-ghost" href="https://ko-fi.com/verimedia" target="_blank" rel="noopener">☕ Donate us at Ko-fi</a>
+    </div>
+    <p class="micro reveal d4">100% free · <span>no account</span> · 100% local · nothing uploaded</p>
+
+    <div class="terminal reveal d5" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body">
+        <div class="l">$ search google.com/search?q=best espresso machine</div>
+        <div class="ok">✓ switched to Web results · AI Overview skipped</div>
+        <div class="l">$ search google.com/search?q=how to fix a leaky faucet</div>
+        <div class="ok">✓ real links · no generative summary box</div>
+        <div class="l">$ search images, videos, maps</div>
+        <div class="ok">✓ left alone · only normal web search is changed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust"><div class="wrap"><div class="row">
+    <span><span class="dot">●</span> Skips <b>AI Overviews</b></span>
+    <span><span class="dot">●</span> <b>Zero</b> config</span>
+    <span><span class="dot">●</span> <b>100%</b> local</span>
+    <span><span class="dot">●</span> Stays <b>stable</b></span>
+    <span><span class="dot">●</span> <b>Free</b> forever</span>
+  </div></div></div>
+
+  <section><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">What it does</p>
+      <h2>The classic Google, back in one click of Install.</h2>
+      <p>VanishAI quietly switches your Google searches to the standard Web results view, so the AI Overview and its slow summary box are skipped. You see real links first, every time.</p>
+    </div>
+    <div class="formats">
+      <div class="fmt heic"><div class="name">No AI Overview</div><div class="meta">straight to web links</div></div>
+      <div class="fmt"><div class="name">Zero config</div><div class="meta">install and done</div></div>
+      <div class="fmt"><div class="name">100% local</div><div class="meta">nothing uploaded</div></div>
+      <div class="fmt"><div class="name">Stable</div><div class="meta">survives Google redesigns</div></div>
+      <div class="fmt"><div class="name">Respectful</div><div class="meta">Images and Videos still work</div></div>
+      <div class="fmt"><div class="name">Pausable</div><div class="meta">toggle off anytime</div></div>
+    </div>
+    <p class="any">VanishAI never reads your page content. It only adjusts the Google search URL to ask for Web results, using Google's own filter.</p>
+  </div></section>
+
+  <section style="padding-top:0;"><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">How it works</p>
+      <h2>Stable by design, not fragile CSS.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01 / DETECT</div><h3>You search Google</h3><p>The moment a Google search loads, VanishAI sees the request.</p></div>
+      <div class="step"><div class="num">02 / SWITCH</div><h3>Web results filter</h3><p>It appends Google's own Web results parameter, so the AI Overview is skipped before the page even renders.</p></div>
+      <div class="step"><div class="num">03 / DONE</div><h3>Real links, instantly</h3><p>You land on classic results. Other extensions hide the AI box with CSS that breaks on every redesign. VanishAI does not.</p></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="procta reveal">
+      <div>
+        <div class="big">Free <small>forever · no account</small></div>
+        <ul>
+          <li>No AI Overviews</li><li>Zero config</li><li>100% local</li>
+          <li>Chrome &amp; Firefox</li><li>No tracking</li><li>Open the popup to pause</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:220px;">
+        <a class="btn btn-primary" href="#" data-install style="justify-content:center;">+ Add to Chrome - Free</a>
+        <a class="btn btn-ghost" href="https://ko-fi.com/verimedia" target="_blank" rel="noopener" style="justify-content:center;">☕ Donate us at Ko-fi</a>
+      </div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:0;"><div class="wrap">
+    <div class="section-head"><p class="mono-label">FAQ</p><h2>Questions, answered.</h2></div>
+    <div class="faq-accordion image-converter-faq">
+      <div class="faq-item open">
+        <button class="faq-trigger" aria-expanded="true"><span>How does VanishAI remove the AI Overview?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>It adds Google's own Web results filter (udm=14) to your search, which returns classic web links with no AI Overview. It does not hide anything with CSS, so it keeps working when Google changes its layout.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>Does it slow down or break Google?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>No. It actually loads faster, because the slow generative summary box is skipped. Images, Videos, Maps, and News searches are left untouched.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>Is any data collected?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>None. VanishAI runs entirely in your browser, has no servers, and never reads your page content or search terms. Nothing is uploaded.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>Is it really free?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>Yes, free forever with no account. If it saves you time, you can leave a tip on Ko-fi, but there is nothing to buy.</p></div>
+      </div>
+    </div>
+  </div></section>
+
+  <footer></footer>
+
+  <script type="module" src="/src/site-chrome.js"></script>
+  <script>
+    const CHROME_STORE_URL = '';  // set once the Chrome listing is published live
+    const FIREFOX_STORE_URL = ''; // set once the Firefox (AMO) listing is published live
+
+    const IS_FIREFOX = navigator.userAgent.includes('Firefox');
+    const STORE_URL = IS_FIREFOX ? FIREFOX_STORE_URL : CHROME_STORE_URL;
+    const STORE_NAME = IS_FIREFOX ? 'Firefox Add-ons' : 'Chrome Web Store';
+
+    if (IS_FIREFOX) {
+      document.querySelectorAll('[data-install]').forEach((el) => {
+        if (/add to chrome/i.test(el.textContent)) el.textContent = '+ Add to Firefox - Free';
+      });
+    }
+
+    document.querySelectorAll('[data-install]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        if (STORE_URL) { el.setAttribute('href', STORE_URL); el.setAttribute('target', '_blank'); return; }
+        e.preventDefault();
+        el.textContent = `Launching on the ${STORE_NAME} soon`;
+      });
+    });
+  </script>
+</body>
+</html>

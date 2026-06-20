@@ -22,6 +22,7 @@ export default defineConfig({
         knowledge: resolve(__dirname, 'knowledge/index.html'),
         imageConverter: resolve(__dirname, 'image-converter/index.html'),
         imageConverterSuccess: resolve(__dirname, 'image-converter/success/index.html'),
+        vanishAi: resolve(__dirname, 'vanishai/index.html'),
         quietBrowsing: resolve(__dirname, 'quietbrowsing/index.html'),
         quietBrowsingBuy: resolve(__dirname, 'quietbrowsing/buy/index.html'),
         quietBrowsingSuccess: resolve(__dirname, 'quietbrowsing/success/index.html'),

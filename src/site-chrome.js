@@ -126,6 +126,9 @@ function buildNav(t) {
           <span>${t.nav_image_converter || 'Image Converter'}</span>
           <small>Image &amp; PDF tools</small>
         </a>
+        <a href="/vanishai/" class="nav-dropdown-item">
+          <span>${t.nav_vanishai || 'VanishAI'}</span>
+        </a>
         <a href="/quietbrowsing/" class="nav-dropdown-item">
           <span>${t.nav_quietbrowsing || 'QuietBrowsing'}</span>
           <small>Clean tracking links</small>
@@ -175,6 +178,7 @@ function buildFooter(t) {
       <h4 class="footer-col-title">${t.footer_col_extensions || 'Extensions'}</h4>
       <a href="/image-converter/" class="footer-link">${t.footer_link_image_converter || 'Image Converter'}</a>
       <a href="/quietbrowsing/" class="footer-link">${t.footer_link_quietbrowsing || 'QuietBrowsing'}</a>
+      <a href="/vanishai/" class="footer-link">${t.footer_link_vanishai || 'VanishAI'}</a>
     </div>
     <div class="footer-col">
       <h4 class="footer-col-title">${t.footer_col_guides || 'Guides'}</h4>
