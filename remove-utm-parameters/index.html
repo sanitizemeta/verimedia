@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>How to Remove UTM Parameters from URLs | VeriMedia</title>
+  <meta name="description" content="Strip utm_source, utm_medium, utm_campaign and other tracking tags from links automatically in your browser. 100% local, nothing uploaded.">
+  <link rel="canonical" href="https://verimedia.xyz/remove-utm-parameters/" />
+  <meta http-equiv="content-language" content="en" />
+  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/remove-utm-parameters/" />
+  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/remove-utm-parameters/" />
+
+  <meta property="og:title" content="How to Remove UTM Parameters from URLs | VeriMedia">
+  <meta property="og:description" content="Strip utm_source, utm_medium, utm_campaign and other tracking tags from links automatically in your browser. 100% local, nothing uploaded.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verimedia.xyz/remove-utm-parameters/">
+  <meta property="og:image" content="https://verimedia.xyz/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="alternate icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.min.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to remove UTM parameters from a URL",
+    "description": "Strip utm_source, utm_medium, utm_campaign and other marketing tracking parameters from links automatically, without uploading anything to a server.",
+    "totalTime": "PT1M",
+    "tool": { "@type": "HowToTool", "name": "QuietBrowsing (free Chrome extension)" },
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Install QuietBrowsing", "text": "Add the free QuietBrowsing extension to Chrome. No account needed." },
+      { "@type": "HowToStep", "position": 2, "name": "Browse normally", "text": "QuietBrowsing automatically removes utm_ and other tracking parameters from links as you open them." },
+      { "@type": "HowToStep", "position": 3, "name": "Copy clean links", "text": "Right-click any link and choose Copy Clean Link to share a spotless, un-tracked URL." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What are UTM parameters?", "acceptedAnswer": { "@type": "Answer", "text": "UTM parameters (utm_source, utm_medium, utm_campaign, utm_term, utm_content) are tags marketers append to links to track which campaign, email, or ad sent you to a page. They are not needed to load the page." } },
+      { "@type": "Question", "name": "Is it safe to remove UTM parameters?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. UTM parameters only feed analytics. Removing them does not break the destination page. QuietBrowsing keeps real state parameters like id, sku, and q intact." } },
+      { "@type": "Question", "name": "Does QuietBrowsing upload my links?", "acceptedAnswer": { "@type": "Answer", "text": "No. All cleaning happens locally in your browser. QuietBrowsing has no servers, analytics, or accounts. Your URLs never leave your device." } }
+    ]
+  }
+  </script>
+
+  <style>
+    .guide-page { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+    .guide-header { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    .guide-breadcrumb { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 1rem; display: flex; gap: 0.4rem; align-items: center; }
+    .guide-breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+    .guide-breadcrumb a:hover { color: var(--accent); }
+    .guide-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.18); border-radius: 999px; padding: 0.2rem 0.65rem; margin-bottom: 1rem; }
+    .guide-title { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 1rem; }
+    .guide-intro { font-size: 1.08rem; color: var(--text-secondary); line-height: 1.7; margin: 0 0 1.5rem; }
+    .guide-meta { font-size: 0.78rem; color: var(--text-secondary); display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .guide-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .guide-body h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; letter-spacing: -0.02em; }
+    .guide-body p { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem; }
+    .guide-body ul, .guide-body ol { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem 1.25rem; }
+    .guide-body li { margin-bottom: 0.4rem; }
+    .guide-body code { background: rgba(56,189,248,0.08); color: var(--accent); padding: 1px 5px; border-radius: 4px; font-size: 0.88em; }
+    .guide-callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px 10px 10px 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .guide-callout p { margin: 0; font-size: 0.93rem; }
+    .guide-steps { counter-reset: steps; list-style: none; margin: 0 0 1.5rem; padding: 0; }
+    .guide-steps li { counter-increment: steps; display: flex; gap: 1rem; align-items: flex-start; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .guide-steps li:last-child { border-bottom: none; }
+    .guide-steps li::before { content: counter(steps); display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.2); border-radius: 50%; font-size: 0.78rem; font-weight: 700; color: var(--accent); font-family: var(--font-display); flex-shrink: 0; margin-top: 2px; }
+    .guide-steps li div strong { display: block; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .url-demo { display: grid; gap: 0.5rem; margin: 1rem 0 1.5rem; font-family: var(--font-display); font-size: 0.84rem; }
+    .url-demo div { padding: 0.7rem 0.9rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); word-break: break-all; }
+    .url-demo .dirty { color: var(--text-secondary); }
+    .url-demo .dirty s { color: #e0707a; }
+    .url-demo .clean { color: var(--accent); border-color: rgba(56,189,248,0.3); }
+    .guide-cta-block { background: var(--surface); border: 1px solid rgba(56,189,248,0.18); border-radius: 14px; padding: 2rem; text-align: center; margin: 3rem 0; }
+    .guide-cta-block h3 { margin: 0 0 0.5rem; font-size: 1.25rem; }
+    .guide-cta-block p { margin: 0 0 1.25rem; font-size: 0.93rem; }
+    .guide-related { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1.5rem 0 3rem; }
+    .guide-related a { display: block; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; transition: border-color var(--t-fast); }
+    .guide-related a:hover { border-color: var(--border-active); }
+    .guide-related a span { display: block; font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .guide-related a strong { font-size: 0.9rem; color: var(--text-primary); }
+    @media (max-width: 600px) { .guide-related { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header></header>
+
+  <main class="guide-page">
+    <div class="guide-header">
+      <div class="guide-breadcrumb">
+        <a href="/">VeriMedia</a>
+        <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+        <span>Remove UTM parameters from URLs</span>
+      </div>
+      <div class="guide-tag">Link Privacy</div>
+      <h1 class="guide-title">How to Remove UTM Parameters from URLs</h1>
+      <p class="guide-intro">Every link from a newsletter, ad, or social post is loaded with tracking tags like <code>utm_source</code> and <code>utm_campaign</code>. They follow you, clutter your address bar, and leak how you found a page when you share it. Here is what they are and how to strip them automatically.</p>
+      <div class="guide-meta">
+        <span><i data-lucide="clock" style="width:13px;height:13px;"></i> 4 min read</span>
+        <span><i data-lucide="calendar" style="width:13px;height:13px;"></i> Updated June 2026</span>
+        <span><i data-lucide="shield-check" style="width:13px;height:13px;color:var(--emerald);"></i> Free to use</span>
+      </div>
+    </div>
+
+    <div class="guide-body">
+
+      <h2>What are UTM parameters?</h2>
+      <p>UTM parameters are tracking tags marketers append to a link's query string so their analytics can attribute your visit to a specific campaign, email, or ad. The five standard tags are <code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_term</code>, and <code>utm_content</code>. None of them are needed for the page to load.</p>
+
+      <div class="url-demo">
+        <div class="dirty">https://example.com/article?id=42<s>&utm_source=newsletter&utm_medium=email&utm_campaign=spring</s></div>
+        <div class="clean">https://example.com/article?id=42</div>
+      </div>
+
+      <h2>Why remove them?</h2>
+      <ul>
+        <li><strong>Privacy:</strong> UTM tags reveal exactly which email or ad you clicked, building a profile of your behavior.</li>
+        <li><strong>Clean sharing:</strong> Paste a link in a chat and you broadcast that you got it from a marketing campaign, with your tracking IDs attached.</li>
+        <li><strong>Tidy URLs:</strong> Long tracking strings make links ugly and harder to read.</li>
+      </ul>
+
+      <h2>Remove UTM parameters automatically in 3 steps</h2>
+      <ol class="guide-steps">
+        <li><div><strong>Install QuietBrowsing</strong> Add the free <a href="/quietbrowsing/" style="color:var(--accent);">QuietBrowsing</a> extension to Chrome. No account, no setup.</div></li>
+        <li><div><strong>Browse normally</strong> QuietBrowsing strips <code>utm_*</code>, <code>fbclid</code>, <code>gclid</code>, and 60+ other tracking tags from links the moment you open them, before the request even leaves your browser.</div></li>
+        <li><div><strong>Copy clean links to share</strong> Right-click any link and choose <strong>Copy Clean Link</strong> for a spotless, un-tracked URL ready to paste anywhere.</div></li>
+      </ol>
+
+      <div class="guide-callout">
+        <p><strong>Your pages keep working.</strong> QuietBrowsing only removes known tracking keys. Real state parameters like <code>id</code>, <code>sku</code>, <code>variant</code>, and <code>q</code> are preserved, so shopping carts and search results never break.</p>
+      </div>
+
+      <h2>What about doing it manually?</h2>
+      <p>You can delete UTM tags by hand: click the address bar, find the <code>?</code>, and remove everything from <code>utm_</code> onward. This works for one link but is tedious and error-prone, and it does nothing for the dozens of tracked links you open every day. An extension that cleans them automatically is the practical answer.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq-accordion">
+        <div class="faq-item"><h3>Is it safe to remove UTM parameters?</h3><p>Yes. UTM tags only feed analytics. Removing them never breaks the destination page, and QuietBrowsing leaves real state parameters intact.</p></div>
+        <div class="faq-item"><h3>Does this work everywhere?</h3><p>QuietBrowsing cleans links across all sites as you browse. Chrome blocks extensions from rewriting browser-owned pages like the Web Store, but you can still copy a clean version manually there.</p></div>
+        <div class="faq-item"><h3>Does QuietBrowsing upload my links?</h3><p>No. Everything happens locally in your browser. There are no servers, analytics, or accounts. Nothing is uploaded.</p></div>
+      </div>
+
+      <div class="guide-cta-block">
+        <h3>Strip tracking tags from every link, free</h3>
+        <p>QuietBrowsing removes utm_, fbclid, gclid and 60+ trackers automatically. 100% local, nothing uploaded.</p>
+        <a href="/quietbrowsing/" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:var(--accent); box-shadow: 0 4px 20px var(--accent-glow);">
+          <i data-lucide="link-2-off" style="width:15px;height:15px;"></i>
+          Get QuietBrowsing free
+        </a>
+      </div>
+
+      <h2>Related guides</h2>
+      <div class="guide-related">
+        <a href="/clean-tracking-links/"><span>Link Privacy</span><strong>Clean Tracking Links Before Sharing (fbclid, gclid)</strong></a>
+        <a href="/see-real-url-behind-redirect/"><span>Redirects</span><strong>See the Real URL Behind a Redirect Link</strong></a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <script type="module" src="/src/site-chrome.js"></script>
+</body>
+</html>

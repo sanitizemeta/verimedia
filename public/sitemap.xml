@@ -85,6 +85,32 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- QuietBrowsing extension -->
+  <url>
+    <loc>https://verimedia.xyz/quietbrowsing/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://verimedia.xyz/remove-utm-parameters/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://verimedia.xyz/clean-tracking-links/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://verimedia.xyz/see-real-url-behind-redirect/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Legal & support -->
   <url>
     <loc>https://verimedia.xyz/privacy/</loc>

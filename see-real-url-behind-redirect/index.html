@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>How to See the Real URL Behind a Redirect Link | VeriMedia</title>
+  <meta name="description" content="Facebook, Google and Outlook hide the real destination inside redirect links. Learn how to reveal the true URL safely, decoded locally in your browser.">
+  <link rel="canonical" href="https://verimedia.xyz/see-real-url-behind-redirect/" />
+  <meta http-equiv="content-language" content="en" />
+  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/see-real-url-behind-redirect/" />
+  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/see-real-url-behind-redirect/" />
+
+  <meta property="og:title" content="How to See the Real URL Behind a Redirect Link | VeriMedia">
+  <meta property="og:description" content="Facebook, Google and Outlook hide the real destination inside redirect links. Learn how to reveal the true URL safely, decoded locally in your browser.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verimedia.xyz/see-real-url-behind-redirect/">
+  <meta property="og:image" content="https://verimedia.xyz/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="alternate icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.min.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to see the real URL behind a redirect link",
+    "description": "Reveal the true destination hidden inside Facebook, Google, and Outlook SafeLinks redirect wrappers, decoded locally without visiting the tracker.",
+    "totalTime": "PT1M",
+    "tool": { "@type": "HowToTool", "name": "QuietBrowsing (free Chrome extension)" },
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Install QuietBrowsing", "text": "Add the free QuietBrowsing extension to Chrome." },
+      { "@type": "HowToStep", "position": 2, "name": "Right-click the redirect link", "text": "Choose Copy Clean Link. QuietBrowsing decodes the real destination embedded in the wrapper." },
+      { "@type": "HowToStep", "position": 3, "name": "See and share the real URL", "text": "You get the true destination URL, with tracking parameters also removed, copied to your clipboard." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Why do links go through l.facebook.com or google.com/url?", "acceptedAnswer": { "@type": "Answer", "text": "These are redirect wrappers. The platform routes your click through its own server first to log it, then forwards you to the real destination, which is encoded inside the link's url or u parameter." } },
+      { "@type": "Question", "name": "Is it safe to click a redirect link?", "acceptedAnswer": { "@type": "Answer", "text": "Redirect wrappers hide where you are actually going, which scammers exploit. Revealing the real destination before clicking lets you confirm it is a site you trust." } },
+      { "@type": "Question", "name": "Does revealing the URL contact the tracker?", "acceptedAnswer": { "@type": "Answer", "text": "No. QuietBrowsing decodes the destination from the link text locally in your browser. It never sends a request to the redirector, so the click is never logged." } }
+    ]
+  }
+  </script>
+
+  <style>
+    .guide-page { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+    .guide-header { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    .guide-breadcrumb { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 1rem; display: flex; gap: 0.4rem; align-items: center; }
+    .guide-breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+    .guide-breadcrumb a:hover { color: var(--accent); }
+    .guide-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.18); border-radius: 999px; padding: 0.2rem 0.65rem; margin-bottom: 1rem; }
+    .guide-title { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 1rem; }
+    .guide-intro { font-size: 1.08rem; color: var(--text-secondary); line-height: 1.7; margin: 0 0 1.5rem; }
+    .guide-meta { font-size: 0.78rem; color: var(--text-secondary); display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .guide-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .guide-body h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; letter-spacing: -0.02em; }
+    .guide-body p { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem; }
+    .guide-body ul, .guide-body ol { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem 1.25rem; }
+    .guide-body li { margin-bottom: 0.4rem; }
+    .guide-body code { background: rgba(56,189,248,0.08); color: var(--accent); padding: 1px 5px; border-radius: 4px; font-size: 0.88em; }
+    .guide-callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px 10px 10px 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .guide-callout p { margin: 0; font-size: 0.93rem; }
+    .guide-steps { counter-reset: steps; list-style: none; margin: 0 0 1.5rem; padding: 0; }
+    .guide-steps li { counter-increment: steps; display: flex; gap: 1rem; align-items: flex-start; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .guide-steps li:last-child { border-bottom: none; }
+    .guide-steps li::before { content: counter(steps); display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.2); border-radius: 50%; font-size: 0.78rem; font-weight: 700; color: var(--accent); font-family: var(--font-display); flex-shrink: 0; margin-top: 2px; }
+    .guide-steps li div strong { display: block; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .url-demo { display: grid; gap: 0.5rem; margin: 1rem 0 1.5rem; font-family: var(--font-display); font-size: 0.84rem; }
+    .url-demo div { padding: 0.7rem 0.9rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); word-break: break-all; }
+    .url-demo .dirty { color: var(--text-secondary); }
+    .url-demo .dirty s { color: #e0707a; }
+    .url-demo .clean { color: var(--accent); border-color: rgba(56,189,248,0.3); }
+    .guide-cta-block { background: var(--surface); border: 1px solid rgba(56,189,248,0.18); border-radius: 14px; padding: 2rem; text-align: center; margin: 3rem 0; }
+    .guide-cta-block h3 { margin: 0 0 0.5rem; font-size: 1.25rem; }
+    .guide-cta-block p { margin: 0 0 1.25rem; font-size: 0.93rem; }
+    .guide-related { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1.5rem 0 3rem; }
+    .guide-related a { display: block; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; transition: border-color var(--t-fast); }
+    .guide-related a:hover { border-color: var(--border-active); }
+    .guide-related a span { display: block; font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .guide-related a strong { font-size: 0.9rem; color: var(--text-primary); }
+    @media (max-width: 600px) { .guide-related { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header></header>
+
+  <main class="guide-page">
+    <div class="guide-header">
+      <div class="guide-breadcrumb">
+        <a href="/">VeriMedia</a>
+        <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+        <span>See the real URL behind a redirect</span>
+      </div>
+      <div class="guide-tag">Redirects</div>
+      <h1 class="guide-title">How to See the Real URL Behind a Redirect Link</h1>
+      <p class="guide-intro">Click a link on Facebook or in an Outlook email and you often pass through <code>l.facebook.com</code> or a SafeLinks wrapper first. The real destination is hidden inside the link, and the platform logs your click on the way. Here is how to reveal the true URL safely, without ever pinging the tracker.</p>
+      <div class="guide-meta">
+        <span><i data-lucide="clock" style="width:13px;height:13px;"></i> 4 min read</span>
+        <span><i data-lucide="calendar" style="width:13px;height:13px;"></i> Updated June 2026</span>
+        <span><i data-lucide="shield-check" style="width:13px;height:13px;color:var(--emerald);"></i> Free to use</span>
+      </div>
+    </div>
+
+    <div class="guide-body">
+
+      <h2>What is a redirect wrapper?</h2>
+      <p>A redirect wrapper is a link that points to a platform's own server, with the real destination encoded inside a parameter such as <code>u</code> or <code>url</code>. When you click, the platform records the click, then forwards you on. Common wrappers include <code>l.facebook.com</code>, <code>google.com/url</code>, Outlook <code>SafeLinks</code>, <code>out.reddit.com</code>, and link shorteners.</p>
+
+      <div class="url-demo">
+        <div class="dirty">https://l.facebook.com/l.php?u=https%3A%2F%2Fexample.com%2Fpost<s>&fbclid=IwAR3xExAmPlE</s></div>
+        <div class="clean">https://example.com/post</div>
+      </div>
+
+      <h2>Why you would want the real link</h2>
+      <ul>
+        <li><strong>Safety:</strong> wrappers hide where a link actually goes, a trick used in phishing. Seeing the true domain before you click lets you spot a scam.</li>
+        <li><strong>Privacy:</strong> following the wrapper logs your click. Decoding the destination locally skips that entirely.</li>
+        <li><strong>Clean sharing:</strong> share the real, short URL instead of an ugly tracker link.</li>
+      </ul>
+
+      <h2>Reveal the real URL in 3 steps</h2>
+      <ol class="guide-steps">
+        <li><div><strong>Install QuietBrowsing</strong> Add the free <a href="/quietbrowsing/" style="color:var(--accent);">QuietBrowsing</a> extension to Chrome.</div></li>
+        <li><div><strong>Right-click the redirect link, Copy Clean Link</strong> QuietBrowsing decodes the destination embedded in the wrapper and removes any tracking parameters on it too.</div></li>
+        <li><div><strong>Read or share the real URL</strong> The true destination lands on your clipboard, clean and ready to verify or paste.</div></li>
+      </ol>
+
+      <div class="guide-callout">
+        <p><strong>Nothing is uploaded, and the tracker is never contacted.</strong> QuietBrowsing reads the destination straight from the link text and decodes it locally. It does not send a request to <code>l.facebook.com</code> or any redirector, so your click stays private.</p>
+      </div>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq-accordion">
+        <div class="faq-item"><h3>Which redirect wrappers are supported?</h3><p>QuietBrowsing unwraps common redirectors including Facebook, Instagram, Messenger, Google, YouTube, Outlook SafeLinks, LinkedIn, Reddit, and more, then strips tracking parameters from the revealed link.</p></div>
+        <div class="faq-item"><h3>Does this contact the tracker's server?</h3><p>No. The real URL is decoded from the link locally. No request is sent to the redirector, so the click is never logged.</p></div>
+        <div class="faq-item"><h3>Will it ever break a normal link?</h3><p>No. QuietBrowsing only unwraps known redirector hosts, so an ordinary link that happens to carry a url parameter is left untouched.</p></div>
+      </div>
+
+      <div class="guide-cta-block">
+        <h3>Reveal the real link, free</h3>
+        <p>QuietBrowsing decodes redirect wrappers and strips trackers, all locally in your browser. Nothing uploaded.</p>
+        <a href="/quietbrowsing/" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:var(--accent); box-shadow: 0 4px 20px var(--accent-glow);">
+          <i data-lucide="link-2-off" style="width:15px;height:15px;"></i>
+          Get QuietBrowsing free
+        </a>
+      </div>
+
+      <h2>Related guides</h2>
+      <div class="guide-related">
+        <a href="/remove-utm-parameters/"><span>Link Privacy</span><strong>How to Remove UTM Parameters from URLs</strong></a>
+        <a href="/clean-tracking-links/"><span>Link Privacy</span><strong>Clean Tracking Links Before Sharing (fbclid, gclid)</strong></a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <script type="module" src="/src/site-chrome.js"></script>
+</body>
+</html>

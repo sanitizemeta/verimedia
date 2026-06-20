@@ -25,6 +25,9 @@ export default defineConfig({
         quietBrowsing: resolve(__dirname, 'quietbrowsing/index.html'),
         quietBrowsingBuy: resolve(__dirname, 'quietbrowsing/buy/index.html'),
         quietBrowsingSuccess: resolve(__dirname, 'quietbrowsing/success/index.html'),
+        removeUtmParameters: resolve(__dirname, 'remove-utm-parameters/index.html'),
+        cleanTrackingLinks: resolve(__dirname, 'clean-tracking-links/index.html'),
+        seeRealUrl: resolve(__dirname, 'see-real-url-behind-redirect/index.html'),
         // Spanish
         esAiOptOut: resolve(__dirname, 'es/ai-opt-out-metadata/index.html'),
         esRemoveExif: resolve(__dirname, 'es/remove-exif-from-photos/index.html'),

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>How to Clean Tracking Links Before Sharing (fbclid, gclid) | VeriMedia</title>
+  <meta name="description" content="What fbclid and gclid are, why they follow you, and how to remove every tracking parameter from a link before you share it. Free, 100% local.">
+  <link rel="canonical" href="https://verimedia.xyz/clean-tracking-links/" />
+  <meta http-equiv="content-language" content="en" />
+  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/clean-tracking-links/" />
+  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/clean-tracking-links/" />
+
+  <meta property="og:title" content="How to Clean Tracking Links Before Sharing (fbclid, gclid) | VeriMedia">
+  <meta property="og:description" content="What fbclid and gclid are, why they follow you, and how to remove every tracking parameter from a link before you share it. Free, 100% local.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verimedia.xyz/clean-tracking-links/">
+  <meta property="og:image" content="https://verimedia.xyz/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="alternate icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.min.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to clean tracking links before sharing",
+    "description": "Remove fbclid, gclid, msclkid and other click-tracking identifiers from a link before sharing it, entirely in your browser.",
+    "totalTime": "PT1M",
+    "tool": { "@type": "HowToTool", "name": "QuietBrowsing (free Chrome extension)" },
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Install QuietBrowsing", "text": "Add the free QuietBrowsing extension to Chrome." },
+      { "@type": "HowToStep", "position": 2, "name": "Right-click the link", "text": "Choose Copy Clean Link to copy a version with all tracking identifiers removed." },
+      { "@type": "HowToStep", "position": 3, "name": "Share it", "text": "Paste the clean link anywhere. It carries no click IDs back to advertisers." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is fbclid?", "acceptedAnswer": { "@type": "Answer", "text": "fbclid is the Facebook Click Identifier. Facebook appends it to outbound links so it can tie the click back to your profile and the ad or post you came from." } },
+      { "@type": "Question", "name": "What is gclid?", "acceptedAnswer": { "@type": "Answer", "text": "gclid is the Google Click Identifier, added to links from Google Ads so Google can attribute the click and conversion to a specific ad campaign." } },
+      { "@type": "Question", "name": "Do tracking IDs stay in a link when I share it?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. If you copy a link straight from your address bar, identifiers like fbclid and gclid travel with it. Anyone you send it to, and the destination's analytics, can see them. Cleaning the link first removes them." } }
+    ]
+  }
+  </script>
+
+  <style>
+    .guide-page { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+    .guide-header { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    .guide-breadcrumb { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 1rem; display: flex; gap: 0.4rem; align-items: center; }
+    .guide-breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+    .guide-breadcrumb a:hover { color: var(--accent); }
+    .guide-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.18); border-radius: 999px; padding: 0.2rem 0.65rem; margin-bottom: 1rem; }
+    .guide-title { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 1rem; }
+    .guide-intro { font-size: 1.08rem; color: var(--text-secondary); line-height: 1.7; margin: 0 0 1.5rem; }
+    .guide-meta { font-size: 0.78rem; color: var(--text-secondary); display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .guide-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .guide-body h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; letter-spacing: -0.02em; }
+    .guide-body p { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem; }
+    .guide-body ul, .guide-body ol { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem 1.25rem; }
+    .guide-body li { margin-bottom: 0.4rem; }
+    .guide-body code { background: rgba(56,189,248,0.08); color: var(--accent); padding: 1px 5px; border-radius: 4px; font-size: 0.88em; }
+    .guide-callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px 10px 10px 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .guide-callout p { margin: 0; font-size: 0.93rem; }
+    .guide-steps { counter-reset: steps; list-style: none; margin: 0 0 1.5rem; padding: 0; }
+    .guide-steps li { counter-increment: steps; display: flex; gap: 1rem; align-items: flex-start; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .guide-steps li:last-child { border-bottom: none; }
+    .guide-steps li::before { content: counter(steps); display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.2); border-radius: 50%; font-size: 0.78rem; font-weight: 700; color: var(--accent); font-family: var(--font-display); flex-shrink: 0; margin-top: 2px; }
+    .guide-steps li div strong { display: block; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .id-table { display: grid; gap: 0.5rem; margin: 1rem 0 1.5rem; }
+    .id-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.9rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font-size: 0.86rem; }
+    .id-key { font-weight: 600; color: var(--accent); min-width: 92px; font-family: var(--font-display); font-size: 0.82rem; }
+    .id-val { color: var(--text-secondary); }
+    .guide-cta-block { background: var(--surface); border: 1px solid rgba(56,189,248,0.18); border-radius: 14px; padding: 2rem; text-align: center; margin: 3rem 0; }
+    .guide-cta-block h3 { margin: 0 0 0.5rem; font-size: 1.25rem; }
+    .guide-cta-block p { margin: 0 0 1.25rem; font-size: 0.93rem; }
+    .guide-related { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1.5rem 0 3rem; }
+    .guide-related a { display: block; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; transition: border-color var(--t-fast); }
+    .guide-related a:hover { border-color: var(--border-active); }
+    .guide-related a span { display: block; font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .guide-related a strong { font-size: 0.9rem; color: var(--text-primary); }
+    @media (max-width: 600px) { .guide-related { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header></header>
+
+  <main class="guide-page">
+    <div class="guide-header">
+      <div class="guide-breadcrumb">
+        <a href="/">VeriMedia</a>
+        <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+        <span>Clean tracking links before sharing</span>
+      </div>
+      <div class="guide-tag">Link Privacy</div>
+      <h1 class="guide-title">How to Clean Tracking Links Before Sharing</h1>
+      <p class="guide-intro">When you copy a link to send to a friend, you often send a lot more than the page. Hidden click identifiers like <code>fbclid</code> and <code>gclid</code> ride along, tying the link back to you and the ad you came from. Here is what they are and how to strip them in one click.</p>
+      <div class="guide-meta">
+        <span><i data-lucide="clock" style="width:13px;height:13px;"></i> 4 min read</span>
+        <span><i data-lucide="calendar" style="width:13px;height:13px;"></i> Updated June 2026</span>
+        <span><i data-lucide="shield-check" style="width:13px;height:13px;color:var(--emerald);"></i> Free to use</span>
+      </div>
+    </div>
+
+    <div class="guide-body">
+
+      <h2>The tracking identifiers hiding in your links</h2>
+      <p>Ad networks and social platforms append a unique click ID to outbound links. Unlike UTM tags (which describe a campaign), these IDs can tie a single click back to a single user.</p>
+
+      <div class="id-table">
+        <div class="id-row"><span class="id-key">fbclid</span><span class="id-val">Facebook Click ID, links the click to your profile and the source post or ad</span></div>
+        <div class="id-row"><span class="id-key">gclid</span><span class="id-val">Google Click ID, attributes the click and conversion to a Google Ads campaign</span></div>
+        <div class="id-row"><span class="id-key">msclkid</span><span class="id-val">Microsoft / Bing Ads click identifier</span></div>
+        <div class="id-row"><span class="id-key">igshid</span><span class="id-val">Instagram share identifier added to shared links</span></div>
+        <div class="id-row"><span class="id-key">ttclid</span><span class="id-val">TikTok click identifier</span></div>
+        <div class="id-row"><span class="id-key">mc_cid / mc_eid</span><span class="id-val">Mailchimp campaign and subscriber identifiers</span></div>
+      </div>
+
+      <div class="guide-callout">
+        <p><strong>Why it matters when sharing:</strong> paste a link from your address bar into a group chat and everyone, plus the destination's analytics, can see the <code>fbclid</code> that identifies your original click. Cleaning the link first removes that trail.</p>
+      </div>
+
+      <h2>Clean any link in 3 steps</h2>
+      <ol class="guide-steps">
+        <li><div><strong>Install QuietBrowsing</strong> Add the free <a href="/quietbrowsing/" style="color:var(--accent);">QuietBrowsing</a> extension to Chrome.</div></li>
+        <li><div><strong>Right-click and Copy Clean Link</strong> On any link or page, choose <strong>Copy Clean Link</strong>. QuietBrowsing removes <code>fbclid</code>, <code>gclid</code>, <code>utm_*</code> and 60+ more, then copies the clean URL.</div></li>
+        <li><div><strong>Share it</strong> Paste anywhere. The link carries no identifiers back to advertisers, and it is shorter and cleaner too.</div></li>
+      </ol>
+
+      <p>It also works passively: with QuietBrowsing on, tracking parameters are stripped from links automatically as you browse, so most URLs are already clean by the time you copy them.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq-accordion">
+        <div class="faq-item"><h3>Will removing fbclid or gclid break the link?</h3><p>No. These identifiers are for tracking only. The destination page loads identically without them.</p></div>
+        <div class="faq-item"><h3>Can I clean a link I already copied?</h3><p>Yes. QuietBrowsing Pro includes a clipboard cleaner that sanitizes any URL you have copied with one click.</p></div>
+        <div class="faq-item"><h3>Is anything uploaded?</h3><p>No. All cleaning is local to your browser. QuietBrowsing has no servers and collects no data.</p></div>
+      </div>
+
+      <div class="guide-cta-block">
+        <h3>Share clean links, free</h3>
+        <p>QuietBrowsing strips click IDs and tracking tags from any link. 100% local, nothing uploaded.</p>
+        <a href="/quietbrowsing/" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:var(--accent); box-shadow: 0 4px 20px var(--accent-glow);">
+          <i data-lucide="link-2-off" style="width:15px;height:15px;"></i>
+          Get QuietBrowsing free
+        </a>
+      </div>
+
+      <h2>Related guides</h2>
+      <div class="guide-related">
+        <a href="/remove-utm-parameters/"><span>Link Privacy</span><strong>How to Remove UTM Parameters from URLs</strong></a>
+        <a href="/see-real-url-behind-redirect/"><span>Redirects</span><strong>See the Real URL Behind a Redirect Link</strong></a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <script type="module" src="/src/site-chrome.js"></script>
+</body>
+</html>
