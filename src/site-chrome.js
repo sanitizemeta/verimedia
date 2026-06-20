@@ -189,6 +189,7 @@ function buildFooter(t) {
       <a href="${currentLang === 'en' ? '/terms/' : `/${currentLang}/terms/`}" class="footer-link">${t.footer_link_terms || 'Terms of Service'}</a>
       <a href="${currentLang === 'en' ? '/refund/' : `/${currentLang}/refund/`}" class="footer-link">${t.footer_link_refund || 'Refund Policy'}</a>
       <a href="${home}#pricing-section" class="footer-link">${t.footer_link_pricing || 'Pricing'}</a>
+      <a href="https://ko-fi.com/verimedia" class="footer-link" target="_blank" rel="noopener">${t.footer_link_kofi || 'Support us on Ko-fi'}</a>
     </div>
   </div>
   <div class="footer-bottom">
