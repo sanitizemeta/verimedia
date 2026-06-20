@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Pro license key — QuietBrowsing</title>
+  <title>Your Pro license key | QuietBrowsing</title>
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,7 +91,7 @@
       statusEl.style.display = 'none';
       keyInput.value = key;
       keybox.classList.add('show');
-      // One-click activation only when we know how to reach the extension —
+      // One-click activation only when we know how to reach the extension via
       // activateBase (passed by the extension, carries the right scheme:
       // chrome-extension:// or moz-extension://) or a known extId. Otherwise the
       // copy + paste flow above is the path (extension not yet published).
@@ -101,7 +101,7 @@
         const link = document.getElementById('activateLink');
         link.href = activateUrl;
         link.style.display = 'inline-block';
-        // Auto-redirect into the extension — Pro unlocks without any manual paste.
+        // Auto-redirect into the extension so Pro unlocks without any manual paste.
         window.location.href = activateUrl;
       }
     }
@@ -123,7 +123,7 @@
       if (!txn) {
         statusEl.innerHTML = `<span style="color:var(--accent);font-size:1.1rem;">&#10003;</span>&nbsp;<span>Purchase confirmed!</span>`;
         setTimeout(() => {
-          showError("Your license key has been emailed to you — check your inbox. Open the extension, scroll to \"Have a license key?\", paste it, and click Activate.");
+          showError("Your license key has been emailed to you. Check your inbox, open the extension, scroll to \"Have a license key?\", paste it, and click Activate.");
         }, 1000);
         return;
       }
@@ -138,7 +138,7 @@
         await new Promise((r) => setTimeout(r, delay));
         delay = Math.min(delay + 500, 4000);
       }
-      showError("Your key is taking a little longer to confirm. Keep this page open — it'll appear here.", true);
+      showError("Your key is taking a little longer to confirm. Keep this page open and it'll appear here.", true);
     }
 
     statusText.textContent = 'Confirming your payment…';
