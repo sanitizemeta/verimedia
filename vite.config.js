@@ -24,6 +24,7 @@ export default defineConfig({
         imageConverterSuccess: resolve(__dirname, 'image-converter/success/index.html'),
         quietBrowsing: resolve(__dirname, 'quietbrowsing/index.html'),
         quietBrowsingBuy: resolve(__dirname, 'quietbrowsing/buy/index.html'),
+        quietBrowsingSuccess: resolve(__dirname, 'quietbrowsing/success/index.html'),
         // Spanish
         esAiOptOut: resolve(__dirname, 'es/ai-opt-out-metadata/index.html'),
         esRemoveExif: resolve(__dirname, 'es/remove-exif-from-photos/index.html'),
