@@ -35,40 +35,7 @@
   <!-- Particle canvas kept for JS compat — hidden via CSS -->
   <canvas id="particleCanvas" style="display:none;"></canvas>
 
-  <!-- Header Section -->
-  <header>
-    <div class="logo-container">
-      <span class="logo-text">
-        <img src="/icon.svg" alt="VeriMedia Logo" data-i18n-alt="header.logo_alt" width="24" height="24">
-        VeriMedia<span class="dot">.xyz</span>
-      </span>
-    </div>
-    <nav>
-      <a href="#calculator-section" class="nav-link" data-i18n="header.utility">Tool</a>
-      <a href="/image-converter/" class="nav-link">Image Converter</a>
-      <a href="#pricing-section" class="nav-link" data-i18n="header.pricing">Pricing</a>
-      <a href="#faq-section" class="nav-link" data-i18n="header.faq">FAQ</a>
-      <a href="#calculator-section" class="nav-link nav-cta">Shield my images</a>
-
-      <!-- Language Switcher -->
-      <div class="lang-switcher-wrap" style="position: relative;">
-        <button id="langToggle" class="nav-link" aria-label="Switch Language" style="background: none; border: none; padding: 0.35rem 0; cursor: pointer; text-transform: uppercase;">
-          <span id="currentLang">EN</span>
-        </button>
-        <div id="langDropdown" class="glass-card lang-dropdown" style="display: none; position: absolute; top: calc(100% + 8px); right: 0; min-width: 130px; z-index: 1000; padding: 0.5rem;">
-          <button class="lang-opt" data-lang="en">English (EN)</button>
-          <button class="lang-opt" data-lang="es">Español (ES)</button>
-          <button class="lang-opt" data-lang="fr">Français (FR)</button>
-          <button class="lang-opt" data-lang="de">Deutsch (DE)</button>
-        </div>
-      </div>
-
-      <button class="nav-link profile-nav-btn" id="profileBtn" aria-label="Open Creator Profile settings" title="Creator Profile. set your name, copyright & URL">
-        <i data-lucide="user" style="width: 15px; height: 15px;"></i>
-        <span data-i18n="header.profile">Profile</span>
-      </button>
-    </nav>
-  </header>
+  <header></header>
 
 
   <main>
@@ -718,46 +685,10 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="logo-text" style="font-size:1.2rem; display:flex; align-items:center; gap:8px;">
-          <img src="/icon.svg" alt="VeriMedia" width="20" height="20">
-          VeriMedia<span class="dot">.xyz</span>
-        </span>
-        <p class="footer-tagline" data-i18n-html="footer.tagline">Block AI scrapers. Protect your creative work.<br>Zero uploads. Zero tracking. Free core, forever.</p>
-        <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 VeriMedia.xyz</p>
-      </div>
-      <div class="footer-col">
-        <h4 class="footer-col-title" data-i18n="footer.col_tools">Tools</h4>
-        <a href="/image-converter/" class="footer-link">Image Converter</a>
-        <a href="/fr/#calculator-section" class="footer-link" data-i18n="footer.link_shield">AI Opt-Out Shield</a>
-        <a href="/fr/ai-opt-out-metadata/" class="footer-link" data-i18n="footer.link_tagger">AI Opt-Out Tagger</a>
-        <a href="/fr/remove-exif-from-photos/" class="footer-link" data-i18n="footer.link_exif">EXIF &amp; GPS Cleaner</a>
-        <a href="/fr/remove-pdf-metadata/" class="footer-link" data-i18n="footer.link_pdf">PDF Metadata Cleaner</a>
-      </div>
-      <div class="footer-col">
-        <h4 class="footer-col-title" data-i18n="footer.col_resources">Resources</h4>
-        <a href="/fr/ai-opt-out-metadata/" class="footer-link" data-i18n="footer.link_ai_guide">AI Training Shield Guide</a>
-        <a href="/fr/remove-exif-from-photos/" class="footer-link" data-i18n="footer.link_exif_guide">EXIF Removal Guide</a>
-        <a href="/fr/remove-pdf-metadata/" class="footer-link" data-i18n="footer.link_pdf_guide">PDF Privacy Guide</a>
-        <a href="/fr/knowledge/" class="footer-link" data-i18n="footer.link_kb">Knowledge Base</a>
-      </div>
-      <div class="footer-col">
-        <h4 class="footer-col-title" data-i18n="footer.col_legal">Legal</h4>
-        <a href="/fr/privacy/" class="footer-link" data-i18n="footer.privacy">Privacy Policy</a>
-        <a href="/fr/terms/" class="footer-link" data-i18n="footer.terms">Terms of Service</a>
-        <a href="/fr/refund/" class="footer-link" data-i18n="footer.refunds">Refund Policy</a>
-        <a href="/fr/#pricing-section" class="footer-link" data-i18n="footer.link_pricing">Pricing</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span><i data-lucide="shield-check" style="width:12px;height:12px;vertical-align:middle;color:var(--emerald);margin-right:5px;"></i>All files processed 100% locally. nothing ever leaves your browser.</span>
-    </div>
-  </footer>
+  <footer></footer>
 
   <!-- Scripts -->
+  <script type="module" src="/src/site-chrome.js"></script>
   <script type="module" src="/src/main.js"></script>
 
   <script>

@@ -117,7 +117,6 @@ function buildNav(t) {
     </a>
   </div>
   <nav>
-    <a href="${home}#calculator-section" class="nav-link">${t.nav_utility || 'AI-Opt Out Tool'}</a>
     <div class="nav-dropdown-wrap">
       <button id="sc-ext-toggle" class="nav-link nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="sc-ext-dropdown">
         ${t.nav_extensions || 'Extensions'}
@@ -150,10 +149,10 @@ function buildNav(t) {
     </div>
     ` : ''}
     ${showProfile ? `
-    <a href="${homeUrl()}" class="profile-nav-btn nav-link">
+    <button class="profile-nav-btn nav-link" id="profileBtn" type="button" aria-label="Open Creator Profile settings" title="Creator Profile: set your name, copyright & URL">
       <i data-lucide="user" style="width:13px;height:13px;"></i>
       ${t.nav_profile || 'Profile'}
-    </a>
+    </button>
     ` : ''}
   </nav>
 `;
@@ -174,6 +173,7 @@ function buildFooter(t) {
     <div class="footer-col">
       <h4 class="footer-col-title">${t.footer_col_tools || 'Tools'}</h4>
       <a href="/image-converter/" class="footer-link">${t.footer_link_image_converter || 'Image Converter'}</a>
+      <a href="/quietbrowsing/" class="footer-link">${t.footer_link_quietbrowsing || 'QuietBrowsing'}</a>
       <a href="${home}#calculator-section" class="footer-link">${t.footer_link_shield || 'AI Opt-Out Shield'}</a>
       <a href="${guideUrl('ai-opt-out-metadata')}" class="footer-link">${t.footer_link_tagger || 'AI Opt-Out Tagger'}</a>
       <a href="${guideUrl('remove-exif-from-photos')}" class="footer-link">${t.footer_link_exif || 'EXIF &amp; GPS Cleaner'}</a>
@@ -280,6 +280,11 @@ function bootFaqAccordions() {
     });
   });
 }
+
+renderChrome();
+wireExtensionsDropdown();
+wireLanguageDropdown();
+bootFaqAccordions();
 
 document.addEventListener('DOMContentLoaded', async () => {
   renderChrome();

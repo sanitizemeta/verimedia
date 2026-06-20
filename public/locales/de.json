@@ -247,7 +247,6 @@
     "p8": "Diese Bedingungen unterliegen den lokalen Gesetzen. Kontaktieren Sie uns bei Anfragen."
   },
   "chrome": {
-    "nav_utility": "AI-Opt-Out-Tool",
     "nav_pricing": "Preise",
     "nav_faq": "FAQ",
     "nav_cta": "Meine Bilder schützen",
@@ -273,6 +272,7 @@
     "nav_image_converter": "Bildkonverter",
     "nav_extensions": "Erweiterungen",
     "nav_quietbrowsing": "QuietBrowsing",
+    "footer_link_quietbrowsing": "QuietBrowsing",
     "footer_link_image_converter": "Bildkonverter"
   },
   "refund_page": {

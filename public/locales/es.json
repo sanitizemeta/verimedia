@@ -247,7 +247,6 @@
     "p8": "Estos términos se rigen por los estatutos locales. Contáctanos para consultas."
   },
   "chrome": {
-    "nav_utility": "Herramienta AI Opt-Out",
     "nav_pricing": "Precios",
     "nav_faq": "Preguntas frecuentes",
     "nav_cta": "Proteger mis imágenes",
@@ -273,6 +272,7 @@
     "nav_image_converter": "Conversor de imágenes",
     "nav_extensions": "Extensiones",
     "nav_quietbrowsing": "QuietBrowsing",
+    "footer_link_quietbrowsing": "QuietBrowsing",
     "footer_link_image_converter": "Conversor de imágenes"
   },
   "refund_page": {

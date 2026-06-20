@@ -257,7 +257,6 @@
     "p8": "These Terms are governed by local statutes. Contact us for inquiries."
   },
   "chrome": {
-    "nav_utility": "AI-Opt Out Tool",
     "nav_image_converter": "Image Converter",
     "nav_extensions": "Extensions",
     "nav_quietbrowsing": "QuietBrowsing",
@@ -269,6 +268,7 @@
     "footer_copy": "© 2026 VeriMedia.xyz. Processed 100% locally in your browser. No files are ever stored or uploaded.",
     "footer_col_tools": "Tools",
     "footer_link_image_converter": "Image Converter",
+    "footer_link_quietbrowsing": "QuietBrowsing",
     "footer_link_shield": "AI Opt-Out Shield",
     "footer_link_tagger": "AI Opt-Out Tagger",
     "footer_link_exif": "EXIF & GPS Cleaner",
