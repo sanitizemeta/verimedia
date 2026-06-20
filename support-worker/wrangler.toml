@@ -3,7 +3,7 @@ main = "src/index.mjs"
 compatibility_date = "2024-11-01"
 
 [vars]
-SUPPORT_FROM = "VeriMedia Support <support@verimedia.xyz>"
+SUPPORT_FROM = "VeriMedia Contact Form <forms@verimedia.xyz>"
 # Origins allowed to POST the form (comma-separated).
 ALLOWED_ORIGIN = "https://verimedia.xyz,https://verimedia.pages.dev,http://localhost:5173,http://localhost:3000"
 
