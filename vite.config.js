@@ -31,6 +31,8 @@ export default defineConfig({
         seeRealUrl: resolve(__dirname, 'see-real-url-behind-redirect/index.html'),
         convertHeicToJpg: resolve(__dirname, 'convert-heic-to-jpg/index.html'),
         compressImages: resolve(__dirname, 'compress-images-without-losing-quality/index.html'),
+        turnOffAiOverviews: resolve(__dirname, 'turn-off-google-ai-overviews/index.html'),
+        googleUdm14: resolve(__dirname, 'google-udm-14/index.html'),
         // Spanish
         esAiOptOut: resolve(__dirname, 'es/ai-opt-out-metadata/index.html'),
         esRemoveExif: resolve(__dirname, 'es/remove-exif-from-photos/index.html'),

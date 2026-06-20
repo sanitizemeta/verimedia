@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>How to Turn Off Google AI Overviews | VeriMedia</title>
+  <meta name="description" content="Get rid of Google's AI Overviews and see normal web results. The fastest, most reliable way to disable AI Overviews in Chrome and Firefox, free.">
+  <link rel="canonical" href="https://verimedia.xyz/turn-off-google-ai-overviews/" />
+  <meta http-equiv="content-language" content="en" />
+  <link rel="alternate" hreflang="en" href="https://verimedia.xyz/turn-off-google-ai-overviews/" />
+  <link rel="alternate" hreflang="x-default" href="https://verimedia.xyz/turn-off-google-ai-overviews/" />
+
+  <meta property="og:title" content="How to Turn Off Google AI Overviews | VeriMedia">
+  <meta property="og:description" content="Get rid of Google's AI Overviews and see normal web results. The fastest, most reliable way to disable AI Overviews, free.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verimedia.xyz/turn-off-google-ai-overviews/">
+  <meta property="og:image" content="https://verimedia.xyz/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="alternate icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.min.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to turn off Google AI Overviews",
+    "description": "Disable Google's AI Overviews and get normal web search results, reliably, in Chrome and Firefox.",
+    "totalTime": "PT1M",
+    "tool": { "@type": "HowToTool", "name": "VanishAI (free browser extension)" },
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Install VanishAI", "text": "Add the free VanishAI extension to Chrome or Firefox." },
+      { "@type": "HowToStep", "position": 2, "name": "Search normally", "text": "VanishAI switches Google to the Web results view automatically, so AI Overviews are skipped." },
+      { "@type": "HowToStep", "position": 3, "name": "Enjoy clean results", "text": "You land on standard web links with no AI summary box. Toggle off anytime from the popup." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Can you permanently turn off Google AI Overviews?", "acceptedAnswer": { "@type": "Answer", "text": "Google has no official permanent setting to disable AI Overviews everywhere. The reliable method is to load Google's Web results view (udm=14), which has no AI Overview. VanishAI does this automatically on every search." } },
+      { "@type": "Question", "name": "Does the udm=14 trick still work?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. udm=14 is Google's own parameter for Web-only results, so it is stable and does not break when Google changes its page layout, unlike CSS-hiding extensions." } },
+      { "@type": "Question", "name": "Is VanishAI free and private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. VanishAI is free, runs entirely in your browser, collects no data, and never reads your page content. It only adjusts the Google search URL locally." } }
+    ]
+  }
+  </script>
+
+  <style>
+    .guide-page { max-width: 780px; margin: 0 auto; padding: 0 1.5rem; }
+    .guide-header { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    .guide-breadcrumb { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 1rem; display: flex; gap: 0.4rem; align-items: center; }
+    .guide-breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+    .guide-breadcrumb a:hover { color: var(--accent); }
+    .guide-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.18); border-radius: 999px; padding: 0.2rem 0.65rem; margin-bottom: 1rem; }
+    .guide-title { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 1rem; }
+    .guide-intro { font-size: 1.08rem; color: var(--text-secondary); line-height: 1.7; margin: 0 0 1.5rem; }
+    .guide-meta { font-size: 0.78rem; color: var(--text-secondary); display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .guide-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .guide-body h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; letter-spacing: -0.02em; }
+    .guide-body p { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem; }
+    .guide-body ul, .guide-body ol { color: var(--text-secondary); line-height: 1.75; margin: 0 0 1rem 1.25rem; }
+    .guide-body li { margin-bottom: 0.4rem; }
+    .guide-body code { background: rgba(56,189,248,0.08); color: var(--accent); padding: 1px 5px; border-radius: 4px; font-size: 0.88em; }
+    .guide-callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px 10px 10px 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+    .guide-callout p { margin: 0; font-size: 0.93rem; }
+    .guide-steps { counter-reset: steps; list-style: none; margin: 0 0 1.5rem; padding: 0; }
+    .guide-steps li { counter-increment: steps; display: flex; gap: 1rem; align-items: flex-start; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .guide-steps li:last-child { border-bottom: none; }
+    .guide-steps li::before { content: counter(steps); display: flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; background: var(--accent-subtle); border: 1px solid rgba(56,189,248,0.2); border-radius: 50%; font-size: 0.78rem; font-weight: 700; color: var(--accent); font-family: var(--font-display); flex-shrink: 0; margin-top: 2px; }
+    .guide-steps li div strong { display: block; color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .guide-cta-block { background: var(--surface); border: 1px solid rgba(56,189,248,0.18); border-radius: 14px; padding: 2rem; text-align: center; margin: 3rem 0; }
+    .guide-cta-block h3 { margin: 0 0 0.5rem; font-size: 1.25rem; }
+    .guide-cta-block p { margin: 0 0 1.25rem; font-size: 0.93rem; }
+    .guide-related { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1.5rem 0 3rem; }
+    .guide-related a { display: block; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; transition: border-color var(--t-fast); }
+    .guide-related a:hover { border-color: var(--border-active); }
+    .guide-related a span { display: block; font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .guide-related a strong { font-size: 0.9rem; color: var(--text-primary); }
+    @media (max-width: 600px) { .guide-related { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header></header>
+
+  <main class="guide-page">
+    <div class="guide-header">
+      <div class="guide-breadcrumb">
+        <a href="/">VeriMedia</a>
+        <i data-lucide="chevron-right" style="width:12px;height:12px;"></i>
+        <span>Turn off Google AI Overviews</span>
+      </div>
+      <div class="guide-tag">Search</div>
+      <h1 class="guide-title">How to Turn Off Google AI Overviews</h1>
+      <p class="guide-intro">Google now pushes an AI Overview to the top of most searches, burying the real links under a slow, space-hogging summary box. There is no simple official switch to turn it off, but there is a fast, reliable way to skip it on every search. Here it is.</p>
+      <div class="guide-meta">
+        <span><i data-lucide="clock" style="width:13px;height:13px;"></i> 4 min read</span>
+        <span><i data-lucide="calendar" style="width:13px;height:13px;"></i> Updated June 2026</span>
+        <span><i data-lucide="shield-check" style="width:13px;height:13px;color:var(--emerald);"></i> Free to use</span>
+      </div>
+    </div>
+
+    <div class="guide-body">
+
+      <h2>Why there is no simple off switch</h2>
+      <p>Google does not offer a setting that permanently disables AI Overviews for everyone. Some people try browser settings, Search Labs toggles, or region tricks, but those are inconsistent and change often. The dependable approach is to tell Google to show you <strong>Web results only</strong>, a view that simply has no AI Overview.</p>
+
+      <h2>The reliable method: Web results (udm=14)</h2>
+      <p>Google has a built-in "Web" filter that returns classic ten-blue-links results with no AI Overview, no featured snippets clutter, just pages. Its URL parameter is <code>udm=14</code>. Add it to any Google search and the AI Overview is gone.</p>
+      <div class="guide-callout">
+        <p><strong>Why this beats "AI blocker" extensions:</strong> most of those hide the AI box with CSS that breaks every time Google changes its layout. <code>udm=14</code> is Google's own parameter, so it keeps working through redesigns and never needs to read your page.</p>
+      </div>
+
+      <h2>Do it automatically in 3 steps</h2>
+      <p>Typing <code>&udm=14</code> by hand on every search is tedious. A tiny free extension does it for you:</p>
+      <ol class="guide-steps">
+        <li><div><strong>Install VanishAI</strong> Add the free <a href="/vanishai/" style="color:var(--accent);">VanishAI</a> extension to Chrome or Firefox. No account, no setup.</div></li>
+        <li><div><strong>Search Google normally</strong> VanishAI adds the Web results filter to every search automatically, before the page loads, so the AI Overview never appears.</div></li>
+        <li><div><strong>Toggle anytime</strong> Want the AI Overview back for a search? Open the popup and flip it off. Images, Videos, and Maps searches are never touched.</div></li>
+      </ol>
+
+      <h2>Manual options (if you prefer no extension)</h2>
+      <ul>
+        <li><strong>Bookmark a Web-results search:</strong> append <code>&udm=14</code> to a Google search URL and bookmark it.</li>
+        <li><strong>Add a custom search engine:</strong> in your browser settings, add a search engine with the URL <code>https://www.google.com/search?q=%s&udm=14</code> and make it default. Every address-bar search then skips the AI Overview.</li>
+      </ul>
+      <p>These work, but you have to set them up per device and they do not cover links you click from other sites. An extension handles every case automatically.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq-accordion">
+        <div class="faq-item"><h3>Can you permanently turn off AI Overviews?</h3><p>There is no official global setting. Loading Google's Web results view (udm=14) is the reliable way to skip them on every search, which is what VanishAI automates.</p></div>
+        <div class="faq-item"><h3>Will this break Google search?</h3><p>No. udm=14 is Google's own Web filter. Results load normally, in fact faster, since the generative summary is skipped.</p></div>
+        <div class="faq-item"><h3>Is it free and private?</h3><p>VanishAI is free, runs entirely in your browser, collects no data, and never reads page content.</p></div>
+      </div>
+
+      <div class="guide-cta-block">
+        <h3>Skip AI Overviews automatically, free</h3>
+        <p>VanishAI loads Google's clean Web results on every search. Zero config, 100% local, for Chrome and Firefox.</p>
+        <a href="/vanishai/" class="pricing-btn primary-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; background:var(--accent); box-shadow: 0 4px 20px var(--accent-glow);">
+          <i data-lucide="sparkles" style="width:15px;height:15px;"></i>
+          Get VanishAI free
+        </a>
+      </div>
+
+      <h2>Related guides</h2>
+      <div class="guide-related">
+        <a href="/google-udm-14/"><span>Search</span><strong>What Is udm=14? Google Web Results Only</strong></a>
+        <a href="/remove-utm-parameters/"><span>Link Privacy</span><strong>How to Remove UTM Parameters from URLs</strong></a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <script type="module" src="/src/site-chrome.js"></script>
+</body>
+</html>
