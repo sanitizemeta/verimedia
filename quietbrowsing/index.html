@@ -173,7 +173,13 @@
     const PADDLE_TOKEN = 'live_2f19b88294a235307e74e44f820';
     const PRICE_ID = 'pri_01kvjvp2yh1xsehh780t9vtw8f';
     const DEFAULT_EXT_ID = 'mnddglaamllkmlbgnkfmibpgafiijiae';
-    const CHROME_STORE_URL = ''; // set once the listing is published live
+    const CHROME_STORE_URL = '';  // set once the Chrome listing is published live
+    const FIREFOX_STORE_URL = ''; // set once the Firefox (AMO) listing is published live
+
+    // Route installs to the right store based on the visitor's browser.
+    const IS_FIREFOX = navigator.userAgent.includes('Firefox');
+    const STORE_URL = IS_FIREFOX ? FIREFOX_STORE_URL : CHROME_STORE_URL;
+    const STORE_NAME = IS_FIREFOX ? 'Firefox Add-ons' : 'Chrome Web Store';
 
     const params = new URLSearchParams(location.search);
     const extId = params.get('ext') || DEFAULT_EXT_ID;
@@ -181,9 +187,9 @@
 
     document.querySelectorAll('[data-install]').forEach((el) => {
       el.addEventListener('click', (e) => {
-        if (CHROME_STORE_URL) { el.setAttribute('href', CHROME_STORE_URL); el.setAttribute('target', '_blank'); return; }
+        if (STORE_URL) { el.setAttribute('href', STORE_URL); el.setAttribute('target', '_blank'); return; }
         e.preventDefault();
-        el.textContent = 'Launching on the Chrome Web Store soon';
+        el.textContent = `Launching on the ${STORE_NAME} soon`;
       });
     });
 
