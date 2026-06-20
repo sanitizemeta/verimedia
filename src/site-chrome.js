@@ -133,6 +133,7 @@ function buildNav(t) {
       </div>
     </div>
     <a href="${home}#pricing-section" class="nav-link">${t.nav_pricing || 'Pricing'}</a>
+    <a href="${guideUrl('knowledge')}" class="nav-link">${t.nav_knowledge || 'Guides'}</a>
     <a href="${home}#faq-section" class="nav-link">${t.nav_faq || 'FAQ'}</a>
     <a href="${home}#calculator-section" class="nav-link nav-cta">${t.nav_cta || 'Shield my images'}</a>
     ${showLanguage ? `

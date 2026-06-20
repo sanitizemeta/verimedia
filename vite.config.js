@@ -28,6 +28,8 @@ export default defineConfig({
         removeUtmParameters: resolve(__dirname, 'remove-utm-parameters/index.html'),
         cleanTrackingLinks: resolve(__dirname, 'clean-tracking-links/index.html'),
         seeRealUrl: resolve(__dirname, 'see-real-url-behind-redirect/index.html'),
+        convertHeicToJpg: resolve(__dirname, 'convert-heic-to-jpg/index.html'),
+        compressImages: resolve(__dirname, 'compress-images-without-losing-quality/index.html'),
         // Spanish
         esAiOptOut: resolve(__dirname, 'es/ai-opt-out-metadata/index.html'),
         esRemoveExif: resolve(__dirname, 'es/remove-exif-from-photos/index.html'),
