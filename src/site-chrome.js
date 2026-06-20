@@ -171,16 +171,12 @@ function buildFooter(t) {
       <p class="footer-copy">${t.footer_copy || '© 2026 VeriMedia.xyz. Processed 100% locally in your browser. No files are ever stored or uploaded.'}</p>
     </div>
     <div class="footer-col">
-      <h4 class="footer-col-title">${t.footer_col_tools || 'Tools'}</h4>
+      <h4 class="footer-col-title">${t.footer_col_extensions || 'Extensions'}</h4>
       <a href="/image-converter/" class="footer-link">${t.footer_link_image_converter || 'Image Converter'}</a>
       <a href="/quietbrowsing/" class="footer-link">${t.footer_link_quietbrowsing || 'QuietBrowsing'}</a>
-      <a href="${home}#calculator-section" class="footer-link">${t.footer_link_shield || 'AI Opt-Out Shield'}</a>
-      <a href="${guideUrl('ai-opt-out-metadata')}" class="footer-link">${t.footer_link_tagger || 'AI Opt-Out Tagger'}</a>
-      <a href="${guideUrl('remove-exif-from-photos')}" class="footer-link">${t.footer_link_exif || 'EXIF &amp; GPS Cleaner'}</a>
-      <a href="${guideUrl('remove-pdf-metadata')}" class="footer-link">${t.footer_link_pdf || 'PDF Metadata Cleaner'}</a>
     </div>
     <div class="footer-col">
-      <h4 class="footer-col-title">${t.footer_col_resources || 'Resources'}</h4>
+      <h4 class="footer-col-title">${t.footer_col_guides || 'Guides'}</h4>
       <a href="${guideUrl('ai-opt-out-metadata')}" class="footer-link">${t.footer_link_ai_guide || 'AI Training Shield Guide'}</a>
       <a href="${guideUrl('remove-exif-from-photos')}" class="footer-link">${t.footer_link_exif_guide || 'EXIF Removal Guide'}</a>
       <a href="${guideUrl('remove-pdf-metadata')}" class="footer-link">${t.footer_link_pdf_guide || 'PDF Privacy Guide'}</a>
