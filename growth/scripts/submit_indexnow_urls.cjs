@@ -4,7 +4,7 @@ const { rootPath, loadGrowthConfig } = require('./_utils.cjs');
 
 const DEFAULT_KEY = '5f68c5d4b4484f299e1f43d962f6c32e';
 const DEFAULT_HOST = 'verimedia.xyz';
-const DEFAULT_REPORT = rootPath('growth', 'reports', 'indexnow-submit-2026-06-10.md');
+const DEFAULT_REPORT = rootPath('growth', 'reports', 'indexnow-submit-2026-06-25.md');
 
 function readUrls(reportPath) {
   const markdown = fs.readFileSync(reportPath, 'utf8');

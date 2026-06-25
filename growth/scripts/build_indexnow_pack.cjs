@@ -3,19 +3,44 @@ const path = require('path');
 
 const root = process.cwd();
 const outDir = path.join(root, 'growth', 'reports');
-const outFile = path.join(outDir, 'indexnow-submit-2026-06-10.md');
+const outFile = path.join(outDir, 'indexnow-submit-2026-06-25.md');
 
+// Changed / new indexable URLs from Ahrefs "Pages to submit to IndexNow"
+// Crawl 2026-06-25 vs 2026-06-18.
 const urls = [
+  'https://verimedia.xyz/',
+  'https://verimedia.xyz/es/',
+  'https://verimedia.xyz/fr/',
+  'https://verimedia.xyz/de/',
   'https://verimedia.xyz/image-converter/',
-  'https://verimedia.xyz/refund/',
+  'https://verimedia.xyz/knowledge/',
   'https://verimedia.xyz/privacy/',
   'https://verimedia.xyz/terms/',
+  'https://verimedia.xyz/refund/',
+  'https://verimedia.xyz/es/privacy/',
+  'https://verimedia.xyz/es/terms/',
+  'https://verimedia.xyz/es/refund/',
+  'https://verimedia.xyz/fr/privacy/',
+  'https://verimedia.xyz/fr/terms/',
+  'https://verimedia.xyz/fr/refund/',
+  'https://verimedia.xyz/de/privacy/',
+  'https://verimedia.xyz/de/terms/',
+  'https://verimedia.xyz/de/refund/',
+  'https://verimedia.xyz/clean-tracking-links/',
+  'https://verimedia.xyz/remove-utm-parameters/',
+  'https://verimedia.xyz/see-real-url-behind-redirect/',
+  'https://verimedia.xyz/convert-heic-to-jpg/',
+  'https://verimedia.xyz/compress-images-without-losing-quality/',
+  'https://verimedia.xyz/turn-off-google-ai-overviews/',
+  'https://verimedia.xyz/google-udm-14/',
+  'https://verimedia.xyz/vanishai/',
+  'https://verimedia.xyz/quietbrowsing/',
 ];
 
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
 const lines = [
-  '# IndexNow Submission Pack - 2026-06-10',
+  '# IndexNow Submission Pack - 2026-06-25',
   '',
   'Submit these changed indexable URLs after deployment.',
   '',
@@ -26,9 +51,9 @@ const lines = [
   '## Ahrefs Source',
   '',
   'Issue: Pages to submit to IndexNow',
-  'Crawl: 2026-06-10T12:50:50Z',
+  'Crawl: 2026-06-25T11:25:51Z',
   '',
 ];
 
 fs.writeFileSync(outFile, lines.join('\n'));
-console.log(`Wrote ${outFile}`);
+console.log(`Wrote ${outFile} (${urls.length} URLs)`);
