@@ -3,8 +3,8 @@
  * Edit once here — updates every guide, legal, and 404 page.
  */
 
-const SUPPORTED_LANGS = ['en', 'es', 'fr', 'de'];
-const LANG_LABELS = { en: 'English (EN)', es: 'Español (ES)', fr: 'Français (FR)', de: 'Deutsch (DE)' };
+const SUPPORTED_LANGS = ['en'];
+const LANG_LABELS = { en: 'English (EN)' };
 const LANG_KEY = 'vm_lang';
 
 function detectLang() {
@@ -105,7 +105,7 @@ function guideUrl(slug) {
 
 function buildNav(t) {
   const home = homeUrl();
-  const showLanguage = document.body.dataset.chromeLanguage !== 'false';
+  const showLanguage = false; // English-only site; language switcher removed
   const showProfile = document.body.dataset.chromeProfile !== 'false';
   return `
   <div class="logo-container">
