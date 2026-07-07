@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Image &amp; PDF Converter and Compressor · 100% offline</title>
-  <meta name="description" content="Convert and compress images and PDFs offline. Remove EXIF, merge or split PDFs, and unlock Pro once for $7." />
+  <meta name="description" content="Convert and compress images and PDFs offline. Right-click any web image to save or convert it. Remove EXIF, merge or split PDFs, and unlock Pro once for $7." />
   <link rel="canonical" href="https://verimedia.xyz/image-converter/" />
   <meta property="og:title" content="Image &amp; PDF Converter and Compressor" />
   <meta property="og:description" content="Convert images and PDFs offline. Compress, merge, split, remove EXIF. No uploads, no tracking. One-time $7 Pro." />
@@ -30,7 +30,7 @@
     "name": "Image & PDF Converter and Compressor",
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "Chrome, Firefox",
-    "description": "Convert and compress images and PDFs locally in the browser. No uploads, no data collection. Merge PDFs, split pages, remove EXIF metadata.",
+    "description": "Convert and compress images and PDFs locally in the browser. No uploads, no data collection. Merge PDFs, split pages, remove EXIF metadata, right-click any web image to save or convert it.",
     "offers": [
       { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
       { "@type": "Offer", "price": "7", "priceCurrency": "USD", "name": "Pro (one-time)" }
@@ -47,7 +47,7 @@
     <p class="mono-label reveal d1" data-i18n="image_converter.kicker">Chrome &amp; Firefox Extension · Free &amp; Pro</p>
     <h1 class="reveal d2" data-i18n-html="image_converter.hero_title">Image &amp; PDF <span class="glow">Converter</span></h1>
     <p class="sub reveal d3" data-i18n-html="image_converter.hero_summary">Convert, compress, merge, and split images and PDFs <b>directly in your browser.</b>
-      Remove EXIF metadata, target a max file size, choose output quality. <b>100% offline</b> - nothing ever leaves your machine.</p>
+      Right-click any web image to save or convert it. Remove EXIF metadata, target a max file size, choose output quality. <b>100% offline</b> - nothing ever leaves your machine.</p>
     <div class="cta reveal d4">
       <a class="btn btn-primary" id="installBtn" href="#" data-install data-i18n="image_converter.install_cta">+ Add to Chrome - Free</a>
       <a class="btn btn-ghost" href="#pricing" data-buy data-i18n="image_converter.pro_cta">Unlock Pro · $7</a>
@@ -73,7 +73,7 @@
     <span data-i18n-html="image_converter.trust_uploads"><span class="dot">●</span> <b>No</b> uploads</span>
     <span data-i18n-html="image_converter.trust_data"><span class="dot">●</span> <b>No</b> data collected</span>
     <span data-i18n-html="image_converter.trust_browser"><span class="dot">●</span> Runs in <b>your</b> browser</span>
-    <span data-i18n-html="image_converter.trust_permission"><span class="dot">●</span> <b>storage</b> permission only</span>
+    <span data-i18n-html="image_converter.trust_permission"><span class="dot">●</span> <b>Nothing</b> runs in the background</span>
   </div></div></div>
 
   <!-- FORMATS -->
@@ -103,7 +103,21 @@
     <div class="steps">
       <div class="step"><div class="num" data-i18n="image_converter.step1_num">01 / DROP</div><h3 data-i18n="image_converter.step1_title">Drop your files</h3><p data-i18n="image_converter.step1_body">Drag images or PDFs onto the popup or pick them from your device. Up to 5 at once on Free, unlimited on Pro.</p></div>
       <div class="step"><div class="num" data-i18n="image_converter.step2_num">02 / CONVERT</div><h3 data-i18n="image_converter.step2_title">Choose what to do</h3><p data-i18n="image_converter.step2_body">Pick a format, set quality or a target file size, resize, remove EXIF. For PDFs: compress, merge, or split pages. Everything runs locally.</p></div>
-      <div class="step"><div class="num" data-i18n="image_converter.step3_num">03 / DOWNLOAD</div><h3 data-i18n="image_converter.step3_title">Save instantly</h3><p data-i18n="image_converter.step3_body">Download each file individually, or grab them all as a ZIP with Pro. Nothing ever touches a server.</p></div>
+      <div class="step"><div class="num" data-i18n="image_converter.step3_num">03 / DOWNLOAD</div><h3 data-i18n="image_converter.step3_title">Save instantly</h3><p data-i18n="image_converter.step3_body">Download each file individually, or grab them all as a single ZIP. Nothing ever touches a server.</p></div>
+    </div>
+  </div></section>
+
+  <!-- WEB IMAGE TOOLS (new in 1.2) -->
+  <section id="web-tools" style="padding-top:0;"><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">New in 1.2</p>
+      <h2>Grab images straight from any page.</h2>
+      <p>Convert images without ever leaving the page you are on. All of it free, and still 100% local.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">RIGHT-CLICK</div><h3>Save any web image</h3><p>Right-click an image on any website and save it as PNG, JPG, WebP, or AVIF in one click, or compress and resize it before saving. Works in Chrome and Firefox.</p></div>
+      <div class="step"><div class="num">SCAN</div><h3>Find images on this page</h3><p>One click scans the current tab for up to 300 images: photos, icons, backgrounds, srcset variants. Everything lands in a gallery inside the popup. Chrome only.</p></div>
+      <div class="step"><div class="num">BATCH</div><h3>Convert or download in bulk</h3><p>Select any images from the gallery and batch-convert them, or download them all as a single ZIP. Nothing runs until you click, and no page content is sent anywhere.</p></div>
     </div>
   </div></section>
 
@@ -125,8 +139,10 @@
       <div class="crow"><div class="feat" data-i18n="image_converter.feature_pdf_images">PDF to images / images to PDF</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat" data-i18n="image_converter.feature_pdf_compress">Compress PDF (choose quality and DPI)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat" data-i18n="image_converter.feature_pdf_merge">Merge PDFs / split PDF pages</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_rightclick">Right-click any web image to save or convert</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_scan">Page image scanner with batch gallery (Chrome)</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
+      <div class="crow"><div class="feat" data-i18n="image_converter.feature_zip">Download all as ZIP</div><div class="col yes">✓</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat" data-i18n="image_converter.feature_batch">Batch size</div><div class="col" data-i18n="image_converter.five_files">5 files</div><div class="col yes" data-i18n="image_converter.unlimited">Unlimited</div></div>
-      <div class="crow"><div class="feat" data-i18n="image_converter.feature_zip">Download all as ZIP</div><div class="col no">-</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat" data-i18n="image_converter.feature_crop">Exact-pixel resize &amp; crop</div><div class="col no">-</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat" data-i18n="image_converter.feature_target_size">Target a maximum file size</div><div class="col no">-</div><div class="col yes">✓</div></div>
       <div class="crow"><div class="feat" data-i18n="image_converter.feature_rename">Bulk rename on export</div><div class="col no">-</div><div class="col yes">✓</div></div>
@@ -136,7 +152,7 @@
       <div>
         <div class="big" data-i18n-html="image_converter.price_big">$7 <small>once · forever</small></div>
         <ul>
-          <li data-i18n="image_converter.bullet_batch">Unlimited batch</li><li data-i18n="image_converter.bullet_zip">ZIP export</li><li data-i18n="image_converter.bullet_crop">Exact resize &amp; crop</li>
+          <li data-i18n="image_converter.bullet_batch">Unlimited batch</li><li data-i18n="image_converter.bullet_crop">Exact resize &amp; crop</li><li data-i18n="image_converter.bullet_aspect">Aspect ratio crops</li>
           <li data-i18n="image_converter.bullet_rename">Bulk rename</li><li data-i18n="image_converter.bullet_target">Target a max file size</li><li data-i18n="image_converter.bullet_license">Lifetime license</li>
         </ul>
       </div>
@@ -153,7 +169,7 @@
     <div class="faq-accordion image-converter-faq">
       <div class="faq-item open">
         <button class="faq-trigger" aria-expanded="true"><span data-i18n="image_converter.faq_upload_q">Are my files uploaded anywhere?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
-        <div class="faq-body"><p data-i18n-html="image_converter.faq_upload_a">Never. All decoding, conversion, and compression happen locally in your browser using the Canvas API and WebAssembly. The extension requests only the <code>storage</code> permission and makes no network calls during processing.</p></div>
+        <div class="faq-body"><p data-i18n-html="image_converter.faq_upload_a">Never. All decoding, conversion, and compression happen locally in your browser using the Canvas API and WebAssembly. Processing makes zero network calls; the only request the extension ever sends is a one-time license check when you activate Pro. The right-click and page-scan tools run only when you explicitly trigger them, and no page content is ever sent anywhere.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_heic_q">How do I convert iPhone HEIC photos?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
@@ -168,6 +184,10 @@
         <div class="faq-body"><p data-i18n="image_converter.faq_pdf_size_a">Not always. PDFs that contain mostly text and vector graphics are already very compact. Rasterizing them to images can make them larger. Compression works best on PDFs that already contain embedded photos or scanned images. The extension shows you the before and after size so you always know the result.</p></div>
       </div>
       <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>How do the web image tools work?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>Right-click any image on a webpage to save it as PNG, JPG, WebP, or AVIF, compress or resize it first, or open it in the full converter. In Chrome you can also click "Find Images on This Page" in the popup to scan the current tab into a gallery and batch-convert or batch-download. The first time you use these tools the browser asks for permission to read image data on sites; it is requested once, on demand, never at install.</p></div>
+      </div>
+      <div class="faq-item">
         <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_exif_q">What does "Remove EXIF" do?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
         <div class="faq-body"><p data-i18n="image_converter.faq_exif_a">EXIF metadata is information embedded in JPEG photos: GPS coordinates, camera model, date taken, and more. Checking "Remove EXIF" strips this before saving the output, which protects your location privacy when sharing images. It only applies when converting to JPG, since other formats do not carry EXIF in the same way.</p></div>
       </div>
@@ -177,7 +197,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_sub_q">Is Pro a subscription?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
-        <div class="faq-body"><p data-i18n="image_converter.faq_sub_a">No. Pro is a single $7 payment that unlocks everything forever: unlimited batches, ZIP export, exact resize and crop, bulk rename, and the max file size target. It keeps working offline after you activate.</p></div>
+        <div class="faq-body"><p data-i18n="image_converter.faq_sub_a">No. Pro is a single $7 payment that unlocks everything forever: unlimited batches, exact resize and crop, aspect ratio cropping, bulk rename, and the max file size target. It keeps working offline after you activate.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-trigger" aria-expanded="false"><span data-i18n="image_converter.faq_activation_q">How does activation work?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
