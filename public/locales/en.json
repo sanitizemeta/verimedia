@@ -384,6 +384,7 @@
     "faq_refund_a": "Yes, payments are handled by Paddle, our Merchant of Record. See our <a href=\"/refund/\" style=\"color:var(--accent)\">refund policy</a>.",
     "bullet_aspect": "Aspect ratio crops",
     "feature_rightclick": "Right-click any web image to save or convert",
-    "feature_scan": "Page image scanner with batch gallery (Chrome)"
+    "feature_scan": "Page image scanner with batch gallery (Chrome)",
+    "bullet_support": "Supports ongoing development"
   }
 }
