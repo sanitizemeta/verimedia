@@ -31,6 +31,10 @@ export default defineConfig({
         compressImages: resolve(__dirname, 'compress-images-without-losing-quality/index.html'),
         turnOffAiOverviews: resolve(__dirname, 'turn-off-google-ai-overviews/index.html'),
         googleUdm14: resolve(__dirname, 'google-udm-14/index.html'),
+        shotglow: resolve(__dirname, 'shotglow/index.html'),
+        shotglowWelcome: resolve(__dirname, 'shotglow/welcome/index.html'),
+        shotglowPrivacy: resolve(__dirname, 'shotglow/privacy/index.html'),
+        shotglowFeedback: resolve(__dirname, 'shotglow/feedback/index.html'),
       }
     }
   }

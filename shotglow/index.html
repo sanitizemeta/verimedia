@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shotglow · Screenshot Beautifier, Annotate &amp; Blur</title>
+  <meta name="description" content="Take a screenshot, annotate it, blur sensitive info & export a beautiful image. Private, local, no uploads, no account. Free Chrome extension." />
+  <link rel="canonical" href="https://verimedia.xyz/shotglow/" />
+  <meta property="og:title" content="Shotglow" />
+  <meta property="og:description" content="Screenshot → annotate → blur → beautiful share-ready image, all on your own device. No uploads, no account." />
+  <meta property="og:image" content="https://verimedia.xyz/logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://verimedia.xyz/shotglow/" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    .shotglow-page .hero { padding: 3.6rem 0 3rem; }
+    .shotglow-page .hero h1 { font-size: clamp(2.7rem, 7vw, 5.2rem); }
+    .shotglow-page .terminal { margin-top: 2.2rem; }
+    .shotglow-page .trust { margin-top: 0; }
+    @media (max-width: 720px) {
+      .shotglow-page .hero { padding: 2.8rem 0 2.5rem; }
+      .shotglow-page .terminal { margin-top: 1.6rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Shotglow",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "description": "Chrome extension that captures screenshots and lets you annotate, blur sensitive info, style, and export beautiful images. 100% local processing — screenshots never leave your device.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" }
+  }
+  </script>
+</head>
+<body class="image-converter-page shotglow-page" data-chrome-profile="false">
+  <header></header>
+
+  <div class="wrap hero">
+    <p class="mono-label reveal d1">Chrome Extension · Free</p>
+    <h1 class="reveal d2">Shot<span class="glow">glow</span></h1>
+    <p class="sub reveal d3">Take a screenshot, annotate it, blur the sensitive bits, and export a beautiful share-ready image — all in seconds, all on your own device. Nothing is ever uploaded.</p>
+    <div class="cta reveal d4">
+      <a class="btn btn-primary" id="installBtn" href="#" data-install>+ Add to Chrome - Free</a>
+      <a class="btn btn-ghost" href="https://ko-fi.com/verimedia" target="_blank" rel="noopener">☕ Donate us at Ko-fi</a>
+    </div>
+    <p class="micro reveal d4">100% free · <span>no account</span> · 100% local · no watermark</p>
+
+    <div class="terminal reveal d5" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="body">
+        <div class="l">$ capture visible-area --shortcut Alt+Shift+V</div>
+        <div class="ok">✓ opened in editor · arrows, text, numbered steps added</div>
+        <div class="l">$ blur email api-key</div>
+        <div class="ok">✓ pixelated permanently · baked into the pixels, not an overlay</div>
+        <div class="l">$ style gradient padding shadow &amp;&amp; copy</div>
+        <div class="ok">✓ on your clipboard · capture to paste in under 15 seconds</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust"><div class="wrap"><div class="row">
+    <span><span class="dot">●</span> <b>Never</b> uploaded</span>
+    <span><span class="dot">●</span> Blur that <b>can't be undone</b></span>
+    <span><span class="dot">●</span> <b>No</b> watermark</span>
+    <span><span class="dot">●</span> <b>No</b> account</span>
+    <span><span class="dot">●</span> Sharp on <b>Retina</b></span>
+  </div></div></div>
+
+  <section><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">What it does</p>
+      <h2>From raw screenshot to designed image, in two clicks.</h2>
+      <p>Capture the visible area, a selected region, or the full scrolling page. Annotate, blur, and style it in a fast canvas editor, then copy or download. Every pixel is processed locally in your browser.</p>
+    </div>
+    <div class="formats">
+      <div class="fmt heic"><div class="name">Capture</div><div class="meta">visible area · region · full page</div></div>
+      <div class="fmt"><div class="name">Annotate</div><div class="meta">arrows, text, pen, highlighter</div></div>
+      <div class="fmt"><div class="name">Numbered steps</div><div class="meta">1-2-3 badges for tutorials</div></div>
+      <div class="fmt"><div class="name">Blur</div><div class="meta">permanent pixelation, not an overlay</div></div>
+      <div class="fmt"><div class="name">Beautify</div><div class="meta">gradients, padding, corners, shadow</div></div>
+      <div class="fmt"><div class="name">Export</div><div class="meta">clipboard · PNG · JPEG</div></div>
+    </div>
+    <p class="any">Screenshots often contain emails, API keys, customer data, and private messages. Shotglow is built so that data physically cannot leave your computer — there is nothing to upload it to.</p>
+  </div></section>
+
+  <section style="padding-top:0;"><div class="wrap">
+    <div class="section-head">
+      <p class="mono-label">How it works</p>
+      <h2>Capture to paste in under 15 seconds.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01 / CAPTURE</div><h3>One click or one hotkey</h3><p>Grab the visible area, drag to select a region with live pixel dimensions, or capture the whole scrolling page.</p></div>
+      <div class="step"><div class="num">02 / EDIT</div><h3>Annotate &amp; blur</h3><p>Arrows, boxes, text, numbered steps. Drag over anything sensitive and it's pixelated permanently — the blur is baked into the exported pixels, never a removable layer.</p></div>
+      <div class="step"><div class="num">03 / SHIP</div><h3>Style &amp; export</h3><p>Add a gradient frame, padding, rounded corners, and shadow. Copy to clipboard or download as PNG/JPEG. No watermark.</p></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="procta reveal">
+      <div>
+        <div class="big">Free <small>· no account · no watermark</small></div>
+        <ul>
+          <li>All capture modes</li><li>Every annotation tool</li><li>Permanent blur</li>
+          <li>Gradient styling</li><li>Clipboard + PNG/JPEG export</li><li>Install now, Pro free for life</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:220px;">
+        <a class="btn btn-primary" href="#" data-install style="justify-content:center;">+ Add to Chrome - Free</a>
+        <a class="btn btn-ghost" href="https://ko-fi.com/verimedia" target="_blank" rel="noopener" style="justify-content:center;">☕ Donate us at Ko-fi</a>
+      </div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:0;"><div class="wrap">
+    <div class="section-head"><p class="mono-label">FAQ</p><h2>Questions, answered.</h2></div>
+    <div class="faq-accordion image-converter-faq">
+      <div class="faq-item open">
+        <button class="faq-trigger" aria-expanded="true"><span>Do my screenshots really never leave my device?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>Correct. Capture, editing, and export all happen locally in your browser. Shotglow has no image servers, no account, and no analytics. The only network request it ever makes is an anonymous install counter — never your images or page content. See the <a href="/shotglow/privacy/">privacy policy</a> for the complete list.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>Can the blur be reversed?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>No. Some editors draw blur as a removable overlay on top of the image — anyone with the file can peel it off. Shotglow pixelates the actual pixels at a strength that cannot be reconstructed, so what you blur stays blurred.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>Is it really free?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>Yes — every current feature is free with no watermark. Some advanced features (like full-page scrolling capture) will become part of a paid Pro tier later, but everyone who installs before that flip gets Pro free for life.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false"><span>What are the keyboard shortcuts?</span><i data-lucide="chevron-down" class="faq-chevron"></i></button>
+        <div class="faq-body"><p>Alt+Shift+V captures the visible area, Alt+Shift+R starts a region selection, and Alt+Shift+F captures the full page. All of them can be rebound at chrome://extensions/shortcuts, and the editor has single-key tool shortcuts plus 50 steps of undo.</p></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:0;"><div class="wrap">
+    <div class="section-head"><p class="mono-label">More from VeriMedia</p><h2>More privacy-first tools.</h2></div>
+    <div class="formats">
+      <a class="fmt" href="/quietbrowsing/" style="text-decoration:none;color:inherit;"><div class="name">QuietBrowsing</div><div class="meta">Clean tracking links · Free + Pro</div></a>
+      <a class="fmt" href="/vanishai/" style="text-decoration:none;color:inherit;"><div class="name">VanishAI</div><div class="meta">Skip Google AI Overviews · Free</div></a>
+      <a class="fmt" href="/image-converter/" style="text-decoration:none;color:inherit;"><div class="name">Image Converter</div><div class="meta">Convert &amp; compress, offline · Free + Pro</div></a>
+    </div>
+  </div></section>
+
+  <footer></footer>
+
+  <script type="module" src="/src/site-chrome.js"></script>
+  <script>
+    const CHROME_STORE_URL = ''; // set once the Chrome Web Store listing is live
+
+    document.querySelectorAll('[data-install]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        if (CHROME_STORE_URL) { el.setAttribute('href', CHROME_STORE_URL); el.setAttribute('target', '_blank'); return; }
+        e.preventDefault();
+        el.textContent = 'Launching on the Chrome Web Store soon';
+      });
+    });
+  </script>
+</body>
+</html>
