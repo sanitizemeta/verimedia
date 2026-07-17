@@ -43,6 +43,44 @@
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://verimedia.xyz/" },
+      { "@type": "ListItem", "position": 2, "name": "Shotglow", "item": "https://verimedia.xyz/shotglow/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do my screenshots really never leave my device?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Correct. Capture, editing, and export all happen locally in your browser. Shotglow has no image servers, no account, and no analytics. The only network request it ever makes is an anonymous install counter — never your images or page content." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can the blur be reversed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Some editors draw blur as a removable overlay on top of the image — anyone with the file can peel it off. Shotglow pixelates the actual pixels at a strength that cannot be reconstructed, so what you blur stays blurred." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Shotglow really free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — every current feature is free with no watermark. Some advanced features like full-page scrolling capture will become part of a paid Pro tier later, but everyone who installs before that gets Pro free for life." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the keyboard shortcuts?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Alt+Shift+V captures the visible area, Alt+Shift+R starts a region selection, and Alt+Shift+F captures the full page. All of them can be rebound at chrome://extensions/shortcuts." }
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="image-converter-page shotglow-page" data-chrome-profile="false">
   <header></header>

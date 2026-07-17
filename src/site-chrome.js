@@ -133,6 +133,10 @@ function buildNav(t) {
           <span>${t.nav_quietbrowsing || 'QuietBrowsing'}</span>
           <small>Clean tracking links</small>
         </a>
+        <a href="/shotglow/" class="nav-dropdown-item">
+          <span>${t.nav_shotglow || 'Shotglow'}</span>
+          <small>Screenshot beautifier</small>
+        </a>
       </div>
     </div>
     <a href="${home}#pricing-section" class="nav-link">${t.nav_pricing || 'Pricing'}</a>
@@ -179,6 +183,7 @@ function buildFooter(t) {
       <a href="/image-converter/" class="footer-link">${t.footer_link_image_converter || 'Image Converter'}</a>
       <a href="/quietbrowsing/" class="footer-link">${t.footer_link_quietbrowsing || 'QuietBrowsing'}</a>
       <a href="/vanishai/" class="footer-link">${t.footer_link_vanishai || 'VanishAI'}</a>
+      <a href="/shotglow/" class="footer-link">${t.footer_link_shotglow || 'Shotglow'}</a>
     </div>
     <div class="footer-col">
       <h4 class="footer-col-title">${t.footer_col_guides || 'Guides'}</h4>

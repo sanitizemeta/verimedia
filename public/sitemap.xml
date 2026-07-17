@@ -72,6 +72,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Shotglow extension -->
+  <url>
+    <loc>https://verimedia.xyz/shotglow/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://verimedia.xyz/shotglow/privacy/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <url>
     <loc>https://verimedia.xyz/remove-utm-parameters/</loc>
     <lastmod>2026-06-21</lastmod>
