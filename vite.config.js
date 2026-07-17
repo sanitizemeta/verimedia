@@ -35,6 +35,8 @@ export default defineConfig({
         shotglowWelcome: resolve(__dirname, 'shotglow/welcome/index.html'),
         shotglowPrivacy: resolve(__dirname, 'shotglow/privacy/index.html'),
         shotglowFeedback: resolve(__dirname, 'shotglow/feedback/index.html'),
+        shotglowBuy: resolve(__dirname, 'shotglow/buy/index.html'),
+        shotglowSuccess: resolve(__dirname, 'shotglow/success/index.html'),
       }
     }
   }
