@@ -95,7 +95,7 @@
       // One-click activation only when we can reach the extension: activateBase
       // (passed by the extension, carries chrome-extension:// or moz-extension://)
       // or a known extension id. Otherwise copy + paste is the path.
-      const activateBase = params.get('activateBase') || (extId ? `chrome-extension://${extId}/activate.html` : '');
+      const activateBase = params.get('activateBase') || (extId ? `chrome-extension://${extId}/options/options.html` : '');
       if (activateBase) {
         const activateUrl = `${activateBase}?key=${encodeURIComponent(key)}`;
         const link = document.getElementById('activateLink');
