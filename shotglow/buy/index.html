@@ -102,10 +102,15 @@
     function openCheckout() {
       if (!window.Paddle) { showCheckoutUnavailable(); return; }
       if (buyBtn.disabled) return;
-      Paddle.Checkout.open({
+      const checkout = {
         items: [{ priceId: PRICES[selectedPlan], quantity: 1 }],
-        settings: { successUrl, displayMode: 'overlay', theme: 'dark' },
-      });
+        settings: { successUrl, displayMode: 'overlay', theme: 'dark', showAddDiscounts: true },
+      };
+      // Apply a discount code from the URL (?discount=CODE) — also covers
+      // accounts where the overlay's discount field is hidden.
+      const discount = params.get('discount');
+      if (discount) checkout.discountCode = discount;
+      Paddle.Checkout.open(checkout);
     }
     buyBtn.addEventListener('click', openCheckout);
 
