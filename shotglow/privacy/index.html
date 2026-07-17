@@ -57,18 +57,18 @@
         <p><strong>Usage counters.</strong> A local count of your exports is kept on your device solely to decide when to show a one-time review prompt. It is never transmitted.</p>
         <p><strong>Install ID.</strong> When you install Shotglow, the extension generates a random identifier (a UUID) on your device. This ID is not derived from and cannot be linked to you, your Google account, your hardware, or your browsing. It is sent to our server (a Cloudflare Worker) in exactly three situations:</p>
         <ul>
-          <li><i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i><span><strong>On install</strong> — so we can count installs and record the install date. Early installs receive Pro features free for life, and the install date is how we honor that promise.</span></li>
-          <li><i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i><span><strong>Periodic status check</strong> — the extension occasionally asks our server whether paid features are enabled and whether your install qualifies for free lifetime access. Only the install ID is sent.</span></li>
-          <li><i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i><span><strong>On uninstall</strong> — Chrome opens our feedback page with the install ID so we can mark the install as removed in our counts.</span></li>
+          <li><i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i><span><strong>On install</strong>, so we can count installs and record the install date. Early installs receive Pro features free for life, and the install date is how we honor that promise.</span></li>
+          <li><i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i><span><strong>Periodic status check</strong>: the extension occasionally asks our server whether paid features are enabled and whether your install qualifies for free lifetime access. Only the install ID is sent.</span></li>
+          <li><i data-lucide="check" style="width:14px; height:14px; color:var(--accent-emerald); flex-shrink:0; margin-top:4px;"></i><span><strong>On uninstall</strong>: Chrome opens our feedback page with the install ID so we can mark the install as removed in our counts.</span></li>
         </ul>
-        <p>That's the complete list. No page URLs, no image data, no personal information, no browsing history — ever.</p>
+        <p>That's the complete list. No page URLs, no image data, no personal information, no browsing history. Ever.</p>
 
         <h2>What Shotglow does NOT do</h2>
         <ul>
-          <li><i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span>No uploads of images — your screenshots are never sent to any server</span></li>
+          <li><i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span>No uploads of images: your screenshots are never sent to any server</span></li>
           <li><i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span>No account or sign-in</span></li>
           <li><i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span>No analytics or tracking SDKs</span></li>
-          <li><i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span>No reading of page content — the extension only captures the pixels you see, when you ask it to</span></li>
+          <li><i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span>No reading of page content: the extension only captures the pixels you see, when you ask it to</span></li>
           <li><i data-lucide="x-circle" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span>No sale or sharing of any data with anyone</span></li>
         </ul>
 
@@ -80,10 +80,10 @@
 
         <h2>Permissions explained</h2>
         <ul>
-          <li><i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span><strong>activeTab</strong> — capture the visible tab when you click or press the shortcut; no background page access</span></li>
-          <li><i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span><strong>scripting</strong> — show the drag-to-select overlay when you choose "Select region"</span></li>
-          <li><i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span><strong>downloads</strong> — save your exported image to your Downloads folder</span></li>
-          <li><i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span><strong>storage</strong> — keep your settings on your device</span></li>
+          <li><i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span><strong>activeTab</strong>: capture the visible tab when you click or press the shortcut; no background page access</span></li>
+          <li><i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span><strong>scripting</strong>: show the drag-to-select overlay when you choose "Select region"</span></li>
+          <li><i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span><strong>downloads</strong>: save your exported image to your Downloads folder</span></li>
+          <li><i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan); flex-shrink:0; margin-top:4px;"></i><span><strong>storage</strong>: keep your settings on your device</span></li>
         </ul>
 
         <h2>Changes &amp; contact</h2>
