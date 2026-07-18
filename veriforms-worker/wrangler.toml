@@ -1,0 +1,7 @@
+name = "veriforms"
+main = "src/index.js"
+compatibility_date = "2026-07-18"
+
+kv_namespaces = [
+  { binding = "RATE", id = "1139f2b1ead8498eb46441ad9a52e221" }
+]

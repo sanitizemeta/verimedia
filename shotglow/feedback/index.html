@@ -34,11 +34,42 @@
     <p class="mono-label reveal d1">Shotglow was uninstalled</p>
     <h1 class="reveal d2">Sorry to see <span class="glow">you go.</span></h1>
     <p class="sub reveal d3">No hard feelings, and nothing of yours sticks around: your screenshots were never uploaded in the first place, and your anonymous install ID has now been marked as removed.</p>
-    <div class="cta reveal d4">
-      <a class="btn btn-primary" href="mailto:shotglow@verimedia.xyz?subject=Shotglow%20feedback">✉ Tell us why (30 seconds)</a>
-      <a class="btn btn-ghost" href="/shotglow/">Reinstall Shotglow</a>
-    </div>
-    <p class="micro reveal d4">One sentence about what didn't work genuinely shapes what gets fixed next.</p>
+    <form id="fbForm" class="reveal d4" style="max-width:560px;">
+      <textarea id="fbMsg" name="message" required rows="4" placeholder="What didn't work? One sentence is plenty." style="width:100%;padding:14px;background:var(--surface,#0c0c0c);border:1px solid rgba(255,255,255,0.08);color:inherit;font-family:inherit;font-size:.9rem;resize:vertical;"></textarea>
+      <input id="fbEmail" name="email" type="email" placeholder="Email (optional, only if you want a reply)" style="width:100%;margin-top:10px;padding:12px 14px;background:var(--surface,#0c0c0c);border:1px solid rgba(255,255,255,0.08);color:inherit;font-family:inherit;font-size:.85rem;" />
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true" />
+      <div class="cta" style="margin-top:14px;">
+        <button type="submit" class="btn btn-primary" id="fbSend">Send feedback</button>
+        <a class="btn btn-ghost" href="/shotglow/">Reinstall Shotglow</a>
+      </div>
+      <p class="micro" id="fbNote">One sentence about what didn't work genuinely shapes what gets fixed next. Prefer email? <a href="mailto:shotglow@verimedia.xyz?subject=Shotglow%20feedback">shotglow@verimedia.xyz</a></p>
+    </form>
+    <script>
+      (function () {
+        const form = document.getElementById('fbForm');
+        const btn = document.getElementById('fbSend');
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          btn.disabled = true; btn.textContent = 'Sending…';
+          try {
+            const res = await fetch('https://veriforms.sanitizemeta.workers.dev/f/shotglow-feedback', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                message: document.getElementById('fbMsg').value,
+                email: document.getElementById('fbEmail').value,
+                _gotcha: form.querySelector('[name=_gotcha]').value,
+              }),
+            });
+            if (!(await res.json()).ok) throw new Error();
+            form.innerHTML = '<p class="sub" style="margin:0;">✓ Got it, thank you. This genuinely shapes what gets fixed next.</p><div class="cta" style="margin-top:14px;"><a class="btn btn-ghost" href="/shotglow/">Reinstall Shotglow</a></div>';
+          } catch (_) {
+            btn.disabled = false; btn.textContent = 'Send feedback';
+            document.getElementById('fbNote').innerHTML = 'Could not send just now. Please email <a href="mailto:shotglow@verimedia.xyz?subject=Shotglow%20feedback">shotglow@verimedia.xyz</a> instead.';
+          }
+        });
+      })();
+    </script>
   </div>
 
   <section style="padding-top:0;"><div class="wrap">
